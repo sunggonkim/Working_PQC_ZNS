@@ -1,0 +1,17 @@
+# Build outputs
+/build/*
+!/build/.gitkeep
+
+# Experiment outputs
+/artifacts/*
+!/artifacts/.gitkeep
+
+# Local editor and OS files
+.DS_Store
+.vscode/
+.idea/
+
+# Temporary files
+*.tmp
+*.log
+*~
