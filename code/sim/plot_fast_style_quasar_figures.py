@@ -59,7 +59,11 @@ def load_json(path: Path) -> Any:
 
 def save(fig: plt.Figure, path: Path) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    fig.tight_layout()
+    rect = getattr(fig, "_tight_layout_rect", None)
+    if rect is None:
+        fig.tight_layout()
+    else:
+        fig.tight_layout(rect=rect)
     fig.savefig(path)
     if path.suffix == ".pdf":
         fig.savefig(path.with_suffix(".png"), dpi=220)
@@ -79,51 +83,49 @@ def short_ycsb_label(row: dict[str, Any]) -> str:
 
 def plot_intro_failure(curve: dict[str, Any], out: Path) -> None:
     rows = curve["rows"]
-    labels = [short_ycsb_label(row) for row in rows]
-    xs = list(range(len(rows)))
-    width = 0.36
+    selected = [row for row in rows if short_ycsb_label(row) in {"A/F\n2K", "A\n4K", "F\n8K", "F\n10K"}]
+    if len(selected) != 4:
+        selected = rows
 
-    fig, axes = plt.subplots(2, 1, figsize=(6.9, 4.35), sharex=True)
-    ax = axes[0]
-    ax.bar(
-        [x - width / 2 for x in xs],
-        [row["dogi_gc_blocks"] for row in rows],
-        width,
-        label="DOGI-style",
-        color=COLORS["dogi-history"],
-    )
-    ax.bar(
-        [x + width / 2 for x in xs],
-        [row["hybrid_gc_blocks"] for row in rows],
-        width,
-        label="QUASAR-DOGI",
-        color=COLORS["quasar-dogi-hybrid"],
-    )
-    ax.set_ylabel("GC blocks")
-    ax.set_title("YCSB pressure exposes the missing lifecycle signal")
-    ax.grid(axis="y", alpha=0.25)
-    ax.legend(ncol=2, fontsize=8, frameon=False)
+    policies = ["fifo", "sepbit-style", "midas-style", "dogi-history", "quasar-dogi-hybrid"]
+    labels = [short_ycsb_label(row) for row in selected]
+    xs = list(range(len(selected)))
+    width = 0.14
+    offsets = [(idx - (len(policies) - 1) / 2) * width for idx in range(len(policies))]
 
-    ax = axes[1]
-    ax.bar(
-        [x - width / 2 for x in xs],
-        [row["dogi_stale_secret_blocks"] for row in rows],
-        width,
-        label="DOGI-style",
-        color=COLORS["stale"],
-    )
-    ax.bar(
-        [x + width / 2 for x in xs],
-        [row["hybrid_stale_secret_blocks"] for row in rows],
-        width,
-        label="QUASAR-DOGI",
-        color=COLORS["reset"],
-    )
-    ax.set_ylabel("Stale secret blocks")
-    ax.set_xticks(xs)
-    ax.set_xticklabels(labels)
-    ax.set_xlabel("YCSB workload and PQC overlay")
-    ax.grid(axis="y", alpha=0.25)
+    def row_value(row: dict[str, Any], policy: str, metric: str) -> int:
+        if policy == "quasar-dogi-hybrid":
+            return row["hybrid_gc_blocks" if metric == "gc" else "hybrid_stale_secret_blocks"]
+        baseline = row["baseline_semantic_failures"][policy]
+        return baseline["gc_blocks" if metric == "gc" else "stale_secret_blocks"]
+
+    fig, axes = plt.subplots(1, 2, figsize=(6.9, 2.55), sharey=False)
+    for ax, metric, ylabel, title in [
+        (axes[0], "gc", "GC blocks", "GC pressure"),
+        (axes[1], "stale", "Stale secret blocks", "Expired-secret exposure"),
+    ]:
+        for offset, policy in zip(offsets, policies):
+            values = [row_value(row, policy, metric) for row in selected]
+            bar_x = [x + offset for x in xs]
+            ax.bar(
+                bar_x,
+                values,
+                width,
+                label=POLICY_LABELS[policy],
+                color=COLORS[policy],
+            )
+            if policy == "quasar-dogi-hybrid":
+                ax.scatter(bar_x, values, s=12, marker="v", color=COLORS[policy], zorder=3)
+        ax.set_title(title)
+        ax.set_ylabel(ylabel)
+        ax.set_xticks(xs)
+        ax.set_xticklabels(labels)
+        ax.grid(axis="y", alpha=0.25)
+    axes[0].set_xlabel("YCSB + PQC overlay")
+    axes[1].set_xlabel("YCSB + PQC overlay")
+    handles, legend_labels = axes[0].get_legend_handles_labels()
+    fig.legend(handles, legend_labels, loc="upper center", ncol=5, frameon=False, bbox_to_anchor=(0.5, 0.99))
+    setattr(fig, "_tight_layout_rect", (0.0, 0.0, 1.0, 0.90))
     save(fig, out)
 
 
