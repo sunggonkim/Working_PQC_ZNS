@@ -1,7 +1,8 @@
 \section{Evaluation}
 
-\subsection{Methodology}
+\subsection{Evaluation Setup}
 
+\noindent\textbf{Evaluation questions.}
 The evaluation answers five questions:
 
 \begin{enumerate}[leftmargin=*]
@@ -25,24 +26,22 @@ The fairness matrix uses six DOGI-style axes: FIO Zipf, YCSB-A, YCSB-F, Varmail,
 We report WAF, GC write blocks, stale secret blocks, semantic physical reset count, secret bytes waiting for physical reset, zone utilization, live physical zones, append/reset latency, and C-level placement-decision overhead.  A stale secret block is an expired secret-class logical block in a family that is not safely reset- or sanitize-eligible because live data remains or epoch close is unproven.  Exposure artifacts report stale-secret block-seconds; physical tables use final and representative stale-block counts for auditability.  WAF alone is insufficient because a policy can keep WAF near 1.0 while leaving expired PQC secrets in mixed zones.
 For example, the E4 exposure timeline records max stale-secret block-seconds of 69,391,500 for FIFO and \dogi-style placement, while \system remains at zero block-seconds and zero final stale-secret blocks.
 
-\subsection{Workload Hardness}
-
+\noindent\textbf{Claim gate.}
 The workload hardness rule is: DOGI-friendly first, PQC-hostile second.  A headline WAF/GC row must preserve storage-visible structure that helps history-based placement---hot/cold skew, overwrite locality, segment reuse, or phase changes---and then add PQC objects whose invalidation follows protocol state rather than LBA history.  Pure PQC-only traces, oracle-expiration traces, and low-pressure rows are sanity checks or exposure evidence.
 
 The matrix passes all nine gates: fairness, negative controls, pressure rows, main-claim eligibility, and hostile robustness.  The artifact set has seven eligible YCSB pressure rows, nine YCSB baseline-complete rows, three dynamic eligible rows, and DB pressure eligibility.  Rows with WAF near 1.0 are interpreted as semantic exposure results; WAF/GC claims come only from rows where history-based policies pay positive GC or copied-live-block cost.
 
-\subsection{Epoch Upper Bound}
-
+\noindent\textbf{Epoch upper bound.}
 DOGI uses NoDaP as an oracle-like target for lost lifetime information.  We use a narrower upper bound: an epoch oracle that sees exact death time at write time.  It is not deployable and is not counted as \system; it tests whether the workload is placeable once the protocol-lifetime signal exists.
 
 On the mixed sanity trace, \dogi-style placement has WAF 1.791 and 484,967 GC blocks, \system has WAF 1.010 and 6,331 GC blocks, and the epoch oracle has WAF 1.000 and zero GC blocks.  On the stress-rekey trace, \dogi-style placement has WAF 2.031, \system has WAF 1.019, and the oracle has WAF 1.003.  These synthetic rows are bounds, not headline evidence: most of the gap comes from whether the allocator can observe the protocol lifetime boundary.  We therefore do not use the oracle as a main evaluation figure; the plotted headline evidence below compares all same-path baselines on physical-\zns pressure rows.
 
-\subsection{DOGI-Favorable Control}
+\subsection{PQC Lifecycle Pressure}
 
+\noindent\textbf{DOGI-favorable control.}
 The non-PQC control verifies that the hybrid preserves history placement.  On the six DOGI-style axes with no PQC side writes, \dogi-style placement and the \system-\dogi hybrid produce the same WAF because payload stays on the history policy.  \dogi-style placement beats FIFO and pure \system on all six workloads, and no stale secret blocks exist.  This keeps the claim boundary clear: \system is not a replacement for learned placement when no cryptographic death-cohort signal exists.
 
-\subsection{Same-Path Fairness Matrix}
-
+\noindent\textbf{Six-axis fairness matrix.}
 The six-axis actual-\zns fairness matrix completes 72 rows with zero failures.  Table~\ref{tab:fairness} reports the aggregated policy results.  \dogi-style placement is already strong on WAF, which is expected on an easy fairness matrix.  However, it leaves 99,834 stale secret blocks and performs no semantic physical resets.  \system-\dogi hybrid leaves zero stale secret blocks, performs 98 semantic resets, and reduces GC blocks from 625 to 106.
 
 \begin{table}[t]
@@ -66,8 +65,7 @@ FIFO & 1.0040 & 3,903 & 99,141 & 0 \\
 
 The WAF gain here is deliberately modest: 0.1\% relative to \dogi-style.  The row is a semantic result, not a performance headline: storage-history placement can have good WAF and still fail to make expired PQC secrets resettable.
 
-\subsection{PQC Lifecycle Pressure on YCSB Carriers}
-
+\noindent\textbf{YCSB carrier pressure.}
 These rows use YCSB only as a storage-locality carrier.  The target phenomenon is PQC lifecycle pressure: epoch secrets, KEM artifacts, rotation metadata, and append-only signatures are inserted beside ordinary payload, then invalidated by protocol state.  Figure~\ref{fig:ycsb-pressure} reports representative physical \zns replays.  Across the plotted pressure rows, \dogi-style placement pays 3,357--24,289 GC blocks and leaves 46,266--150,221 expired PQC secret blocks.  The hybrid removes stale secret blocks in all rows and reduces GC to zero in these representative replays.
 
 \begin{figure*}[!t]
@@ -89,12 +87,10 @@ These rows use YCSB only as a storage-locality carrier.  The target phenomenon i
 
 The p10000 rows bound the WAF claim.  Dense YCSB overlays can keep \dogi-style WAF close to 1.0, yet the stale-secret gap remains large.  WAF improvement appears under pressure; exposure improvement appears across PQC overlays.
 
-\subsection{Multi-Seed Ratio Sweep}
-
+\noindent\textbf{Multi-seed ratio sweep.}
 To check that the pressure result is not a single-seed artifact, we run a three-seed ratio sweep over the six DOGI-style workload families at 0\%, 5\%, and 20\% PQC overlay ratios, for 54 comparisons.  The hybrid matches \dogi-style at 0\% PQC, is WAF-negative at 5\% PQC (-1.1\% mean WAF, -12.4\% mean GC) while avoiding 2,342 stale secret blocks per seed, and becomes positive at 20\% PQC (5.0\% mean WAF and 38.3\% mean GC improvement) while avoiding 10,021 stale secret blocks per seed.  Thus low-ratio overlays are exposure evidence, not WAF wins; WAF/GC benefits appear once protocol-lifetime objects create enough placement pressure.
 
-\subsection{PQC Lifecycle Pressure Across Service Carriers}
-
+\noindent\textbf{Service carrier pressure.}
 Figure~\ref{fig:pressure-breadth} reports harder service carriers with the same PQC lifecycle side writes.  Sysbench is included as DB-backed PQC service pressure rather than as a generic DB claim.  The hybrid reduces \dogi-style GC from 11,256 to 609 blocks and removes 38,438 expired PQC secret blocks.  On Exchange-, Varmail-, and Alibaba-like carriers, the hybrid reduces GC by 92.3--99.9\% and keeps stale secrets at zero.
 
 \begin{figure*}[!t]
@@ -116,8 +112,9 @@ Figure~\ref{fig:pressure-breadth} reports harder service carriers with the same 
 
 These rows are the strongest performance evidence because all non-QUASAR baselines complete but pay visible GC and leave stale secrets.  They also show why the hybrid is the default deployable policy: payload placement remains history-based, while secrets are placed by protocol cohort.
 
-\subsection{Component Ablation}
+\subsection{Mechanism and Baseline Analysis}
 
+\noindent\textbf{Component ablation.}
 Figure~\ref{fig:component-ablation} is the metric-bearing ablation.  History-only placement is the right first row because it gives \dogi-style placement all storage-visible signals but no protocol lifetime.  Adding lifecycle hints removes stale secrets, but pure semantic grouping can still leave GC cost on DB-like payload.  Adding the \dogi payload fallback removes that remaining cost.  Admission and residual migration are not free performance wins; they are boundary mechanisms for open-zone pressure and stragglers, which Figure~\ref{fig:open-zone-robustness} exposes directly.  Table~\ref{tab:ablation} therefore does not repeat the plotted values; it records the design decisions implied by the ablation.
 
 \begin{figure*}[t]
@@ -155,12 +152,12 @@ Residual & Strict zero-wait exposure control can require copying stragglers. & E
 \end{tabularx}
 \end{table*}
 
-\subsection{Exact Public Baseline Sanity Runs}
-
+\noindent\textbf{Exact public baseline sanity.}
 The main tables use same-path replay so FIFO, \sepbit-style, \midas-style, \dogi-style, \system, and the hybrid share trace timing, packed physical-\zns model, and reset accounting.  We also ran public baseline artifacts in their native environments.  Public DOGI completes Alibaba p8000 compact, selector-suite, and original-LBA runs with reported WAF 2.993, 2.804, and 3.212; public MiDAS completes compact FIO and PQC representatives with WA 1.000 and 1.250; public SepBIT completes a PQC pressure representative with WA 2.430.  These runs are sanity evidence, not apples-to-apples WAF numbers.  They sharpen the boundary: MiDAS is strong on at least one compact representative, so the claim rests on death-cohort exposure and same-path pressure evidence, not universal baseline collapse.
 
-\subsection{Open-Zone and Hint Robustness}
+\subsection{Robustness and Overhead}
 
+\noindent\textbf{Open-zone and hint robustness.}
 The hardest \system cases are not clean epochs; they are wrong or missing hints, many tenants, and delayed-expiry stragglers.  On YCSB-A p4000, the clean hybrid has WAF 1.0000, zero stale secrets, and 28 semantic resets.  With 5\% missing hints, WAF remains 1.0000 but 3,361 stale secret blocks appear because some secret writes fall back to nonsemantic placement.  With 5\% wrong epochs, this trace still ends with zero stale secrets but increases reset activity to 112 resets.  With 5\% stragglers, exact secret-group packing can exceed the device open-zone budget; epoch-bin fallback completes within the budget but leaves waiting secrets, while epoch-bin plus residual migration reaches zero waiting at WAF 1.7098 after copying 234,549 residual blocks.
 
 The residual fallback frontier shows why strict exposure mode cannot be the default.  Exchange-like and Sysbench-like representatives can reach zero final secret waiting with physical WAF 1.0182 and 1.2161, respectively.  YCSB-F p8000 reaches strict zero waiting only at physical WAF 3.5535 after migrating 1,168,095 residual blocks.  \system therefore exposes low-overhead, balanced, and strict-zero-wait profiles rather than hiding this tradeoff behind a single policy.
@@ -172,8 +169,7 @@ The residual fallback frontier shows why strict exposure mode cannot be the defa
 \label{fig:open-zone-robustness}
 \end{figure}
 
-\subsection{Prototype Overhead}
-
+\noindent\textbf{Prototype overhead.}
 \system adds semantic reset work, but its decision path is cheap.  In the actual-\zns overhead suite, the hybrid issues 318 more semantic reset operations than \dogi-style.  Zonefs-helper throughput is lower than \dogi-style by this accounting, but helper latency includes user-space append/truncate overhead.  In the C-level placement-decision benchmark, \dogi-style feature extraction plus a small MLP costs 2,397.8 ns/write, \system hint routing costs 16.8 ns/write, and the hybrid costs 1,178.8 ns/write.
 
 The xNVMe probe provides a lower-overhead command-path sanity check: 4,096 4KiB zone appends complete with p99 latency of 26,064 ns and throughput of 181.79 MiB/s.  The probe is a Linux NVMe ioctl path, not SPDK poll-mode, so it is reported as a bound rather than a final production datapoint.
@@ -185,10 +181,10 @@ The xNVMe probe provides a lower-overhead command-path sanity check: 4,096 4KiB 
 \label{fig:prototype-overhead}
 \end{figure}
 
-\subsection{Security Boundary}
+\subsection{Security and Reproducibility}
 
+\noindent\textbf{Security boundary.}
 The physical device advertises crypto-erase and block-erase sanitize support.  We executed crypto-erase sanitize and observed successful completion in the sanitize log.  This supports a deployment path where \system triggers hardware erase semantics at epoch boundaries.  The default result remains more conservative: \system reduces stale-secret exposure by aligning secret lifetime with reset eligibility, while physical erasure requires explicit sanitize or equivalent hardware support.  We do not use sanitize timing to claim foreground service latency: sanitize policy, batching, and SLO integration are deployment choices beyond the same-path placement comparison.
 
-\subsection{Reproducibility}
-
+\noindent\textbf{Reproducibility.}
 The artifact manifest records 37 evidence artifacts, their roles, abbreviated hashes, and regeneration commands.  Validation finds zero hash mismatches, and the local acceptance report passes 41 of 41 gates.  These checks make the scoped evidence auditable.

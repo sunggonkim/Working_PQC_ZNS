@@ -9,12 +9,12 @@ This file records how the QUASAR draft follows the local writing guide and the p
 | `HowToWritePaper.md` systems contract | Problem, gap, idea, evidence are stated before implementation detail. | Abstract and Introduction. |
 | AURORA Introduction | Reach the systems bottleneck by paragraph 3. | `1.Introduction.tex`: PQC storage pressure, ZNS placement, death cohort gap. |
 | AURORA/ScaleQsim Introduction | Use an early capability/gap table before contributions. | Table 1 in `1.Introduction.tex`. |
-| DOGI paper structure | Define storage-placement baselines and workload families before evaluation claims. | `2.Background.tex`, `6.Evaluation.tex`. |
-| DOGI/FAST workload fairness | Preserve DOGI-friendly locality before adding PQC lifecycle stress. | `3.Motivation.tex`, `6.Evaluation.tex`, Workload Hardness. |
+| DOGI paper structure | Define storage-placement baselines and workload families before evaluation claims, then group results into large evaluation families rather than fragmented micro-sections. | `2.Background.tex`, `6.Evaluation.tex`. |
+| DOGI/FAST workload fairness | Preserve DOGI-friendly locality before adding PQC lifecycle stress. | `3.Motivation.tex`; `6.Evaluation.tex` Evaluation Setup and PQC Lifecycle Pressure blocks. |
 | DOGI NoDaP role | Use an oracle only as an upper bound that exposes the missing lifetime signal, then turn the gap into design requirements. | `3.Motivation.tex`, `4.Design.tex`, `6.Evaluation.tex`. |
 | ScaleQsim/AURORA Design | Start Design with architecture and procedure, then explain mechanisms. | `4.Design.tex`. |
 | AURORA Evaluation | State setup, baselines, exclusions, and feasibility before results. | `6.Evaluation.tex`. |
-| HowToWritePaper paragraph grammar | Claim first, concrete object, number/procedure, cause, bridge. | Each result subsection in `6.Evaluation.tex`. |
+| HowToWritePaper paragraph grammar | Claim first, concrete object, number/procedure, cause, bridge. | Each `\textbf{}` result block inside the five Evaluation subsections. |
 
 ## Paragraph-Role Map
 

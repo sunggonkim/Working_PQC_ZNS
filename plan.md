@@ -93,7 +93,7 @@ right signal.
 
 | Checkpoint | Required Answer | Evidence | Paper Location | Status |
 | --- | --- | --- | --- | --- |
-| Is the workload too easy? | Headline rows are DOGI/FAST-shaped plus PQC overlay, not pure PQC-only streams. | `workload-hardness-matrix.md` | Evaluation Methodology, Workload Hardness | closed |
+| Is the workload too easy? | Headline rows are DOGI/FAST-shaped plus PQC overlay, not pure PQC-only streams. | `workload-hardness-matrix.md` | Evaluation Setup, PQC Lifecycle Pressure | closed |
 | Does DOGI get its native signals? | Yes. Hot/cold skew, overwrite locality, segment reuse, and dynamic service phases remain. | FIO/YCSB/Varmail/Alibaba/Exchange axes | Evaluation | closed |
 | Are low-pressure rows overclaimed? | No. p2000/easy rows are negative WAF controls and exposure evidence only. | YCSB pressure curve | Evaluation | closed |
 | Is the result cherry-picked at one ratio or seed? | No. A three-seed ratio sweep over six DOGI-style families reports 54 comparisons and shows 0% parity, 5% WAF-negative exposure rows, and 20% WAF/GC gains. | `dogi-paper-seed-sweep/summary.md` | Multi-Seed Ratio Sweep | closed for scoped claim |
@@ -243,12 +243,13 @@ git diff --check -- plan.md Paper/6.Evaluation.tex Paper/FAST_READINESS_AUDIT.md
 
 | Checkpoint | Required Answer | Evidence | Paper Location | Status |
 | --- | --- | --- | --- | --- |
-| Does the paper follow the systems-paper spine? | Yes: problem, gap, bound, mechanism, physical evidence, ablation, cost, scope. | `LINE_BY_LINE_FAST_AUDIT.md` | whole paper | closed for scoped draft |
-| Does it pass the `HowToWritePaper.md` final audit? | Yes for the scoped claim; figure labels/captions have been visually checked, Evaluation prose was compressed, and WAF-vs-utilization now visualizes the space tradeoff. | `LINE_BY_LINE_FAST_AUDIT.md` final audit matrix | whole paper | closed |
+| Does the paper follow the systems-paper spine? | Yes: problem, gap, bound, mechanism, physical evidence, ablation, cost, scope. Evaluation is now grouped into FAST-style result families instead of many micro-subsections. | `LINE_BY_LINE_FAST_AUDIT.md` | whole paper | closed for scoped draft |
+| Does it pass the `HowToWritePaper.md` final audit? | Yes for the scoped claim; figure labels/captions have been visually checked, Evaluation is consolidated into five readable subsections with `\textbf{}` run-in leads, and WAF-vs-utilization now visualizes the space tradeoff. | `LINE_BY_LINE_FAST_AUDIT.md` final audit matrix | whole paper | closed |
 | Is the abstract compact? | Yes. It now follows a four-sentence problem/gap/approach/result shape. | `0.Main.tex` | Abstract | closed |
 | Are captions reviewer-readable? | Main captions now state the lesson, not only the content. | Introduction/Design/Evaluation captions | figures/tables | improved |
 | Is Evaluation too table-heavy? | The exact numbers remain in tables for auditability, but the FAST-style figure path now includes pressure breadth, component ablation, open-zone sensitivity, and prototype overhead. | `FAST_READINESS_AUDIT.md`, Figures `fig:pressure-breadth`, `fig:component-ablation`, `fig:open-zone-robustness`, `fig:prototype-overhead` | packaging | closed |
-| Is prose too defensive? | A final compression pass cut Evaluation from 2,757 to 2,447 words while preserving numbers, caveats, and claim boundaries. | `Paper/6.Evaluation.tex` | final polish | closed |
+| Is Evaluation fragmented? | No. It now follows a DOGI-like structure: setup, PQC lifecycle pressure, mechanism/baseline analysis, robustness/overhead, and security/reproducibility. Fine-grained claims are run-in `\textbf{}` blocks, not separate subsections. | `Paper/6.Evaluation.tex` | Evaluation | closed |
+| Is prose too defensive? | A final structure pass keeps caveats as claim boundaries and uses bold claim leads for readability without deleting evidence. | `Paper/6.Evaluation.tex` | final polish | closed |
 
 Polish target:
 
@@ -269,7 +270,8 @@ Every checkpoint above must be visible in the paper. Current mapping:
 | Design | Hint schema, trust boundary, zone families, admission, reclaim invariant, crash/recovery, FDP/ZNS modes | reflected |
 | Implementation | Trace/replay path, same-path baselines, actual-ZNS path, 32-byte hint micro-case | reflected |
 | Evaluation Methodology | Platform, baselines, workloads, metrics, caveats | reflected |
-| Workload Hardness | Prevent toy PQC-only overclaim | reflected |
+| Evaluation Structure | DOGI/FAST-style grouping with five major result sections and bold run-in claim leads | reflected |
+| Workload Hardness | Prevent toy PQC-only overclaim inside PQC lifecycle pressure results | reflected |
 | Fairness Matrix | DOGI/hybrid not crippled on easy DOGI axes; exposure gap remains | reflected |
 | YCSB Pressure | DOGI/FAST-shaped pressure produces GC/WAF separation plus stale-secret gap | reflected |
 | DB/Dynamic Pressure | Not YCSB-only; Sysbench labeled FAST-style DB pressure | reflected |

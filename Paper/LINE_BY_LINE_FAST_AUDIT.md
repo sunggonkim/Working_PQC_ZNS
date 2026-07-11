@@ -51,7 +51,7 @@ WAF optimizer:
 | DOGI Role | QUASAR Counterpart | Evidence |
 | --- | --- | --- |
 | Problem setup | PQC creates protocol-lifetime storage pressure and stale-secret exposure. | Abstract, Introduction, Table 1, `fig:intro-ycsb`. |
-| Upper bound | Epoch oracle shows what becomes possible once death time is visible. | Evaluation text in `Epoch Upper Bound`; not plotted as a headline figure. |
+| Upper bound | Epoch oracle shows what becomes possible once death time is visible. | Evaluation Setup's `Epoch upper bound` run-in block; not plotted as a headline figure. |
 | Limitation of history | DOGI/MiDAS/SepBIT see LBA/frequency/history, not session close or rotation. | Motivation, Table 1, `fig:pressure-breadth`. |
 | Design mechanisms | Hint schema, zone families, admission/open-zone budget, conservative reset. | Design section and architecture figure. |
 | Workload breadth | DOGI six-axis controls plus YCSB, Sysbench, Exchange, Varmail, Alibaba pressure. | Methodology, tables, `fig:pressure-breadth`. |

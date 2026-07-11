@@ -49,7 +49,7 @@ fallback modes.
 | Full production SPDK path | Zonefs helper replay validates actual-ZNS append/reset behavior, but not final production p99 latency. | Explicitly scoped; xNVMe probe partially addresses command path. |
 | Real YCSB/JDBC block traces | Would strengthen external validity beyond DOGI-shaped YCSB pressure generation. | Optional strengthening for the scoped claim; not represented as completed. |
 | More device diversity | One WD ZN540-class device plus emulator/exact-baseline artifacts is not a wear-leveling study. | Explicit limitation. |
-| Final prose pass | Evaluation was compressed from 2,757 to 2,447 words while preserving the evidence and claim boundaries. | Checked for current build. |
+| Final prose pass | Evaluation was consolidated into five FAST-style subsections with `\textbf{}` run-in leads while preserving the evidence and claim boundaries. | Checked for current build. |
 | Final figure/caption inspection | Current visual pass checked Figure 5 plus the compact one-column Figure 6--7 layout after label removal. Repeat only if figures move or new plots are added. | Checked for current build. |
 
 ## FAST Reviewer Attack Readiness
