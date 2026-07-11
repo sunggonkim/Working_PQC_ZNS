@@ -6,6 +6,16 @@ History-based placement asks: what did this block look like before?  \dogi-style
 
 This distinction creates two failure modes.  The first is semantic: the baseline leaves expired secret blocks in zones that are not safely resettable because the zone also contains payload or long-lived metadata.  The second is performance: under sufficient free-zone pressure, mixed death cohorts force valid-block migration and raise WAF.  The first failure can appear even when WAF is near 1.0; the second appears only in harder pressure workloads.
 
+\begin{figure}[!t]
+\centering
+\includegraphics[width=0.62\columnwidth]{../artifacts/figures/fast-style/fig2-motivation-semantic-gap-legend.pdf}\\[-0.4em]
+\includegraphics[width=0.98\columnwidth]{../artifacts/figures/fast-style/fig2-motivation-semantic-gap.pdf}
+\caption{Motivation diagnostic: WAF is not enough to expose the PQC failure mode.  \dogi-style placement can look benign on storage-visible WAF while still stranding expired PQC secrets; \system-\dogi keeps payload on history placement but routes lifecycle objects by death cohort.}
+\label{fig:motivation-semantic-gap}
+\end{figure}
+
+Figure~\ref{fig:motivation-semantic-gap} shows the diagnostic reason this paper does not use WAF alone as the motivation.  On DOGI-compatible YCSB carriers, \dogi-style placement often keeps physical WAF close to 1.0 because the payload locality signal is still useful.  At the same time, expired PQC secrets remain stranded because the storage-visible history does not encode epoch close.  \system-\dogi removes those protocol-dead secrets.  It routes only lifecycle objects through the death-cohort path.
+
 \subsection{Easy Workloads Are Not Enough}
 
 A clean PQC-only epoch trace makes \system look too good and is not a fair test of \dogi.  Our evaluation therefore treats such traces as sanity checks only.  The hard tests keep DOGI's normal locality signals and then add realistic PQC lifecycle writes.  Concretely, the workload matrix contains: DOGI-style six-axis fairness, YCSB-A/F pressure, FAST-style Sysbench pressure, dynamic service pressure, and QUASAR-hostile robustness.

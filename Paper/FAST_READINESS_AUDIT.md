@@ -44,7 +44,7 @@ fallback modes.
 
 | Gap | Why It Matters | Status |
 | --- | --- | --- |
-| Figure polish | FAST reviewers read plots before prose. Figure 5 now carries component ablation, Figure 6 carries open-zone/config sensitivity, and Figure 7 carries prototype overhead. Numeric graph labels were removed to avoid table/figure duplication. | Checked for current build. |
+| Figure polish | FAST reviewers read plots before prose. Motivation now has a one-column semantic-gap diagnostic with a separate legend PDF above the plot. Figure 5 carries component ablation, Figure 6 carries open-zone/config sensitivity, and Figure 7 carries prototype overhead. Numeric graph labels were removed to avoid table/figure duplication. | Checked for current build. |
 | Table-heavy Evaluation | The paper still carries exact measured matrices in tables, but the main reviewer attacks now have figure paths: pressure, component attribution, open-zone sensitivity, and overhead. | Intentional auditability tradeoff. |
 | Full production SPDK path | Zonefs helper replay validates actual-ZNS append/reset behavior, but not final production p99 latency. | Explicitly scoped; xNVMe probe partially addresses command path. |
 | Real YCSB/JDBC block traces | Would strengthen external validity beyond DOGI-shaped YCSB pressure generation. | Optional strengthening for the scoped claim; not represented as completed. |
@@ -76,7 +76,7 @@ matching the argument mechanics is the goal.
 | --- | --- | --- |
 | Abstract: problem, gap, approach, result. | PQC storage pressure, DOGI/MiDAS/SepBIT gap, QUASAR death-cohort hints, actual-ZNS numbers. | Good. |
 | Introduction: pressure by paragraph 3. | PQC service writes, ZNS placement, death cohort mismatch. | Good. |
-| First evidence figure. | PQC lifecycle characterization appears immediately after the opening gap; metric-bearing YCSB pressure follows in Evaluation. | Good. |
+| First evidence figures. | PQC lifecycle characterization appears immediately after the opening gap; Motivation adds a WAF-vs-stale-secret diagnostic; metric-bearing YCSB pressure follows in Evaluation. | Good. |
 | Capability/prior-work table. | Table 1 maps SepBIT/MiDAS/DOGI/QUASAR by signal and blind spot. | Good. |
 | Design map. | Architecture figure plus hint schema, trust boundary, families, admission, reclaim, recovery. | Good. |
 | Evaluation setup. | Platform, baselines, workloads, metrics, caveats. | Good. |

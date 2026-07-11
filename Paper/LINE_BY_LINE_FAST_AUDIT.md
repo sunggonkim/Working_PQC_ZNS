@@ -21,7 +21,7 @@ Sources checked:
 
 | Checkpoint | Previous Problem | Current Fix | Status |
 | --- | --- | --- | --- |
-| First evidence figure | Old YCSB plot made the WAF gap look small and visually weak. | Use `fig:intro-ycsb` as characterization, then make `fig:ycsb-pressure` the first metric-bearing PQC pressure figure. | fixed; verified in PDF |
+| First evidence figures | Old YCSB plot made the WAF gap look small and visually weak. | Use `fig:intro-ycsb` as characterization, add `fig:motivation-semantic-gap` to show WAF/history blindness, then make `fig:ycsb-pressure` the first metric-bearing PQC pressure figure. | fixed; verified in PDF |
 | Workload breadth | Evidence was table-heavy and did not visually match DOGI-style breadth. | Use `fig:pressure-breadth`: Sysbench, Exchange, Varmail, Alibaba-like pressure rows with FIFO/SepBIT/MiDAS/DOGI/QUASAR. | fixed; verified in PDF |
 | Mechanism attribution | Ablation existed mostly as a table. | Use `fig:component-ablation`: staged subfloats for WAF, GC, and expired PQC secrets across history-only, lifecycle hints, and hybrid fallback. | fixed; verified in PDF |
 | Configuration sensitivity | Space/open-zone tradeoff was scattered across prose and tables. | Use `fig:open-zone-robustness`: live-zone budget, waiting secrets, and strict cleanup WAF cost. | fixed; verified in PDF |
@@ -50,9 +50,9 @@ WAF optimizer:
 
 | DOGI Role | QUASAR Counterpart | Evidence |
 | --- | --- | --- |
-| Problem setup | PQC creates protocol-lifetime storage pressure and stale-secret exposure. | Abstract, Introduction, Table 1, `fig:intro-ycsb`. |
+| Problem setup | PQC creates protocol-lifetime storage pressure and stale-secret exposure. | Abstract, Introduction, Table 1, `fig:intro-ycsb`, `fig:motivation-semantic-gap`. |
 | Upper bound | Epoch oracle shows what becomes possible once death time is visible. | Evaluation Setup's `Epoch upper bound` run-in block; not plotted as a headline figure. |
-| Limitation of history | DOGI/MiDAS/SepBIT see LBA/frequency/history, not session close or rotation. | Motivation, Table 1, `fig:pressure-breadth`. |
+| Limitation of history | DOGI/MiDAS/SepBIT see LBA/frequency/history, not session close or rotation. | Motivation, Table 1, `fig:motivation-semantic-gap`, `fig:pressure-breadth`. |
 | Design mechanisms | Hint schema, zone families, admission/open-zone budget, conservative reset. | Design section and architecture figure. |
 | Workload breadth | DOGI six-axis controls plus YCSB, Sysbench, Exchange, Varmail, Alibaba pressure. | Methodology, tables, `fig:pressure-breadth`. |
 | Component analysis | Hints vs history-only vs hybrid payload fallback. | `fig:component-ablation`, `tab:ablation`. |

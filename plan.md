@@ -266,7 +266,7 @@ Every checkpoint above must be visible in the paper. Current mapping:
 | Abstract | PQC pressure, storage-history gap, QUASAR hint/hybrid idea, actual-ZNS result and scope | reflected |
 | Introduction | Early pressure evidence, Table 1 prior-work gap, death-cohort thesis | reflected |
 | Background | PQC object classes and lifetime sources; why ZNS placement matters | reflected |
-| Motivation | Why storage-visible history misses protocol death events | reflected |
+| Motivation | Why storage-visible history misses protocol death events; semantic-gap figure separates WAF from stale-secret exposure | reflected |
 | Design | Hint schema, trust boundary, zone families, admission, reclaim invariant, crash/recovery, FDP/ZNS modes | reflected |
 | Implementation | Trace/replay path, same-path baselines, actual-ZNS path, 32-byte hint micro-case | reflected |
 | Evaluation Methodology | Platform, baselines, workloads, metrics, caveats | reflected |
@@ -326,7 +326,7 @@ sensitivity, overhead, and robustness.
 
 | Checkpoint | Required Figure | What It Must Prove | Status |
 | --- | --- | --- | --- |
-| First evidence, not a weak WAF plot | `fig:intro-ycsb` | The opening figure characterizes PQC side writes as epoch secrets, rotation metadata, and append-only signatures whose lifetimes are protocol-defined. | regenerated and wired into Introduction |
+| First evidence, not a weak WAF plot | `fig:intro-ycsb`, `fig:motivation-semantic-gap` | The opening figure characterizes PQC side writes; the Motivation figure shows WAF can look benign while protocol-dead secrets remain. | regenerated and wired into Introduction/Motivation |
 | Main PQC pressure | `fig:ycsb-pressure` | YCSB supplies DOGI-friendly update locality; PQC side writes create death cohorts that history baselines strand. | regenerated and wired into Evaluation |
 | Workload breadth | `fig:pressure-breadth` | Sysbench, Exchange, Varmail, and Alibaba-like pressure rows show the same PQC-specific stale-secret and GC gap across FIFO/SepBIT/MiDAS/DOGI/QUASAR. | regenerated and wired into Evaluation |
 | Mechanism ablation | `fig:component-ablation` | History-only fails on death cohorts; lifecycle hints remove exposure; DOGI payload fallback removes remaining payload GC. | regenerated and wired into Evaluation with subfloats |

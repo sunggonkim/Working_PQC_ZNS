@@ -16,6 +16,7 @@ from pathlib import Path
 from typing import Any
 
 import matplotlib.pyplot as plt
+from matplotlib.lines import Line2D
 
 
 plt.rcParams.update(
@@ -286,6 +287,75 @@ def plot_intro_failure(curve: dict[str, Any], out: Path) -> None:
     ax.grid(axis="y", alpha=0.25)
     ax.legend(ncol=1, fontsize=5.8, frameon=False, loc="upper left")
     save(fig, out)
+
+
+def plot_motivation_semantic_gap(curve: dict[str, Any], out_dir: Path) -> None:
+    """Show why WAF/history alone is the wrong motivation signal."""
+    wanted = [
+        (("ycsb-a-pqc2000", "ycsb-f-pqc2000"), 2000),
+        (("ycsb-a-pqc4000",), 4000),
+        (("ycsb-f-pqc6000",), 6000),
+        (("ycsb-f-pqc8000",), 8000),
+        (("ycsb-a-pqc10000",), 10000),
+    ]
+    rows: list[dict[str, Any]] = []
+    for names, level in wanted:
+        for row in curve["rows"]:
+            if tuple(row.get("workloads", [])) == names and row.get("pqc_level") == level:
+                rows.append(row)
+                break
+    if len(rows) != len(wanted):
+        rows = curve["rows"][:5]
+
+    labels = [short_ycsb_label(row) for row in rows]
+    xs = list(range(len(rows)))
+    policies = [
+        ("DOGI-style", "dogi_waf", "dogi_stale_secret_blocks", COLORS["dogi-history"], "o"),
+        ("QUASAR-DOGI", "hybrid_waf", "hybrid_stale_secret_blocks", COLORS["quasar-dogi-hybrid"], "s"),
+    ]
+
+    legend_path = out_dir / "fig2-motivation-semantic-gap-legend.pdf"
+    legend_path.parent.mkdir(parents=True, exist_ok=True)
+    legend_fig = plt.figure(figsize=(3.35, 0.22))
+    handles = [
+        Line2D([0], [0], color=color, marker=marker, linewidth=1.2, markersize=4.5, label=label)
+        for label, _, _, color, marker in policies
+    ]
+    legend_fig.legend(handles=handles, loc="center", ncol=2, frameon=False, handlelength=1.8, columnspacing=1.4)
+    legend_fig.savefig(legend_path, bbox_inches="tight", pad_inches=0.01)
+    legend_fig.savefig(legend_path.with_suffix(".png"), dpi=220, bbox_inches="tight", pad_inches=0.01)
+    plt.close(legend_fig)
+    print(f"wrote {legend_path}")
+
+    fig, axes = plt.subplots(1, 2, figsize=(3.45, 1.72))
+    for label, waf_key, stale_key, color, marker in policies:
+        axes[0].plot(xs, [row[waf_key] for row in rows], marker=marker, linewidth=1.2, markersize=4.0, color=color)
+        axes[1].plot(
+            xs,
+            [row[stale_key] + 1 for row in rows],
+            marker=marker,
+            linewidth=1.2,
+            markersize=4.0,
+            color=color,
+        )
+
+    axes[0].axhline(1.0, color="#9ca3af", linewidth=0.7, linestyle="--")
+    axes[0].set_title("WAF can look benign")
+    axes[0].set_ylabel("WAF")
+    axes[0].set_ylim(0.995, max(row["dogi_waf"] for row in rows) + 0.016)
+    axes[0].set_xticks(xs)
+    axes[0].set_xticklabels(labels, rotation=25, ha="right")
+    axes[0].grid(axis="y", alpha=0.25)
+
+    axes[1].set_title("Protocol-dead data remains")
+    axes[1].set_ylabel("Expired secrets + 1")
+    axes[1].set_yscale("log")
+    axes[1].set_ylim(1, max(row["dogi_stale_secret_blocks"] for row in rows) * 2.2)
+    axes[1].set_xticks(xs)
+    axes[1].set_xticklabels(labels, rotation=25, ha="right")
+    axes[1].grid(axis="y", alpha=0.25)
+
+    save(fig, out_dir / "fig2-motivation-semantic-gap.pdf")
 
 
 def plot_fairness_matrix_subfigs(out_dir: Path) -> None:
@@ -1336,6 +1406,7 @@ def main() -> int:
     args = parser.parse_args()
 
     plot_intro_failure(load_json(args.ycsb), args.out_dir / "fig1-intro-pressure.pdf")
+    plot_motivation_semantic_gap(load_json(args.ycsb), args.out_dir)
     plot_fairness_matrix_subfigs(args.out_dir)
     plot_service_pressure_allbaseline_subfigs(load_json(args.dynamic), load_json(args.sysbench), args.out_dir)
     plot_ycsb_pressure_subfigs(load_json(args.ycsb), args.out_dir)
