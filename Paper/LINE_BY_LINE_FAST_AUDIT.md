@@ -26,7 +26,7 @@ Sources checked:
 | Mechanism attribution | Ablation existed mostly as a table. | Use `fig:component-ablation`: staged subfloats for WAF, GC, and expired PQC secrets across history-only, lifecycle hints, and hybrid fallback. | fixed; verified in PDF |
 | Configuration sensitivity | Space/open-zone tradeoff was scattered across prose and tables. | Use `fig:open-zone-robustness`: live-zone budget, waiting secrets, and strict cleanup WAF cost. | fixed; verified in PDF |
 | Overhead | Overhead was prose plus numbers, not a FAST-style figure. | Use `fig:prototype-overhead`: actual-ZNS replay throughput plus C-level placement-decision cost. | fixed; verified in PDF |
-| Plot hygiene | Old plots repeated table numbers, used oversized pages, and mixed figure labels with the wrong data story. | Remove numeric labels from bars/points, use subfloats, and keep tables as qualitative or audit-only support. | fixed; verified in PDF |
+| Plot hygiene | Old plots repeated table numbers, used oversized pages, and mixed figure labels with the wrong data story. | Remove numeric labels from bars/points, keep Figure 5 as subfloats, and make Figures 6--7 compact one-column figures instead of `figure*`. | fixed; verified in PDF |
 | Audit honesty | Old audit claimed `18/18` and “submission-grade” too early. | Remove score-as-victory language; keep remaining risks explicit. | fixed |
 | Prior-paper match | “Line-by-line” cannot mean copying DOGI's exact figures because QUASAR's claim is narrower. | Use role parity: failure, bound, design, workload breadth, ablation, overhead, robustness. | fixed with scope |
 
@@ -73,7 +73,7 @@ WAF/GC plus expired-secret exposure.
 | Fig. 12: GC-written relocation | Relocation accuracy and destination group distribution. | `fig:component-ablation` shows GC copied blocks disappearing when lifecycle hints and payload fallback separate death cohorts. |
 | Fig. 13: grouping/config behavior | How group count and misprediction interact across workload types. | `fig:open-zone-robustness` shows exact grouping, binning, open-zone limits, and residual migration cost. |
 | Fig. 14: component analysis | Incrementally adds DOGI mechanisms and reports WAF. | `fig:component-ablation` incrementally moves from history-only to lifecycle hints to hybrid payload fallback, with WAF/GC/exposure subfloats. |
-| Fig. 15/Table 5: overhead/prototype | Inference throughput and foreground latency. | `fig:prototype-overhead` separates zonefs actual-ZNS throughput accounting from isolated C-level placement-decision cost. |
+| Fig. 15/Table 5: overhead/prototype | Inference throughput and foreground latency. | `fig:prototype-overhead` is a compact one-column figure that separates zonefs actual-ZNS throughput accounting from isolated C-level placement-decision cost. |
 
 ## Remaining Reviewer Risks
 

@@ -836,6 +836,69 @@ def plot_open_zone_robustness_subfigs(robustness: dict[str, Any], out_dir: Path)
         save(fig, out_dir / filename)
 
 
+def plot_open_zone_robustness_column(robustness: dict[str, Any], out_dir: Path) -> None:
+    limit = robustness["device_limits"]["mor"]
+    cases = [
+        ("Clean", robustness["clean"]["hybrid"]),
+        ("Missing", robustness["missing_hint_5pct"]["hybrid"]),
+        ("Wrong", robustness["wrong_epoch_5pct"]["hybrid"]),
+        ("Exact", robustness["straggler_5pct_exact_secret_group"]["hybrid"]),
+        ("Bin", robustness["straggler_5pct_epoch_bin_4"]["hybrid"]),
+        ("Bin+copy", robustness["straggler_5pct_epoch_bin_5_residual_12288"]["hybrid"]),
+    ]
+    labels = [case[0] for case in cases]
+    x = list(range(len(cases)))
+
+    fig = plt.figure(figsize=(3.35, 2.65))
+    grid = fig.add_gridspec(2, 2, height_ratios=[1.0, 1.05], hspace=0.78, wspace=0.52)
+    axes = [
+        fig.add_subplot(grid[0, 0]),
+        fig.add_subplot(grid[0, 1]),
+        fig.add_subplot(grid[1, :]),
+    ]
+    panels = [
+        (
+            axes[0],
+            [case[1]["max_live_physical_zones"] for case in cases],
+            "Live zones",
+            "Open-zone budget",
+            "#4C78A8",
+            "limit",
+        ),
+        (
+            axes[1],
+            [case[1]["secret_waiting_end"] + 1 for case in cases],
+            "Waiting secrets + 1",
+            "Residual exposure",
+            COLORS["stale"],
+            "log",
+        ),
+        (
+            axes[2],
+            [case[1]["physical_waf"] for case in cases],
+            "Physical WAF",
+            "Strict cleanup cost",
+            "#F58518",
+            "waf",
+        ),
+    ]
+    for ax, values, ylabel, title, color, mode in panels:
+        ax.bar(x, values, color=color)
+        if mode == "limit":
+            ax.axhline(limit, color=COLORS["stale"], linestyle="--", linewidth=0.8)
+        if mode == "log":
+            ax.set_yscale("log")
+        if mode == "waf":
+            ax.set_ylim(0.95, max(values) + 0.20)
+        ax.set_title(title, fontsize=7.3)
+        ax.set_ylabel(ylabel, fontsize=6.5)
+        ax.set_xticks(x)
+        ax.set_xticklabels(labels, rotation=28, ha="right", fontsize=5.6)
+        ax.tick_params(axis="y", labelsize=5.8)
+        ax.grid(axis="y", alpha=0.25)
+    save(fig, out_dir / "fig6-open-zone-column.pdf")
+
+
 def plot_prototype_overhead_subfigs(
     overhead: dict[str, Any],
     policy_overhead: dict[str, Any],
@@ -881,6 +944,57 @@ def plot_prototype_overhead_subfigs(
     ax.grid(axis="y", alpha=0.25)
     ax.legend(ncol=1, fontsize=5.7, frameon=False, loc="upper left")
     save(fig, out_dir / "fig7-decision-cost.pdf")
+
+
+def plot_prototype_overhead_column(
+    overhead: dict[str, Any],
+    policy_overhead: dict[str, Any],
+    out_dir: Path,
+) -> None:
+    policies = ["fifo", "sepbit-style", "midas-style", "dogi-history", "quasar", "quasar-dogi-hybrid"]
+    trace_names = []
+    for row in policy_overhead["rows"]:
+        name = row["trace_name"]
+        if name not in trace_names:
+            trace_names.append(name)
+    policy_order = ["dogi-mlp", "quasar-dogi-hybrid", "quasar-hint"]
+    policy_labels = {"dogi-mlp": "DOGI MLP", "quasar-dogi-hybrid": "Hybrid", "quasar-hint": "Hint"}
+    policy_colors = {"dogi-mlp": COLORS["dogi-history"], "quasar-dogi-hybrid": COLORS["quasar-dogi-hybrid"], "quasar-hint": COLORS["quasar"]}
+    by_key = {(row["trace_name"], row["policy"]): row for row in policy_overhead["rows"]}
+
+    fig, axes = plt.subplots(1, 2, figsize=(3.35, 1.48))
+    fig.subplots_adjust(wspace=0.56)
+    ax = axes[0]
+    xs = list(range(len(policies)))
+    ax.bar(xs, [overhead["by_policy"][policy]["throughput_mib_s"] for policy in policies], color=[COLORS[p] for p in policies])
+    ax.set_title("Actual-ZNS replay throughput", fontsize=7.4)
+    ax.set_ylabel("MiB/s", fontsize=6.5)
+    ax.set_xticks(xs)
+    ax.set_xticklabels([POLICY_LABELS[p].replace("-style", "") for p in policies], rotation=35, ha="right", fontsize=5.0)
+    ax.tick_params(axis="y", labelsize=5.8)
+    ax.grid(axis="y", alpha=0.25)
+
+    ax = axes[1]
+    xs = list(range(len(trace_names)))
+    width = 0.21
+    for i, policy in enumerate(policy_order):
+        offset = (i - 1) * width
+        ax.bar(
+            [x + offset for x in xs],
+            [by_key[(trace, policy)]["ns_per_write_median"] for trace in trace_names],
+            width,
+            label=policy_labels[policy],
+            color=policy_colors[policy],
+        )
+    ax.set_yscale("log")
+    ax.set_title("Placement-decision cost", fontsize=7.4)
+    ax.set_ylabel("ns/write", fontsize=6.5)
+    ax.set_xticks(xs)
+    ax.set_xticklabels([overhead_trace_label(name) for name in trace_names], rotation=18, ha="right", fontsize=5.1)
+    ax.tick_params(axis="y", labelsize=5.8)
+    ax.grid(axis="y", alpha=0.25)
+    ax.legend(ncol=1, fontsize=4.6, frameon=False, loc="upper left")
+    save(fig, out_dir / "fig7-prototype-column.pdf")
 
 
 def plot_space_sensitivity(rows: list[dict[str, Any]], out: Path) -> None:
@@ -1232,7 +1346,9 @@ def main() -> int:
     plot_component_ablation(load_json(args.ablation), args.out_dir / "fig3-component-ablation.pdf")
     plot_component_ablation_subfigs(load_json(args.ablation), args.out_dir)
     plot_open_zone_robustness_subfigs(load_json(args.physical_robustness), args.out_dir)
+    plot_open_zone_robustness_column(load_json(args.physical_robustness), args.out_dir)
     plot_prototype_overhead_subfigs(load_json(args.overhead), load_json(args.policy_overhead), args.out_dir)
+    plot_prototype_overhead_column(load_json(args.overhead), load_json(args.policy_overhead), args.out_dir)
     return 0
 
 

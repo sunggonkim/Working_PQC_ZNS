@@ -328,8 +328,8 @@ sensitivity, overhead, and robustness.
 | Main PQC pressure | `fig:ycsb-pressure` | YCSB supplies DOGI-friendly update locality; PQC side writes create death cohorts that history baselines strand. | regenerated and wired into Evaluation |
 | Workload breadth | `fig:pressure-breadth` | Sysbench, Exchange, Varmail, and Alibaba-like pressure rows show the same PQC-specific stale-secret and GC gap across FIFO/SepBIT/MiDAS/DOGI/QUASAR. | regenerated and wired into Evaluation |
 | Mechanism ablation | `fig:component-ablation` | History-only fails on death cohorts; lifecycle hints remove exposure; DOGI payload fallback removes remaining payload GC. | regenerated and wired into Evaluation with subfloats |
-| Open-zone/config sensitivity | `fig:open-zone-robustness` | Exact cohort placement, binning, missing hints, wrong epochs, and residual migration expose the real open-zone and strict-mode cost. | regenerated and wired into Evaluation with subfloats |
-| Prototype overhead | `fig:prototype-overhead` | Zonefs-helper throughput is scoped as accounting, while C-level placement-decision cost shows hint routing is much cheaper than DOGI-style MLP scoring. | regenerated and wired into Evaluation with subfloats |
+| Open-zone/config sensitivity | `fig:open-zone-robustness` | Exact cohort placement, binning, missing hints, wrong epochs, and residual migration expose the real open-zone and strict-mode cost. | compact one-column figure, not `figure*` |
+| Prototype overhead | `fig:prototype-overhead` | Zonefs-helper throughput is scoped as accounting, while C-level placement-decision cost shows hint routing is much cheaper than DOGI-style MLP scoring. | compact one-column figure, not `figure*` |
 | Audit language | `LINE_BY_LINE_FAST_AUDIT.md` | No more premature `18/18` or "submission-grade" victory language; keep reviewer risks visible. | rewritten as checkpoint audit |
 
 DOGI-specific role mapping used for the rewrite:

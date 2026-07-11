@@ -27,7 +27,7 @@ fallback modes.
 | Define security metric. | `stale_secret_blocks` and stale-secret block-seconds are defined; E4 exposure timeline is cited. | Satisfied. |
 | Avoid physical erase overclaim. | Paper says zone reset alone is not physical NAND erasure and separates sanitize/crypto-erase evidence. | Satisfied. |
 | Reproducibility. | `acceptance_check.py` reports 41/41 gates; current tests pass; PDFs build cleanly. | Satisfied. |
-| Final `HowToWritePaper.md` audit. | `LINE_BY_LINE_FAST_AUDIT.md` now checks the guide's pre-submission questions, DOGI figure-role translation, and the design-choice rule directly. Figures 5--7 were rebuilt with subfloats, no embedded numeric labels, and DOGI-style component/sensitivity/overhead roles. | Satisfied. |
+| Final `HowToWritePaper.md` audit. | `LINE_BY_LINE_FAST_AUDIT.md` now checks the guide's pre-submission questions, DOGI figure-role translation, and the design-choice rule directly. Figure 5 uses subfloats; Figures 6--7 are compact one-column figures, with no embedded numeric labels. | Satisfied. |
 
 ## Current Format And Test Evidence
 
@@ -50,7 +50,7 @@ fallback modes.
 | Real YCSB/JDBC block traces | Would strengthen external validity beyond DOGI-shaped YCSB pressure generation. | Optional strengthening for the scoped claim; not represented as completed. |
 | More device diversity | One WD ZN540-class device plus emulator/exact-baseline artifacts is not a wear-leveling study. | Explicit limitation. |
 | Final prose pass | Evaluation was compressed from 2,757 to 2,447 words while preserving the evidence and claim boundaries. | Checked for current build. |
-| Final figure/caption inspection | Current visual pass checked the redesigned Figure 5--7 pages after label removal and subfloat conversion. Repeat only if figures move or new plots are added. | Checked for current build. |
+| Final figure/caption inspection | Current visual pass checked Figure 5 plus the compact one-column Figure 6--7 layout after label removal. Repeat only if figures move or new plots are added. | Checked for current build. |
 
 ## FAST Reviewer Attack Readiness
 

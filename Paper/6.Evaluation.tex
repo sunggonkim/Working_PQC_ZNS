@@ -165,22 +165,12 @@ The hardest \system cases are not clean epochs; they are wrong or missing hints,
 
 The residual fallback frontier shows why strict exposure mode cannot be the default.  Exchange-like and Sysbench-like representatives can reach zero final secret waiting with physical WAF 1.0182 and 1.2161, respectively.  YCSB-F p8000 reaches strict zero waiting only at physical WAF 3.5535 after migrating 1,168,095 residual blocks.  \system therefore exposes low-overhead, balanced, and strict-zero-wait profiles rather than hiding this tradeoff behind a single policy.
 
-\begin{figure*}[t]
+\begin{figure}[!htb]
 \centering
-\subfloat[Live zones versus the device open-zone limit.]{
-\includegraphics[width=0.31\textwidth]{../artifacts/figures/fast-style/fig6-open-zone-zones.pdf}
-}
-\hfill
-\subfloat[Final waiting secrets under bad hints and stragglers.]{
-\includegraphics[width=0.31\textwidth]{../artifacts/figures/fast-style/fig6-open-zone-waiting.pdf}
-}
-\hfill
-\subfloat[Physical WAF cost of strict residual cleanup.]{
-\includegraphics[width=0.31\textwidth]{../artifacts/figures/fast-style/fig6-open-zone-waf.pdf}
-}
-\caption{Open-zone and hint robustness, matching DOGI's configuration-sensitivity role.  Clean, missing-hint, and wrong-epoch rows complete within the device budget.  Delayed-expiry stragglers expose the hard boundary: exact epoch placement can exceed the open-zone limit, binning fits the limit but leaves waiting secrets, and residual migration removes the waiting secrets at explicit physical-WAF cost.}
+\includegraphics[width=\columnwidth]{../artifacts/figures/fast-style/fig6-open-zone-column.pdf}
+\caption{Open-zone and hint robustness, matching DOGI's configuration-sensitivity role.  Exact epoch placement can exceed the open-zone limit, binning fits the limit but leaves waiting secrets, and residual migration removes waiting secrets at explicit physical-WAF cost.}
 \label{fig:open-zone-robustness}
-\end{figure*}
+\end{figure}
 
 \subsection{Prototype Overhead}
 
@@ -188,18 +178,12 @@ The residual fallback frontier shows why strict exposure mode cannot be the defa
 
 The xNVMe probe provides a lower-overhead command-path sanity check: 4,096 4KiB zone appends complete with p99 latency of 26,064 ns and throughput of 181.79 MiB/s.  The probe is a Linux NVMe ioctl path, not SPDK poll-mode, so it is reported as a bound rather than a final production datapoint.
 
-\begin{figure*}[t]
+\begin{figure}[!htb]
 \centering
-\subfloat[Actual-\zns replay throughput with zonefs helper accounting.]{
-\includegraphics[width=0.48\textwidth]{../artifacts/figures/fast-style/fig7-prototype-throughput.pdf}
-}
-\hfill
-\subfloat[C-level placement-decision cost across PQC traces.]{
-\includegraphics[width=0.48\textwidth]{../artifacts/figures/fast-style/fig7-decision-cost.pdf}
-}
-\caption{Prototype overhead in the role of DOGI's prototype figure.  Full-suite actual-\zns replay includes zonefs helper overhead and semantic reset commands, so it is an accounting bound rather than an optimized SPDK datapoint.  The isolated C-level decision benchmark shows that lifecycle-hint routing is much cheaper than \dogi-style feature extraction and MLP scoring, while the hybrid keeps the DOGI fallback only where payload history is useful.}
+\includegraphics[width=\columnwidth]{../artifacts/figures/fast-style/fig7-prototype-column.pdf}
+\caption{Prototype overhead in the role of DOGI's prototype figure.  Zonefs replay is an accounting bound, while the isolated C-level benchmark shows lifecycle-hint routing is much cheaper than \dogi-style feature extraction and MLP scoring.}
 \label{fig:prototype-overhead}
-\end{figure*}
+\end{figure}
 
 \subsection{Security Boundary}
 
