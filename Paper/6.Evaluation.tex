@@ -108,7 +108,13 @@ Table~\ref{tab:pressure} reports harder service carriers with the same PQC lifec
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=0.74\textwidth]{../artifacts/figures/fast-style/fig2-pressure-breadth.pdf}
+\subfloat[GC caused by mixed PQC cohorts.]{
+\includegraphics[width=0.48\textwidth]{../artifacts/figures/fast-style/fig2-pressure-breadth-gc.pdf}
+}
+\hfill
+\subfloat[Expired PQC secrets stranded after epoch close.]{
+\includegraphics[width=0.48\textwidth]{../artifacts/figures/fast-style/fig2-pressure-breadth-secrets.pdf}
+}
 \caption{PQC lifecycle pressure breadth.  The x-axis names the service carrier, but the measured failure is PQC-specific: expired secret cohorts remain mixed with live payload under history-based placement.  \system-\dogi keeps those cohorts reset-eligible while preserving payload placement on the history fallback.}
 \label{fig:pressure-breadth}
 \end{figure*}
@@ -138,7 +144,13 @@ Table~\ref{tab:ablation} turns the upper-bound requirements into mechanism evide
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=0.74\textwidth]{../artifacts/figures/fast-style/fig3-component-ablation.pdf}
+\subfloat[GC cost from missing lifecycle signal.]{
+\includegraphics[width=0.48\textwidth]{../artifacts/figures/fast-style/fig3-component-ablation-gc.pdf}
+}
+\hfill
+\subfloat[Expired PQC secrets after epoch close.]{
+\includegraphics[width=0.48\textwidth]{../artifacts/figures/fast-style/fig3-component-ablation-secrets.pdf}
+}
 \caption{PQC lifecycle-signal ablation.  A history-only \dogi-style policy sees storage history but misses cryptographic death cohorts, so GC and expired-secret exposure remain.  Lifecycle hints remove exposure; adding \dogi-style payload fallback recovers payload placement and removes the remaining GC in the default hybrid.}
 \label{fig:component-ablation}
 \end{figure*}
@@ -173,7 +185,17 @@ The xNVMe probe provides a lower-overhead command-path sanity check: 4,096 4KiB 
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=0.76\textwidth]{../artifacts/figures/fast-style/fig4-resource-overhead.pdf}
+\subfloat[Space cost.]{
+\includegraphics[width=0.31\textwidth]{../artifacts/figures/fast-style/fig4-resource-space.pdf}
+}
+\hfill
+\subfloat[Policy-decision cost.]{
+\includegraphics[width=0.31\textwidth]{../artifacts/figures/fast-style/fig4-resource-decision.pdf}
+}
+\hfill
+\subfloat[xNVMe append path.]{
+\includegraphics[width=0.31\textwidth]{../artifacts/figures/fast-style/fig4-resource-xnvme.pdf}
+}
 \caption{PQC placement resource and overhead controls.  \system-\dogi bounds the closed-zone fill cost while removing stale PQC secrets, the lifecycle-hint routing path is orders of magnitude cheaper than the \dogi-style policy-decision microbenchmark, and xNVMe confirms a lower-overhead append command path than the zonefs helper used for full-suite replay accounting.}
 \label{fig:resource-overhead}
 \end{figure*}
@@ -186,7 +208,17 @@ The residual fallback frontier shows why strict exposure mode cannot be the defa
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=0.76\textwidth]{../artifacts/figures/fast-style/fig6-robustness.pdf}
+\subfloat[Secrets waiting under bounded active zones.]{
+\includegraphics[width=0.31\textwidth]{../artifacts/figures/fast-style/fig6-robustness-waiting.pdf}
+}
+\hfill
+\subfloat[Physical WAF of strict mode.]{
+\includegraphics[width=0.31\textwidth]{../artifacts/figures/fast-style/fig6-robustness-waf.pdf}
+}
+\hfill
+\subfloat[Residual migration copy cost.]{
+\includegraphics[width=0.31\textwidth]{../artifacts/figures/fast-style/fig6-robustness-copy.pdf}
+}
 \caption{PQC robustness frontier.  Exact and binned placement can leave delayed-expiry PQC secrets waiting under tight active-zone budgets.  Residual migration removes the exposure but increases physical WAF and copied blocks; strict zero-wait mode is therefore a policy point, not the default.}
 \label{fig:robustness}
 \end{figure*}

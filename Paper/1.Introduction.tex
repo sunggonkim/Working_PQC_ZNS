@@ -6,12 +6,12 @@ Zoned Namespace SSDs are a natural substrate for such services because they expo
 
 The central mismatch in post-quantum workloads is that the lifetime of cryptographic artifacts is often not hidden at all.  The application or cryptographic runtime already knows that a session secret will die at session close, that a KMS envelope belongs to an epoch, and that a certificate object follows a rotation policy.  The storage device does not see this state.  From the perspective of a history-based placement system, a KEM artifact may look like another small write near a hot payload record.  From the perspective of the protocol, it belongs to a death cohort: a set of objects that become invalid together when the cryptographic state advances.
 
-\begin{figure*}[t]
+\begin{figure}[t]
 \centering
-\includegraphics[width=0.68\textwidth]{../artifacts/figures/fast-style/fig1-intro-pressure.pdf}
-\caption{PQC lifecycle pressure on actual \zns.  The left panel shows the PQC artifacts that create the storage problem: epoch secrets, rotation metadata, and append-only signatures.  The right panel shows the consequence after epoch close: FIFO, \sepbit-style, \midas-style, and \dogi-style placement strand expired PQC secret blocks, while \system-\dogi keeps those death cohorts reset-eligible.}
+\includegraphics[width=0.95\columnwidth]{../artifacts/figures/fast-style/fig1-intro-pressure.pdf}
+\caption{PQC lifecycle side writes on actual \zns traces.  The figure is workload characterization, not an evaluation result: post-quantum services add epoch secrets, rotation metadata, and append-only signatures whose lifetimes are defined by cryptographic protocol state rather than storage history.}
 \label{fig:intro-ycsb}
-\end{figure*}
+\end{figure}
 
 \begin{table*}[t]
 \centering

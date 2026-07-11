@@ -239,19 +239,10 @@ def plot_intro_failure(curve: dict[str, Any], out: Path) -> None:
     if len(selected) != 4:
         selected = rows
 
-    policies = ["fifo", "sepbit-style", "midas-style", "dogi-history", "quasar-dogi-hybrid"]
     labels = [pqc_pressure_label(row) for row in selected]
     xs = list(range(len(selected)))
-    width = 0.13
-    offsets = [(idx - (len(policies) - 1) / 2) * width for idx in range(len(policies))]
 
-    def stale_value(row: dict[str, Any], policy: str) -> int:
-        if policy == "quasar-dogi-hybrid":
-            return row["hybrid_stale_secret_blocks"]
-        baseline = row["baseline_semantic_failures"][policy]
-        return baseline["stale_secret_blocks"]
-
-    fig, axes = plt.subplots(1, 2, figsize=(6.45, 2.35), sharey=False)
+    fig, ax = plt.subplots(figsize=(3.55, 2.15))
 
     lifecycle_summaries = [pqc_lifecycle_blocks(row) for row in selected]
     lifecycle_groups = [
@@ -262,11 +253,11 @@ def plot_intro_failure(curve: dict[str, Any], out: Path) -> None:
     bottoms = [0.0 for _ in selected]
     for group, color in lifecycle_groups:
         values = [summary[group] for summary in lifecycle_summaries]
-        bars = axes[0].bar(xs, values, 0.55, bottom=bottoms, label=group, color=color)
+        bars = ax.bar(xs, values, 0.55, bottom=bottoms, label=group, color=color)
         for bar, bottom, value in zip(bars, bottoms, values):
             if value <= 0:
                 continue
-            axes[0].text(
+            ax.text(
                 bar.get_x() + bar.get_width() / 2,
                 bottom + value / 2,
                 compact_count(value),
@@ -276,35 +267,12 @@ def plot_intro_failure(curve: dict[str, Any], out: Path) -> None:
                 color="white" if group == "Epoch secrets" else "black",
             )
         bottoms = [bottom + value for bottom, value in zip(bottoms, values)]
-    axes[0].set_title("PQC lifecycle blocks")
-    axes[0].set_ylabel("PQC blocks written")
-    axes[0].set_xticks(xs)
-    axes[0].set_xticklabels(labels)
-    axes[0].grid(axis="y", alpha=0.25)
-    axes[0].legend(ncol=1, fontsize=5.8, frameon=False, loc="upper left")
-
-    for offset, policy in zip(offsets, policies):
-        values = [stale_value(row, policy) for row in selected]
-        bar_x = [x + offset for x in xs]
-        bars = axes[1].bar(
-            bar_x,
-            values,
-            width,
-            label=POLICY_LABELS[policy],
-            color=COLORS[policy],
-        )
-        annotate_bars(axes[1], bars, include_zero=(policy == "quasar-dogi-hybrid"), fontsize=4.6)
-        if policy == "quasar-dogi-hybrid":
-            axes[1].scatter(bar_x, values, s=12, marker="v", color=COLORS[policy], zorder=3)
-    axes[1].set_title("Expired PQC secrets stranded")
-    axes[1].set_ylabel("Stale secret blocks")
-    axes[1].set_xticks(xs)
-    axes[1].set_xticklabels(labels)
-    axes[1].grid(axis="y", alpha=0.25)
-
-    handles, legend_labels = axes[1].get_legend_handles_labels()
-    fig.legend(handles, legend_labels, loc="upper center", ncol=5, frameon=False, bbox_to_anchor=(0.62, 0.99))
-    setattr(fig, "_tight_layout_rect", (0.0, 0.0, 1.0, 0.90))
+    ax.set_title("PQC lifecycle side writes")
+    ax.set_ylabel("PQC blocks written")
+    ax.set_xticks(xs)
+    ax.set_xticklabels(labels)
+    ax.grid(axis="y", alpha=0.25)
+    ax.legend(ncol=1, fontsize=5.8, frameon=False, loc="upper left")
     save(fig, out)
 
 
@@ -377,6 +345,43 @@ def plot_pressure_breadth(dynamic: dict[str, Any], sysbench: dict[str, Any], out
     save(fig, out)
 
 
+def plot_pressure_breadth_subfigs(dynamic: dict[str, Any], sysbench: dict[str, Any], out_dir: Path) -> None:
+    rows = dynamic_rows(dynamic, sysbench)
+    policies = ["dogi-history", "midas-style", "sepbit-style", "quasar-dogi-hybrid"]
+    xs = list(range(len(rows)))
+    width = 0.18
+    offsets = [(-1.5 + i) * width for i in range(len(policies))]
+    panels = [
+        ("fig2-pressure-breadth-gc.pdf", "sim_gc_blocks", "GC blocks", "GC from mixed PQC cohorts", True),
+        (
+            "fig2-pressure-breadth-secrets.pdf",
+            "sim_stale_secret_blocks",
+            "Expired PQC secrets",
+            "Expired secrets stranded",
+            False,
+        ),
+    ]
+    for filename, key, ylabel, title, show_legend in panels:
+        fig, ax = plt.subplots(figsize=(3.35, 2.15))
+        for offset, policy in zip(offsets, policies):
+            bars = ax.bar(
+                [x + offset for x in xs],
+                [entry[1][policy][key] for entry in rows],
+                width,
+                label=POLICY_LABELS[policy],
+                color=COLORS[policy],
+            )
+            annotate_bars(ax, bars, include_zero=(policy == "quasar-dogi-hybrid"), fontsize=4.7)
+        ax.set_title(title)
+        ax.set_ylabel(ylabel)
+        ax.set_xticks(xs)
+        ax.set_xticklabels([carrier_label(label) for label, _ in rows])
+        ax.grid(axis="y", alpha=0.25)
+        if show_legend:
+            ax.legend(ncol=2, fontsize=5.8, frameon=False, loc="upper left")
+        save(fig, out_dir / filename)
+
+
 def plot_component_ablation(ablation: dict[str, Any], out: Path) -> None:
     rows = [row for row in ablation["main_components"] if row["policy"] != "component delta"]
     workloads = []
@@ -424,6 +429,54 @@ def plot_component_ablation(ablation: dict[str, Any], out: Path) -> None:
     fig.legend(handles, legend_labels, loc="upper center", ncol=3, frameon=False, bbox_to_anchor=(0.5, 0.99))
     setattr(fig, "_tight_layout_rect", (0.0, 0.0, 1.0, 0.90))
     save(fig, out)
+
+
+def plot_component_ablation_subfigs(ablation: dict[str, Any], out_dir: Path) -> None:
+    rows = [row for row in ablation["main_components"] if row["policy"] != "component delta"]
+    workloads = []
+    for row in rows:
+        if row["workload"] not in workloads:
+            workloads.append(row["workload"])
+    policies = [
+        "history-only DOGI-style",
+        "lifecycle hints only",
+        "hints + DOGI payload fallback",
+    ]
+    labels = ["DOGI-style", "Hints only", "Hints + DOGI payload"]
+    colors = ["#4C78A8", "#F58518", "#54A24B"]
+    xs = list(range(len(workloads)))
+    width = 0.24
+    by_key = {(row["workload"], row["policy"]): row for row in rows}
+    panels = [
+        ("fig3-component-ablation-gc.pdf", "gc_blocks", "GC blocks", "GC from missing lifecycle signal", True),
+        (
+            "fig3-component-ablation-secrets.pdf",
+            "stale_secret_blocks",
+            "Expired PQC secrets",
+            "Expired secrets after epoch close",
+            False,
+        ),
+    ]
+    for filename, key, ylabel, title, show_legend in panels:
+        fig, ax = plt.subplots(figsize=(3.35, 2.1))
+        for i, (policy, label, color) in enumerate(zip(policies, labels, colors)):
+            offset = (i - 1) * width
+            bars = ax.bar(
+                [x + offset for x in xs],
+                [by_key[(workload, policy)][key] for workload in workloads],
+                width,
+                label=label,
+                color=color,
+            )
+            annotate_bars(ax, bars, include_zero=("hints" in policy.lower()), fontsize=4.9)
+        ax.set_title(title)
+        ax.set_ylabel(ylabel)
+        ax.set_xticks(xs)
+        ax.set_xticklabels(["PQC-YCSB", "PQC-DB", "PQC-mail"])
+        ax.grid(axis="y", alpha=0.25)
+        if show_legend:
+            ax.legend(ncol=1, fontsize=5.8, frameon=False, loc="upper left")
+        save(fig, out_dir / filename)
 
 
 def plot_space_sensitivity(rows: list[dict[str, Any]], out: Path) -> None:
@@ -595,6 +648,90 @@ def plot_resource_overhead(
     save(fig, out)
 
 
+def plot_resource_overhead_subfigs(
+    rows: list[dict[str, Any]],
+    overhead: dict[str, Any],
+    xnvme: dict[str, Any],
+    out_dir: Path,
+) -> None:
+    dogi = next(row for row in rows if row.get("policy") == "dogi-history" and not row.get("failed"))
+    hybrids = [row for row in rows if row.get("policy") == "quasar-dogi-hybrid" and not row.get("failed")]
+    policies = ["dogi-history", "quasar-dogi-hybrid", "quasar"]
+    labels = ["DOGI\nMLP", "Hybrid", "QUASAR\nhint"]
+    cpu = [
+        overhead["by_policy"][policy]["cpu_policy"]["median_ns_per_write"]
+        for policy in policies
+    ]
+
+    fig, ax = plt.subplots(figsize=(2.35, 2.05))
+    ax.scatter(
+        [row["closed_zone_fill_avg"] for row in hybrids],
+        [row["waf"] for row in hybrids],
+        s=28,
+        color=COLORS["quasar-dogi-hybrid"],
+        alpha=0.85,
+        edgecolor="white",
+        linewidth=0.4,
+        label="QUASAR-DOGI",
+    )
+    ax.scatter(
+        [dogi["closed_zone_fill_avg"]],
+        [dogi["waf"]],
+        marker="X",
+        s=90,
+        color=COLORS["stale"],
+        label="DOGI-style",
+        zorder=3,
+    )
+    selected_hybrids = hybrids[:1] + hybrids[len(hybrids) // 2 : len(hybrids) // 2 + 1] + hybrids[-1:]
+    annotate_points(
+        ax,
+        [row["closed_zone_fill_avg"] for row in selected_hybrids],
+        [row["waf"] for row in selected_hybrids],
+        [f"{row['waf']:.3f}" for row in selected_hybrids],
+    )
+    annotate_points(ax, [dogi["closed_zone_fill_avg"]], [dogi["waf"]], [f"{dogi['waf']:.3f}"], fontsize=5.6)
+    ax.set_xlabel("Closed-zone fill")
+    ax.set_ylabel("WAF")
+    ax.set_title("Space cost")
+    ax.set_xlim(
+        min([row["closed_zone_fill_avg"] for row in hybrids] + [dogi["closed_zone_fill_avg"]]) - 0.006,
+        max([row["closed_zone_fill_avg"] for row in hybrids] + [dogi["closed_zone_fill_avg"]]) + 0.010,
+    )
+    ax.set_ylim(
+        min([row["waf"] for row in hybrids] + [dogi["waf"]]) - 0.0006,
+        max([row["waf"] for row in hybrids] + [dogi["waf"]]) + 0.0012,
+    )
+    ax.grid(alpha=0.25)
+    ax.legend(fontsize=5.5, frameon=False, loc="upper left")
+    save(fig, out_dir / "fig4-resource-space.pdf")
+
+    fig, ax = plt.subplots(figsize=(2.35, 2.05))
+    bars = ax.bar(range(len(policies)), cpu, color=[COLORS["dogi-history"], COLORS["quasar-dogi-hybrid"], COLORS["quasar"]])
+    ax.set_yscale("log")
+    ax.set_xticks(range(len(policies)))
+    ax.set_xticklabels(labels)
+    ax.set_ylabel("ns/write, log")
+    ax.set_title("Decision cost")
+    ax.grid(axis="y", alpha=0.25)
+    annotate_bars(ax, bars, kind="latency", rotation=0, fontsize=5.1)
+    save(fig, out_dir / "fig4-resource-decision.pdf")
+
+    fig, ax = plt.subplots(figsize=(2.35, 2.05))
+    bars = ax.bar(
+        [0, 1],
+        [xnvme["append_p50_ns"] / 1000.0, xnvme["append_p99_ns"] / 1000.0],
+        color="#4C78A8",
+    )
+    ax.set_xticks([0, 1])
+    ax.set_xticklabels(["append\np50", "append\np99"])
+    ax.set_ylabel("us")
+    ax.set_title("xNVMe append")
+    ax.grid(axis="y", alpha=0.25)
+    annotate_bars(ax, bars, kind="latency", rotation=0, fontsize=5.4)
+    save(fig, out_dir / "fig4-resource-xnvme.pdf")
+
+
 def plot_robustness(ablation: dict[str, Any], out: Path) -> None:
     residual = ablation["residual_fallback"]
     cases = [
@@ -635,6 +772,36 @@ def plot_robustness(ablation: dict[str, Any], out: Path) -> None:
     save(fig, out)
 
 
+def plot_robustness_subfigs(ablation: dict[str, Any], out_dir: Path) -> None:
+    residual = ablation["residual_fallback"]
+    cases = [
+        ("Exact", residual["exact_secret_group"], None),
+        ("Bin", residual["epoch_bin_no_residual"], None),
+        ("Bin+copy", residual["epoch_bin_with_residual"], residual["epoch_bin_with_residual"]["physical_waf"]),
+        ("Strict", residual["strict_ycsb_f_boundary"], residual["strict_ycsb_f_boundary"]["physical_waf"]),
+    ]
+    labels = [case[0] for case in cases]
+    waiting = [case[1].get("secret_waiting_end", 0) for case in cases]
+    waf = [case[2] if case[2] is not None else 0 for case in cases]
+    copied = [case[1].get("residual_migrated_blocks", 0) for case in cases]
+    x = list(range(len(cases)))
+    panels = [
+        ("fig6-robustness-waiting.pdf", waiting, "Waiting PQC secrets", "Exposure fallback", COLORS["stale"], "count"),
+        ("fig6-robustness-waf.pdf", waf, "Physical WAF", "Strict erase cost", "#F58518", "waf"),
+        ("fig6-robustness-copy.pdf", copied, "Residual copied blocks", "Copy cost exposed", "#4C78A8", "count"),
+    ]
+    for filename, values, ylabel, title, color, kind in panels:
+        fig, ax = plt.subplots(figsize=(2.35, 2.05))
+        bars = ax.bar(x, values, color=color)
+        ax.set_ylabel(ylabel)
+        ax.set_xticks(x)
+        ax.set_xticklabels(labels)
+        ax.set_title(title)
+        ax.grid(axis="y", alpha=0.25)
+        annotate_bars(ax, bars, kind=kind, include_zero=True, rotation=0 if kind == "waf" else 90, fontsize=5.0)
+        save(fig, out_dir / filename)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--out-dir", type=Path, default=Path("artifacts/figures/fast-style"))
@@ -649,7 +816,9 @@ def main() -> int:
 
     plot_intro_failure(load_json(args.ycsb), args.out_dir / "fig1-intro-pressure.pdf")
     plot_pressure_breadth(load_json(args.dynamic), load_json(args.sysbench), args.out_dir / "fig2-pressure-breadth.pdf")
+    plot_pressure_breadth_subfigs(load_json(args.dynamic), load_json(args.sysbench), args.out_dir)
     plot_component_ablation(load_json(args.ablation), args.out_dir / "fig3-component-ablation.pdf")
+    plot_component_ablation_subfigs(load_json(args.ablation), args.out_dir)
     plot_space_sensitivity(load_json(args.space), args.out_dir / "fig4-space-sensitivity.pdf")
     plot_overhead(load_json(args.overhead), load_json(args.xnvme), args.out_dir / "fig5-overhead.pdf")
     plot_resource_overhead(
@@ -658,7 +827,9 @@ def main() -> int:
         load_json(args.xnvme),
         args.out_dir / "fig4-resource-overhead.pdf",
     )
+    plot_resource_overhead_subfigs(load_json(args.space), load_json(args.overhead), load_json(args.xnvme), args.out_dir)
     plot_robustness(load_json(args.ablation), args.out_dir / "fig6-robustness.pdf")
+    plot_robustness_subfigs(load_json(args.ablation), args.out_dir)
     return 0
 
 
