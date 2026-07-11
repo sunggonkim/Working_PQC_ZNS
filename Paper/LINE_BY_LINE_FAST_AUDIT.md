@@ -21,12 +21,12 @@ Sources checked:
 
 | Checkpoint | Previous Problem | Current Fix | Status |
 | --- | --- | --- | --- |
-| First evidence figure | Old YCSB plot made the WAF gap look small and visually weak. | Replace it with `fig1-intro-pressure`: GC blocks plus stale-secret blocks on actual-ZNS YCSB pressure rows. | fixed; verify in PDF |
-| Workload breadth | Evidence was table-heavy and did not visually match DOGI-style breadth. | Add `fig2-pressure-breadth`: Sysbench, Exchange, Varmail, Alibaba-like pressure rows with DOGI/MiDAS/SepBIT/QUASAR-DOGI. | fixed; verify in PDF |
-| Mechanism attribution | Ablation existed mostly as a table. | Add `fig3-component-ablation`: history-only, lifecycle hints, and hybrid fallback. | fixed; verify in PDF |
-| Space-amplification attack | Space tradeoff was present but not enough of a reviewer-facing graph. | Add `fig4-resource-overhead`, panel 1: WAF vs closed-zone fill plus DOGI stale-secret point. | fixed; verify in PDF |
-| Overhead | Overhead was prose plus numbers, not a FAST-style figure. | Add `fig4-resource-overhead`, panels 2--3: policy cost and xNVMe append-latency bound. | fixed; verify in PDF |
-| Robustness | Straggler/strict-mode cost was buried in text. | Add `fig6-robustness`: waiting secrets, physical WAF, residual copied blocks. | fixed; verify in PDF |
+| First evidence figure | Old YCSB plot made the WAF gap look small and visually weak. | Use `fig:intro-ycsb` as characterization, then make `fig:ycsb-pressure` the first metric-bearing PQC pressure figure. | fixed; verified in PDF |
+| Workload breadth | Evidence was table-heavy and did not visually match DOGI-style breadth. | Use `fig:pressure-breadth`: Sysbench, Exchange, Varmail, Alibaba-like pressure rows with FIFO/SepBIT/MiDAS/DOGI/QUASAR. | fixed; verified in PDF |
+| Mechanism attribution | Ablation existed mostly as a table. | Use `fig:component-ablation`: staged subfloats for WAF, GC, and expired PQC secrets across history-only, lifecycle hints, and hybrid fallback. | fixed; verified in PDF |
+| Configuration sensitivity | Space/open-zone tradeoff was scattered across prose and tables. | Use `fig:open-zone-robustness`: live-zone budget, waiting secrets, and strict cleanup WAF cost. | fixed; verified in PDF |
+| Overhead | Overhead was prose plus numbers, not a FAST-style figure. | Use `fig:prototype-overhead`: actual-ZNS replay throughput plus C-level placement-decision cost. | fixed; verified in PDF |
+| Plot hygiene | Old plots repeated table numbers, used oversized pages, and mixed figure labels with the wrong data story. | Remove numeric labels from bars/points, use subfloats, and keep tables as qualitative or audit-only support. | fixed; verified in PDF |
 | Audit honesty | Old audit claimed `18/18` and “submission-grade” too early. | Remove score-as-victory language; keep remaining risks explicit. | fixed |
 | Prior-paper match | “Line-by-line” cannot mean copying DOGI's exact figures because QUASAR's claim is narrower. | Use role parity: failure, bound, design, workload breadth, ablation, overhead, robustness. | fixed with scope |
 
@@ -51,14 +51,29 @@ WAF optimizer:
 | DOGI Role | QUASAR Counterpart | Evidence |
 | --- | --- | --- |
 | Problem setup | PQC creates protocol-lifetime storage pressure and stale-secret exposure. | Abstract, Introduction, Table 1, `fig:intro-ycsb`. |
-| Upper bound | Epoch oracle shows what becomes possible once death time is visible. | `fig:epoch-upper-bound`. |
+| Upper bound | Epoch oracle shows what becomes possible once death time is visible. | Evaluation text in `Epoch Upper Bound`; not plotted as a headline figure. |
 | Limitation of history | DOGI/MiDAS/SepBIT see LBA/frequency/history, not session close or rotation. | Motivation, Table 1, `fig:pressure-breadth`. |
 | Design mechanisms | Hint schema, zone families, admission/open-zone budget, conservative reset. | Design section and architecture figure. |
 | Workload breadth | DOGI six-axis controls plus YCSB, Sysbench, Exchange, Varmail, Alibaba pressure. | Methodology, tables, `fig:pressure-breadth`. |
 | Component analysis | Hints vs history-only vs hybrid payload fallback. | `fig:component-ablation`, `tab:ablation`. |
-| Sensitivity | WAF vs closed-zone fill under open-zone budget. | `fig:resource-overhead`. |
-| Overhead | Policy-decision cost and lower-overhead xNVMe command-path probe. | `fig:resource-overhead`. |
-| Robustness | Missing/wrong hints, tenants, stragglers, strict-zero-wait copy cost. | `fig:robustness`, robustness text. |
+| Configuration sensitivity | Open-zone budget, binning, missing/wrong hints, and residual cleanup cost. | `fig:open-zone-robustness`. |
+| Prototype overhead | Actual-ZNS replay throughput and C-level decision-cost isolation. | `fig:prototype-overhead`. |
+| Robustness | Missing/wrong hints, tenants, stragglers, strict-zero-wait copy cost. | `fig:open-zone-robustness`, robustness text. |
+
+## DOGI Figure-Role Translation
+
+The rewrite follows DOGI's evaluation grammar by role, not by copying its
+exact metric names.  DOGI optimizes general invalidation-time prediction;
+QUASAR targets PQC lifecycle placement, so the corresponding y-axes must be
+WAF/GC plus expired-secret exposure.
+
+| DOGI Figure Role | What DOGI Shows | QUASAR Translation |
+| --- | --- | --- |
+| Fig. 11: user-written placement comparison | Prediction accuracy and WAF across FIO, YCSB-A/F, Varmail, Alibaba, Exchange. | `fig:ycsb-pressure` and `fig:pressure-breadth` compare all same-path baselines under DOGI-friendly carriers plus PQC lifecycle side writes. |
+| Fig. 12: GC-written relocation | Relocation accuracy and destination group distribution. | `fig:component-ablation` shows GC copied blocks disappearing when lifecycle hints and payload fallback separate death cohorts. |
+| Fig. 13: grouping/config behavior | How group count and misprediction interact across workload types. | `fig:open-zone-robustness` shows exact grouping, binning, open-zone limits, and residual migration cost. |
+| Fig. 14: component analysis | Incrementally adds DOGI mechanisms and reports WAF. | `fig:component-ablation` incrementally moves from history-only to lifecycle hints to hybrid payload fallback, with WAF/GC/exposure subfloats. |
+| Fig. 15/Table 5: overhead/prototype | Inference throughput and foreground latency. | `fig:prototype-overhead` separates zonefs actual-ZNS throughput accounting from isolated C-level placement-decision cost. |
 
 ## Remaining Reviewer Risks
 
@@ -70,7 +85,7 @@ These are not solved by better plotting and must stay visible:
 | Native DOGI equivalence | Same-path DOGI-style placement is not the full public DOGI stack. | Exact public DOGI/MiDAS/SepBIT runs are separated as sanity evidence. | More native DOGI adapter runs with trace conversion documentation. |
 | Production path | Zonefs replay is not SPDK poll-mode. | xNVMe append probe plus explicit zonefs caveat. | Full SPDK replay with p99 service latency. |
 | Device generality | One ZN540-class device may not represent all ZNS/FDP devices. | Device capabilities and limitations are named. | Additional ZNS/FDP devices and reset/sanitize variance. |
-| Space amplification | Death-cohort zones can waste capacity. | Admission, binning, overflow, residual fallback, `fig:resource-overhead`. | Longer multi-tenant pressure and capacity-utilization sweeps. |
+| Space amplification | Death-cohort zones can waste capacity. | Admission, binning, overflow, residual fallback, `fig:open-zone-robustness`. | Longer multi-tenant pressure and capacity-utilization sweeps. |
 | Secure erase overclaim | Zone reset is not universal physical erasure. | Paper separates reset eligibility from sanitize/crypto-erase semantics. | Per-epoch sanitize scheduling benchmark if making a stronger erase claim. |
 
 ## Current Verdict

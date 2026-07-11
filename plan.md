@@ -247,7 +247,7 @@ git diff --check -- plan.md Paper/6.Evaluation.tex Paper/FAST_READINESS_AUDIT.md
 | Does it pass the `HowToWritePaper.md` final audit? | Yes for the scoped claim; figure labels/captions have been visually checked, Evaluation prose was compressed, and WAF-vs-utilization now visualizes the space tradeoff. | `LINE_BY_LINE_FAST_AUDIT.md` final audit matrix | whole paper | closed |
 | Is the abstract compact? | Yes. It now follows a four-sentence problem/gap/approach/result shape. | `0.Main.tex` | Abstract | closed |
 | Are captions reviewer-readable? | Main captions now state the lesson, not only the content. | Introduction/Design/Evaluation captions | figures/tables | improved |
-| Is Evaluation too table-heavy? | The exact numbers remain in tables for auditability, but the FAST-style figure path now includes pressure breadth, component ablation, resource/overhead controls, and robustness. | `FAST_READINESS_AUDIT.md`, Figures `fig:pressure-breadth`, `fig:component-ablation`, `fig:resource-overhead`, `fig:robustness` | packaging | closed |
+| Is Evaluation too table-heavy? | The exact numbers remain in tables for auditability, but the FAST-style figure path now includes pressure breadth, component ablation, open-zone sensitivity, and prototype overhead. | `FAST_READINESS_AUDIT.md`, Figures `fig:pressure-breadth`, `fig:component-ablation`, `fig:open-zone-robustness`, `fig:prototype-overhead` | packaging | closed |
 | Is prose too defensive? | A final compression pass cut Evaluation from 2,757 to 2,447 words while preserving numbers, caveats, and claim boundaries. | `Paper/6.Evaluation.tex` | final polish | closed |
 
 Polish target:
@@ -324,13 +324,23 @@ sensitivity, overhead, and robustness.
 
 | Checkpoint | Required Figure | What It Must Prove | Status |
 | --- | --- | --- | --- |
-| First evidence, not a weak WAF plot | `fig1-intro-pressure` | DOGI-style placement leaves GC/stale-secret pressure; QUASAR-DOGI removes secret exposure on actual-ZNS YCSB pressure. | regenerated and wired into Introduction |
-| Workload breadth | `fig2-pressure-breadth` | Sysbench, Exchange, Varmail, and Alibaba-like pressure rows show the same gap across DOGI/MiDAS/SepBIT/QUASAR-DOGI. | regenerated and wired into Evaluation |
-| Mechanism ablation | `fig3-component-ablation` | History-only fails on death cohorts; lifecycle hints remove exposure; DOGI payload fallback removes remaining payload GC. | regenerated and wired into Evaluation |
-| Space-amplification defense | `fig4-resource-overhead`, panel 1 | Low WAF is not bought only by empty zones; show WAF vs closed-zone fill and the DOGI-style stale-secret point. | regenerated and wired into Evaluation |
-| Overhead | `fig4-resource-overhead`, panels 2--3 | Hint routing is cheap relative to DOGI-style policy-decision cost, while xNVMe provides a lower-overhead append-path bound. | regenerated and wired into Evaluation |
-| Hostile robustness | `fig6-robustness` | Stragglers and strict zero-wait security have visible WAF/copy costs; QUASAR must not hide them. | regenerated and wired into Evaluation |
+| First evidence, not a weak WAF plot | `fig:intro-ycsb` | The opening figure characterizes PQC side writes as epoch secrets, rotation metadata, and append-only signatures whose lifetimes are protocol-defined. | regenerated and wired into Introduction |
+| Main PQC pressure | `fig:ycsb-pressure` | YCSB supplies DOGI-friendly update locality; PQC side writes create death cohorts that history baselines strand. | regenerated and wired into Evaluation |
+| Workload breadth | `fig:pressure-breadth` | Sysbench, Exchange, Varmail, and Alibaba-like pressure rows show the same PQC-specific stale-secret and GC gap across FIFO/SepBIT/MiDAS/DOGI/QUASAR. | regenerated and wired into Evaluation |
+| Mechanism ablation | `fig:component-ablation` | History-only fails on death cohorts; lifecycle hints remove exposure; DOGI payload fallback removes remaining payload GC. | regenerated and wired into Evaluation with subfloats |
+| Open-zone/config sensitivity | `fig:open-zone-robustness` | Exact cohort placement, binning, missing hints, wrong epochs, and residual migration expose the real open-zone and strict-mode cost. | regenerated and wired into Evaluation with subfloats |
+| Prototype overhead | `fig:prototype-overhead` | Zonefs-helper throughput is scoped as accounting, while C-level placement-decision cost shows hint routing is much cheaper than DOGI-style MLP scoring. | regenerated and wired into Evaluation with subfloats |
 | Audit language | `LINE_BY_LINE_FAST_AUDIT.md` | No more premature `18/18` or "submission-grade" victory language; keep reviewer risks visible. | rewritten as checkpoint audit |
+
+DOGI-specific role mapping used for the rewrite:
+
+| DOGI Evidence Role | QUASAR Figure Role |
+| --- | --- |
+| Fig. 11: user-written placement accuracy/WAF | `fig:ycsb-pressure` and `fig:pressure-breadth` compare all same-path placement policies on PQC lifecycle pressure. |
+| Fig. 12: GC-written relocation policy | `fig:component-ablation` shows how lifecycle hints and payload fallback remove GC caused by mixed death cohorts. |
+| Fig. 13: group/configuration sensitivity | `fig:open-zone-robustness` shows active-zone limit, binning, bad hints, and residual cleanup cost. |
+| Fig. 14: incremental component analysis | `fig:component-ablation` uses DOGI-style staged lines: history-only, lifecycle hints, and hybrid fallback. |
+| Fig. 15/Table 5: prototype/overhead | `fig:prototype-overhead` separates actual-ZNS replay throughput from isolated C-level placement-decision cost. |
 
 Before claiming the graph story is done again:
 
