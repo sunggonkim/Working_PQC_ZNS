@@ -35,14 +35,7 @@ The matrix passes all nine gates: fairness, negative controls, pressure rows, ma
 
 DOGI uses NoDaP as an oracle-like target for lost lifetime information.  We use a narrower upper bound: an epoch oracle that sees exact death time at write time.  It is not deployable and is not counted as \system; it tests whether the workload is placeable once the protocol-lifetime signal exists.
 
-On the mixed sanity trace, \dogi-style placement has WAF 1.791 and 484,967 GC blocks, \system has WAF 1.010 and 6,331 GC blocks, and the epoch oracle has WAF 1.000 and zero GC blocks.  On the stress-rekey trace, \dogi-style placement has WAF 2.031, \system has WAF 1.019, and the oracle has WAF 1.003.  These synthetic rows are bounds, not headline evidence: most of the gap comes from whether the allocator can observe the protocol lifetime boundary.
-
-\begin{figure*}[t]
-\centering
-\includegraphics[width=0.62\textwidth]{../artifacts/figures/paper/epoch-upper-bound.pdf}
-\caption{Epoch upper bound.  The epoch oracle is not a deployable baseline; it receives exact future death time.  Its role is to show that the WAF gap is largely a missing-lifetime-signal problem.  \system approaches the upper bound with lifecycle hints, while the paper's headline claims still come from harder physical-\zns pressure rows.}
-\label{fig:epoch-upper-bound}
-\end{figure*}
+On the mixed sanity trace, \dogi-style placement has WAF 1.791 and 484,967 GC blocks, \system has WAF 1.010 and 6,331 GC blocks, and the epoch oracle has WAF 1.000 and zero GC blocks.  On the stress-rekey trace, \dogi-style placement has WAF 2.031, \system has WAF 1.019, and the oracle has WAF 1.003.  These synthetic rows are bounds, not headline evidence: most of the gap comes from whether the allocator can observe the protocol lifetime boundary.  We therefore do not use the oracle as a main evaluation figure; the plotted headline evidence below compares all same-path baselines on physical-\zns pressure rows.
 
 \subsection{DOGI-Favorable Control}
 
@@ -75,7 +68,24 @@ The WAF gain here is deliberately modest: 0.1\% relative to \dogi-style.  The ro
 
 \subsection{PQC Lifecycle Pressure on YCSB Carriers}
 
-These rows use YCSB only as a storage-locality carrier.  The target phenomenon is PQC lifecycle pressure: epoch secrets, KEM artifacts, rotation metadata, and append-only signatures are inserted beside ordinary payload, then invalidated by protocol state.  Table~\ref{tab:ycsb} reports representative physical \zns replays.  \dogi-style placement pays 3,357--24,289 GC blocks and leaves 46,266--150,221 expired PQC secret blocks.  The hybrid removes stale secret blocks in all rows and reduces GC to zero in these representative replays.
+These rows use YCSB only as a storage-locality carrier.  The target phenomenon is PQC lifecycle pressure: epoch secrets, KEM artifacts, rotation metadata, and append-only signatures are inserted beside ordinary payload, then invalidated by protocol state.  Figure~\ref{fig:ycsb-pressure} and Table~\ref{tab:ycsb} report representative physical \zns replays.  \dogi-style placement pays 3,357--24,289 GC blocks and leaves 46,266--150,221 expired PQC secret blocks.  The hybrid removes stale secret blocks in all rows and reduces GC to zero in these representative replays.
+
+\begin{figure*}[!t]
+\centering
+\subfloat[WAF: all baselines on PQC-YCSB pressure.]{
+\includegraphics[width=0.32\textwidth]{../artifacts/figures/fast-style/fig3-ycsb-allbaseline-waf.pdf}
+}
+\hfill
+\subfloat[GC blocks: history-based policies copy mixed cohorts.]{
+\includegraphics[width=0.32\textwidth]{../artifacts/figures/fast-style/fig3-ycsb-allbaseline-gc.pdf}
+}
+\hfill
+\subfloat[Expired PQC secrets: baselines strand protocol-dead data.]{
+\includegraphics[width=0.32\textwidth]{../artifacts/figures/fast-style/fig3-ycsb-allbaseline-secrets.pdf}
+}
+\caption{PQC lifecycle pressure on YCSB carriers, comparing all same-path baselines.  The carrier supplies DOGI-friendly update locality; the side writes supply PQC objects whose invalidation follows protocol state.  QUASAR and the hybrid keep payload on history placement and route PQC objects by death cohort, eliminating stale-secret exposure while reducing WAF/GC on pressure rows.}
+\label{fig:ycsb-pressure}
+\end{figure*}
 
 \begin{table*}[t]
 \centering
@@ -106,16 +116,20 @@ To check that the pressure result is not a single-seed artifact, we run a three-
 
 Table~\ref{tab:pressure} reports harder service carriers with the same PQC lifecycle side writes.  Sysbench is included as DB-backed PQC service pressure rather than as a generic DB claim.  The hybrid reduces \dogi-style GC from 11,256 to 609 blocks and removes 38,438 expired PQC secret blocks.  On Exchange-, Varmail-, and Alibaba-like carriers, the hybrid reduces GC by 92.3--99.9\% and keeps stale secrets at zero.
 
-\begin{figure*}[t]
+\begin{figure*}[!t]
 \centering
-\subfloat[GC caused by mixed PQC cohorts.]{
-\includegraphics[width=0.48\textwidth]{../artifacts/figures/fast-style/fig2-pressure-breadth-gc.pdf}
+\subfloat[WAF: all baselines on PQC service pressure.]{
+\includegraphics[width=0.32\textwidth]{../artifacts/figures/fast-style/fig2-service-allbaseline-waf.pdf}
 }
 \hfill
-\subfloat[Expired PQC secrets stranded after epoch close.]{
-\includegraphics[width=0.48\textwidth]{../artifacts/figures/fast-style/fig2-pressure-breadth-secrets.pdf}
+\subfloat[GC blocks: mixed PQC cohorts create copy cost.]{
+\includegraphics[width=0.32\textwidth]{../artifacts/figures/fast-style/fig2-service-allbaseline-gc.pdf}
 }
-\caption{PQC lifecycle pressure breadth.  The x-axis names the service carrier, but the measured failure is PQC-specific: expired secret cohorts remain mixed with live payload under history-based placement.  \system-\dogi keeps those cohorts reset-eligible while preserving payload placement on the history fallback.}
+\hfill
+\subfloat[Expired PQC secrets: baselines leave stale data.]{
+\includegraphics[width=0.32\textwidth]{../artifacts/figures/fast-style/fig2-service-allbaseline-secrets.pdf}
+}
+\caption{PQC lifecycle pressure breadth, comparing all same-path baselines.  The x-axis names the service carrier, but the measured failure is PQC-specific: expired secret cohorts remain mixed with live payload under history-based placement.  \system and \system-\dogi keep those cohorts reset-eligible while preserving payload placement on the history fallback.}
 \label{fig:pressure-breadth}
 \end{figure*}
 

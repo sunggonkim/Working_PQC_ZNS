@@ -190,6 +190,76 @@ def plot_architecture():
     save(fig, "quasar-architecture")
 
 
+def plot_design_hint_path():
+    fig, ax = plt.subplots(figsize=(3.45, 1.75))
+    ax.set_xlim(0, 10)
+    ax.set_ylim(0, 3.2)
+    ax.axis("off")
+
+    box(ax, (0.25, 1.75), (1.75, 0.82), "PQC", "TLS/KMS", COLORS["blue"], COLORS["blue_edge"], fontsize=9)
+    box(ax, (2.75, 1.75), (1.75, 0.82), "Hint", "intent+epoch", COLORS["green"], COLORS["green_edge"], fontsize=9)
+    box(ax, (5.25, 1.75), (1.95, 0.82), "Allocator", "family", COLORS["amber"], COLORS["amber_edge"], fontsize=9)
+    box(ax, (7.95, 1.75), (1.75, 0.82), "ZNS", "append/reset", COLORS["gray"], COLORS["gray_edge"], fontsize=9)
+
+    arrow(ax, (2.00, 2.16), (2.75, 2.16))
+    arrow(ax, (4.50, 2.16), (5.25, 2.16))
+    arrow(ax, (7.20, 2.16), (7.95, 2.16))
+
+    ax.text(5.0, 0.65, "Only lifecycle labels cross the storage boundary.", ha="center", fontsize=8.5, color=COLORS["muted"])
+    save(fig, "quasar-design-hint-path")
+
+
+def plot_design_zone_families():
+    fig, ax = plt.subplots(figsize=(3.45, 1.75))
+    ax.set_xlim(0, 10)
+    ax.set_ylim(0, 3.2)
+    ax.axis("off")
+
+    families = [
+        ("Epoch secret", COLORS["rose"], COLORS["rose_edge"]),
+        ("Rotation", COLORS["violet"], COLORS["violet_edge"]),
+        ("Append log", COLORS["green"], COLORS["green_edge"]),
+        ("Payload", COLORS["gray"], COLORS["gray_edge"]),
+        ("Overflow", COLORS["amber"], COLORS["amber_edge"]),
+    ]
+    for i, (title, fc, ec) in enumerate(families):
+        x = 0.25 + i * 1.93
+        patch = FancyBboxPatch(
+            (x, 1.65),
+            1.58,
+            0.85,
+            boxstyle="round,pad=0.02,rounding_size=0.035",
+            linewidth=1.2,
+            edgecolor=ec,
+            facecolor=fc,
+        )
+        ax.add_patch(patch)
+        ax.text(x + 0.79, 2.08, title, ha="center", va="center", fontsize=8.7, fontweight="bold", color=COLORS["ink"])
+
+    ax.text(5.0, 0.72, "Priority: cohort purity -> secret isolation -> utilization -> open-zone budget.", ha="center", fontsize=7.8, color=COLORS["muted"])
+    save(fig, "quasar-design-zone-families")
+
+
+def plot_design_epoch_reclaim():
+    fig, ax = plt.subplots(figsize=(3.45, 1.75))
+    ax.set_xlim(0, 10)
+    ax.set_ylim(0, 3.2)
+    ax.axis("off")
+
+    box(ax, (0.25, 1.75), (1.75, 0.82), "Close", "epoch E", COLORS["blue"], COLORS["blue_edge"], fontsize=9)
+    box(ax, (2.55, 1.75), (1.75, 0.82), "Check", "live bytes", COLORS["amber"], COLORS["amber_edge"], fontsize=9)
+    box(ax, (4.85, 1.75), (1.55, 0.82), "Reset", "empty", COLORS["green"], COLORS["green_edge"], fontsize=9)
+    box(ax, (6.85, 1.75), (1.55, 0.82), "Copy", "residue", COLORS["violet"], COLORS["violet_edge"], fontsize=9)
+    box(ax, (8.55, 1.75), (1.20, 0.82), "GC", "unsafe", COLORS["gray"], COLORS["gray_edge"], fontsize=9)
+
+    arrow(ax, (2.00, 2.16), (2.55, 2.16))
+    arrow(ax, (4.30, 2.16), (4.85, 2.16))
+    arrow(ax, (6.40, 2.16), (6.85, 2.16))
+    arrow(ax, (8.40, 2.16), (8.55, 2.16))
+    ax.text(5.0, 0.72, "Wrong hints hurt placement, not correctness.", ha="center", fontsize=8.2, color=COLORS["muted"])
+    save(fig, "quasar-design-epoch-reclaim")
+
+
 def plot_epoch_upper_bound():
     fig, ax = plt.subplots(figsize=(7.6, 3.2))
     workloads = ["mixed sanity", "stress rekey"]
@@ -235,6 +305,9 @@ def plot_epoch_upper_bound():
 
 def main():
     plot_architecture()
+    plot_design_hint_path()
+    plot_design_zone_families()
+    plot_design_epoch_reclaim()
     plot_epoch_upper_bound()
 
 

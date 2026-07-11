@@ -276,6 +276,296 @@ def plot_intro_failure(curve: dict[str, Any], out: Path) -> None:
     save(fig, out)
 
 
+def plot_fairness_matrix_subfigs(out_dir: Path) -> None:
+    policies = ["fifo", "sepbit-style", "midas-style", "dogi-history", "quasar", "quasar-dogi-hybrid"]
+    labels = [POLICY_LABELS[p] for p in policies]
+    waf = {
+        "fifo": 1.0040,
+        "sepbit-style": 1.0023,
+        "midas-style": 1.0006,
+        "dogi-history": 1.0006,
+        "quasar": 1.0011,
+        "quasar-dogi-hybrid": 1.0001,
+    }
+    gc = {
+        "fifo": 3903,
+        "sepbit-style": 2241,
+        "midas-style": 581,
+        "dogi-history": 625,
+        "quasar": 1121,
+        "quasar-dogi-hybrid": 106,
+    }
+    stale = {
+        "fifo": 99141,
+        "sepbit-style": 99822,
+        "midas-style": 99898,
+        "dogi-history": 99834,
+        "quasar": 0,
+        "quasar-dogi-hybrid": 0,
+    }
+    reset = {
+        "fifo": 0,
+        "sepbit-style": 0,
+        "midas-style": 0,
+        "dogi-history": 0,
+        "quasar": 98,
+        "quasar-dogi-hybrid": 98,
+    }
+    xs = list(range(len(policies)))
+
+    fig, ax = plt.subplots(figsize=(3.35, 2.1))
+    bars = ax.bar(xs, [waf[p] for p in policies], color=[COLORS[p] for p in policies])
+    ax.set_ylim(0.998, 1.006)
+    ax.set_ylabel("WAF")
+    ax.set_title("DOGI-axis control")
+    ax.set_xticks(xs)
+    ax.set_xticklabels(labels, rotation=25, ha="right")
+    ax.grid(axis="y", alpha=0.25)
+    annotate_bars(ax, bars, kind="waf", rotation=90, fontsize=4.8)
+    save(fig, out_dir / "fig2-fairness-waf.pdf")
+
+    fig, ax = plt.subplots(figsize=(3.35, 2.1))
+    width = 0.36
+    gc_bars = ax.bar([x - width / 2 for x in xs], [gc[p] for p in policies], width, label="GC", color="#4C78A8")
+    stale_bars = ax.bar([x + width / 2 for x in xs], [stale[p] for p in policies], width, label="Expired secrets", color=COLORS["stale"])
+    ax.set_yscale("log")
+    ax.set_ylim(1, 220000)
+    ax.set_ylabel("Blocks (log)")
+    ax.set_title("WAF is not the whole story")
+    ax.set_xticks(xs)
+    ax.set_xticklabels(labels, rotation=25, ha="right")
+    ax.grid(axis="y", alpha=0.25)
+    ax.legend(fontsize=5.8, frameon=False, loc="upper left")
+    annotate_bars(ax, gc_bars, include_zero=True, fontsize=4.7)
+    annotate_bars(ax, stale_bars, include_zero=True, fontsize=4.7)
+    save(fig, out_dir / "fig2-fairness-gc-stale.pdf")
+
+    fig, ax = plt.subplots(figsize=(3.35, 2.1))
+    bars = ax.bar(xs, [reset[p] for p in policies], color=[COLORS[p] for p in policies])
+    ax.set_ylabel("Semantic resets")
+    ax.set_title("Only semantic placement resets PQC cohorts")
+    ax.set_xticks(xs)
+    ax.set_xticklabels(labels, rotation=25, ha="right")
+    ax.grid(axis="y", alpha=0.25)
+    annotate_bars(ax, bars, include_zero=True, rotation=0, fontsize=5.2)
+    save(fig, out_dir / "fig2-fairness-resets.pdf")
+
+
+def plot_service_pressure_allbaseline_subfigs(dynamic: dict[str, Any], sysbench: dict[str, Any], out_dir: Path) -> None:
+    rows = dynamic_rows(dynamic, sysbench)
+    policies = ["fifo", "sepbit-style", "midas-style", "dogi-history", "quasar", "quasar-dogi-hybrid"]
+    xs = list(range(len(rows)))
+    width = 0.12
+    offsets = [(-2.5 + i) * width for i in range(len(policies))]
+    panels = [
+        ("fig2-service-allbaseline-waf.pdf", "physical_waf", "WAF", "All-baseline WAF on PQC service pressure", "waf", False),
+        ("fig2-service-allbaseline-gc.pdf", "sim_gc_blocks", "GC blocks", "GC from mixed PQC cohorts", "count", True),
+        (
+            "fig2-service-allbaseline-secrets.pdf",
+            "sim_stale_secret_blocks",
+            "Expired PQC secrets",
+            "Expired PQC secrets stranded",
+            "count",
+            True,
+        ),
+    ]
+    for filename, key, ylabel, title, kind, log_scale in panels:
+        fig, ax = plt.subplots(figsize=(3.55, 2.25))
+        all_values: list[float] = []
+        for offset, policy in zip(offsets, policies):
+            values = [entry[1][policy][key] for entry in rows]
+            all_values.extend(values)
+            bars = ax.bar(
+                [x + offset for x in xs],
+                values,
+                width,
+                label=POLICY_LABELS[policy],
+                color=COLORS[policy],
+            )
+            annotate_bars(
+                ax,
+                bars,
+                kind=kind,
+                include_zero=(policy in {"quasar", "quasar-dogi-hybrid"}),
+                fontsize=4.2,
+                rotation=90,
+            )
+        if kind == "waf":
+            ax.set_ylim(0.995, max(all_values) + 0.025)
+        if log_scale:
+            ax.set_yscale("log")
+            ax.set_ylim(1, max(all_values) * 3.0)
+        ax.set_title(title)
+        ax.set_ylabel(ylabel)
+        ax.set_xticks(xs)
+        ax.set_xticklabels([carrier_label(label) for label, _ in rows], rotation=12, ha="right")
+        ax.grid(axis="y", alpha=0.25)
+        if filename.endswith("waf.pdf"):
+            ax.legend(ncol=2, fontsize=5.2, frameon=False, loc="upper left")
+        save(fig, out_dir / filename)
+
+
+def selected_ycsb_rows(curve: dict[str, Any]) -> list[dict[str, Any]]:
+    wanted = {
+        ("ycsb-a", 4000),
+        ("ycsb-a", 6000),
+        ("ycsb-a", 10000),
+        ("ycsb-f", 6000),
+        ("ycsb-f", 8000),
+        ("ycsb-f", 10000),
+    }
+    selected = []
+    for row in curve["rows"]:
+        names = row.get("workloads", [])
+        if len(names) != 1:
+            continue
+        base = "ycsb-a" if "ycsb-a" in names[0] else "ycsb-f"
+        if (base, row.get("pqc_level")) in wanted:
+            selected.append(row)
+    return selected
+
+
+def plot_ycsb_pressure_subfigs(curve: dict[str, Any], out_dir: Path) -> None:
+    rows = selected_ycsb_rows(curve)
+    labels = [short_ycsb_label(row) for row in rows]
+    xs = list(range(len(rows)))
+    width = 0.34
+
+    panels = [
+        ("fig3-ycsb-pressure-waf.pdf", "dogi_waf", "hybrid_waf", "WAF", "YCSB carrier WAF", "waf"),
+        ("fig3-ycsb-pressure-gc.pdf", "dogi_gc_blocks", "hybrid_gc_blocks", "GC blocks", "GC from PQC cohort mixing", "count"),
+        (
+            "fig3-ycsb-pressure-secrets.pdf",
+            "dogi_stale_secret_blocks",
+            "hybrid_stale_secret_blocks",
+            "Expired PQC secrets",
+            "Expired secrets stranded",
+            "count",
+        ),
+    ]
+    for filename, dogi_key, hybrid_key, ylabel, title, kind in panels:
+        fig, ax = plt.subplots(figsize=(3.35, 2.1))
+        dogi_vals = [row[dogi_key] for row in rows]
+        hybrid_vals = [row[hybrid_key] for row in rows]
+        if kind == "waf":
+            ax.set_ylim(0.995, max(dogi_vals + hybrid_vals) + 0.010)
+        dogi_bars = ax.bar([x - width / 2 for x in xs], dogi_vals, width, label="DOGI-style", color=COLORS["dogi-history"])
+        hybrid_bars = ax.bar([x + width / 2 for x in xs], hybrid_vals, width, label="QUASAR-DOGI", color=COLORS["quasar-dogi-hybrid"])
+        if kind == "count" and max(dogi_vals + hybrid_vals) > 50000:
+            ax.set_yscale("log")
+            ax.set_ylim(1, max(dogi_vals + hybrid_vals) * 2.5)
+        ax.set_ylabel(ylabel)
+        ax.set_title(title)
+        ax.set_xticks(xs)
+        ax.set_xticklabels(labels)
+        ax.grid(axis="y", alpha=0.25)
+        ax.legend(fontsize=5.8, frameon=False, loc="upper left")
+        annotate_bars(ax, dogi_bars, kind=kind, include_zero=True, fontsize=4.7)
+        annotate_bars(ax, hybrid_bars, kind=kind, include_zero=True, fontsize=4.7)
+        save(fig, out_dir / filename)
+
+
+def ycsb_policy_rows(path: Path) -> dict[str, dict[str, Any]]:
+    artifact = load_json(path)
+    rows: dict[str, dict[str, Any]] = {}
+    for row in artifact["rows"]:
+        rows[row["policy"]] = row["sim"]
+    return rows
+
+
+def plot_ycsb_allbaseline_subfigs(out_dir: Path) -> None:
+    workloads = [
+        ("YCSB-F\n8K", Path("artifacts/results/fast-ycsb-pressure/packed-physical-zonefs-ycsb-f-pqc8000-z733-helper.json")),
+        ("YCSB-A\n10K", Path("artifacts/results/fast-ycsb-pressure/packed-physical-zonefs-ycsb-a-pqc10000-z1024-helper.json")),
+        ("YCSB-F\n10K", Path("artifacts/results/fast-ycsb-pressure/packed-physical-zonefs-ycsb-f-pqc10000-z900-helper.json")),
+    ]
+    rows = [(label, ycsb_policy_rows(path)) for label, path in workloads]
+    policies = ["fifo", "sepbit-style", "midas-style", "dogi-history", "quasar", "quasar-dogi-hybrid"]
+    xs = list(range(len(rows)))
+    width = 0.12
+    offsets = [(-2.5 + i) * width for i in range(len(policies))]
+    panels = [
+        ("fig3-ycsb-allbaseline-waf.pdf", "waf", "WAF", "All-baseline WAF on PQC-YCSB pressure", "waf", False),
+        ("fig3-ycsb-allbaseline-gc.pdf", "gc_write_blocks", "GC blocks", "GC from PQC-YCSB mixing", "count", True),
+        (
+            "fig3-ycsb-allbaseline-secrets.pdf",
+            "stale_secret_blocks_remaining",
+            "Expired PQC secrets",
+            "Expired secrets stranded",
+            "count",
+            True,
+        ),
+    ]
+    for filename, key, ylabel, title, kind, log_scale in panels:
+        fig, ax = plt.subplots(figsize=(3.55, 2.25))
+        all_values: list[float] = []
+        for offset, policy in zip(offsets, policies):
+            values = [entry[1][policy][key] for entry in rows]
+            all_values.extend(values)
+            bars = ax.bar(
+                [x + offset for x in xs],
+                values,
+                width,
+                label=POLICY_LABELS[policy],
+                color=COLORS[policy],
+            )
+            annotate_bars(
+                ax,
+                bars,
+                kind=kind,
+                include_zero=(policy in {"quasar", "quasar-dogi-hybrid"}),
+                fontsize=4.2,
+                rotation=90,
+            )
+        if kind == "waf":
+            ax.set_ylim(0.995, max(all_values) + 0.025)
+        if log_scale:
+            ax.set_yscale("log")
+            ax.set_ylim(1, max(all_values) * 3.0)
+        ax.set_title(title)
+        ax.set_ylabel(ylabel)
+        ax.set_xticks(xs)
+        ax.set_xticklabels([label for label, _ in rows])
+        ax.grid(axis="y", alpha=0.25)
+        if filename.endswith("waf.pdf"):
+            ax.legend(ncol=2, fontsize=5.2, frameon=False, loc="upper left")
+        save(fig, out_dir / filename)
+
+
+def plot_ratio_sweep_subfigs(ratio: dict[str, Any], out_dir: Path) -> None:
+    rows = ratio["ratio_summary"]
+    xs = [row["ratio"] * 100 for row in rows]
+
+    fig, ax = plt.subplots(figsize=(3.35, 2.1))
+    ax.plot(xs, [row["avg_waf_reduction_vs_dogi"] * 100 for row in rows], marker="o", color=COLORS["quasar-dogi-hybrid"], label="WAF")
+    ax.axhline(0, color="#6b7280", linewidth=0.8)
+    ax.axvline(ratio["break_even_ratio"] * 100, color=COLORS["stale"], linewidth=0.9, linestyle="--", label="break-even")
+    ax.set_xlabel("PQC overlay ratio (%)")
+    ax.set_ylabel("WAF reduction vs DOGI (%)")
+    ax.set_title("PQC pressure break-even")
+    ax.grid(alpha=0.25)
+    ax.legend(fontsize=5.8, frameon=False, loc="upper left")
+    save(fig, out_dir / "fig4-ratio-waf.pdf")
+
+    fig, ax = plt.subplots(figsize=(3.35, 2.1))
+    ax.plot(xs, [row["aggregate_gc_reduction_vs_dogi"] * 100 for row in rows], marker="s", color="#4C78A8", label="GC")
+    ax.axhline(0, color="#6b7280", linewidth=0.8)
+    ax.set_xlabel("PQC overlay ratio (%)")
+    ax.set_ylabel("GC reduction vs DOGI (%)")
+    ax.set_title("GC benefit appears under pressure")
+    ax.grid(alpha=0.25)
+    save(fig, out_dir / "fig4-ratio-gc.pdf")
+
+    fig, ax = plt.subplots(figsize=(3.35, 2.1))
+    bars = ax.bar(xs, [row["stale_avoided"] for row in rows], width=2.8, color=COLORS["stale"])
+    ax.set_xlabel("PQC overlay ratio (%)")
+    ax.set_ylabel("Expired secrets avoided")
+    ax.set_title("Exposure improves before WAF")
+    ax.grid(axis="y", alpha=0.25)
+    annotate_bars(ax, bars, include_zero=True, fontsize=4.7)
+    save(fig, out_dir / "fig4-ratio-secrets.pdf")
+
+
 def dynamic_rows(dynamic: dict[str, Any], sysbench: dict[str, Any]) -> list[tuple[str, dict[str, Any]]]:
     rows: list[tuple[str, dict[str, Any]]] = []
     sys_policies = {}
@@ -812,9 +1102,15 @@ def main() -> int:
     parser.add_argument("--space", type=Path, default=Path("artifacts/results/dogi-paper-workloads-smoke/space-sensitivity-tight-open.json"))
     parser.add_argument("--overhead", type=Path, default=Path("artifacts/results/actual-zns-overhead-summary.json"))
     parser.add_argument("--xnvme", type=Path, default=Path("artifacts/results/xnvme-zns-latency/summary.json"))
+    parser.add_argument("--ratio", type=Path, default=Path("artifacts/results/dogi-paper-ratio-sweep-50k/summary.json"))
     args = parser.parse_args()
 
     plot_intro_failure(load_json(args.ycsb), args.out_dir / "fig1-intro-pressure.pdf")
+    plot_fairness_matrix_subfigs(args.out_dir)
+    plot_service_pressure_allbaseline_subfigs(load_json(args.dynamic), load_json(args.sysbench), args.out_dir)
+    plot_ycsb_pressure_subfigs(load_json(args.ycsb), args.out_dir)
+    plot_ycsb_allbaseline_subfigs(args.out_dir)
+    plot_ratio_sweep_subfigs(load_json(args.ratio), args.out_dir)
     plot_pressure_breadth(load_json(args.dynamic), load_json(args.sysbench), args.out_dir / "fig2-pressure-breadth.pdf")
     plot_pressure_breadth_subfigs(load_json(args.dynamic), load_json(args.sysbench), args.out_dir)
     plot_component_ablation(load_json(args.ablation), args.out_dir / "fig3-component-ablation.pdf")

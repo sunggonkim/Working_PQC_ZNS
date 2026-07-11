@@ -2,12 +2,22 @@
 
 \subsection{Overview}
 
-\system is a host-side placement layer for \zns devices.  Figure~\ref{fig:architecture} shows the data path.  Applications or cryptographic libraries produce lifecycle labels when they create PQC artifacts.  These labels are attached to writes as \texttt{quasar\_hint}.  The allocator maps each write to a zone family.  An epoch manager tracks which families are eligible for reset, migration, or fallback GC.  Payload writes continue to use a history-based fallback, so the system does not discard the strengths of \dogi-style placement.
+\system is a host-side placement layer for \zns devices.  Figure~\ref{fig:architecture} shows the three mechanisms that define the design: lifecycle labels enter the storage path, the allocator maps them to bounded zone families, and epoch reclaim resets a family only after safety is proven.  Applications or cryptographic libraries produce lifecycle labels when they create PQC artifacts.  These labels are attached to writes as \texttt{quasar\_hint}.  The allocator maps each write to a zone family.  An epoch manager tracks which families are eligible for reset, migration, or fallback GC.  Payload writes continue to use a history-based fallback, so the system does not discard the strengths of \dogi-style placement.
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=0.86\textwidth]{../artifacts/figures/paper/quasar-architecture.pdf}
-\caption{\system architecture.  The storage path receives lifecycle labels, not secret material.  Payload remains on a history-based fallback, while PQC secrets, rotation metadata, and uncertain writes are routed to separate zone families.  The epoch manager resets or sanitizes a family only after proving that all objects in the family are expired or migrated.}
+\subfloat[Hint path: lifecycle labels, not secret bytes.]{
+\includegraphics[width=0.32\textwidth]{../artifacts/figures/paper/quasar-design-hint-path.pdf}
+}
+\hfill
+\subfloat[Zone-family split and admission priority.]{
+\includegraphics[width=0.32\textwidth]{../artifacts/figures/paper/quasar-design-zone-families.pdf}
+}
+\hfill
+\subfloat[Epoch reclaim and conservative fallback.]{
+\includegraphics[width=0.32\textwidth]{../artifacts/figures/paper/quasar-design-epoch-reclaim.pdf}
+}
+\caption{\system design overview.  Like DOGI's design figures, the figure separates the data path, placement organization, and reclaim rule.  The storage path receives lifecycle labels, not secret material.  Payload remains on a history-based fallback, while PQC secrets, rotation metadata, and uncertain writes are routed to separate zone families.  The epoch manager resets or sanitizes a family only after proving that all objects in the family are expired or migrated.}
 \label{fig:architecture}
 \end{figure*}
 
