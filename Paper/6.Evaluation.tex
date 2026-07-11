@@ -73,13 +73,13 @@ FIFO & 1.0040 & 3,903 & 99,141 & 0 \\
 
 The WAF gain here is deliberately modest: 0.1\% relative to \dogi-style.  The row is a semantic result, not a performance headline: storage-history placement can have good WAF and still fail to make expired PQC secrets resettable.
 
-\subsection{YCSB Pressure}
+\subsection{PQC Lifecycle Pressure on YCSB Carriers}
 
-YCSB pressure creates the WAF/GC separation missing from easy p2000 rows.  Table~\ref{tab:ycsb} reports representative physical \zns replays.  \dogi-style placement pays 3,357--24,289 GC blocks and leaves 46,266--150,221 stale secret blocks.  The hybrid removes stale secret blocks in all rows and reduces GC to zero in these representative replays.
+These rows use YCSB only as a storage-locality carrier.  The target phenomenon is PQC lifecycle pressure: epoch secrets, KEM artifacts, rotation metadata, and append-only signatures are inserted beside ordinary payload, then invalidated by protocol state.  Table~\ref{tab:ycsb} reports representative physical \zns replays.  \dogi-style placement pays 3,357--24,289 GC blocks and leaves 46,266--150,221 expired PQC secret blocks.  The hybrid removes stale secret blocks in all rows and reduces GC to zero in these representative replays.
 
 \begin{table*}[t]
 \centering
-\caption{Representative actual-\zns YCSB pressure replays.  These traces keep YCSB update locality while adding PQC lifecycle side writes, showing where pressure turns the semantic gap into measurable GC/WAF cost.}
+\caption{Representative actual-\zns PQC lifecycle pressure on YCSB carriers.  The carrier preserves update locality; the PQC side writes create protocol-defined death cohorts that history-based placement cannot observe.}
 \label{tab:ycsb}
 \footnotesize
 \begin{tabularx}{\textwidth}{lRRRRRRR}
@@ -102,20 +102,20 @@ The p10000 rows bound the WAF claim.  Dense YCSB overlays can keep \dogi-style W
 
 To check that the pressure result is not a single-seed artifact, we run a three-seed ratio sweep over the six DOGI-style workload families at 0\%, 5\%, and 20\% PQC overlay ratios, for 54 comparisons.  The hybrid matches \dogi-style at 0\% PQC, is WAF-negative at 5\% PQC (-1.1\% mean WAF, -12.4\% mean GC) while avoiding 2,342 stale secret blocks per seed, and becomes positive at 20\% PQC (5.0\% mean WAF and 38.3\% mean GC improvement) while avoiding 10,021 stale secret blocks per seed.  Thus low-ratio overlays are exposure evidence, not WAF wins; WAF/GC benefits appear once protocol-lifetime objects create enough placement pressure.
 
-\subsection{DB and Dynamic-Service Pressure}
+\subsection{PQC Lifecycle Pressure Across Service Carriers}
 
-Table~\ref{tab:pressure} reports the harder Sysbench and dynamic service rows.  Sysbench is not a DOGI-paper workload; it is included as FAST-style DB pressure.  The hybrid reduces \dogi-style GC from 11,256 to 609 blocks and removes 38,438 stale secret blocks.  On Exchange-, Varmail-, and Alibaba-like dynamic traces, the hybrid reduces GC by 92.3--99.9\% and keeps stale secrets at zero.
+Table~\ref{tab:pressure} reports harder service carriers with the same PQC lifecycle side writes.  Sysbench is included as DB-backed PQC service pressure rather than as a generic DB claim.  The hybrid reduces \dogi-style GC from 11,256 to 609 blocks and removes 38,438 expired PQC secret blocks.  On Exchange-, Varmail-, and Alibaba-like carriers, the hybrid reduces GC by 92.3--99.9\% and keeps stale secrets at zero.
 
 \begin{figure*}[t]
 \centering
 \includegraphics[width=0.74\textwidth]{../artifacts/figures/fast-style/fig2-pressure-breadth.pdf}
-\caption{FAST-style pressure breadth.  Sysbench, Exchange, Varmail, and Alibaba-like rows keep storage-visible locality while adding PQC lifecycle objects.  History-based policies can still group payload, but they do not make expired secret cohorts reset-eligible; \system-\dogi cuts GC and stale-secret exposure on the same pressure axes.}
+\caption{PQC lifecycle pressure breadth.  The x-axis names the service carrier, but the measured failure is PQC-specific: expired secret cohorts remain mixed with live payload under history-based placement.  \system-\dogi keeps those cohorts reset-eligible while preserving payload placement on the history fallback.}
 \label{fig:pressure-breadth}
 \end{figure*}
 
 \begin{table*}[t]
 \centering
-\caption{FAST-style DB and dynamic-service pressure.  Dynamic rows use DOGI-style workload families with high PQC overlays and tight logical-zone pressure; the hybrid preserves zero stale secrets while cutting GC.}
+\caption{PQC lifecycle pressure across DB and dynamic-service carriers.  Each row preserves a DOGI-style storage-locality pattern, then adds PQC artifacts whose death time is protocol-defined; the hybrid preserves zero stale secrets while cutting GC.}
 \label{tab:pressure}
 \footnotesize
 \begin{tabularx}{\textwidth}{lRRRRRRR}
@@ -139,7 +139,7 @@ Table~\ref{tab:ablation} turns the upper-bound requirements into mechanism evide
 \begin{figure*}[t]
 \centering
 \includegraphics[width=0.74\textwidth]{../artifacts/figures/fast-style/fig3-component-ablation.pdf}
-\caption{Component ablation.  A history-only \dogi-style policy sees storage history but misses death cohorts, so GC and stale-secret exposure remain.  Lifecycle hints remove exposure; adding \dogi-style payload fallback recovers payload placement and removes the remaining GC in the default hybrid.}
+\caption{PQC lifecycle-signal ablation.  A history-only \dogi-style policy sees storage history but misses cryptographic death cohorts, so GC and expired-secret exposure remain.  Lifecycle hints remove exposure; adding \dogi-style payload fallback recovers payload placement and removes the remaining GC in the default hybrid.}
 \label{fig:component-ablation}
 \end{figure*}
 
@@ -174,7 +174,7 @@ The xNVMe probe provides a lower-overhead command-path sanity check: 4,096 4KiB 
 \begin{figure*}[t]
 \centering
 \includegraphics[width=0.76\textwidth]{../artifacts/figures/fast-style/fig4-resource-overhead.pdf}
-\caption{Resource and overhead controls.  \system-\dogi bounds the closed-zone fill cost while removing stale secrets, the hint-routing decision path is orders of magnitude cheaper than the \dogi-style policy-decision microbenchmark, and xNVMe confirms a lower-overhead append command path than the zonefs helper used for full-suite replay accounting.}
+\caption{PQC placement resource and overhead controls.  \system-\dogi bounds the closed-zone fill cost while removing stale PQC secrets, the lifecycle-hint routing path is orders of magnitude cheaper than the \dogi-style policy-decision microbenchmark, and xNVMe confirms a lower-overhead append command path than the zonefs helper used for full-suite replay accounting.}
 \label{fig:resource-overhead}
 \end{figure*}
 
@@ -187,7 +187,7 @@ The residual fallback frontier shows why strict exposure mode cannot be the defa
 \begin{figure*}[t]
 \centering
 \includegraphics[width=0.76\textwidth]{../artifacts/figures/fast-style/fig6-robustness.pdf}
-\caption{Robustness frontier.  Exact and binned placement can leave straggler secrets waiting under tight active-zone budgets.  Residual migration removes the exposure but increases physical WAF and copied blocks; strict zero-wait mode is therefore a policy point, not the default.}
+\caption{PQC robustness frontier.  Exact and binned placement can leave delayed-expiry PQC secrets waiting under tight active-zone budgets.  Residual migration removes the exposure but increases physical WAF and copied blocks; strict zero-wait mode is therefore a policy point, not the default.}
 \label{fig:robustness}
 \end{figure*}
 

@@ -9,7 +9,7 @@ The central mismatch in post-quantum workloads is that the lifetime of cryptogra
 \begin{figure*}[t]
 \centering
 \includegraphics[width=0.68\textwidth]{../artifacts/figures/fast-style/fig1-intro-pressure.pdf}
-\caption{Actual-\zns YCSB pressure with all history-based baselines.  The low-pressure row is intentionally a negative WAF control, while higher PQC overlays create GC pressure.  FIFO, \sepbit-style, \midas-style, and \dogi-style placement all leave expired secret blocks because they cannot see protocol death cohorts; \system-\dogi keeps secret cohorts reset-eligible and removes the exposure on the same rows.}
+\caption{PQC lifecycle pressure on actual \zns.  The left panel shows the PQC artifacts that create the storage problem: epoch secrets, rotation metadata, and append-only signatures.  The right panel shows the consequence after epoch close: FIFO, \sepbit-style, \midas-style, and \dogi-style placement strand expired PQC secret blocks, while \system-\dogi keeps those death cohorts reset-eligible.}
 \label{fig:intro-ycsb}
 \end{figure*}
 

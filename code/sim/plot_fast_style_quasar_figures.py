@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import argparse
 import json
+from collections import Counter
 from pathlib import Path
 from typing import Any
 
@@ -50,6 +51,9 @@ COLORS = {
     "quasar-dogi-hybrid": "#54A24B",
     "stale": "#E45756",
     "reset": "#72B7B2",
+    "pqc-secret": "#E45756",
+    "pqc-rotation": "#F58518",
+    "pqc-log": "#72B7B2",
 }
 
 
@@ -80,6 +84,59 @@ def short_ycsb_label(row: dict[str, Any]) -> str:
     name = names[0] if names else "ycsb"
     flavor = "A" if "ycsb-a" in name else "F"
     return f"{flavor}\n{level // 1000}K"
+
+
+def pqc_pressure_label(row: dict[str, Any]) -> str:
+    names = row.get("workloads", [])
+    level = row.get("pqc_level", 0) // 1000
+    if len(names) == 2:
+        carrier = "A/F carrier"
+    else:
+        name = names[0] if names else ""
+        carrier = "A carrier" if "ycsb-a" in name else "F carrier"
+    return f"PQC {level}K\n{carrier}"
+
+
+def carrier_label(label: str) -> str:
+    mapping = {
+        "Sysbench": "PQC-DB",
+        "Exchange": "PQC-mail",
+        "Varmail": "PQC-files",
+        "Alibaba": "PQC-tenant",
+    }
+    return mapping.get(label, f"PQC-{label}")
+
+
+def row_trace_paths(row: dict[str, Any]) -> list[Path]:
+    artifact = row.get("artifact")
+    if not artifact:
+        return []
+    artifact_path = Path(artifact)
+    if not artifact_path.exists():
+        return []
+    artifact_json = load_json(artifact_path)
+    return [Path(path) for path in artifact_json.get("traces", [])]
+
+
+def pqc_lifecycle_blocks(row: dict[str, Any]) -> Counter[str]:
+    blocks: Counter[str] = Counter()
+    for trace_path in row_trace_paths(row):
+        if not trace_path.exists():
+            continue
+        with trace_path.open("r", encoding="utf-8") as src:
+            for line in src:
+                if not line.strip():
+                    continue
+                event = json.loads(line)
+                intent = event.get("intent")
+                size = int(event.get("size_blocks", 1))
+                if intent in {"EPHEMERAL_SECRET", "KEM_ARTIFACT"}:
+                    blocks["Epoch secrets"] += size
+                elif intent == "CERT_METADATA":
+                    blocks["Rotation metadata"] += size
+                elif intent == "SIGNATURE_LOG":
+                    blocks["Signature logs"] += size
+    return blocks
 
 
 def compact_count(value: float) -> str:
@@ -183,44 +240,70 @@ def plot_intro_failure(curve: dict[str, Any], out: Path) -> None:
         selected = rows
 
     policies = ["fifo", "sepbit-style", "midas-style", "dogi-history", "quasar-dogi-hybrid"]
-    labels = [short_ycsb_label(row) for row in selected]
+    labels = [pqc_pressure_label(row) for row in selected]
     xs = list(range(len(selected)))
-    width = 0.14
+    width = 0.13
     offsets = [(idx - (len(policies) - 1) / 2) * width for idx in range(len(policies))]
 
-    def row_value(row: dict[str, Any], policy: str, metric: str) -> int:
+    def stale_value(row: dict[str, Any], policy: str) -> int:
         if policy == "quasar-dogi-hybrid":
-            return row["hybrid_gc_blocks" if metric == "gc" else "hybrid_stale_secret_blocks"]
+            return row["hybrid_stale_secret_blocks"]
         baseline = row["baseline_semantic_failures"][policy]
-        return baseline["gc_blocks" if metric == "gc" else "stale_secret_blocks"]
+        return baseline["stale_secret_blocks"]
 
-    fig, axes = plt.subplots(1, 2, figsize=(6.35, 2.25), sharey=False)
-    for ax, metric, ylabel, title in [
-        (axes[0], "gc", "GC blocks", "GC pressure"),
-        (axes[1], "stale", "Stale secret blocks", "Expired-secret exposure"),
-    ]:
-        for offset, policy in zip(offsets, policies):
-            values = [row_value(row, policy, metric) for row in selected]
-            bar_x = [x + offset for x in xs]
-            bars = ax.bar(
-                bar_x,
-                values,
-                width,
-                label=POLICY_LABELS[policy],
-                color=COLORS[policy],
+    fig, axes = plt.subplots(1, 2, figsize=(6.45, 2.35), sharey=False)
+
+    lifecycle_summaries = [pqc_lifecycle_blocks(row) for row in selected]
+    lifecycle_groups = [
+        ("Epoch secrets", COLORS["pqc-secret"]),
+        ("Rotation metadata", COLORS["pqc-rotation"]),
+        ("Signature logs", COLORS["pqc-log"]),
+    ]
+    bottoms = [0.0 for _ in selected]
+    for group, color in lifecycle_groups:
+        values = [summary[group] for summary in lifecycle_summaries]
+        bars = axes[0].bar(xs, values, 0.55, bottom=bottoms, label=group, color=color)
+        for bar, bottom, value in zip(bars, bottoms, values):
+            if value <= 0:
+                continue
+            axes[0].text(
+                bar.get_x() + bar.get_width() / 2,
+                bottom + value / 2,
+                compact_count(value),
+                ha="center",
+                va="center",
+                fontsize=4.8,
+                color="white" if group == "Epoch secrets" else "black",
             )
-            annotate_bars(ax, bars, include_zero=(policy == "quasar-dogi-hybrid"), fontsize=4.8)
-            if policy == "quasar-dogi-hybrid":
-                ax.scatter(bar_x, values, s=12, marker="v", color=COLORS[policy], zorder=3)
-        ax.set_title(title)
-        ax.set_ylabel(ylabel)
-        ax.set_xticks(xs)
-        ax.set_xticklabels(labels)
-        ax.grid(axis="y", alpha=0.25)
-    axes[0].set_xlabel("YCSB + PQC overlay")
-    axes[1].set_xlabel("YCSB + PQC overlay")
-    handles, legend_labels = axes[0].get_legend_handles_labels()
-    fig.legend(handles, legend_labels, loc="upper center", ncol=5, frameon=False, bbox_to_anchor=(0.5, 0.99))
+        bottoms = [bottom + value for bottom, value in zip(bottoms, values)]
+    axes[0].set_title("PQC lifecycle blocks")
+    axes[0].set_ylabel("PQC blocks written")
+    axes[0].set_xticks(xs)
+    axes[0].set_xticklabels(labels)
+    axes[0].grid(axis="y", alpha=0.25)
+    axes[0].legend(ncol=1, fontsize=5.8, frameon=False, loc="upper left")
+
+    for offset, policy in zip(offsets, policies):
+        values = [stale_value(row, policy) for row in selected]
+        bar_x = [x + offset for x in xs]
+        bars = axes[1].bar(
+            bar_x,
+            values,
+            width,
+            label=POLICY_LABELS[policy],
+            color=COLORS[policy],
+        )
+        annotate_bars(axes[1], bars, include_zero=(policy == "quasar-dogi-hybrid"), fontsize=4.6)
+        if policy == "quasar-dogi-hybrid":
+            axes[1].scatter(bar_x, values, s=12, marker="v", color=COLORS[policy], zorder=3)
+    axes[1].set_title("Expired PQC secrets stranded")
+    axes[1].set_ylabel("Stale secret blocks")
+    axes[1].set_xticks(xs)
+    axes[1].set_xticklabels(labels)
+    axes[1].grid(axis="y", alpha=0.25)
+
+    handles, legend_labels = axes[1].get_legend_handles_labels()
+    fig.legend(handles, legend_labels, loc="upper center", ncol=5, frameon=False, bbox_to_anchor=(0.62, 0.99))
     setattr(fig, "_tight_layout_rect", (0.0, 0.0, 1.0, 0.90))
     save(fig, out)
 
@@ -282,11 +365,11 @@ def plot_pressure_breadth(dynamic: dict[str, Any], sysbench: dict[str, Any], out
         annotate_bars(axes[0], gc_bars, include_zero=(policy == "quasar-dogi-hybrid"))
         annotate_bars(axes[1], stale_bars, include_zero=(policy == "quasar-dogi-hybrid"))
     axes[0].set_ylabel("GC blocks")
-    axes[0].set_title("Pressure workloads")
+    axes[0].set_title("PQC lifecycle pressure carriers")
     axes[0].grid(axis="y", alpha=0.25)
-    axes[1].set_ylabel("Stale secret blocks")
+    axes[1].set_ylabel("Expired PQC secrets")
     axes[1].set_xticks(xs)
-    axes[1].set_xticklabels([label for label, _ in rows])
+    axes[1].set_xticklabels([carrier_label(label) for label, _ in rows])
     axes[1].grid(axis="y", alpha=0.25)
     handles, legend_labels = axes[0].get_legend_handles_labels()
     fig.legend(handles, legend_labels, loc="upper center", ncol=4, frameon=False, bbox_to_anchor=(0.5, 0.99))
@@ -331,11 +414,11 @@ def plot_component_ablation(ablation: dict[str, Any], out: Path) -> None:
         annotate_bars(axes[0], gc_bars, include_zero=("hints" in policy.lower()))
         annotate_bars(axes[1], stale_bars, include_zero=("hints" in policy.lower()))
     axes[0].set_ylabel("GC blocks")
-    axes[0].set_title("Component ablation")
+    axes[0].set_title("PQC lifecycle signal ablation")
     axes[0].grid(axis="y", alpha=0.25)
-    axes[1].set_ylabel("Stale secret blocks")
+    axes[1].set_ylabel("Expired PQC secrets")
     axes[1].set_xticks(xs)
-    axes[1].set_xticklabels(["YCSB-A", "Sysbench", "Exchange"])
+    axes[1].set_xticklabels(["PQC-YCSB", "PQC-DB", "PQC-mail"])
     axes[1].grid(axis="y", alpha=0.25)
     handles, legend_labels = axes[0].get_legend_handles_labels()
     fig.legend(handles, legend_labels, loc="upper center", ncol=3, frameon=False, bbox_to_anchor=(0.5, 0.99))
@@ -475,7 +558,7 @@ def plot_resource_overhead(
     annotate_points(ax, [dogi["closed_zone_fill_avg"]], [dogi["waf"]], [f"{dogi['waf']:.3f}"], fontsize=5.6)
     ax.set_xlabel("Closed-zone fill")
     ax.set_ylabel("WAF")
-    ax.set_title("Space tradeoff")
+    ax.set_title("PQC placement space cost")
     ax.set_xlim(
         min([row["closed_zone_fill_avg"] for row in hybrids] + [dogi["closed_zone_fill_avg"]]) - 0.006,
         max([row["closed_zone_fill_avg"] for row in hybrids] + [dogi["closed_zone_fill_avg"]]) + 0.010,
@@ -493,7 +576,7 @@ def plot_resource_overhead(
     ax.set_xticks(range(len(policies)))
     ax.set_xticklabels(labels)
     ax.set_ylabel("ns/write, log")
-    ax.set_title("Decision cost")
+    ax.set_title("PQC hint routing cost")
     ax.grid(axis="y", alpha=0.25)
     annotate_bars(ax, bars, kind="latency", rotation=0, fontsize=5.1)
 
@@ -527,10 +610,10 @@ def plot_robustness(ablation: dict[str, Any], out: Path) -> None:
 
     fig, axes = plt.subplots(1, 3, figsize=(6.65, 2.22))
     bars = axes[0].bar(x, waiting, color=COLORS["stale"])
-    axes[0].set_ylabel("Waiting secret blocks")
+    axes[0].set_ylabel("Waiting PQC secrets")
     axes[0].set_xticks(x)
     axes[0].set_xticklabels([case[0] for case in cases])
-    axes[0].set_title("Exposure fallback")
+    axes[0].set_title("PQC exposure fallback")
     axes[0].grid(axis="y", alpha=0.25)
     annotate_bars(axes[0], bars, include_zero=True, fontsize=5.0)
 
@@ -538,7 +621,7 @@ def plot_robustness(ablation: dict[str, Any], out: Path) -> None:
     axes[1].set_ylabel("Physical WAF")
     axes[1].set_xticks(x)
     axes[1].set_xticklabels([case[0] for case in cases])
-    axes[1].set_title("Strict mode cost")
+    axes[1].set_title("Strict PQC erase cost")
     axes[1].grid(axis="y", alpha=0.25)
     annotate_bars(axes[1], bars, kind="waf", include_zero=True, rotation=0, fontsize=5.3)
 
