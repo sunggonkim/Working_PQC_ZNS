@@ -39,7 +39,7 @@ On the mixed sanity trace, \dogi-style placement has WAF 1.791 and 484,967 GC bl
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=0.72\textwidth]{../artifacts/figures/paper/epoch-upper-bound.pdf}
+\includegraphics[width=0.62\textwidth]{../artifacts/figures/paper/epoch-upper-bound.pdf}
 \caption{Epoch upper bound.  The epoch oracle is not a deployable baseline; it receives exact future death time.  Its role is to show that the WAF gap is largely a missing-lifetime-signal problem.  \system approaches the upper bound with lifecycle hints, while the paper's headline claims still come from harder physical-\zns pressure rows.}
 \label{fig:epoch-upper-bound}
 \end{figure*}
@@ -108,7 +108,7 @@ Table~\ref{tab:pressure} reports the harder Sysbench and dynamic service rows.  
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=0.88\textwidth]{../artifacts/figures/fast-style/fig2-pressure-breadth.pdf}
+\includegraphics[width=0.74\textwidth]{../artifacts/figures/fast-style/fig2-pressure-breadth.pdf}
 \caption{FAST-style pressure breadth.  Sysbench, Exchange, Varmail, and Alibaba-like rows keep storage-visible locality while adding PQC lifecycle objects.  History-based policies can still group payload, but they do not make expired secret cohorts reset-eligible; \system-\dogi cuts GC and stale-secret exposure on the same pressure axes.}
 \label{fig:pressure-breadth}
 \end{figure*}
@@ -138,7 +138,7 @@ Table~\ref{tab:ablation} turns the upper-bound requirements into mechanism evide
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=0.88\textwidth]{../artifacts/figures/fast-style/fig3-component-ablation.pdf}
+\includegraphics[width=0.74\textwidth]{../artifacts/figures/fast-style/fig3-component-ablation.pdf}
 \caption{Component ablation.  A history-only \dogi-style policy sees storage history but misses death cohorts, so GC and stale-secret exposure remain.  Lifecycle hints remove exposure; adding \dogi-style payload fallback recovers payload placement and removes the remaining GC in the default hybrid.}
 \label{fig:component-ablation}
 \end{figure*}
@@ -173,7 +173,7 @@ The xNVMe probe provides a lower-overhead command-path sanity check: 4,096 4KiB 
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=0.88\textwidth]{../artifacts/figures/fast-style/fig4-resource-overhead.pdf}
+\includegraphics[width=0.76\textwidth]{../artifacts/figures/fast-style/fig4-resource-overhead.pdf}
 \caption{Resource and overhead controls.  \system-\dogi bounds the closed-zone fill cost while removing stale secrets, the hint-routing decision path is orders of magnitude cheaper than the \dogi-style policy-decision microbenchmark, and xNVMe confirms a lower-overhead append command path than the zonefs helper used for full-suite replay accounting.}
 \label{fig:resource-overhead}
 \end{figure*}
@@ -186,7 +186,7 @@ The residual fallback frontier shows why strict exposure mode cannot be the defa
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=0.88\textwidth]{../artifacts/figures/fast-style/fig6-robustness.pdf}
+\includegraphics[width=0.76\textwidth]{../artifacts/figures/fast-style/fig6-robustness.pdf}
 \caption{Robustness frontier.  Exact and binned placement can leave straggler secrets waiting under tight active-zone budgets.  Residual migration removes the exposure but increases physical WAF and copied blocks; strict zero-wait mode is therefore a policy point, not the default.}
 \label{fig:robustness}
 \end{figure*}

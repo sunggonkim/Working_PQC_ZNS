@@ -6,7 +6,7 @@
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=\textwidth]{../artifacts/figures/paper/quasar-architecture.pdf}
+\includegraphics[width=0.86\textwidth]{../artifacts/figures/paper/quasar-architecture.pdf}
 \caption{\system architecture.  The storage path receives lifecycle labels, not secret material.  Payload remains on a history-based fallback, while PQC secrets, rotation metadata, and uncertain writes are routed to separate zone families.  The epoch manager resets or sanitizes a family only after proving that all objects in the family are expired or migrated.}
 \label{fig:architecture}
 \end{figure*}
