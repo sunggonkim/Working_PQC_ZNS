@@ -15,3 +15,20 @@
 *.tmp
 *.log
 *~
+
+# LaTeX intermediates
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.out
+*.synctex.gz
+*.toc
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Local reference papers and unpacked prior projects
+/Paper/Previous papers/

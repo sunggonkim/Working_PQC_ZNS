@@ -1,0 +1,60 @@
+\documentclass[letterpaper,twocolumn,10pt]{article}
+\usepackage{usenix-2020-09}
+
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{xspace}
+
+\newcommand{\system}{QUASAR\xspace}
+\newcommand{\dogi}{DOGI\xspace}
+\newcommand{\midas}{MiDAS\xspace}
+\newcommand{\sepbit}{SepBIT\xspace}
+\newcommand{\zns}{ZNS\xspace}
+\newcommand{\pqc}{PQC\xspace}
+\newcommand{\etal}{et al.\xspace}
+
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}
+
+\lstset{
+  basicstyle=\ttfamily\footnotesize,
+  columns=fullflexible,
+  frame=single,
+  breaklines=true,
+  xleftmargin=0.5em,
+  xrightmargin=0.5em
+}
+
+\date{}
+\title{\Large \bf \system: Cryptographic Intent-Aware Zoned Storage for Post-Quantum Workloads}
+\author{Anonymous Submission}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Post-quantum services such as TLS terminators, KMS deployments, and audit systems write not only payload and logs, but also KEM artifacts, session secrets, key-wrap records, certificate metadata, and signatures whose lifetimes follow sessions, key epochs, rotations, and erase policy.
+Zoned Namespace SSDs expose append and reset primitives that can exploit lifetime structure, but \dogi, \midas, and \sepbit infer lifetime from LBA locality, frequency, and previous invalidations, which do not encode the protocol event that kills a post-quantum secret.
+This paper presents \system, a cryptographic intent-aware placement architecture that adds a 32-byte lifecycle hint to the write path, preserves history-based placement for ordinary payload, and packs short-lived post-quantum objects by death cohort so epoch close can reset eligible secret-bearing zones.
+On an actual WD ZN540-class \zns SSD, a same-path replay over six DOGI-style workload axes completes 72 policy rows with no failures; \dogi-style placement leaves 99,834 stale secret blocks, while \system-\dogi hybrid leaves zero and reduces GC by 83.0\%, and FAST-style Sysbench plus dynamic Exchange-, Varmail-, and Alibaba-like pressure traces show 92.3--99.9\% GC reduction while preserving zero stale-secret exposure.
+\end{abstract}
+
+\input{1.Introduction}
+\input{2.Background}
+\input{3.Motivation}
+\input{4.Design}
+\input{5.Implementation}
+\input{6.Evaluation}
+\input{7.RelatedWork}
+\input{8.Discussion}
+\input{9.Conclusion}
+
+\bibliographystyle{abbrv}
+\bibliography{ref}
+
+\end{document}

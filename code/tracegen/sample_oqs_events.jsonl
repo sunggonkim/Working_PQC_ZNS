@@ -1,0 +1,3 @@
+{"ts": 0, "event": "handshake", "session_id": "s0", "tenant_id": "tenant0", "kem": "ML-KEM-768", "sig": "ML-DSA-65", "payload_bytes": 8192, "session_end_ts": 1200}
+{"ts": 250, "event": "signature", "session_id": "s0", "tenant_id": "tenant0", "sig": "ML-DSA-65"}
+{"ts": 1500, "event": "handshake", "session_id": "s1", "tenant_id": "tenant0", "kem": "ML-KEM-1024", "sig": "ML-DSA-87", "payload_bytes": 4096, "session_end_ts": 2400}

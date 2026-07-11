@@ -1,0 +1,23 @@
+\section{Motivation}
+
+\subsection{History Signals Do Not Encode Death Cohorts}
+
+History-based placement asks: what did this block look like before?  \dogi-style policies observe LBA, previous LBA, access interval, segment frequency, and prior placement state.  These features are meaningful for ordinary payload updates because they capture hotness and locality.  A post-quantum secret asks a different question: which objects will die together when the protocol state advances?  The answer requires at least intent and epoch.
+
+This distinction creates two failure modes.  The first is semantic: the baseline leaves expired secret blocks in zones that are not safely resettable because the zone also contains payload or long-lived metadata.  The second is performance: under sufficient free-zone pressure, mixed death cohorts force valid-block migration and raise WAF.  The first failure can appear even when WAF is near 1.0; the second appears only in harder pressure workloads.
+
+\subsection{Easy Workloads Are Not Enough}
+
+A clean PQC-only epoch trace makes \system look too good and is not a fair test of \dogi.  Our evaluation therefore treats such traces as sanity checks only.  The hard tests keep DOGI's normal locality signals and then add realistic PQC lifecycle writes.  Concretely, the workload matrix contains: DOGI-style six-axis fairness, YCSB-A/F pressure, FAST-style Sysbench pressure, dynamic service pressure, and QUASAR-hostile robustness.
+
+\subsection{The Upper Bound Gives Design Requirements}
+
+DOGI uses NoDaP to turn an oracle gap into design requirements.  \system uses a narrower epoch upper bound for the same diagnostic purpose: by giving the oracle exact PQC death cohorts, we test whether the missing signal is protocol lifetime rather than another storage-history feature.
+
+The upper bound yields three requirements.  First, the placement path must expose protocol lifetime because LBA, frequency, and prior invalidations do not encode session close or key rotation.  Second, exact cohort placement must be budgeted because a sparse epoch per zone can trade WAF for poor utilization and too many active families.  Third, reset must be conservative because a wrong hint can hurt placement quality but must not discard live data.  These requirements lead directly to \system's lifecycle hint, admission/open-zone policy, and epoch-confirmed reclaim path.
+
+The actual-\zns results later separate these failure modes.  In the six-axis fairness matrix, \dogi-style placement has WAF near 1.0 but leaves 99,834 stale secret blocks.  In harder YCSB, Sysbench, Exchange, Varmail, and Alibaba-like rows, history-based placement pays positive GC while leaving stale secrets; the hybrid keeps payload on history placement and moves PQC secrets into resettable cohorts.
+
+\subsection{The Desired Design Shape}
+
+The design requirement is therefore not ``replace DOGI everywhere.''  A pure semantic allocator can be worse for ordinary payload.  The desired system uses history where history is the right signal and cryptographic intent where history is blind: DOGI-like placement for payload, \system zone families for PQC lifecycle objects, and conservative fallback for unreliable hints.

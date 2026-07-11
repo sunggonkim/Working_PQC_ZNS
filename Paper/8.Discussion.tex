@@ -1,0 +1,13 @@
+\section{Discussion and Limitations}
+
+\noindent\textbf{QUASAR is not a universal WAF optimizer.}
+Easy rows deliberately show \dogi-style WAF near 1.0; there, \system's benefit is exposure reduction.  The scoped claim is that PQC death cohorts are invisible to history-based placement and become costly under pressure, not that \system wins every trace.
+
+\noindent\textbf{Correctness, trust, and tenancy.}
+Wrong or missing hints must not cause data loss: \system resets only after epoch-close confirmation; otherwise it migrates residuals, downgrades to normal GC, or sends low-confidence writes to overflow.  High-priority secret placement is emitted by trusted TLS/KMS/logging or policy components, with opaque cohort IDs, tenant-local namespaces, quotas, and admission limits to prevent priority inflation.
+
+\noindent\textbf{Resource tradeoffs are explicit.}
+Dedicated epoch zones can waste space, and strict zero-wait residual handling can be expensive on hostile rows such as YCSB-F p8000.  The default hybrid reserves exact placement for high-security cohorts, bins sparse cohorts, sends uncertain writes to overflow, and makes strict tenant/residual modes opt-in.
+
+\noindent\textbf{Device and deployment boundaries.}
+Zone reset alone is not physical NAND erasure; strong erasure requires sanitize or hardware crypto-erase, with deployment-specific scheduling cost.  The physical evidence uses one WD ZN540-class device, zonefs replay, liboqs/OpenSSL traces, a TLS socket trace, and an xNVMe probe.  Exact DOGI/MiDAS/SepBIT runs stay separate because their units differ from packed actual-\zns replay.  We report host-visible resets/utilization, but not internal wear telemetry or full SPDK poll-mode replay.

@@ -1,0 +1,1227 @@
+{
+  "gates": [
+    {
+      "evidence": {
+        "comparisons": {
+          "mixed-web": {
+            "dogi_waf": 1.3310897245596895,
+            "quasar_waf": 1.004560984956846,
+            "won": true
+          },
+          "pqc-kms": {
+            "dogi_waf": 1.1119220894952366,
+            "quasar_waf": 1.0407375188304937,
+            "won": true
+          },
+          "pqc-log": {
+            "dogi_waf": 1.7869593033123996,
+            "quasar_waf": 1.0160593281194918,
+            "won": true
+          },
+          "pqc-tls": {
+            "dogi_waf": 1.0481073163210237,
+            "quasar_waf": 1.0340181944337368,
+            "won": true
+          },
+          "stress-rekey": {
+            "dogi_waf": 2.0309245276533336,
+            "quasar_waf": 1.0190199021506239,
+            "won": true
+          }
+        },
+        "required": 3,
+        "win_count": 5,
+        "wins": [
+          "mixed-web",
+          "pqc-kms",
+          "pqc-log",
+          "pqc-tls",
+          "stress-rekey"
+        ]
+      },
+      "name": "quasar_beats_dogi_on_at_least_three_workloads",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "missing": [],
+        "quasar_rows": 5,
+        "valid_workloads": [
+          "mixed-web",
+          "pqc-kms",
+          "pqc-log",
+          "pqc-tls",
+          "stress-rekey"
+        ]
+      },
+      "name": "quasar_reports_waf_and_zone_utilization",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "max_failed_gc_attempts": 0,
+        "max_waf": 1.0130553500106019,
+        "stressed_rows": 7,
+        "waf_threshold": 1.05
+      },
+      "name": "quasar_survives_5_percent_bad_hints",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "final_stale_secret_blocks": {
+          "dogi-history": 514,
+          "fifo": 580,
+          "quasar": 0
+        },
+        "max_stale_secret_blocks": {
+          "dogi-history": 11535,
+          "fifo": 11535,
+          "quasar": 3
+        }
+      },
+      "name": "exposure_window_graph_shows_secret_drop",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "can_run_full_prototype": false,
+        "dogi_lines": 122485,
+        "dogi_tombstones": 42485,
+        "parser_matches_adapter": true,
+        "trace_all_lines_usable": true
+      },
+      "name": "dogi_full_or_justified_dogi_style_included",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "dogi_feature_count": 6,
+        "dogi_feature_samples": 80000,
+        "missing_feature_flags": [],
+        "prediction_samples": 42485,
+        "runtime_feature_keys": 42478
+      },
+      "name": "dogi_style_models_six_runtime_features",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "all_kem_ok": true,
+        "all_sig_ok": true,
+        "dogi_waf": 1.1839080459770115,
+        "kem": "ML-KEM-768",
+        "quasar_stale_secret_blocks": 0,
+        "quasar_waf": 1.0258620689655173,
+        "sessions": 200,
+        "sig": "ML-DSA-65"
+      },
+      "name": "liboqs_trace_generated_and_verified",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "append_commands": 80000,
+        "backend": "file-zns",
+        "dry_run_only": false,
+        "emulator_append_commands": 80000,
+        "emulator_final_used_zones": 1036,
+        "emulator_reset_commands": 84,
+        "emulator_reset_zones": 193,
+        "emulator_zone_count": 1400,
+        "reset_family_commands": 84
+      },
+      "name": "file_zns_emulated_replay_executed",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "append_commands": 80000,
+        "backend": "blkzone-zns",
+        "real_append_commands": 80000,
+        "real_bytes_written": 2511405056,
+        "real_device": "/dev/nullb_quasar",
+        "real_final_used_zones": 33,
+        "real_reset_commands": 84,
+        "real_reset_zones": 84,
+        "real_zone_count": 64,
+        "reset_family_commands": 84
+      },
+      "name": "real_nullblk_zoned_replay_executed",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "append_commands": 64,
+        "bytes_written": 262144,
+        "execute": true,
+        "p99_append_latency_ns": 2503628,
+        "reset_issued": false,
+        "unique_families": 3,
+        "zone_files_used": 3
+      },
+      "name": "physical_zonefs_direct_replay_executed",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "failed_workloads": [],
+        "max_active_zone_files": 8,
+        "median_p99_append_latency_ns": 2397112.0,
+        "total_append_commands": 192108,
+        "total_gib_written": 3.7674484252929688,
+        "total_reset_family_commands": 106,
+        "workloads": 6
+      },
+      "name": "physical_zonefs_dogi_pqc2000_suite_completed",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "execute": true,
+        "failed": false,
+        "hybrid_block_reduction_vs_dogi": 0.04276687213435144,
+        "rows": 30,
+        "scale": 40,
+        "stale_secret_blocks_avoided": 44726,
+        "total_gib_written": 511.4024353027344
+      },
+      "name": "physical_zonefs_write_pressure_scale_completed",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "dogi_stale_secret_blocks": 3840,
+        "dogi_vs_hybrid": {
+          "dogi_physical_blocks": 7789,
+          "hybrid_block_reduction_vs_dogi": 0.0,
+          "hybrid_physical_blocks": 7789,
+          "stale_secret_blocks_avoided": 3840
+        },
+        "execute": true,
+        "failed_rows": 0,
+        "hybrid_max_active_zone_files": 13,
+        "hybrid_resets": 142,
+        "hybrid_stale_secret_blocks": 0,
+        "quasar_resets": 142,
+        "rows": 20
+      },
+      "name": "physical_policy_zonefs_replay_completed",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "dogi_stale_secret_blocks": 99898,
+        "dogi_vs_hybrid": {
+          "dogi_physical_blocks": 987614,
+          "dogi_total_physical_blocks_including_prefill": 1293614,
+          "hybrid_block_reduction_vs_dogi": 0.0,
+          "hybrid_physical_blocks": 987614,
+          "hybrid_total_block_reduction_vs_dogi_including_prefill": 0.0,
+          "hybrid_total_physical_blocks_including_prefill": 1293614,
+          "stale_secret_blocks_avoided": 99898
+        },
+        "execute": true,
+        "failed_rows": 0,
+        "hybrid_max_allocated_zone_files": 12,
+        "hybrid_max_open_zone_files": 12,
+        "hybrid_resets": 105,
+        "hybrid_stale_secret_blocks": 0,
+        "quasar_resets": 105,
+        "rows": 30,
+        "zone_capacity": 275712
+      },
+      "name": "physical_policy_dogi_zonefs_replay_completed",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "any_delayed_reset_ratio": 1.0,
+        "any_secret_waiting_end": 62635,
+        "failed_rows": 0,
+        "group_max_live_physical_zones": 12,
+        "group_max_secret_waiting": 2581,
+        "group_secret_waiting_end": 0,
+        "logical_zone_capacity": 512,
+        "logical_zone_delayed_reset_ratio": 0.0,
+        "logical_zone_max_live_physical_zones": 390,
+        "physical_zone_capacity": 275712,
+        "physical_zones": 905,
+        "rows": 120
+      },
+      "name": "packed_logical_zone_replay_analysis_completed",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "append_engine": "helper",
+        "baseline_evidence": {
+          "dogi-history": {
+            "group_resets": 0,
+            "group_stale": 99834,
+            "secret_group_resets": 0,
+            "secret_group_stale": 99834
+          },
+          "fifo": {
+            "group_resets": 0,
+            "group_stale": 99141,
+            "secret_group_resets": 0,
+            "secret_group_stale": 99141
+          },
+          "midas-style": {
+            "group_resets": 0,
+            "group_stale": 99898,
+            "secret_group_resets": 0,
+            "secret_group_stale": 99898
+          },
+          "sepbit-style": {
+            "group_resets": 0,
+            "group_stale": 99822,
+            "secret_group_resets": 0,
+            "secret_group_stale": 99822
+          }
+        },
+        "execute": true,
+        "failed_rows": 0,
+        "group_avg_utilization": 0.09836990013043286,
+        "group_max_live_physical_zones": 12,
+        "group_max_secret_waiting": 2380,
+        "group_physical_resets": 105,
+        "group_secret_waiting_end": 0,
+        "helper_chunk_blocks": 1,
+        "physical_zone_capacity": 275712,
+        "rows": 72,
+        "secret_group_avg_utilization": 0.7216600413958528,
+        "secret_group_max_live_physical_zones": 5,
+        "secret_group_max_secret_waiting": 2380,
+        "secret_group_physical_resets": 98,
+        "secret_group_secret_waiting_end": 0,
+        "wall_time_s": 472.459942448
+      },
+      "name": "packed_physical_zonefs_replay_completed",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "can_configure_build": true,
+        "can_run_full_prototype": true,
+        "device": "/dev/nullb_quasar",
+        "trace_all_lines_usable": true
+      },
+      "name": "dogi_nullblk_target_preflight_ready",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "completed": true,
+        "expected_trace_path": "/home/bigdatalab/skim/PQC_ZNS/artifacts/traces/pqc-mixed-adapted.dogi",
+        "gc_write_gib": 1.70215,
+        "saw_dogi_select": true,
+        "saw_zenfs_mount": true,
+        "trace_path": "/home/bigdatalab/skim/PQC_ZNS/artifacts/traces/pqc-mixed-adapted.dogi",
+        "user_write_gib": 2.5,
+        "waf": 1.6808599999999998,
+        "zenfs_free_mb": 10048.0
+      },
+      "name": "external_dogi_real_nullblk_run_completed",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "completed": true,
+        "gc_write_gib": 1.54492,
+        "placement_name": "DOGI",
+        "saw_dogi_select": true,
+        "saw_zenfs_mount": true,
+        "selection_algorithm": "DogiSelect",
+        "trace_path": "/home/bigdatalab/skim/PQC_ZNS/artifacts/traces/dogi-paper-workloads-quick-pqc2000/exchange-pqc2000-compact.dogi",
+        "user_write_gib": 1.00098,
+        "waf": 2.5434074606885253
+      },
+      "name": "external_dogi_physical_compact_run_completed",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "aggregate_waf": 2.4006662646819312,
+        "avg_waf": 2.3331446463391456,
+        "completed": true,
+        "logical_size_gb": 2,
+        "total_gc_write_gib": 11.477537,
+        "total_user_write_gib": 8.194341,
+        "workloads": 6
+      },
+      "name": "external_dogi_physical_full_compact_suite_completed",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "best_placement": "CostBenefit",
+        "best_waf": 2.803532778684755,
+        "completed_runs": 3,
+        "device": "/dev/nvme0n1",
+        "dogi_waf": 2.992549952156656,
+        "logical_size_gb": 2,
+        "placements": [
+          "CostBenefit",
+          "DOGI",
+          "Greedy"
+        ],
+        "scheduler": "mq-deadline",
+        "total_runs": 3
+      },
+      "name": "external_dogi_physical_dynamic_pressure_suite_completed",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "compact_lba": true,
+        "compact_span_blocks": 77111,
+        "completed": true,
+        "dataw": 295064,
+        "dogi_lines": 1532604,
+        "dogi_tombstones": 674196,
+        "gcdw": 3778,
+        "progress_reports": 6,
+        "recomputed_waf_from_dataw_gcdw": 1.012804001843668,
+        "returncode": 0,
+        "runtime_seconds": 6.0,
+        "total_waf": 1.01,
+        "user_write_gib": 3.5812530517578125
+      },
+      "name": "external_midas_exact_repeat4_compact_completed",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "compact_lba": true,
+        "compact_span_blocks": 77111,
+        "nosep_completed": true,
+        "nosep_ngc": 11467,
+        "nosep_returncode": 0,
+        "nosep_runtime_seconds": 13.244,
+        "nosep_wa": 3.696108,
+        "requests": 1532604,
+        "sepbit_completed": true,
+        "sepbit_ngc": 7382,
+        "sepbit_returncode": 0,
+        "sepbit_runtime_seconds": 14.444,
+        "sepbit_wa": 2.399521,
+        "tombstones": 674196
+      },
+      "name": "external_sepbit_exact_repeat4_compact_completed",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "can_create_without_sudo": false,
+        "configfs_parent_exists": true,
+        "create_command_count": 14,
+        "null_blk_module_available": true
+      },
+      "name": "nullblk_zoned_setup_path_recorded",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "actual-zns/overhead-accounting.png": {
+          "bytes": 64105,
+          "exists": true
+        },
+        "actual-zns/workload-hardness.png": {
+          "bytes": 55961,
+          "exists": true
+        },
+        "actual-zns/ycsb-pressure-waf-stale.png": {
+          "bytes": 100733,
+          "exists": true
+        },
+        "e1-waf.png": {
+          "bytes": 66042,
+          "exists": true
+        },
+        "e2-waf-vs-utilization.png": {
+          "bytes": 85245,
+          "exists": true
+        },
+        "e3-service-cost.png": {
+          "bytes": 69412,
+          "exists": true
+        },
+        "e4-exposure-timeline.png": {
+          "bytes": 98030,
+          "exists": true
+        },
+        "e4-exposure.png": {
+          "bytes": 76360,
+          "exists": true
+        },
+        "e5-bad-hints.png": {
+          "bytes": 104808,
+          "exists": true
+        }
+      },
+      "name": "all_major_figures_exist",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "dogi_mlp_median_ns_per_write": 2397.786,
+        "dogi_traces": 3,
+        "hybrid_median_ns_per_write": 1178.816,
+        "hybrid_traces": 3,
+        "quasar_hint_median_ns_per_write": 16.819,
+        "quasar_traces": 3,
+        "rows": 9
+      },
+      "name": "c_policy_cpu_overhead_measured",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "cases": 5,
+        "estimated_recovery_scan_ms": 1.0047,
+        "metadata_bytes_total": 1364432,
+        "metadata_overhead_percent": 0.05432942793279141,
+        "passed_cases": 5,
+        "unsafe_reset_attempted": false
+      },
+      "name": "crash_recovery_cost_measured",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "best_handles": 128,
+        "family_count": 86,
+        "family_purity": 0.9797956733905692,
+        "intent_purity": 0.9862885232640067,
+        "occupied_handles": 66,
+        "runs": 5
+      },
+      "name": "fdp_mapping_model_generated",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "dogi_gc_blocks": 11256,
+        "dogi_stale_secret_blocks": 38438,
+        "dogi_waf": 1.0300788045438876,
+        "failed_rows": 0,
+        "gc_reduction": 0.9458955223880597,
+        "hybrid_gc_blocks": 609,
+        "hybrid_physical_resets": 80,
+        "hybrid_secret_waiting_end": 0,
+        "hybrid_stale_secret_blocks": 0,
+        "hybrid_waf": 1.0016273980070387,
+        "rows": 24,
+        "total_physical_gib": 24.309326171875
+      },
+      "name": "fast_db_pressure_physical_replay_completed",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "actual_zns_pressure_curve": {
+          "failed_rows": 0,
+          "has_p2000_negative_control": true,
+          "row_count": 9,
+          "semantic_gap_rows": 9,
+          "waf_pressure_rows": 7
+        },
+        "physical": {
+          "ycsb-a-pqc10000": {
+            "dogi_gc_blocks": 3357,
+            "dogi_stale_secret_blocks": 150221,
+            "dogi_waf": 1.0065625238250697,
+            "failed_rows": 0,
+            "hybrid_gc_blocks": 0,
+            "hybrid_physical_resets": 26,
+            "hybrid_stale_secret_blocks": 0,
+            "hybrid_waf": 1.0,
+            "logical_zones": 1024,
+            "ok": true,
+            "pressure_ok": true,
+            "rows": 6,
+            "total_physical_gib": 13.04815673828125
+          },
+          "ycsb-a-pqc4000": {
+            "dogi_gc_blocks": 15316,
+            "dogi_stale_secret_blocks": 46266,
+            "dogi_waf": 1.045357087859368,
+            "failed_rows": 0,
+            "hybrid_gc_blocks": 0,
+            "hybrid_physical_resets": 28,
+            "hybrid_stale_secret_blocks": 0,
+            "hybrid_waf": 1.0,
+            "logical_zones": 560,
+            "ok": true,
+            "pressure_ok": true,
+            "rows": 6,
+            "total_physical_gib": 9.19986343383789
+          },
+          "ycsb-a-pqc6000": {
+            "dogi_gc_blocks": 15308,
+            "dogi_stale_secret_blocks": 76950,
+            "dogi_waf": 1.0375701618108681,
+            "failed_rows": 0,
+            "hybrid_gc_blocks": 0,
+            "hybrid_physical_resets": 28,
+            "hybrid_stale_secret_blocks": 0,
+            "hybrid_waf": 1.0,
+            "logical_zones": 712,
+            "ok": true,
+            "pressure_ok": true,
+            "rows": 6,
+            "total_physical_gib": 10.782684326171875
+          },
+          "ycsb-f-pqc10000": {
+            "dogi_gc_blocks": 13741,
+            "dogi_stale_secret_blocks": 144901,
+            "dogi_waf": 1.027909461309415,
+            "failed_rows": 0,
+            "hybrid_gc_blocks": 0,
+            "hybrid_physical_resets": 26,
+            "hybrid_stale_secret_blocks": 0,
+            "hybrid_waf": 1.0,
+            "logical_zones": 900,
+            "ok": true,
+            "pressure_ok": true,
+            "rows": 6,
+            "total_physical_gib": 12.630523681640625
+          },
+          "ycsb-f-pqc6000": {
+            "dogi_gc_blocks": 4166,
+            "dogi_stale_secret_blocks": 96050,
+            "dogi_waf": 1.0105298543867232,
+            "failed_rows": 0,
+            "hybrid_gc_blocks": 0,
+            "hybrid_physical_resets": 28,
+            "hybrid_stale_secret_blocks": 0,
+            "hybrid_waf": 1.0,
+            "logical_zones": 733,
+            "ok": true,
+            "pressure_ok": true,
+            "rows": 6,
+            "total_physical_gib": 10.318489074707031
+          },
+          "ycsb-f-pqc8000": {
+            "dogi_gc_blocks": 24289,
+            "dogi_stale_secret_blocks": 100847,
+            "dogi_waf": 1.0528106695424917,
+            "failed_rows": 0,
+            "hybrid_gc_blocks": 0,
+            "hybrid_physical_resets": 28,
+            "hybrid_stale_secret_blocks": 0,
+            "hybrid_waf": 1.0,
+            "logical_zones": 733,
+            "ok": true,
+            "pressure_ok": true,
+            "rows": 6,
+            "total_physical_gib": 12.040512084960938
+          }
+        },
+        "physical_waf_pressure_workloads": [
+          "ycsb-a-pqc10000",
+          "ycsb-a-pqc4000",
+          "ycsb-a-pqc6000",
+          "ycsb-f-pqc10000",
+          "ycsb-f-pqc6000",
+          "ycsb-f-pqc8000"
+        ],
+        "sim_workloads": {
+          "ycsb-a-pqc4000": {
+            "dogi_gc_blocks": 15316,
+            "dogi_stale_secret_blocks": 46266,
+            "dogi_waf": 1.045357087859368,
+            "hybrid_gc_blocks": 0,
+            "hybrid_stale_secret_blocks": 0,
+            "hybrid_waf": 1.0
+          },
+          "ycsb-a-pqc8000": {
+            "dogi_gc_blocks": 13462,
+            "dogi_stale_secret_blocks": 110018,
+            "dogi_waf": 1.0282174305830667,
+            "hybrid_gc_blocks": 0,
+            "hybrid_stale_secret_blocks": 0,
+            "hybrid_waf": 1.0
+          },
+          "ycsb-f-pqc4000": {
+            "dogi_gc_blocks": 0,
+            "dogi_stale_secret_blocks": 74274,
+            "dogi_waf": 1.0,
+            "hybrid_gc_blocks": 0,
+            "hybrid_stale_secret_blocks": 0,
+            "hybrid_waf": 1.0
+          },
+          "ycsb-f-pqc8000": {
+            "dogi_gc_blocks": 24289,
+            "dogi_stale_secret_blocks": 100847,
+            "dogi_waf": 1.0528106695424917,
+            "hybrid_gc_blocks": 0,
+            "hybrid_stale_secret_blocks": 0,
+            "hybrid_waf": 1.0
+          }
+        },
+        "waf_pressure_workloads": [
+          "ycsb-a-pqc4000",
+          "ycsb-a-pqc8000",
+          "ycsb-f-pqc8000"
+        ],
+        "ycsb_f_straggler_baselines": {
+          "dogi-history::secret-group": {
+            "failed_rows": 0,
+            "max_live_physical_zones": 8,
+            "ok": true,
+            "physical_resets": 0,
+            "physical_waf": 1.0528106695424917,
+            "secret_waiting_end": 52036,
+            "stale_secret_blocks": 100847
+          },
+          "fifo::secret-group": {
+            "failed_rows": 0,
+            "max_live_physical_zones": 3,
+            "ok": true,
+            "physical_resets": 0,
+            "physical_waf": 1.0758643643055719,
+            "secret_waiting_end": 56832,
+            "stale_secret_blocks": 92959
+          },
+          "midas-style::secret-group": {
+            "failed_rows": 0,
+            "max_live_physical_zones": 5,
+            "ok": true,
+            "physical_resets": 0,
+            "physical_waf": 1.0192814464998565,
+            "secret_waiting_end": 25726,
+            "stale_secret_blocks": 128224
+          },
+          "sepbit-style::secret-group": {
+            "failed_rows": 0,
+            "max_live_physical_zones": 7,
+            "ok": true,
+            "physical_resets": 0,
+            "physical_waf": 1.0364406447993808,
+            "secret_waiting_end": 35292,
+            "stale_secret_blocks": 114520
+          }
+        }
+      },
+      "name": "fast_ycsb_pressure_physical_replay_completed",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "cpu_median_ns_ratio": 0.4916268591108631,
+        "dogi_append_avg_ns": 118838715.38928571,
+        "dogi_semantic_resets": 0,
+        "dogi_throughput_mib_s": 208.09710400551958,
+        "failed_rows": 0,
+        "hybrid_append_avg_ns": 88841471.01076716,
+        "hybrid_semantic_resets": 318,
+        "hybrid_throughput_mib_s": 177.25302639798917,
+        "rows": 84
+      },
+      "name": "actual_zns_overhead_and_policy_cpu_reported",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "candidate_policy": "quasar-adaptive-hybrid",
+        "decision": "keep-current-hybrid",
+        "default_policy": "quasar-dogi-hybrid",
+        "sysbench_adaptive_wins": 0,
+        "sysbench_current_wins": 2,
+        "ycsb_adaptive_wins": 0,
+        "ycsb_current_wins": 4
+      },
+      "name": "adaptive_policy_comparison_keeps_current_hybrid",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "current_physical_resets": 41,
+        "current_reset_secret_tenant_impurity": 0.941918466480374,
+        "current_waf": 1.0000176287042315,
+        "decision": "add-tenant-isolation-mode",
+        "dogi_stale_secret_blocks": 24599,
+        "impurity_reduction": 1.0,
+        "physical_failed_rows": 0,
+        "physical_rows": 7,
+        "simulator": {
+          "multitenant-t032-pqc4000": {
+            "current_families": 44,
+            "current_reset_secret_tenant_impurity": 0.941918466480374,
+            "current_waf": 1.0000176287042315,
+            "ok": true,
+            "tenant_mode_families": 1284,
+            "tenant_mode_reset_secret_tenant_impurity": 0.0,
+            "tenant_mode_waf": 1.002867602554987
+          },
+          "multitenant-t032-pqc8000": {
+            "current_families": 44,
+            "current_reset_secret_tenant_impurity": 0.9418542857513188,
+            "current_waf": 1.0,
+            "ok": true,
+            "tenant_mode_families": 1284,
+            "tenant_mode_reset_secret_tenant_impurity": 0.0,
+            "tenant_mode_waf": 1.0003102177987462
+          }
+        },
+        "tenant_mode_physical_resets": 1281,
+        "tenant_mode_reset_secret_tenant_impurity": 0.0,
+        "tenant_mode_waf": 1.002867602554987
+      },
+      "name": "multitenant_tenant_isolation_mode_verified",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "clean_dogi_stale": 46266,
+        "clean_hybrid_stale": 0,
+        "decision": "add-open-zone-aware-residual-fallback",
+        "device_limits": {
+          "mar": 13,
+          "mor": 13,
+          "numzrwa": 13
+        },
+        "missing_hybrid_stale": 3361,
+        "straggler_epoch_bin_failed_rows": 0,
+        "straggler_epoch_bin_max_zones": 13,
+        "straggler_epoch_bin_stale": 25477,
+        "straggler_nobatch_failed_rows": 1,
+        "straggler_nobatch_max_zones": 15,
+        "straggler_residual_failed_rows": 0,
+        "straggler_residual_max_zones": 13,
+        "straggler_residual_migrated_blocks": 234549,
+        "straggler_residual_waiting_end": 0,
+        "straggler_secret_group_failed_rows": 1,
+        "straggler_secret_group_max_zones": 30,
+        "wrong_hybrid_stale": 0
+      },
+      "name": "physical_hint_robustness_and_open_zone_fallback_verified",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "budget_physical_rows": [
+          {
+            "copy_budget": 50000,
+            "failed_rows": 0,
+            "max_live_physical_zones": 12,
+            "physical_waf": 1.1096309180844703,
+            "residual_migrated_blocks": 44105,
+            "residual_migration_budget_skips": 68,
+            "secret_waiting_end": 70656
+          },
+          {
+            "copy_budget": 100000,
+            "failed_rows": 0,
+            "max_live_physical_zones": 12,
+            "physical_waf": 1.2054965483502744,
+            "residual_migrated_blocks": 88196,
+            "residual_migration_budget_skips": 64,
+            "secret_waiting_end": 68608
+          },
+          {
+            "copy_budget": 200000,
+            "failed_rows": 0,
+            "max_live_physical_zones": 12,
+            "physical_waf": 1.4461096917975758,
+            "residual_migrated_blocks": 198860,
+            "residual_migration_budget_skips": 51,
+            "secret_waiting_end": 43008
+          },
+          {
+            "copy_budget": 400000,
+            "failed_rows": 0,
+            "max_live_physical_zones": 12,
+            "physical_waf": 1.8357906180355492,
+            "residual_migrated_blocks": 378084,
+            "residual_migration_budget_skips": 40,
+            "secret_waiting_end": 39936
+          }
+        ],
+        "budget_rows": [
+          {
+            "copy_budget": 50000,
+            "physical_waf": 1.1096309180844703,
+            "residual_migration_budget_skips": 68,
+            "secret_waiting_end": 70656
+          },
+          {
+            "copy_budget": 100000,
+            "physical_waf": 1.2054965483502744,
+            "residual_migration_budget_skips": 64,
+            "secret_waiting_end": 68608
+          },
+          {
+            "copy_budget": 200000,
+            "physical_waf": 1.4461096917975758,
+            "residual_migration_budget_skips": 51,
+            "secret_waiting_end": 43008
+          },
+          {
+            "copy_budget": 400000,
+            "physical_waf": 1.8357906180355492,
+            "residual_migration_budget_skips": 40,
+            "secret_waiting_end": 39936
+          }
+        ],
+        "controller_ycsb_f": {
+          "balanced": {
+            "copy_budget": null,
+            "failed_rows": 0,
+            "max_active_pack_keys": 12,
+            "max_live_physical_zones": 13,
+            "max_secret_waiting": 67605,
+            "mode": "threshold-only-residual",
+            "packing": "epoch-bin-6",
+            "physical_bytes_written": 2723975168,
+            "physical_gc_blocks": 153107,
+            "physical_reset_commands": 10,
+            "physical_waf": 1.3328955808012175,
+            "recommended_copy_budget": 146790,
+            "residual_migrated_blocks": 146790,
+            "residual_migration_budget_skips": null,
+            "residual_migration_commands": 10,
+            "secret_waiting_end": 31744,
+            "sim_gc_blocks": 6317,
+            "sim_stale_secret_blocks": 72773,
+            "sim_waf": 1.013734818209886,
+            "threshold": 32768,
+            "workload": "ycsb-f-pqc8000"
+          },
+          "low_overhead": {
+            "copy_budget": null,
+            "failed_rows": 0,
+            "max_active_pack_keys": 12,
+            "max_live_physical_zones": 12,
+            "max_secret_waiting": 71722,
+            "mode": "no-residual-copy",
+            "packing": "epoch-bin-5",
+            "physical_bytes_written": 2122723328,
+            "physical_gc_blocks": 6317,
+            "physical_reset_commands": 0,
+            "physical_waf": 1.0137348480730555,
+            "recommended_copy_budget": 0,
+            "residual_migrated_blocks": 0,
+            "residual_migration_budget_skips": null,
+            "residual_migration_commands": 0,
+            "secret_waiting_end": 71722,
+            "sim_gc_blocks": 6317,
+            "sim_stale_secret_blocks": 72773,
+            "sim_waf": 1.013734818209886,
+            "threshold": 4096,
+            "workload": "ycsb-f-pqc8000"
+          },
+          "strict_zero_wait": {
+            "copy_budget": null,
+            "failed_rows": 0,
+            "max_active_pack_keys": 12,
+            "max_live_physical_zones": 13,
+            "max_secret_waiting": 44544,
+            "mode": "strict-zero-wait",
+            "packing": "epoch-bin-5",
+            "physical_bytes_written": 6907240448,
+            "physical_gc_blocks": 1174412,
+            "physical_reset_commands": 49,
+            "physical_waf": 3.553485894439311,
+            "recommended_copy_budget": null,
+            "residual_migrated_blocks": 1168095,
+            "residual_migration_budget_skips": null,
+            "residual_migration_commands": 49,
+            "secret_waiting_end": 0,
+            "sim_gc_blocks": 6317,
+            "sim_stale_secret_blocks": 72773,
+            "sim_waf": 1.013734818209886,
+            "threshold": 32768,
+            "workload": "ycsb-f-pqc8000"
+          }
+        },
+        "decision": "use-residual-fallback-as-strict-exposure-mode",
+        "dryrun_rows": 48,
+        "physical_workloads": {
+          "exchange-pqc2000": {
+            "failed_rows": 0,
+            "max_live_physical_zones": 10,
+            "physical_waf": 1.0182406941323605,
+            "secret_waiting_end": 0
+          },
+          "sysbench-oltp-pqc4000": {
+            "failed_rows": 0,
+            "max_live_physical_zones": 13,
+            "physical_waf": 1.216127268158819,
+            "secret_waiting_end": 0
+          },
+          "ycsb-a-pqc4000": {
+            "failed_rows": 0,
+            "max_live_physical_zones": 13,
+            "physical_waf": 1.7098490861062083,
+            "secret_waiting_end": 0
+          }
+        },
+        "ycsb_f_best_zero_wait": {
+          "packing": "epoch-bin-5",
+          "physical_waf": 3.553485894439311,
+          "residual_migrated_blocks": 1168095,
+          "threshold": 32768
+        },
+        "ycsb_f_controller_physical": {
+          "balanced": {
+            "failed_rows": 0,
+            "max_live_physical_zones": 13,
+            "physical_waf": 1.3328955808012175,
+            "residual_migrated_blocks": 146790,
+            "secret_waiting_end": 31744
+          },
+          "low_overhead": {
+            "failed_rows": 0,
+            "max_live_physical_zones": 12,
+            "physical_waf": 1.0137348480730555,
+            "residual_migrated_blocks": 0,
+            "secret_waiting_end": 71722
+          },
+          "strict_zero_wait": {
+            "failed_rows": 0,
+            "max_live_physical_zones": 13,
+            "physical_waf": 3.553485894439311,
+            "residual_migrated_blocks": 1168095,
+            "secret_waiting_end": 0
+          }
+        }
+      },
+      "name": "residual_fallback_sweep_defines_strict_mode_frontier",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "block_erase": true,
+        "claim_boundary": "QUASAR proves reset eligibility and stale-secret exposure reduction, and this device's NVMe crypto-erase sanitize command path has been executed and validated. Zone reset alone is still not a physical erase proof; a strong physical erase claim requires explicitly issuing sanitize or equivalent hardware crypto-erase semantics at the epoch boundary.",
+        "crypto_erase": true,
+        "crypto_erase_executed": true,
+        "device_model": "WZS4C8T1TDSP303",
+        "overwrite": false,
+        "sanicap_hex": "0x60000003",
+        "sanitize_execution_validated": true,
+        "sanitize_log_status": "(1) Most Recent Sanitize Command Completed Successfully.",
+        "sanitize_supported": true
+      },
+      "name": "physical_security_capability_and_erase_claim_boundary_recorded",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "by_status": {
+          "qualified": 1,
+          "supported": 10
+        },
+        "claim_count": 11
+      },
+      "name": "claim_matrix_maps_supported_qualified_and_boundary_claims",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "by_tier": {
+          "claim-gate": {
+            "passed": 1,
+            "total": 1
+          },
+          "fairness": {
+            "passed": 1,
+            "total": 1
+          },
+          "hostile-robustness": {
+            "passed": 3,
+            "total": 3
+          },
+          "negative-control": {
+            "passed": 2,
+            "total": 2
+          },
+          "pressure": {
+            "passed": 2,
+            "total": 2
+          }
+        },
+        "claim_gate_evidence": {
+          "db_pressure_eligible": true,
+          "dynamic_baseline_complete_rows": 3,
+          "eligible_dynamic_examples": [
+            {
+              "dogi_gc_blocks": 43006,
+              "dogi_waf": 1.0716089961652904,
+              "gc_reduction": 0.9994884434730038,
+              "hybrid_gc_blocks": 22,
+              "hybrid_waf": 1.00003663204938,
+              "path": "artifacts/results/fast-dynamic-pressure/packed-physical-zonefs-exchange-pqc8000-z768-helper.json",
+              "policies_present": [
+                "dogi-history",
+                "fifo",
+                "midas-style",
+                "quasar",
+                "quasar-dogi-hybrid",
+                "sepbit-style"
+              ],
+              "stale_secret_reduction_blocks": 75422
+            },
+            {
+              "dogi_gc_blocks": 43227,
+              "dogi_waf": 1.0727331770771114,
+              "gc_reduction": 0.9959516043213732,
+              "hybrid_gc_blocks": 175,
+              "hybrid_waf": 1.0002944526797717,
+              "path": "artifacts/results/fast-dynamic-pressure/packed-physical-zonefs-varmail-pqc8000-z768-helper.json",
+              "policies_present": [
+                "dogi-history",
+                "fifo",
+                "midas-style",
+                "quasar",
+                "quasar-dogi-hybrid",
+                "sepbit-style"
+              ],
+              "stale_secret_reduction_blocks": 79600
+            },
+            {
+              "dogi_gc_blocks": 65010,
+              "dogi_waf": 1.0974490270087152,
+              "gc_reduction": 0.9232118135671435,
+              "hybrid_gc_blocks": 4992,
+              "hybrid_waf": 1.0074829340536458,
+              "path": "artifacts/results/fast-dynamic-pressure/packed-physical-zonefs-alibaba-pqc8000-z768-helper.json",
+              "policies_present": [
+                "dogi-history",
+                "fifo",
+                "midas-style",
+                "quasar",
+                "quasar-dogi-hybrid",
+                "sepbit-style"
+              ],
+              "stale_secret_reduction_blocks": 65184
+            }
+          ],
+          "eligible_dynamic_rows": 3,
+          "eligible_ycsb_examples": [
+            {
+              "baselines_present": [
+                "dogi-history",
+                "fifo",
+                "midas-style",
+                "sepbit-style"
+              ],
+              "dogi_gc_blocks": 15316,
+              "dogi_stale_secret_blocks": 46266,
+              "hybrid_gc_blocks": 0,
+              "hybrid_stale_secret_blocks": 0,
+              "pqc_level": 4000,
+              "workloads": [
+                "ycsb-a-pqc4000"
+              ]
+            },
+            {
+              "baselines_present": [
+                "dogi-history",
+                "fifo",
+                "midas-style",
+                "sepbit-style"
+              ],
+              "dogi_gc_blocks": 15308,
+              "dogi_stale_secret_blocks": 76950,
+              "hybrid_gc_blocks": 0,
+              "hybrid_stale_secret_blocks": 0,
+              "pqc_level": 6000,
+              "workloads": [
+                "ycsb-a-pqc6000"
+              ]
+            },
+            {
+              "baselines_present": [
+                "dogi-history",
+                "fifo",
+                "midas-style",
+                "sepbit-style"
+              ],
+              "dogi_gc_blocks": 4166,
+              "dogi_stale_secret_blocks": 96050,
+              "hybrid_gc_blocks": 0,
+              "hybrid_stale_secret_blocks": 0,
+              "pqc_level": 6000,
+              "workloads": [
+                "ycsb-f-pqc6000"
+              ]
+            }
+          ],
+          "eligible_ycsb_pressure_rows": 7,
+          "minimum_rule": ">=3 YCSB pressure rows with all history baselines, DB pressure eligible, >=2 dynamic pressure rows with all policies",
+          "required_all_policies": [
+            "dogi-history",
+            "fifo",
+            "midas-style",
+            "quasar",
+            "quasar-dogi-hybrid",
+            "sepbit-style"
+          ],
+          "required_history_baselines": [
+            "dogi-history",
+            "fifo",
+            "midas-style",
+            "sepbit-style"
+          ],
+          "ycsb_baseline_complete_rows": 9
+        },
+        "claim_gate_passed": true,
+        "failed_entries": [],
+        "observed_tiers": [
+          "claim-gate",
+          "fairness",
+          "hostile-robustness",
+          "negative-control",
+          "pressure"
+        ],
+        "passed_entries": 9,
+        "total_entries": 9
+      },
+      "name": "workload_hardness_matrix_separates_negative_pressure_and_hostile_cases",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "default_policy": "quasar-dogi-hybrid",
+        "failed_modes": [],
+        "hardness_passed": true,
+        "mode_names": [
+          "default",
+          "fallback-overflow",
+          "strict-residual",
+          "tenant-isolation"
+        ],
+        "passed_modes": 4,
+        "total_modes": 4
+      },
+      "name": "deployment_policy_selector_defines_default_tenant_residual_and_fallback_modes",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "artifact_count": 37,
+        "command_count": 10,
+        "missing_or_empty": [],
+        "missing_required": []
+      },
+      "name": "reproducibility_manifest_covers_actual_zns_baselines_claims_and_commands",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "artifact_count": 37,
+        "mismatch_count": 0,
+        "mismatches": []
+      },
+      "name": "reproducibility_manifest_hashes_match_current_artifacts",
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "passed_gates": 41,
+  "total_gates": 41
+}

@@ -1,0 +1,23 @@
+\section{Implementation}
+
+\subsection{Trace and Replay Infrastructure}
+
+We implemented \system as a trace-driven allocator and actual-\zns replay framework.  The trace format records writes, expirations, object identifiers, sizes, LBA-like payload location, intent, epoch, security class, tenant, and confidence.  The same trace is replayed through FIFO, \sepbit-style, \midas-style, \dogi-style, \system, and \system-\dogi hybrid policies.  This keeps timing and object lifetimes identical across policies.
+
+The deployment hook is intentionally small: a TLS terminator, KMS, or logging component emits the 32-byte \texttt{quasar\_hint} when it writes a KEM artifact, ephemeral secret, certificate record, or signature log.  The hint can travel as request context in user-space replay or as file/extent metadata in a filesystem path; it does not carry key material.
+
+The workload generators produce three classes of traces.  First, DOGI-paper-shaped traces mirror the workload axes described by DOGI: FIO Zipf, YCSB-A, YCSB-F, Varmail, Alibaba, and Exchange.  Second, pressure traces increase PQC density and reduce free-zone slack to force GC.  Third, hostile traces introduce missing hints, wrong epochs, tenant pressure, and stragglers.  The implementation also includes a real FIO iolog converter that maps benchmark-issued FIO writes into the same QUASAR JSONL schema before adding PQC lifecycle side writes.  We additionally ran a Sysbench/MySQL execution gate.  Full YCSB/JDBC or Sysbench block traces would strengthen external validity, but the scoped claim uses the DOGI/FAST-shaped physical pressure suites and exact external baseline runs as the paper-grade placement evidence.
+
+\subsection{Baseline Implementations}
+
+The same-path comparison implements FIFO, \sepbit-style, \midas-style, and \dogi-style policies in the replay framework.  These implementations are intentionally described as style-compatible baselines because they share the same physical packed-\zns path as \system.  The artifact set also contains exact public DOGI/MiDAS/SepBIT runs in their native environments.  We keep these exact runs separate from the same-path results because their units and internal segment models are not identical to the packed replay path.
+
+\subsection{Physical ZNS Path}
+
+The actual-\zns experiments use a Western Digital ZN540-class \zns NVMe SSD mounted with \texttt{zonefs}.  The replay writes zone files sequentially and issues reset-like truncation or helper operations according to the policy plan.  This path measures full-suite append/reset accounting, but it includes zonefs helper overhead.  We therefore report it as actual-\zns replay overhead, not as final production p99 latency.
+
+To check the lower-overhead command path, we also implemented an xNVMe raw \zns latency probe.  The local xNVMe backend uses Linux NVMe ioctl synchronous commands.  It bypasses the zonefs helper path and completes 4,096 4KiB appends with p99 append latency of 26,064 ns.  This is not an SPDK poll-mode result, but it bounds the helper-path caveat.
+
+\subsection{Security Capability Check}
+
+The physical device reports sanitize capability with crypto-erase and block-erase support.  We executed an NVMe crypto-erase sanitize command on the device and observed successful completion in the sanitize log.  This validates the command path for hardware crypto-erase.  The evaluation keeps this separate from zone reset: \system makes secret-bearing zones eligible for reset and, when configured, for explicit sanitize or crypto-erase commands.

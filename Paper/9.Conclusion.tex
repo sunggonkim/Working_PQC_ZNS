@@ -1,0 +1,3 @@
+\section{Conclusion}
+
+Post-quantum services write secrets, KEM artifacts, signatures, and payload together, but these objects die for different protocol reasons.  \system exposes that lifecycle signal as a small \zns placement hint, keeps \dogi-style history placement for payload, and packs short-lived secrets by death cohort.  Actual-\zns experiments support the scoped claim: \system removes stale-secret exposure across PQC overlays and reduces GC/WAF when pressure makes mixed cohorts expensive.
