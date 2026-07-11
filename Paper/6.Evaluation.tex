@@ -44,13 +44,6 @@ On the mixed sanity trace, \dogi-style placement has WAF 1.791 and 484,967 GC bl
 \label{fig:epoch-upper-bound}
 \end{figure*}
 
-\begin{figure*}[t]
-\centering
-\includegraphics[width=0.82\textwidth]{../artifacts/figures/actual-zns/workload-hardness.png}
-\caption{Workload hardness guardrail.  The evaluation separates DOGI-favorable controls, negative WAF controls, pressure workloads, claim-gate rows, and QUASAR-hostile robustness cases.  This prevents clean PQC-only traces or easy YCSB rows from becoming the headline WAF evidence.}
-\label{fig:workload-hardness}
-\end{figure*}
-
 \subsection{DOGI-Favorable Control}
 
 The non-PQC control verifies that the hybrid preserves history placement.  On the six DOGI-style axes with no PQC side writes, \dogi-style placement and the \system-\dogi hybrid produce the same WAF because payload stays on the history policy.  \dogi-style placement beats FIFO and pure \system on all six workloads, and no stale secret blocks exist.  This keeps the claim boundary clear: \system is not a replacement for learned placement when no cryptographic death-cohort signal exists.
@@ -84,13 +77,6 @@ The WAF gain here is deliberately modest: 0.1\% relative to \dogi-style.  The ro
 
 YCSB pressure creates the WAF/GC separation missing from easy p2000 rows.  Table~\ref{tab:ycsb} reports representative physical \zns replays.  \dogi-style placement pays 3,357--24,289 GC blocks and leaves 46,266--150,221 stale secret blocks.  The hybrid removes stale secret blocks in all rows and reduces GC to zero in these representative replays.
 
-\begin{figure*}[t]
-\centering
-\includegraphics[width=0.78\textwidth]{../artifacts/figures/actual-zns/ycsb-pressure-waf-stale.png}
-\caption{YCSB pressure curve on actual \zns.  The p2000 row is a negative control; p4000 through p10000 show where pressure creates GC/WAF separation.  Across all rows, the stale-secret gap remains visible.}
-\label{fig:ycsb-pressure}
-\end{figure*}
-
 \begin{table*}[t]
 \centering
 \caption{Representative actual-\zns YCSB pressure replays.  These traces keep YCSB update locality while adding PQC lifecycle side writes, showing where pressure turns the semantic gap into measurable GC/WAF cost.}
@@ -120,6 +106,13 @@ To check that the pressure result is not a single-seed artifact, we run a three-
 
 Table~\ref{tab:pressure} reports the harder Sysbench and dynamic service rows.  Sysbench is not a DOGI-paper workload; it is included as FAST-style DB pressure.  The hybrid reduces \dogi-style GC from 11,256 to 609 blocks and removes 38,438 stale secret blocks.  On Exchange-, Varmail-, and Alibaba-like dynamic traces, the hybrid reduces GC by 92.3--99.9\% and keeps stale secrets at zero.
 
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.88\textwidth]{../artifacts/figures/fast-style/fig2-pressure-breadth.pdf}
+\caption{FAST-style pressure breadth.  Sysbench, Exchange, Varmail, and Alibaba-like rows keep storage-visible locality while adding PQC lifecycle objects.  History-based policies can still group payload, but they do not make expired secret cohorts reset-eligible; \system-\dogi cuts GC and stale-secret exposure on the same pressure axes.}
+\label{fig:pressure-breadth}
+\end{figure*}
+
 \begin{table*}[t]
 \centering
 \caption{FAST-style DB and dynamic-service pressure.  Dynamic rows use DOGI-style workload families with high PQC overlays and tight logical-zone pressure; the hybrid preserves zero stale secrets while cutting GC.}
@@ -141,14 +134,14 @@ These rows are the strongest performance evidence because all non-QUASAR baselin
 
 \subsection{Component Ablation}
 
-Table~\ref{tab:ablation} turns the upper-bound requirements into mechanism evidence.  History-only placement is the right first row because it gives \dogi-style placement all storage-visible signals but no protocol lifetime.  Adding lifecycle hints removes stale secrets, but pure semantic grouping can still leave GC cost on DB-like payload.  Adding the \dogi payload fallback removes that remaining cost.  Admission and residual migration are not free performance wins; they are boundary mechanisms for open-zone pressure and stragglers.  Figure~\ref{fig:space-sensitivity} visualizes the space tradeoff: tight-budget hybrids lower WAF and stale secrets without relying on empty zones.
+Table~\ref{tab:ablation} turns the upper-bound requirements into mechanism evidence.  History-only placement is the right first row because it gives \dogi-style placement all storage-visible signals but no protocol lifetime.  Adding lifecycle hints removes stale secrets, but pure semantic grouping can still leave GC cost on DB-like payload.  Adding the \dogi payload fallback removes that remaining cost.  Admission and residual migration are not free performance wins; they are boundary mechanisms for open-zone pressure and stragglers.  Figure~\ref{fig:component-ablation} shows the mechanism split visually, and Figure~\ref{fig:resource-overhead} visualizes the space and overhead controls.
 
-\begin{figure}[t]
+\begin{figure*}[t]
 \centering
-\includegraphics[width=\columnwidth]{../artifacts/figures/actual-zns/space-sensitivity.png}
-\caption{WAF vs. utilization sensitivity on Exchange p2000.  \system-\dogi candidates keep stale secrets at zero with closed-zone fill 0.936--0.961, while the \dogi-style point keeps higher fill but leaves 3,748 stale secret blocks.}
-\label{fig:space-sensitivity}
-\end{figure}
+\includegraphics[width=0.88\textwidth]{../artifacts/figures/fast-style/fig3-component-ablation.pdf}
+\caption{Component ablation.  A history-only \dogi-style policy sees storage history but misses death cohorts, so GC and stale-secret exposure remain.  Lifecycle hints remove exposure; adding \dogi-style payload fallback recovers payload placement and removes the remaining GC in the default hybrid.}
+\label{fig:component-ablation}
+\end{figure*}
 
 \begin{table*}[t]
 \centering
@@ -178,11 +171,25 @@ The main tables use same-path replay so FIFO, \sepbit-style, \midas-style, \dogi
 
 The xNVMe probe provides a lower-overhead command-path sanity check: 4,096 4KiB zone appends complete with p99 latency of 26,064 ns and throughput of 181.79 MiB/s.  The probe is a Linux NVMe ioctl path, not SPDK poll-mode, so it is reported as a bound rather than a final production datapoint.
 
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.88\textwidth]{../artifacts/figures/fast-style/fig4-resource-overhead.pdf}
+\caption{Resource and overhead controls.  \system-\dogi bounds the closed-zone fill cost while removing stale secrets, the hint-routing decision path is orders of magnitude cheaper than the \dogi-style policy-decision microbenchmark, and xNVMe confirms a lower-overhead append command path than the zonefs helper used for full-suite replay accounting.}
+\label{fig:resource-overhead}
+\end{figure*}
+
 \subsection{Robustness to Bad Hints and Stragglers}
 
 The hardest \system cases are not clean epochs; they are wrong or missing hints, many tenants, and delayed-expiry stragglers.  On YCSB-A p4000, the clean hybrid has WAF 1.0000, zero stale secrets, and 28 semantic resets.  With 5\% missing hints, WAF remains 1.0000 but 3,361 stale secret blocks appear because some secret writes fall back to nonsemantic placement.  With 5\% wrong epochs, this trace still ends with zero stale secrets but increases reset activity to 112 resets.  With 5\% stragglers, exact secret-group packing can exceed the device open-zone budget; epoch-bin fallback completes within the budget but leaves waiting secrets, while epoch-bin plus residual migration reaches zero waiting at WAF 1.7098 after copying 234,549 residual blocks.
 
 The residual fallback frontier shows why strict exposure mode cannot be the default.  Exchange-like and Sysbench-like representatives can reach zero final secret waiting with physical WAF 1.0182 and 1.2161, respectively.  YCSB-F p8000 reaches strict zero waiting only at physical WAF 3.5535 after migrating 1,168,095 residual blocks.  \system therefore exposes low-overhead, balanced, and strict-zero-wait profiles rather than hiding this tradeoff behind a single policy.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.88\textwidth]{../artifacts/figures/fast-style/fig6-robustness.pdf}
+\caption{Robustness frontier.  Exact and binned placement can leave straggler secrets waiting under tight active-zone budgets.  Residual migration removes the exposure but increases physical WAF and copied blocks; strict zero-wait mode is therefore a policy point, not the default.}
+\label{fig:robustness}
+\end{figure*}
 
 \subsection{Security Boundary}
 

@@ -247,7 +247,7 @@ git diff --check -- plan.md Paper/6.Evaluation.tex Paper/FAST_READINESS_AUDIT.md
 | Does it pass the `HowToWritePaper.md` final audit? | Yes for the scoped claim; figure labels/captions have been visually checked, Evaluation prose was compressed, and WAF-vs-utilization now visualizes the space tradeoff. | `LINE_BY_LINE_FAST_AUDIT.md` final audit matrix | whole paper | closed |
 | Is the abstract compact? | Yes. It now follows a four-sentence problem/gap/approach/result shape. | `0.Main.tex` | Abstract | closed |
 | Are captions reviewer-readable? | Main captions now state the lesson, not only the content. | Introduction/Design/Evaluation captions | figures/tables | improved |
-| Is Evaluation too table-heavy? | The exact numbers remain in tables for auditability, but the final WAF-vs-utilization figure now gives reviewers a visual path through the space-amplification tradeoff. | `FAST_READINESS_AUDIT.md`, Figure `fig:space-sensitivity` | packaging | closed |
+| Is Evaluation too table-heavy? | The exact numbers remain in tables for auditability, but the FAST-style figure path now includes pressure breadth, component ablation, resource/overhead controls, and robustness. | `FAST_READINESS_AUDIT.md`, Figures `fig:pressure-breadth`, `fig:component-ablation`, `fig:resource-overhead`, `fig:robustness` | packaging | closed |
 | Is prose too defensive? | A final compression pass cut Evaluation from 2,757 to 2,447 words while preserving numbers, caveats, and claim boundaries. | `Paper/6.Evaluation.tex` | final polish | closed |
 
 Polish target:
@@ -314,6 +314,31 @@ These are valuable but not blockers for the scoped claim.
 | Repeated physical pressure runs | Stronger run-to-run stability beyond the three-seed simulator sweep | optional strengthening |
 | Final WAF-vs-utilization figure | Replace some tables with easier visual reviewer path; current figure-label polish is already done | done |
 | Per-epoch sanitize scheduling benchmark | Stronger secure erase SLO story | only needed for stronger erase claim |
+
+### 5.3 FAST Figure Rewrite Checkpoints
+
+The previous paper draft was too table-heavy and the graph story did not match
+DOGI/FAST paper style.  The paper must now carry the result through figures in
+the same role order used by the previous papers: failure, breadth, mechanism,
+sensitivity, overhead, and robustness.
+
+| Checkpoint | Required Figure | What It Must Prove | Status |
+| --- | --- | --- | --- |
+| First evidence, not a weak WAF plot | `fig1-intro-pressure` | DOGI-style placement leaves GC/stale-secret pressure; QUASAR-DOGI removes secret exposure on actual-ZNS YCSB pressure. | regenerated and wired into Introduction |
+| Workload breadth | `fig2-pressure-breadth` | Sysbench, Exchange, Varmail, and Alibaba-like pressure rows show the same gap across DOGI/MiDAS/SepBIT/QUASAR-DOGI. | regenerated and wired into Evaluation |
+| Mechanism ablation | `fig3-component-ablation` | History-only fails on death cohorts; lifecycle hints remove exposure; DOGI payload fallback removes remaining payload GC. | regenerated and wired into Evaluation |
+| Space-amplification defense | `fig4-resource-overhead`, panel 1 | Low WAF is not bought only by empty zones; show WAF vs closed-zone fill and the DOGI-style stale-secret point. | regenerated and wired into Evaluation |
+| Overhead | `fig4-resource-overhead`, panels 2--3 | Hint routing is cheap relative to DOGI-style policy-decision cost, while xNVMe provides a lower-overhead append-path bound. | regenerated and wired into Evaluation |
+| Hostile robustness | `fig6-robustness` | Stragglers and strict zero-wait security have visible WAF/copy costs; QUASAR must not hide them. | regenerated and wired into Evaluation |
+| Audit language | `LINE_BY_LINE_FAST_AUDIT.md` | No more premature `18/18` or "submission-grade" victory language; keep reviewer risks visible. | rewritten as checkpoint audit |
+
+Before claiming the graph story is done again:
+
+1. Rebuild `Paper/0.Main.pdf`.
+2. Render the PDF pages to images.
+3. Visually inspect every inserted figure for clipped titles, overlapping labels, and weak captions.
+4. Check that the first page or first evidence spread exposes the gap without relying on a tiny WAF delta.
+5. Keep tables as audit evidence, but make figures carry the reviewer story.
 
 ## 6. Metric Interpretation Rules
 
