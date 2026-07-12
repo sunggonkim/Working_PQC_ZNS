@@ -1067,6 +1067,49 @@ def plot_prototype_overhead_column(
     save(fig, out_dir / "fig7-prototype-column.pdf")
 
 
+def plot_fdp_handle_pressure(fdp: dict[str, Any], out: Path) -> None:
+    runs = sorted(fdp.get("runs", []), key=lambda row: row.get("handles", 0))
+    if not runs:
+        raise ValueError("fdp mapping payload has no runs")
+
+    handles = [run["handles"] for run in runs]
+    family_purity = [run["family_purity"] for run in runs]
+    intent_purity = [run["intent_purity"] for run in runs]
+    avg_families = [run["avg_families_per_occupied_handle"] for run in runs]
+
+    fig, ax = plt.subplots(figsize=(3.35, 1.65))
+    ax.plot(handles, family_purity, marker="o", color="#4C78A8", label="Family purity")
+    ax.plot(handles, intent_purity, marker="s", color="#54A24B", label="Intent purity")
+    ax.set_xscale("log", base=2)
+    ax.set_xticks(handles)
+    ax.set_xticklabels([str(handle) for handle in handles])
+    ax.set_ylim(0.84, 1.005)
+    ax.set_xlabel("FDP placement handles", fontsize=6.5)
+    ax.set_ylabel("Purity", fontsize=6.5)
+    ax.tick_params(labelsize=5.8)
+    ax.grid(axis="y", alpha=0.25)
+
+    ax2 = ax.twinx()
+    ax2.plot(handles, avg_families, marker="^", color="#F58518", linestyle="--", label="Families/handle")
+    ax2.set_ylabel("Avg families/handle", fontsize=6.5)
+    ax2.tick_params(labelsize=5.8)
+    ax2.set_ylim(0, max(avg_families) * 1.25)
+
+    handles1, labels1 = ax.get_legend_handles_labels()
+    handles2, labels2 = ax2.get_legend_handles_labels()
+    fig.legend(
+        handles1 + handles2,
+        labels1 + labels2,
+        loc="upper center",
+        ncol=3,
+        frameon=False,
+        fontsize=5.2,
+        bbox_to_anchor=(0.5, 1.04),
+    )
+    fig._tight_layout_rect = (0, 0, 1, 0.86)
+    save(fig, out)
+
+
 def plot_space_sensitivity(rows: list[dict[str, Any]], out: Path) -> None:
     dogi = next(row for row in rows if row.get("policy") == "dogi-history" and not row.get("failed"))
     hybrids = [row for row in rows if row.get("policy") == "quasar-dogi-hybrid" and not row.get("failed")]
@@ -1403,6 +1446,7 @@ def main() -> int:
     parser.add_argument("--physical-robustness", type=Path, default=Path("artifacts/results/physical-robustness-ycsb-a-pqc4000/summary.json"))
     parser.add_argument("--xnvme", type=Path, default=Path("artifacts/results/xnvme-zns-latency/summary.json"))
     parser.add_argument("--ratio", type=Path, default=Path("artifacts/results/dogi-paper-ratio-sweep-50k/summary.json"))
+    parser.add_argument("--fdp", type=Path, default=Path("artifacts/results/pqc-mixed-fdp-mapping.json"))
     args = parser.parse_args()
 
     plot_intro_failure(load_json(args.ycsb), args.out_dir / "fig1-intro-pressure.pdf")
@@ -1418,6 +1462,7 @@ def main() -> int:
     plot_component_ablation_subfigs(load_json(args.ablation), args.out_dir)
     plot_open_zone_robustness_subfigs(load_json(args.physical_robustness), args.out_dir)
     plot_open_zone_robustness_column(load_json(args.physical_robustness), args.out_dir)
+    plot_fdp_handle_pressure(load_json(args.fdp), args.out_dir / "fig8-fdp-handle-pressure.pdf")
     plot_prototype_overhead_subfigs(load_json(args.overhead), load_json(args.policy_overhead), args.out_dir)
     plot_prototype_overhead_column(load_json(args.overhead), load_json(args.policy_overhead), args.out_dir)
     return 0

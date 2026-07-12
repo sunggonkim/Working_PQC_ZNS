@@ -441,7 +441,7 @@ The pasted FAST-style review is now consolidated into reviewer-facing checkpoint
 
 | Review Attack | Concrete Checkpoint | Paper Action | Status |
 | --- | --- | --- | --- |
-| "Why ZNS only? FDP can carry lifetime hints." | Explain QUASAR as a lifecycle-placement policy that can target native ZNS first and FDP later. | Add Background/Discussion text mapping `intent`, `epoch_id`, `cohort_id`, and `security_class` to FDP placement/RUH-style handles, with ZNS retained as the measured substrate because it exposes reset and migration accounting. | reflected |
+| "Why ZNS only? FDP can carry lifetime hints." | Explain QUASAR as a lifecycle-placement policy that can target native ZNS first and FDP later. | Background/Discussion map `intent`, `epoch_id`, `cohort_id`, and `security_class` to FDP handles; Evaluation now includes a trace-driven FDP handle-pressure model over 8--128 handles. | reflected + modeled |
 | "ZoneFS is not production SPDK latency." | Separate actual-ZNS replay accounting, xNVMe command-path sanity, and future SPDK poll-mode work. | Keep zonefs helper path caveat in Implementation/Evaluation/Discussion; state xNVMe is a lower-overhead bound, not full SPDK. | reflected with caveat |
 | "Zone reset is not NIST-grade physical erase." | Do not equate reset with NAND sanitization. | Cite NIST SP 800-88 Rev. 2 and NVMe sanitize; define default claim as reset eligibility and stale-exposure reduction. Strong physical erase requires sanitize/crypto-erase support and deployment scheduling. | reflected |
 | "Why would PQC secrets hit SSD at all?" | Scope threat model to deployments that already persist bounded PQC lifecycle state. | Background/Introduction now name KMS envelopes, key-wrap records, audit/compliance logs, crash-recovery/session-derived state, and constrained spill paths. The paper does not require every TLS session key to be synchronously persisted. | reflected |
@@ -457,7 +457,8 @@ These are the remaining experiments that would move the paper from credible to m
 
 - [ ] **SPDK or true xNVMe async replay**: repeat representative pressure rows with a poll-mode or async kernel-bypass path and report p99 append/reset latency.
 - [ ] **Real DB block traces**: capture MySQL/Sysbench or RocksDB/YCSB block traces with PQC side writes instead of only using execution gates plus generated DOGI-shaped carriers.
-- [ ] **FDP prototype or emulator path**: map QUASAR families to FDP placement handles and compare the same trace under handle-count pressure.
+- [x] **FDP trace-driven handle model**: map QUASAR families to FDP placement handles and compare the same trace under handle-count pressure. Artifact: `artifacts/results/pqc-mixed-fdp-mapping.json`; figure: `artifacts/figures/fast-style/fig8-fdp-handle-pressure.pdf`.
+- [ ] **Physical FDP device or emulator replay**: run the same handle policy on real FDP hardware or a faithful FDP emulator. This remains open; the current result is not a physical FDP measurement.
 - [ ] **Device-diversity run**: repeat reset/append/security-capability checks on at least one additional ZNS or FDP-capable device.
 - [ ] **Sanitize scheduling benchmark**: only if the paper wants a stronger physical-erasure claim, measure the service impact of batching sanitize/crypto-erase at epoch boundaries.
 

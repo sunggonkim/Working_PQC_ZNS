@@ -1,0 +1,54 @@
+{
+  "can_configure_build": true,
+  "can_run_full_prototype": true,
+  "device": "/dev/nvme0n1",
+  "dogi_repo": "artifacts/external/DOGI",
+  "notes": [
+    "This preflight does not edit DOGI global.cc or reset devices.",
+    "Full DOGI execution still requires configured RocksDB/ZenFS and a real or emulated ZNS target.",
+    "can_run_full_prototype is false unless --device points to an existing target."
+  ],
+  "nvme_list": {
+    "available": true,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "Node                  Generic               SN                   Model                                    Namespace  Usage                      Format           FW Rev  \n--------------------- --------------------- -------------------- ---------------------------------------- ---------- -------------------------- ---------------- --------\n/dev/nvme0n1          /dev/ng0n1            21113Q900190         WZS4C8T1TDSP303                          0x1          1.13  GB /   1.94  TB      4 KiB +  0 B   R6Z10009\n/dev/nvme1n1          /dev/ng1n1            S6EZNC0TA00691       SAMSUNG MZWLR1T9HBJR-00007               0x1          1.92  TB /   1.92  TB      4 KiB +  0 B   MPK90B5Q\n"
+  },
+  "repo": {
+    "exists": true,
+    "has_logical_size_gb": true,
+    "has_wk_name": true,
+    "has_zns_device_path": true,
+    "parser_filters_type_1": true,
+    "parser_matches_adapter": true,
+    "parser_uses_lba_4k": true,
+    "parser_uses_length_bytes": true,
+    "required_files": {
+      "prototype/CMakeLists.txt": true,
+      "prototype/app/CMakeLists.txt": true,
+      "prototype/app/global.cc": true,
+      "prototype/app/main.cc": true
+    }
+  },
+  "tools": {
+    "cmake": "/usr/bin/cmake",
+    "make": "/usr/bin/make",
+    "nvme": "/usr/local/sbin/nvme",
+    "python3": "/usr/bin/python3",
+    "zbd": "/usr/bin/zbd"
+  },
+  "trace": {
+    "all_lines_usable": true,
+    "exists": true,
+    "lines": 1038786,
+    "max_lba": 10895998,
+    "max_length_bytes": 32768,
+    "valid_dogi_lines": 1038786
+  },
+  "zbd_probe": {
+    "available": true,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "Zone 00000: swr, ofst 00000000000000, len 00002147483648, cap 00001129316352, wp 00002147483648, fu, non_seq 0, reset 0\nZone 00001: swr, ofst 00002147483648, len 00002147483648, cap 00001129316352, wp 00002147483648, em, non_seq 0, reset 0\nZone 00002: swr, ofst 00004294967296, len 00002147483648, cap 00001129316352, wp 00004294967296, em, non_seq 0, reset 0\nZone 00003: swr, ofst 00006442450944, len 00002147483648, cap 00001129316352, wp 00006442450944, em, non_seq 0, reset 0\nZone 00004: swr, ofst 00008589934592, len 00002147483648, cap 00001129316352, wp 00008589934592, em, non_seq 0, reset 0\nZone 00005: swr, ofst 00010737418240, len 00002147483648, cap 00001129316352, wp 00010737418240, em, non_seq 0, reset 0\nZone 00006: swr, ofst 00012884901888, len 00002147483648, cap 00001129316352, wp 00012884901888, em, non_seq 0, reset 0\nZone 00007: swr, ofst 00015032385536, len 00002147483648, cap 00001129316352, wp 00015032385536, em, non_seq 0, reset 0\nZone 00008: swr, ofst 00017179869184, len 00002147483648, cap 00001129316352, wp 00017179869184, em, non_seq 0, reset 0\nZone 00009: swr, ofst 00019327352832, len 00002147483648, cap 00001129316352, wp 00019327352832, em, non_seq 0, reset 0\nZone 00010: swr, ofst 00021474836480, len 00002147483648, cap 00001129316352, wp 00021474836480, em, non_seq 0, reset 0\nZone 00011: swr, ofst 00023622320128, len 00002147483648, cap 00001129316352, wp 00023622320128, em, non_seq 0, reset 0\nZone 00012: swr, ofst 00025769803776, len 00002147483648, cap 00001129316352, wp 00025769803776, em, non_seq 0, reset 0\nZone 00013: swr, ofst 00027917287424, len 00002147483648, cap 00001129316352, wp 00027917287424, em, non_seq 0, reset 0\nZone 00014: swr, ofst 00030064771072, len 00002147483648, cap 00001129316352, wp 00030064771072, em, non_seq 0, reset 0\nZone 00015: swr, ofst 00032212254720, len 00002147483648, cap 00001129316352, wp 00032212254720, em, non_seq 0, reset 0\nZone 00016: swr, ofst 00034359738368, len 00002147483648, cap 00001129316352, wp 00034359738368, em, non_seq 0, reset 0\nZone 00017: swr, ofst 00036507222016, len 00002147483648, cap 00001129316352, wp 00036507222016, em, non_seq 0, reset 0\nZone 00018: swr, ofst 00038654705664, len 00002147483648, cap 00001129316352, wp 00038654705664, em, non_seq 0, reset 0\nZone 00019: swr, ofst 00040802189312, len 00002147483648, cap 00001129316352, wp 00040802189312, em, non_seq 0, reset 0\nZone 00020: swr, ofst 00042949672960, len 00002147483648, cap 00001129316352, wp 00042949672960, em, non_seq 0, reset 0\nZone 00021: swr, ofst 00045097156608, len 00002147483648, cap 00001129316352, wp 00045097156608, em, non_seq 0, reset 0\nZone 00022: swr, ofst 00047244640256, len 00002147483648, cap 00001129316352, wp 00047244640256, em, non_seq 0, reset 0\nZone 00023: swr, ofst 00049392123904, len 00002147483648, cap 00001129316352, wp 00049392123904, em, non_seq 0, reset 0\nZone 00024: swr, ofst 00051539607552, len 00002147483648, cap 00001129316352, wp 00051539607552, em, non_seq 0, reset 0\nZone 00025: swr, ofst 00053687091200, len 00002147483648, cap 00001129316352, wp 00053687091200, em, non_seq 0, reset 0\nZone 00026: swr, ofst 00055834574848, len 00002147483648, cap 00001129316352, wp 00055834574848, em, non_seq 0, reset 0\nZone 00027: swr, ofst 00057982058496, len 00002147483648, cap 00001129316352, wp 00057982058496, em, non_seq 0, reset 0\nZone 00028: swr, ofst 00060129542144, len 00002147483648, cap 00001129316352, wp 00060129542144, em, non_seq 0, reset 0\nZone 00029: swr, ofst 00062277025792, len 00002147483648, cap 00001129316352, wp 00062277025792, em, non_seq 0, reset 0\nZone 00030: swr, ofst 00064424509440, len 00002147483648, cap 00001129316352, wp 00064424509440, em, non_seq 0, reset 0\nZone 00031: swr, ofst 00066571993088, len 00002147483648, cap 00001129316352, wp 00066571993088, em, non_seq 0, reset 0\nZone 00032: swr, ofst 00068719476736, len 00002147483648, cap 00001129316352, wp 00068719476736, em, non_seq 0, reset 0\nZone 00033: swr, ofst 00070866960384, le"
+  }
+}

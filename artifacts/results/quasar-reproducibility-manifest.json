@@ -1,0 +1,466 @@
+{
+  "artifact_count": 39,
+  "artifacts": [
+    {
+      "bytes": 310144,
+      "claim": "storage-history baselines miss PQC death cohorts even when WAF is near 1.0",
+      "exists": true,
+      "id": "same_path_actual_zns_fairness",
+      "path": "artifacts/results/packed-physical-zonefs-replay-dogi-paper-pqc2000-z512-secret-group-helper.json",
+      "role": "six DOGI/FAST workload-axis actual-ZNS fairness matrix",
+      "sha256": "a2a68a144d0ca2639dbb2437524a69454e7e0037b9ca87c712b4c3d1bbd60ece"
+    },
+    {
+      "bytes": 16180,
+      "claim": "WAF/GC gains are pressure-dependent while semantic reset gap is broad",
+      "exists": true,
+      "id": "ycsb_actual_zns_pressure_curve",
+      "path": "artifacts/results/fast-ycsb-pressure/ycsb-actual-zns-pressure-curve.json",
+      "role": "actual-ZNS YCSB p2000 negative control plus p4000/p6000/p8000/p10000 pressure curve",
+      "sha256": "a4b6b8a29a465bbb12a05e2ac65dc95ed2a5d86c8468c2eaecda4e4fc4068930"
+    },
+    {
+      "bytes": 61422,
+      "claim": "easy YCSB point keeps WAF near 1.0 while exposing stale-secret reset gap",
+      "exists": true,
+      "id": "ycsb_actual_zns_p2000_raw",
+      "path": "artifacts/results/fast-ycsb-pressure/packed-physical-zonefs-ycsb-pqc2000-z512-helper.json",
+      "role": "raw actual-ZNS packed replay for YCSB p2000 negative WAF control",
+      "sha256": "9505e243ac1a36a61f8454f3ad8fec11177d9869781e5ec895a44f4496e79062"
+    },
+    {
+      "bytes": 31634,
+      "claim": "YCSB-A p4000 creates DOGI-style GC while hybrid drains secrets",
+      "exists": true,
+      "id": "ycsb_actual_zns_a_p4000_raw",
+      "path": "artifacts/results/fast-ycsb-pressure/packed-physical-zonefs-ycsb-a-pqc4000-z560-helper.json",
+      "role": "raw actual-ZNS packed replay for YCSB-A p4000 pressure point",
+      "sha256": "af9c9667f1a015d649ae5d61825a75fb7d978b522035b1b214ecfc316b0c5793"
+    },
+    {
+      "bytes": 34976,
+      "claim": "YCSB-A p6000 strengthens the intermediate pressure curve",
+      "exists": true,
+      "id": "ycsb_actual_zns_a_p6000_raw",
+      "path": "artifacts/results/fast-ycsb-pressure/packed-physical-zonefs-ycsb-a-pqc6000-z712-helper.json",
+      "role": "raw actual-ZNS packed replay for YCSB-A p6000 pressure point",
+      "sha256": "f8f6e4fdafb0712834710bd9720c9d6a5cc6af6b37d9e312d64cdbd0b1451665"
+    },
+    {
+      "bytes": 33134,
+      "claim": "YCSB-A p8000 preserves stale-secret gap under higher PQC density",
+      "exists": true,
+      "id": "ycsb_actual_zns_a_p8000_raw",
+      "path": "artifacts/results/fast-ycsb-pressure/packed-physical-zonefs-ycsb-a-pqc8000-z863-helper.json",
+      "role": "raw actual-ZNS packed replay for YCSB-A p8000 pressure point",
+      "sha256": "100bbb6db346c74e5122bb98a55919d57eef86f2c6ad2992354ba7f34f3f3d7f"
+    },
+    {
+      "bytes": 32766,
+      "claim": "YCSB-F p4000 remains an easy WAF point but exposes stale-secret gap",
+      "exists": true,
+      "id": "ycsb_actual_zns_f_p4000_raw",
+      "path": "artifacts/results/fast-ycsb-pressure/packed-physical-zonefs-ycsb-f-pqc4000-z733-helper.json",
+      "role": "raw actual-ZNS packed replay for YCSB-F p4000 easy/stale-secret point",
+      "sha256": "a7c9938d4ea777f76593731a85a18ffd70a1f8ec21329a5800260a2a2df2d1b6"
+    },
+    {
+      "bytes": 34924,
+      "claim": "YCSB-F p6000 captures the transition from easy WAF to pressure",
+      "exists": true,
+      "id": "ycsb_actual_zns_f_p6000_raw",
+      "path": "artifacts/results/fast-ycsb-pressure/packed-physical-zonefs-ycsb-f-pqc6000-z733-helper.json",
+      "role": "raw actual-ZNS packed replay for YCSB-F p6000 pressure point",
+      "sha256": "30d917927795775e6af95a0b0066eae2ffceda67c537fe1fab95840f80314453"
+    },
+    {
+      "bytes": 31665,
+      "claim": "YCSB-F p8000 creates strong DOGI-style WAF/GC separation",
+      "exists": true,
+      "id": "ycsb_actual_zns_f_p8000_raw",
+      "path": "artifacts/results/fast-ycsb-pressure/packed-physical-zonefs-ycsb-f-pqc8000-z733-helper.json",
+      "role": "raw actual-ZNS packed replay for YCSB-F p8000 pressure point",
+      "sha256": "a107b694ebf3d6604143f3cc895360c572b31399f5e92116d08bf61b35dc02ac"
+    },
+    {
+      "bytes": 34941,
+      "claim": "YCSB-A p10000 confirms the realistic failure mode is stale-secret exposure plus moderate DOGI-style GC, not a toy WAF explosion",
+      "exists": true,
+      "id": "ycsb_actual_zns_a_p10000_raw",
+      "path": "artifacts/results/fast-ycsb-pressure/packed-physical-zonefs-ycsb-a-pqc10000-z1024-helper.json",
+      "role": "raw actual-ZNS packed replay for larger YCSB-A p10000 pressure point",
+      "sha256": "5ce08c4851b2d86d6432b40f3cd036c8c2bb137635f2a823a8ad7acc0cfde1b9"
+    },
+    {
+      "bytes": 35041,
+      "claim": "YCSB-F p10000 strengthens DOGI-axis pressure while QUASAR/hybrid keeps GC and stale secrets at zero",
+      "exists": true,
+      "id": "ycsb_actual_zns_f_p10000_raw",
+      "path": "artifacts/results/fast-ycsb-pressure/packed-physical-zonefs-ycsb-f-pqc10000-z900-helper.json",
+      "role": "raw actual-ZNS packed replay for larger YCSB-F p10000 pressure point",
+      "sha256": "322531c09f4db15d1d917427c6e4082adf8a0b7581badc6277d3ca66417681af"
+    },
+    {
+      "bytes": 7872,
+      "claim": "update-heavy PQC metadata pressure can create large DOGI-style GC copy cost",
+      "exists": true,
+      "id": "sysbench_actual_zns_pressure",
+      "path": "artifacts/results/fast-db-pressure/sysbench-pressure-summary.json",
+      "role": "FAST-style DB pressure actual-ZNS replay summary",
+      "sha256": "fa0fe82fb8634b5c74b5970bdc343f289cbb549bd34cb560ccaeea70c8370d79"
+    },
+    {
+      "bytes": 12800,
+      "claim": "dynamic service workloads also expose DOGI-style GC and stale-secret cost under PQC pressure",
+      "exists": true,
+      "id": "dynamic_exchange_actual_zns_pressure",
+      "path": "artifacts/results/fast-dynamic-pressure/dynamic-pressure-summary.json",
+      "role": "DOGI dynamic-axis Exchange/Varmail/Alibaba pressure actual-ZNS replay summary",
+      "sha256": "30435480f439ea10866534c08c88df93ff000639840cd1caee6d07fa72492646"
+    },
+    {
+      "bytes": 35237,
+      "claim": "Exchange p8000 creates DOGI/SepBIT/MiDAS GC while hybrid drains secrets",
+      "exists": true,
+      "id": "dynamic_exchange_actual_zns_raw",
+      "path": "artifacts/results/fast-dynamic-pressure/packed-physical-zonefs-exchange-pqc8000-z768-helper.json",
+      "role": "raw actual-ZNS packed replay for Exchange p8000 dynamic pressure",
+      "sha256": "d2faf27bd1c3ca4e6bc643fcca6cd694e9db7f837b5355799683f99da83fc57d"
+    },
+    {
+      "bytes": 35235,
+      "claim": "Varmail p8000 creates DOGI/SepBIT/MiDAS GC while hybrid drains secrets",
+      "exists": true,
+      "id": "dynamic_varmail_actual_zns_raw",
+      "path": "artifacts/results/fast-dynamic-pressure/packed-physical-zonefs-varmail-pqc8000-z768-helper.json",
+      "role": "raw actual-ZNS packed replay for Varmail p8000 dynamic pressure",
+      "sha256": "1097e724e2dcb4a7b71424c1f93b9750287f0de9d67d2217020e365cde4c0ebb"
+    },
+    {
+      "bytes": 35267,
+      "claim": "Alibaba p8000 creates DOGI/SepBIT/MiDAS GC while hybrid drains secrets",
+      "exists": true,
+      "id": "dynamic_alibaba_actual_zns_raw",
+      "path": "artifacts/results/fast-dynamic-pressure/packed-physical-zonefs-alibaba-pqc8000-z768-helper.json",
+      "role": "raw actual-ZNS packed replay for Alibaba p8000 dynamic pressure",
+      "sha256": "c1b0d70291fdea82eefeae9e61dccb8a193c2ddf723544c99c0c7b14135421fa"
+    },
+    {
+      "bytes": 499,
+      "claim": "public DOGI binary completes on the hard dynamic PQC pressure trace and reports high GC/WAF",
+      "exists": true,
+      "id": "dogi_exact_alibaba_pressure",
+      "path": "artifacts/results/dogi-exact/alibaba-pqc8000-dogi.json",
+      "role": "exact public DOGI prototype run on physical ZNS with Alibaba p8000 compact trace",
+      "sha256": "39592d4f23d943b1041b98bff4c5f088b424304022ba30be83069d87fcebcea3"
+    },
+    {
+      "bytes": 2064,
+      "claim": "all public DOGI-family placements complete and report high WAF on the hard dynamic PQC pressure trace",
+      "exists": true,
+      "id": "dogi_exact_alibaba_suite",
+      "path": "artifacts/results/dogi-exact/alibaba-pqc8000-suite.json",
+      "role": "exact public DOGI prototype DOGI/Greedy/CostBenefit suite on physical ZNS",
+      "sha256": "f0b1425a00ee6bd95c95bd6ca2389dadb68a8f6da89038e45477d5898d001c18"
+    },
+    {
+      "bytes": 846,
+      "claim": "original-LBA DOGI replay requires a 42GiB logical span instead of the compact 2GiB span",
+      "exists": true,
+      "id": "dogi_original_lba_adapter",
+      "path": "artifacts/results/fast-dynamic-pressure/alibaba-pqc8000-original-lba-dogi-adapter.json",
+      "role": "original-LBA DOGI adapter summary for Alibaba p8000 without compacting the LBA span",
+      "sha256": "63938bb0eea17a659c9a015631a295d1996b622596e80d4a8b8a7b62241c015b"
+    },
+    {
+      "bytes": 6141,
+      "claim": "the original-LBA trace is syntactically runnable by the DOGI prototype and the device/tool chain is visible",
+      "exists": true,
+      "id": "dogi_original_lba_preflight",
+      "path": "artifacts/results/fast-dynamic-pressure/alibaba-pqc8000-original-lba-dogi-preflight-nvme0n1.json",
+      "role": "preflight for the original-LBA DOGI run on the physical ZNS device",
+      "sha256": "9e35230c38ee79ebf226c03e4218fe53fe82e16b62ea1237bfe97215b81dab39"
+    },
+    {
+      "bytes": 527,
+      "claim": "the original-LBA DOGI run completes when executed from the prototype app working directory, reporting WAF on the 42GiB Alibaba p8000 span",
+      "exists": true,
+      "id": "dogi_original_lba_completed_run",
+      "path": "artifacts/results/dogi-exact/alibaba-pqc8000-original-lba-dogi-cwd-app.json",
+      "role": "completed original-LBA public DOGI physical run summary",
+      "sha256": "dbfd67fcd4972ba37967189ce09e21d5c1ab1955c63f8671c51bc98bab55667c"
+    },
+    {
+      "bytes": 23117,
+      "claim": "history baselines issue no semantic resets under delayed-expiry stragglers",
+      "exists": true,
+      "id": "ycsb_f_straggler_baselines",
+      "path": "artifacts/results/fast-ycsb-pressure/packed-physical-zonefs-ycsb-f-pqc8000-straggler005-baselines-helper.json",
+      "role": "actual-ZNS hard straggler replay for FIFO/SepBIT/MiDAS/DOGI baselines",
+      "sha256": "862b9ff20002d258657594602b5ad068ae2613e02ac967474e917df5fea00e29"
+    },
+    {
+      "bytes": 39597,
+      "claim": "hybrid pays reset work but policy-decision CPU remains below DOGI-style MLP",
+      "exists": true,
+      "id": "actual_zns_overhead",
+      "path": "artifacts/results/actual-zns-overhead-summary.json",
+      "role": "actual-ZNS helper-path overhead plus C policy CPU accounting",
+      "sha256": "c4f59381973acb8aaa3f5be1f390c97ade18d1d4b4fb1903a74faa8161f5033f"
+    },
+    {
+      "bytes": 809,
+      "claim": "native xNVMe command-path p99 is measured without zonefs helper append overhead",
+      "exists": true,
+      "id": "xnvme_zns_latency",
+      "path": "artifacts/results/xnvme-zns-latency/summary.json",
+      "role": "raw xNVMe/Linux NVMe ioctl ZNS append/reset latency probe",
+      "sha256": "cf22d6dac2dea485cf95aac27882401970ef5ce7a17860a3448fe33c33603900"
+    },
+    {
+      "bytes": 5671,
+      "claim": "xNVMe replay evidence is backed by an inspectable in-tree tool",
+      "exists": true,
+      "id": "xnvme_zns_latency_source",
+      "path": "code/quasar/xnvme_zns_latency.c",
+      "role": "source for the xNVMe native ZNS latency probe",
+      "sha256": "0fc74b8d7bb942da3ebae56cb9c05ea7ffd359829afe24df83f612b9a824490d"
+    },
+    {
+      "bytes": 1083,
+      "claim": "the evaluated device supports sanitize and records whether crypto-erase execution was validated",
+      "exists": true,
+      "id": "physical_zns_security_capability",
+      "path": "artifacts/results/physical-zns-security-capability.json",
+      "role": "physical ZNS sanitize/security capability and claim-boundary summary",
+      "sha256": "ec57ce25b9bcaed6986cb65b79d2e79dd5107b14213a36d2d62fe9933abfed82"
+    },
+    {
+      "bytes": 1180,
+      "claim": "the device crypto-erase sanitize command path completed successfully and zonefs was restored",
+      "exists": true,
+      "id": "physical_zns_sanitize_execution",
+      "path": "artifacts/results/physical-zns-sanitize-exec/summary.json",
+      "role": "destructive NVMe crypto-erase sanitize execution summary for the physical ZNS SSD",
+      "sha256": "81f36dd378cd8b02b3b8ad49ca4c0423db14c960c6567dcc0bbeb10bfbec7e23"
+    },
+    {
+      "bytes": 13129,
+      "claim": "evaluation does not rely on an overly easy PQC-only trace",
+      "exists": true,
+      "id": "workload_hardness",
+      "path": "artifacts/results/workload-hardness-matrix.json",
+      "role": "benchmark guardrail for fairness, negative-control, pressure, and hostile tiers",
+      "sha256": "778373eaa330f270bcab6ffe12238f7da83501db3f9e5e398c3451602fed1af9"
+    },
+    {
+      "bytes": 3363,
+      "claim": "QUASAR improvement is an explicit mode selector, not one universal knob",
+      "exists": true,
+      "id": "deployment_selector",
+      "path": "artifacts/results/quasar-deployment-policy-selector.json",
+      "role": "deployable policy selector for default, tenant-isolation, strict-residual, and fallback modes",
+      "sha256": "5effb3c19a59ff6f810204b6817ff61056810c7d7517da235dd294a171331215"
+    },
+    {
+      "bytes": 91046,
+      "claim": "FDP can carry QUASAR lifecycle families, but scarce handles collide death cohorts",
+      "exists": true,
+      "id": "fdp_handle_pressure",
+      "path": "artifacts/results/pqc-mixed-fdp-mapping.json",
+      "role": "trace-driven QUASAR-to-FDP placement-handle pressure model",
+      "sha256": "2c5d3ef6463032f348dec8b56e700651a854e2e625160bbb15bdbb8ded6960d8"
+    },
+    {
+      "bytes": 13196,
+      "claim": "FDP handle pressure is reported as deployment modeling, not physical FDP performance",
+      "exists": true,
+      "id": "fdp_handle_pressure_figure",
+      "path": "artifacts/figures/fast-style/fig8-fdp-handle-pressure.pdf",
+      "role": "paper Figure 8 for FDP handle-count purity and collision pressure",
+      "sha256": "7ca6986bd95bfabf05f32390737c4578aa6d0ebfd7e9fa4bc8009c705be801dc"
+    },
+    {
+      "bytes": 182750,
+      "claim": "paper-ready comparison summary",
+      "exists": true,
+      "id": "unified_comparison",
+      "path": "artifacts/results/unified-baseline-comparison.json",
+      "role": "single JSON summary separating same-path, pressure, exact external, and boundary evidence",
+      "sha256": "bce11cb4bd545c2127aa39f8557fb8d7a757824defc67bba08c9aea0ae92b62f"
+    },
+    {
+      "bytes": 8168,
+      "claim": "supported, qualified, and boundary claims are separated",
+      "exists": true,
+      "id": "claim_matrix",
+      "path": "artifacts/results/quasar-claim-matrix.json",
+      "role": "claim-to-evidence guardrail",
+      "sha256": "f29341185c852757b0f2aae9e0900d58f759f962a0856de89e55789d2a15d63c"
+    },
+    {
+      "bytes": 33770,
+      "claim": "no current blockers or pending paper-grade evidence gaps for scoped claim",
+      "exists": true,
+      "id": "external_readiness",
+      "path": "artifacts/results/external-readiness.json",
+      "role": "conservative readiness report for external/system evidence",
+      "sha256": "3e06aae19557c5f93e8f20181cf6309a25b2565bcae0919b965ab40ac6034796"
+    },
+    {
+      "bytes": 6484,
+      "claim": "scoped claim is ready while optional strengthening work is separated",
+      "exists": true,
+      "id": "goal_completion_audit",
+      "path": "artifacts/results/actual-zns-goal-completion-audit.json",
+      "role": "requirement-by-requirement audit of the actual-ZNS comparison goal",
+      "sha256": "56054ce06ec5e8d9b7b1d1c549abe5b702581c6852694412617dde7fe083d453"
+    },
+    {
+      "bytes": 38756,
+      "claim": "all reproducibility and evidence gates pass",
+      "exists": true,
+      "id": "acceptance",
+      "path": "artifacts/results/acceptance-report.json",
+      "role": "local acceptance gate summary",
+      "sha256": "84a20e866e515ccbe96498a2078678fdbf3e5d95540450ba7d0a902af470f344"
+    },
+    {
+      "bytes": 100733,
+      "claim": "visualizes negative control and pressure rows",
+      "exists": true,
+      "id": "ycsb_pressure_figure",
+      "path": "artifacts/figures/actual-zns/ycsb-pressure-waf-stale.png",
+      "role": "paper figure for actual-ZNS YCSB WAF/stale-secret curve",
+      "sha256": "98973b42e75fc5c079c0862f5b5989a72cb5c6568da1272aecab5cebb4e04998"
+    },
+    {
+      "bytes": 64105,
+      "claim": "visualizes throughput, CPU, and semantic reset cost",
+      "exists": true,
+      "id": "overhead_figure",
+      "path": "artifacts/figures/actual-zns/overhead-accounting.png",
+      "role": "paper figure for actual-ZNS overhead accounting",
+      "sha256": "d7a58350fd01ffb2f53eaa7a4ddccd6a4a1a3dc27ac5bef252ae56524bda09a1"
+    },
+    {
+      "bytes": 55961,
+      "claim": "visualizes fairness, pressure, and hostile coverage",
+      "exists": true,
+      "id": "workload_hardness_figure",
+      "path": "artifacts/figures/actual-zns/workload-hardness.png",
+      "role": "paper figure for workload hardness tiers",
+      "sha256": "e49e3cced335fe6241065282a468edf16b0aaedb55590fcefda18677337b2ed4"
+    }
+  ],
+  "commands": [
+    {
+      "command": "python3 code/sim/run_actual_zns_summary_pipeline.py",
+      "step": "actual_zns_summary_pipeline"
+    },
+    {
+      "command": "python3 code/sim/report_fast_dynamic_pressure.py && python3 code/sim/report_workload_hardness_matrix.py",
+      "step": "workload_hardness"
+    },
+    {
+      "command": "python3 code/sim/report_deployment_policy_selector.py",
+      "step": "deployment_selector"
+    },
+    {
+      "command": "python3 code/sim/plot_actual_zns_comparison.py",
+      "step": "actual_zns_figures"
+    },
+    {
+      "command": "python3 code/quasar/fdp_mapping.py --trace artifacts/traces/pqc-mixed.jsonl --handles 8 16 32 64 128 --out artifacts/results/pqc-mixed-fdp-mapping.json --markdown-out artifacts/results/pqc-mixed-fdp-mapping.md",
+      "step": "fdp_mapping"
+    },
+    {
+      "command": "python3 code/sim/plot_fast_style_quasar_figures.py",
+      "step": "fast_style_figures"
+    },
+    {
+      "command": "python3 code/sim/report_unified_comparison.py",
+      "step": "unified_report"
+    },
+    {
+      "command": "python3 code/sim/report_claim_matrix.py && python3 code/sim/report_unified_comparison.py",
+      "step": "claim_matrix"
+    },
+    {
+      "command": "python3 code/baselines/external_readiness.py",
+      "step": "external_readiness"
+    },
+    {
+      "command": "python3 code/sim/report_goal_completion_audit.py",
+      "step": "goal_completion_audit"
+    },
+    {
+      "command": "python3 code/sim/acceptance_check.py",
+      "step": "acceptance"
+    },
+    {
+      "command": "python3 -m unittest discover -s code -p 'test*.py'",
+      "step": "unit_tests"
+    }
+  ],
+  "missing_or_empty": [],
+  "passed": true,
+  "readiness": {
+    "acceptance": {
+      "passed": true,
+      "passed_gates": 41,
+      "total_gates": 41
+    },
+    "actual_zns_overhead": {},
+    "claim_matrix": {
+      "by_status": {
+        "qualified": 1,
+        "supported": 10,
+        "supported-boundary": 1
+      },
+      "claim_count": 12
+    },
+    "deployment_selector": {
+      "passed": true,
+      "passed_modes": 4,
+      "total_modes": 4
+    },
+    "dogi_exact_alibaba_pressure": {},
+    "dogi_exact_alibaba_suite": {},
+    "dogi_original_lba_adapter": {},
+    "dogi_original_lba_completed_run": {},
+    "dogi_original_lba_preflight": {},
+    "dynamic_alibaba_actual_zns_raw": {},
+    "dynamic_exchange_actual_zns_pressure": {},
+    "dynamic_exchange_actual_zns_raw": {},
+    "dynamic_varmail_actual_zns_raw": {},
+    "external_readiness": {
+      "blockers": [],
+      "paper_ready_external": true,
+      "pending": []
+    },
+    "fdp_handle_pressure": {},
+    "goal_completion_audit": {},
+    "physical_zns_sanitize_execution": {},
+    "physical_zns_security_capability": {},
+    "same_path_actual_zns_fairness": {},
+    "sysbench_actual_zns_pressure": {},
+    "unified_comparison": {},
+    "workload_hardness": {
+      "passed": true
+    },
+    "xnvme_zns_latency": {},
+    "ycsb_actual_zns_a_p10000_raw": {},
+    "ycsb_actual_zns_a_p4000_raw": {},
+    "ycsb_actual_zns_a_p6000_raw": {},
+    "ycsb_actual_zns_a_p8000_raw": {},
+    "ycsb_actual_zns_f_p10000_raw": {},
+    "ycsb_actual_zns_f_p4000_raw": {},
+    "ycsb_actual_zns_f_p6000_raw": {},
+    "ycsb_actual_zns_f_p8000_raw": {},
+    "ycsb_actual_zns_p2000_raw": {},
+    "ycsb_actual_zns_pressure_curve": {},
+    "ycsb_f_straggler_baselines": {}
+  },
+  "scope": "reproducibility manifest for actual-ZNS baseline-vs-QUASAR comparison"
+}

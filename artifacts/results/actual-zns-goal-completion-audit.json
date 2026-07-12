@@ -1,0 +1,129 @@
+{
+  "blocking_count": 0,
+  "completion_boundary": "The scoped paper claim and broader full goal are both complete.",
+  "full_goal_complete": true,
+  "full_goal_remaining_count": 0,
+  "main_takeaway": "The scoped actual-ZNS comparison is ready: same-path physical replay, workload hardness, pressure, external exact baselines, overhead, security boundaries, and reproducibility are all covered. Remaining work is optional strengthening, not a blocker for the current scoped claim, but it still prevents calling the broader full goal complete.",
+  "optional_strengthening": [],
+  "requirements": [
+    {
+      "evidence": [
+        "same-path actual-ZNS rows=72 failed=0",
+        "policies=['dogi-history', 'fifo', 'midas-style', 'quasar', 'quasar-dogi-hybrid', 'sepbit-style']",
+        "hybrid resets=98",
+        "DOGI stale secrets=99834",
+        "hybrid stale secrets=0"
+      ],
+      "next_action": "Keep this as the apples-to-apples physical ZNS comparison; do not mix units with exact external runs.",
+      "remaining": "Exact external DOGI/MiDAS/SepBIT units are still separate from this same-path packed replay.",
+      "requirement": "Run the main comparison on a real ZNS path with FIFO/SepBIT/MiDAS/DOGI-style baselines and QUASAR.",
+      "status": "satisfied"
+    },
+    {
+      "evidence": [
+        "hardness=9/9",
+        "tiers={'claim-gate': {'passed': 1, 'total': 1}, 'fairness': {'passed': 1, 'total': 1}, 'hostile-robustness': {'passed': 3, 'total': 3}, 'negative-control': {'passed': 2, 'total': 2}, 'pressure': {'passed': 2, 'total': 2}}",
+        "main-claim gate=True",
+        "eligible YCSB pressure rows=7",
+        "YCSB baseline-complete rows=9",
+        "DB pressure eligible=True",
+        "eligible dynamic rows=3",
+        "dynamic baseline-complete rows=3"
+      ],
+      "next_action": "Use the DOGI-favorable p0 control and YCSB p2000 negative control in the paper narrative.",
+      "remaining": "None for the current scoped claim.",
+      "requirement": "Show the workload is not an easy QUASAR-only construction.",
+      "status": "satisfied"
+    },
+    {
+      "evidence": [
+        "YCSB pressure rows=7/9",
+        "YCSB semantic-gap rows=9/9",
+        "Sysbench GC reduction=0.9458955223880597",
+        "Sysbench stale secrets removed=38438"
+      ],
+      "next_action": "Add more min-free-zone sweeps only if reviewers demand a smoother hardware curve.",
+      "remaining": "None for the current scoped claim; larger p10000 actual-ZNS YCSB pressure points have been added.",
+      "requirement": "Demonstrate pressure cases where WAF/GC separation appears, not only stale-secret separation.",
+      "status": "satisfied"
+    },
+    {
+      "evidence": [
+        "DOGI exact compact WAF=2.4006662646819312",
+        "DOGI exact Alibaba p8000 suite=3/3, best=CostBenefit WAF=2.803532778684755",
+        "DOGI exact original-LBA Alibaba p8000 WAF=3.2117427602002238",
+        "MiDAS exact WAF=1.01",
+        "SepBIT exact WA=2.399521"
+      ],
+      "next_action": "Keep compact-LBA and original-LBA exact external numbers in a separate table from same-path packed ZNS replay.",
+      "remaining": "None for the current scoped claim; exact units remain separate from QUASAR same-path packed replay.",
+      "requirement": "Include exact external DOGI/MiDAS/SepBIT evidence without pretending the units are identical.",
+      "status": "qualified"
+    },
+    {
+      "evidence": [
+        "selector modes=4/4",
+        "default policy=quasar-dogi-hybrid",
+        "hardness passed=True"
+      ],
+      "next_action": "Use QUASAR-DOGI hybrid by default; enable tenant-isolation or strict-residual modes explicitly.",
+      "remaining": "Adaptive modes are available but should not be default unless a workload triggers them.",
+      "requirement": "Improve QUASAR if the evidence shows a better deployable mode.",
+      "status": "satisfied"
+    },
+    {
+      "evidence": [
+        "overhead rows=84 failed=0",
+        "hybrid/DOGI C-policy median ratio=0.4916268591108631",
+        "semantic reset delta=318",
+        "xNVMe completed=True",
+        "xNVMe append_count=4096",
+        "xNVMe append_p99_ns=26064",
+        "xNVMe mounted_after=True"
+      ],
+      "next_action": "Use zonefs-helper overhead as full-suite accounting and xNVMe as native command-path p99 evidence.",
+      "remaining": "SPDK poll-mode is still not measured, but the lower-overhead raw xNVMe/Linux NVMe ioctl command path is validated.",
+      "requirement": "Account for overhead rather than only placement quality.",
+      "status": "satisfied"
+    },
+    {
+      "evidence": [
+        "device=WZS4C8T1TDSP303",
+        "SANICAP=0x60000003",
+        "sanitize_supported=True",
+        "sanitize_log_status=(1) Most Recent Sanitize Command Completed Successfully.",
+        "crypto_erase_executed=True",
+        "sanitize_execution_validated=True"
+      ],
+      "next_action": "State exposure-window reduction by default; claim physical erasure only for deployments that issue sanitize or equivalent crypto-erase commands.",
+      "remaining": "None for the device command-path proof; per-epoch physical erasure still requires explicit sanitize or equivalent hardware crypto-erase at epoch boundaries.",
+      "requirement": "Keep security claims bounded to reset eligibility unless sanitize is executed.",
+      "status": "satisfied-sanitize-validated"
+    },
+    {
+      "evidence": [
+        "acceptance=41/41",
+        "hash mismatches=0",
+        "summary pipeline passed=True",
+        "summary pipeline steps=20"
+      ],
+      "next_action": "Use run_actual_zns_summary_pipeline.py after changing any derived artifact.",
+      "remaining": "Raw long-running physical replays still require device availability and time.",
+      "requirement": "Make the generated actual-ZNS comparison reproducible and hash-checked.",
+      "status": "satisfied"
+    },
+    {
+      "evidence": [
+        "paper_ready_external=True",
+        "blockers=[]",
+        "pending=[]"
+      ],
+      "next_action": "Keep exact-baseline and same-path caveats visible.",
+      "remaining": "External readiness is scoped to the current claim, not an absolute proof of every possible device/firmware stack.",
+      "requirement": "Show external/system readiness has no current paper blockers for the scoped claim.",
+      "status": "satisfied"
+    }
+  ],
+  "scope": "completion audit for actual-ZNS DOGI/SepBIT/MiDAS/FIFO vs QUASAR comparison",
+  "scoped_claim_ready": true
+}

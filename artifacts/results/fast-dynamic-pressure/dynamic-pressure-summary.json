@@ -1,0 +1,345 @@
+{
+  "dryrun_frontier": [
+    {
+      "dogi_failed_rows": 1,
+      "failed_rows": 1,
+      "hybrid_failed_rows": 0,
+      "hybrid_gc_blocks": 42518,
+      "hybrid_waf": 1.0707964307063158,
+      "logical_zones": 404,
+      "path": "artifacts/results/fast-dynamic-pressure/dryrun-exchange-pqc8000-z404.json"
+    },
+    {
+      "dogi_failed_rows": 1,
+      "failed_rows": 1,
+      "hybrid_failed_rows": 0,
+      "hybrid_gc_blocks": 10360,
+      "hybrid_waf": 1.017250365071674,
+      "logical_zones": 512,
+      "path": "artifacts/results/fast-dynamic-pressure/dryrun-exchange-pqc8000-z512.json"
+    },
+    {
+      "dogi_failed_rows": 1,
+      "failed_rows": 1,
+      "hybrid_failed_rows": 0,
+      "hybrid_gc_blocks": 756,
+      "hybrid_waf": 1.001258810424149,
+      "logical_zones": 640,
+      "path": "artifacts/results/fast-dynamic-pressure/dryrun-exchange-pqc8000-z640.json"
+    },
+    {
+      "dogi_failed_rows": 0,
+      "failed_rows": 0,
+      "hybrid_failed_rows": 0,
+      "hybrid_gc_blocks": 22,
+      "hybrid_waf": 1.00003663204938,
+      "logical_zones": 768,
+      "path": "artifacts/results/fast-dynamic-pressure/dryrun-exchange-pqc8000-z768.json"
+    },
+    {
+      "dogi_failed_rows": 0,
+      "failed_rows": 0,
+      "hybrid_failed_rows": 0,
+      "hybrid_gc_blocks": 4992,
+      "hybrid_waf": 1.0074829340536458,
+      "logical_zones": 768,
+      "path": "artifacts/results/fast-dynamic-pressure/dryrun-alibaba-pqc8000-z768.json"
+    },
+    {
+      "dogi_failed_rows": 0,
+      "failed_rows": 0,
+      "hybrid_failed_rows": 0,
+      "hybrid_gc_blocks": 175,
+      "hybrid_waf": 1.0002944526797717,
+      "logical_zones": 768,
+      "path": "artifacts/results/fast-dynamic-pressure/dryrun-varmail-pqc8000-z768.json"
+    }
+  ],
+  "physical": [
+    {
+      "append_engine": "helper",
+      "failed_rows": 0,
+      "helper_chunk_blocks": 1,
+      "hybrid_vs_dogi": {
+        "dogi_completed": true,
+        "gc_reduction": 0.9994884434730038,
+        "hybrid_completed": true,
+        "stale_secret_reduction_blocks": 75422,
+        "waf_reduction": 0.06678962604086855
+      },
+      "logical_zone_capacity": 512,
+      "logical_zones": 768,
+      "path": "artifacts/results/fast-dynamic-pressure/packed-physical-zonefs-exchange-pqc8000-z768-helper.json",
+      "policies": {
+        "dogi-history": {
+          "avg_space_utilization": 0.3552221158310121,
+          "failed_rows": 0,
+          "max_live_physical_zones": 7,
+          "max_secret_blocks_waiting_for_physical_reset": 65427,
+          "physical_reset_commands": 0,
+          "physical_waf": 1.0716089961652904,
+          "secret_blocks_waiting_for_physical_reset": 65427,
+          "sim_gc_blocks": 43006,
+          "sim_stale_secret_blocks": 75422,
+          "sim_waf": 1.0716089961652904
+        },
+        "fifo": {
+          "avg_space_utilization": 0.8336633878830083,
+          "failed_rows": 0,
+          "max_live_physical_zones": 3,
+          "max_secret_blocks_waiting_for_physical_reset": 58880,
+          "physical_reset_commands": 0,
+          "physical_waf": 1.0783007344130944,
+          "secret_blocks_waiting_for_physical_reset": 58880,
+          "sim_gc_blocks": 46986,
+          "sim_stale_secret_blocks": 70261,
+          "sim_waf": 1.0782360669167637
+        },
+        "midas-style": {
+          "avg_space_utilization": 0.41085988277623026,
+          "failed_rows": 0,
+          "max_live_physical_zones": 6,
+          "max_secret_blocks_waiting_for_physical_reset": 37907,
+          "physical_reset_commands": 0,
+          "physical_waf": 1.061787023176586,
+          "secret_blocks_waiting_for_physical_reset": 37907,
+          "sim_gc_blocks": 37107,
+          "sim_stale_secret_blocks": 93718,
+          "sim_waf": 1.061786611651989
+        },
+        "quasar": {
+          "avg_space_utilization": 0.9455518802228412,
+          "failed_rows": 0,
+          "max_live_physical_zones": 6,
+          "max_secret_blocks_waiting_for_physical_reset": 6735,
+          "physical_reset_commands": 36,
+          "physical_waf": 1.0043459220764517,
+          "secret_blocks_waiting_for_physical_reset": 0,
+          "sim_gc_blocks": 2610,
+          "sim_stale_secret_blocks": 0,
+          "sim_waf": 1.0043458931309912
+        },
+        "quasar-dogi-hybrid": {
+          "avg_space_utilization": 0.9408585770659239,
+          "failed_rows": 0,
+          "max_live_physical_zones": 6,
+          "max_secret_blocks_waiting_for_physical_reset": 6735,
+          "physical_reset_commands": 36,
+          "physical_waf": 1.00003663204938,
+          "secret_blocks_waiting_for_physical_reset": 0,
+          "sim_gc_blocks": 22,
+          "sim_stale_secret_blocks": 0,
+          "sim_waf": 1.00003663204938
+        },
+        "sepbit-style": {
+          "avg_space_utilization": 0.3076561774605385,
+          "failed_rows": 0,
+          "max_live_physical_zones": 8,
+          "max_secret_blocks_waiting_for_physical_reset": 41745,
+          "physical_reset_commands": 0,
+          "physical_waf": 1.0599916412323687,
+          "secret_blocks_waiting_for_physical_reset": 41745,
+          "sim_gc_blocks": 36029,
+          "sim_stale_secret_blocks": 88925,
+          "sim_waf": 1.0599916412323687
+        }
+      },
+      "rows": 6,
+      "scope": "actual-ZNS packed replay for DOGI dynamic workload axis",
+      "traces": [
+        "artifacts/traces/fast-dynamic-pressure/exchange-pqc8000.jsonl"
+      ],
+      "wall_time_s": 188.381243217
+    },
+    {
+      "append_engine": "helper",
+      "failed_rows": 0,
+      "helper_chunk_blocks": 1,
+      "hybrid_vs_dogi": {
+        "dogi_completed": true,
+        "gc_reduction": 0.9959516043213732,
+        "hybrid_completed": true,
+        "stale_secret_reduction_blocks": 79600,
+        "waf_reduction": 0.06752725276448922
+      },
+      "logical_zone_capacity": 512,
+      "logical_zones": 768,
+      "path": "artifacts/results/fast-dynamic-pressure/packed-physical-zonefs-varmail-pqc8000-z768-helper.json",
+      "policies": {
+        "dogi-history": {
+          "avg_space_utilization": 0.41170980346641906,
+          "failed_rows": 0,
+          "max_live_physical_zones": 7,
+          "max_secret_blocks_waiting_for_physical_reset": 49555,
+          "physical_reset_commands": 1,
+          "physical_waf": 1.0727331770771114,
+          "secret_blocks_waiting_for_physical_reset": 49555,
+          "sim_gc_blocks": 43227,
+          "sim_stale_secret_blocks": 79600,
+          "sim_waf": 1.0727331770771114
+        },
+        "fifo": {
+          "avg_space_utilization": 0.620581440053389,
+          "failed_rows": 0,
+          "max_live_physical_zones": 4,
+          "max_secret_blocks_waiting_for_physical_reset": 55794,
+          "physical_reset_commands": 0,
+          "physical_waf": 1.0775445026089912,
+          "secret_blocks_waiting_for_physical_reset": 55794,
+          "sim_gc_blocks": 46084,
+          "sim_stale_secret_blocks": 69916,
+          "sim_waf": 1.0775403273977282
+        },
+        "midas-style": {
+          "avg_space_utilization": 0.4906590935468895,
+          "failed_rows": 0,
+          "max_live_physical_zones": 5,
+          "max_secret_blocks_waiting_for_physical_reset": 32176,
+          "physical_reset_commands": 0,
+          "physical_waf": 1.0640731187354981,
+          "secret_blocks_waiting_for_physical_reset": 32176,
+          "sim_gc_blocks": 38080,
+          "sim_stale_secret_blocks": 94250,
+          "sim_waf": 1.064072903118338
+        },
+        "quasar": {
+          "avg_space_utilization": 0.938272545264624,
+          "failed_rows": 0,
+          "max_live_physical_zones": 6,
+          "max_secret_blocks_waiting_for_physical_reset": 6013,
+          "physical_reset_commands": 41,
+          "physical_waf": 1.0028721852332325,
+          "secret_blocks_waiting_for_physical_reset": 0,
+          "sim_gc_blocks": 1707,
+          "sim_stale_secret_blocks": 0,
+          "sim_waf": 1.002872175567831
+        },
+        "quasar-dogi-hybrid": {
+          "avg_space_utilization": 0.9354942838904364,
+          "failed_rows": 0,
+          "max_live_physical_zones": 6,
+          "max_secret_blocks_waiting_for_physical_reset": 6013,
+          "physical_reset_commands": 41,
+          "physical_waf": 1.0002944526797717,
+          "secret_blocks_waiting_for_physical_reset": 0,
+          "sim_gc_blocks": 175,
+          "sim_stale_secret_blocks": 0,
+          "sim_waf": 1.0002944526797717
+        },
+        "sepbit-style": {
+          "avg_space_utilization": 0.350093057766282,
+          "failed_rows": 0,
+          "max_live_physical_zones": 7,
+          "max_secret_blocks_waiting_for_physical_reset": 42604,
+          "physical_reset_commands": 0,
+          "physical_waf": 1.0628462973837458,
+          "secret_blocks_waiting_for_physical_reset": 42604,
+          "sim_gc_blocks": 37351,
+          "sim_stale_secret_blocks": 90060,
+          "sim_waf": 1.0628462973837458
+        }
+      },
+      "rows": 6,
+      "scope": "actual-ZNS packed replay for DOGI dynamic workload axis",
+      "traces": [
+        "artifacts/traces/fast-dynamic-pressure/varmail-pqc8000.jsonl"
+      ],
+      "wall_time_s": 182.091849981
+    },
+    {
+      "append_engine": "helper",
+      "failed_rows": 0,
+      "helper_chunk_blocks": 1,
+      "hybrid_vs_dogi": {
+        "dogi_completed": true,
+        "gc_reduction": 0.9232118135671435,
+        "hybrid_completed": true,
+        "stale_secret_reduction_blocks": 65184,
+        "waf_reduction": 0.08197746842082258
+      },
+      "logical_zone_capacity": 512,
+      "logical_zones": 768,
+      "path": "artifacts/results/fast-dynamic-pressure/packed-physical-zonefs-alibaba-pqc8000-z768-helper.json",
+      "policies": {
+        "dogi-history": {
+          "avg_space_utilization": 0.41082879443560155,
+          "failed_rows": 0,
+          "max_live_physical_zones": 8,
+          "max_secret_blocks_waiting_for_physical_reset": 64544,
+          "physical_reset_commands": 2,
+          "physical_waf": 1.0974490270087152,
+          "secret_blocks_waiting_for_physical_reset": 64544,
+          "sim_gc_blocks": 65010,
+          "sim_stale_secret_blocks": 65184,
+          "sim_waf": 1.0974490270087152
+        },
+        "fifo": {
+          "avg_space_utilization": 0.7347159354688951,
+          "failed_rows": 0,
+          "max_live_physical_zones": 4,
+          "max_secret_blocks_waiting_for_physical_reset": 66532,
+          "physical_reset_commands": 0,
+          "physical_waf": 1.1186626653755407,
+          "secret_blocks_waiting_for_physical_reset": 66532,
+          "sim_gc_blocks": 79162,
+          "sim_stale_secret_blocks": 60057,
+          "sim_waf": 1.1186626653755407
+        },
+        "midas-style": {
+          "avg_space_utilization": 0.4798358431987001,
+          "failed_rows": 0,
+          "max_live_physical_zones": 6,
+          "max_secret_blocks_waiting_for_physical_reset": 51116,
+          "physical_reset_commands": 0,
+          "physical_waf": 1.0939279108043853,
+          "secret_blocks_waiting_for_physical_reset": 51116,
+          "sim_gc_blocks": 62661,
+          "sim_stale_secret_blocks": 83674,
+          "sim_waf": 1.0939279108043853
+        },
+        "quasar": {
+          "avg_space_utilization": 0.7430470926183844,
+          "failed_rows": 0,
+          "max_live_physical_zones": 7,
+          "max_secret_blocks_waiting_for_physical_reset": 7814,
+          "physical_reset_commands": 32,
+          "physical_waf": 1.0145551461660456,
+          "secret_blocks_waiting_for_physical_reset": 0,
+          "sim_gc_blocks": 9710,
+          "sim_stale_secret_blocks": 0,
+          "sim_waf": 1.0145551461660456
+        },
+        "quasar-dogi-hybrid": {
+          "avg_space_utilization": 0.7373430729650263,
+          "failed_rows": 0,
+          "max_live_physical_zones": 7,
+          "max_secret_blocks_waiting_for_physical_reset": 7814,
+          "physical_reset_commands": 32,
+          "physical_waf": 1.0074829340536458,
+          "secret_blocks_waiting_for_physical_reset": 0,
+          "sim_gc_blocks": 4992,
+          "sim_stale_secret_blocks": 0,
+          "sim_waf": 1.0074829340536458
+        },
+        "sepbit-style": {
+          "avg_space_utilization": 0.363611304549675,
+          "failed_rows": 0,
+          "max_live_physical_zones": 8,
+          "max_secret_blocks_waiting_for_physical_reset": 64786,
+          "physical_reset_commands": 0,
+          "physical_waf": 1.1062750517899382,
+          "secret_blocks_waiting_for_physical_reset": 64786,
+          "sim_gc_blocks": 70898,
+          "sim_stale_secret_blocks": 78625,
+          "sim_waf": 1.1062750517899382
+        }
+      },
+      "rows": 6,
+      "scope": "actual-ZNS packed replay for DOGI dynamic workload axis",
+      "traces": [
+        "artifacts/traces/fast-dynamic-pressure/alibaba-pqc8000.jsonl"
+      ],
+      "wall_time_s": 226.440078667
+    }
+  ]
+}

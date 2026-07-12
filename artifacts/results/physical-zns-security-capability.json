@@ -1,0 +1,24 @@
+{
+  "claim_boundary": "QUASAR proves reset eligibility and stale-secret exposure reduction, and this device's NVMe crypto-erase sanitize command path has been executed and validated. Zone reset alone is still not a physical erase proof; a strong physical erase claim requires explicitly issuing sanitize or equivalent hardware crypto-erase semantics at the epoch boundary.",
+  "crypto_erase_executed": true,
+  "device_model": "WZS4C8T1TDSP303",
+  "firmware": "R6Z10009",
+  "namespace_capacity_lba": 249519360,
+  "namespace_size_lba": 474480640,
+  "namespace_use_lba": 275712,
+  "sanicap_hex": "0x60000003",
+  "sanicap_raw": 1610612739,
+  "sanitize_cdw10_info": 4,
+  "sanitize_completed": true,
+  "sanitize_execution_validated": true,
+  "sanitize_log_status": "(1) Most Recent Sanitize Command Completed Successfully.",
+  "sanitize_operations_supported": {
+    "block_erase": true,
+    "crypto_erase": true,
+    "overwrite": false
+  },
+  "sanitize_progress": 65535,
+  "sanitize_supported": true,
+  "sanitize_time_block_erase": 4294967295,
+  "sanitize_time_crypto_erase": 4294967295
+}

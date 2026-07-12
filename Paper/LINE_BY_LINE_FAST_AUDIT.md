@@ -24,7 +24,7 @@ Sources checked:
 | First evidence figures | Old YCSB plot made the WAF gap look small and visually weak. | Use `fig:intro-ycsb` as characterization, add `fig:motivation-semantic-gap` to show WAF/history blindness, then make `fig:ycsb-pressure` the first metric-bearing PQC pressure figure. | fixed; verified in PDF |
 | Workload breadth | Evidence was table-heavy and did not visually match DOGI-style breadth. | Use `fig:pressure-breadth`: Sysbench, Exchange, Varmail, Alibaba-like pressure rows with FIFO/SepBIT/MiDAS/DOGI/QUASAR. | fixed; verified in PDF |
 | Mechanism attribution | Ablation existed mostly as a table. | Use `fig:component-ablation`: staged subfloats for WAF, GC, and expired PQC secrets across history-only, lifecycle hints, and hybrid fallback. | fixed; verified in PDF |
-| Configuration sensitivity | Space/open-zone tradeoff was scattered across prose and tables. | Use `fig:open-zone-robustness`: live-zone budget, waiting secrets, and strict cleanup WAF cost. | fixed; verified in PDF |
+| Configuration sensitivity | Space/open-zone tradeoff and FDP handle pressure were scattered across prose and tables. | Use `fig:open-zone-robustness` for zone budget and `fig:fdp-handle-pressure` for FDP handle collision/purity. | fixed; verify after rebuild |
 | Overhead | Overhead was prose plus numbers, not a FAST-style figure. | Use `fig:prototype-overhead`: actual-ZNS replay throughput plus C-level placement-decision cost. | fixed; verified in PDF |
 | Plot hygiene | Old plots repeated table numbers, used oversized pages, and mixed figure labels with the wrong data story. | Remove numeric labels from bars/points, keep Figure 5 as subfloats, and make Figures 6--7 compact one-column figures instead of `figure*`. | fixed; verified in PDF |
 | Audit honesty | Old audit claimed `18/18` and “submission-grade” too early. | Remove score-as-victory language; keep remaining risks explicit. | fixed |
@@ -56,7 +56,7 @@ WAF optimizer:
 | Design mechanisms | Hint schema, zone families, admission/open-zone budget, conservative reset. | Design section and architecture figure. |
 | Workload breadth | DOGI six-axis controls plus YCSB, Sysbench, Exchange, Varmail, Alibaba pressure. | Methodology, tables, `fig:pressure-breadth`. |
 | Component analysis | Hints vs history-only vs hybrid payload fallback. | `fig:component-ablation`, `tab:ablation`. |
-| Configuration sensitivity | Open-zone budget, binning, missing/wrong hints, and residual cleanup cost. | `fig:open-zone-robustness`. |
+| Configuration sensitivity | Open-zone budget, binning, missing/wrong hints, residual cleanup cost, and FDP handle pressure. | `fig:open-zone-robustness`, `fig:fdp-handle-pressure`. |
 | Prototype overhead | Actual-ZNS replay throughput and C-level decision-cost isolation. | `fig:prototype-overhead`. |
 | Robustness | Missing/wrong hints, tenants, stragglers, strict-zero-wait copy cost. | `fig:open-zone-robustness`, robustness text. |
 
@@ -85,7 +85,7 @@ These are not solved by better plotting and must stay visible:
 | Native DOGI equivalence | Same-path DOGI-style placement is not the full public DOGI stack. | Exact public DOGI/MiDAS/SepBIT runs are separated as sanity evidence. | More native DOGI adapter runs with trace conversion documentation. |
 | Production path | Zonefs replay is not SPDK poll-mode. | xNVMe append probe plus explicit zonefs caveat. | Full SPDK replay with p99 service latency. |
 | Device generality | One ZN540-class device may not represent all ZNS/FDP devices. | Device capabilities and limitations are named. | Additional ZNS/FDP devices and reset/sanitize variance. |
-| FDP relevance | Reviewers may view native ZNS as too narrow when FDP exists. | Background, Related Work, Design, and Discussion map QUASAR lifecycle families to FDP placement handles and explain why ZNS is evaluated first. | FDP device or emulator replay. |
+| FDP relevance | Reviewers may view native ZNS as too narrow when FDP exists. | Background, Related Work, Design, and Discussion map QUASAR lifecycle families to FDP handles; Evaluation reports trace-driven handle collision/purity pressure. | Physical FDP device or emulator replay. |
 | Hint plumbing | POSIX writes do not carry 32-byte lifecycle metadata. | Design includes explicit delivery paths: replay/user-space, SPDK/xNVMe, xattr/ioctl, io_uring, and FDP handles. | Kernel or SPDK request-path prototype. |
 | Stored-secret threat model | Reviewers may object that raw TLS session keys should not be persisted. | Paper scopes to persisted PQC lifecycle state: KMS envelopes, key-wrap records, audit/compliance logs, recovery/session-ticket state, and constrained spill paths. | Application traces from one of those production-like services. |
 | Space amplification | Death-cohort zones can waste capacity. | Admission, binning, overflow, residual fallback, `fig:open-zone-robustness`. | Longer multi-tenant pressure and capacity-utilization sweeps. |
@@ -127,7 +127,7 @@ mapping:
 | Distinction | State mechanism difference. | Death-cohort placement is a mechanism, not just "better placement." | Pass | Keep this phrase stable. |
 | Design | Architecture plus mechanisms and invariants. | Architecture figure, hint schema, trust boundary, families, admission, reclaim, recovery, modes. | Pass | Strongest section after the latest pass. |
 | Implementation | Concrete engineering without replacing Design. | Trace/replay framework, 32-byte hint micro-case, same-path baselines, physical path, xNVMe, sanitize. | Pass | Good scope boundary for zonefs/xNVMe. |
-| Interface boundary | Explain whether QUASAR is ZNS-only. | Background table and Discussion distinguish native ZNS measurement from FDP deployment mapping. | Pass | No FDP hardware result is claimed. |
+| Interface boundary | Explain whether QUASAR is ZNS-only. | Background table and Discussion distinguish native ZNS measurement from FDP deployment mapping; Evaluation adds handle-pressure evidence. | Pass | No physical FDP hardware result is claimed. |
 | Hint plumbing | Show a plausible stack path. | Design table states the concrete carriers and enforcement point. | Pass | This is a blueprint plus implemented user-space path, not kernel code. |
 | Evaluation setup | Hardware, baselines, workloads, metrics. | Present and explicit; exact external baselines are not unit-mixed. | Pass | Repetition evidence exists in artifacts but is not a headline figure. |
 | Main result | End-to-end comparison against fair baselines. | Fairness, YCSB pressure, multi-seed ratio sweep, Sysbench pressure, dynamic pressure. | Pass | Claim is metric-bundled, not WAF-only. |
@@ -147,7 +147,7 @@ mapping:
 | "Space amplification" | Death-cohort zones can waste capacity. | Admission, binning, overflow, residual fallback, utilization reporting, and the Exchange p2000 WAF-vs-utilization figure. | More devices would strengthen generality. |
 | "Hint abuse" | Tenants may inflate priority. | Trust boundary, privileged hint emitters, opaque cohort IDs, quotas, admission limits. | Production policy implementation would strengthen deployment story. |
 | "Physical erase overclaim" | Zone reset is not NAND erase. | Paper says this directly and separates sanitize/crypto-erase command-path evidence. | Per-epoch sanitize scheduling benchmark if making a stronger erase claim. |
-| "FDP would solve this more cleanly" | Native ZNS may look overfit. | Paper positions QUASAR as the lifecycle signal and FDP/ZNS as two carriers; ZNS is chosen for auditable reset accounting. | FDP replay when available. |
+| "FDP would solve this more cleanly" | Native ZNS may look overfit. | Paper positions QUASAR as the lifecycle signal and FDP/ZNS as two carriers; the handle-pressure model shows scarce handles can collide death cohorts. | Physical FDP replay when available. |
 | "This assumes bad security practice" | Raw session-key persistence would be unrealistic. | Threat model now targets persisted lifecycle metadata and bounded secret-bearing records, not all TLS session keys. | Service-specific trace from KMS or audit deployment. |
 | "No production SPDK" | Zonefs helper overhead is not final p99. | xNVMe command-path probe plus explicit caveat. | Full SPDK/poll-mode replay. |
 

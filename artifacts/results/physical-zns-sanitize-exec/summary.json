@@ -1,0 +1,40 @@
+{
+  "action": "crypto-erase sanitize (--sanact=4)",
+  "after": {
+    "cdw10_info": 4,
+    "sprog": 65535,
+    "sstat": {
+      "global_erased": 1,
+      "no_cmplted_passes": 0,
+      "status": "(1) Most Recent Sanitize Command Completed Successfully."
+    },
+    "time_block_erase": 4294967295,
+    "time_block_erase_no_dealloc": 4294967295,
+    "time_crypto_erase": 4294967295,
+    "time_crypto_erase_no_dealloc": 4294967295,
+    "time_over_write": 4294967295,
+    "time_over_write_no_dealloc": 4294967295
+  },
+  "before": {
+    "cdw10_info": 0,
+    "sprog": 65535,
+    "sstat": {
+      "global_erased": 0,
+      "no_cmplted_passes": 0,
+      "status": "(0) NVM Subsystem has never been sanitized."
+    },
+    "time_block_erase": 4294967295,
+    "time_block_erase_no_dealloc": 4294967295,
+    "time_crypto_erase": 4294967295,
+    "time_crypto_erase_no_dealloc": 4294967295,
+    "time_over_write": 4294967295,
+    "time_over_write_no_dealloc": 4294967295
+  },
+  "command_rc": 0,
+  "device": "/dev/nvme0n1",
+  "end_time": "2026-07-11T17:32:32+09:00",
+  "mounted_after": true,
+  "nonempty_after_lines": 0,
+  "nonempty_before_lines": 0,
+  "start_time": "2026-07-11T17:32:26+09:00"
+}

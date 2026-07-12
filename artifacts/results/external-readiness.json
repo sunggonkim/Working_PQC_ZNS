@@ -1,0 +1,773 @@
+{
+  "blockers": [],
+  "components": {
+    "acceptance": {
+      "next": "Keep this green after adding external replay and exact baseline artifacts.",
+      "status": "passed",
+      "summary": "41/41 local simulator/reproducibility gates passed."
+    },
+    "actual_zns_overhead": {
+      "evidence": {
+        "cpu_median_ns_ratio": 0.4916268591108631,
+        "dogi_append_avg_ns": 118838715.38928571,
+        "dogi_throughput_mib_s": 208.09710400551958,
+        "failed_rows": 0,
+        "hybrid_append_avg_ns": 88841471.01076716,
+        "hybrid_semantic_reset_delta": 318,
+        "hybrid_throughput_mib_s": 177.25302639798917,
+        "rows": 84
+      },
+      "next": "Use as overhead accounting; xNVMe/SPDK remains optional for lower-overhead latency measurement.",
+      "status": "done-actual-zns-overhead",
+      "summary": "Actual-ZNS helper replay overhead and C-level policy-decision overhead are summarized; hybrid pays semantic reset work while remaining below DOGI-style MLP decision cost."
+    },
+    "adaptive_policy": {
+      "evidence": {
+        "candidate_policy": "quasar-adaptive-hybrid",
+        "decision": "keep-current-hybrid",
+        "default_policy": "quasar-dogi-hybrid",
+        "sysbench_adaptive_wins": 0,
+        "sysbench_current_wins": 2,
+        "ycsb_adaptive_wins": 0,
+        "ycsb_current_wins": 4
+      },
+      "next": "Keep adaptive binning as a future multi-tenant/open-zone-budget experiment, not as the default.",
+      "status": "done-current-hybrid-retained",
+      "summary": "Adaptive QUASAR was tested on YCSB/Sysbench pressure workloads and did not beat the current QUASAR-DOGI hybrid; the default policy remains unchanged."
+    },
+    "claim_matrix": {
+      "evidence": {
+        "by_status": {
+          "qualified": 1,
+          "supported": 10
+        },
+        "claim_count": 11
+      },
+      "next": "Use this as the paper writing guardrail.",
+      "status": "done-claim-matrix",
+      "summary": "Claim matrix maps paper claims to evidence and forbidden overclaims."
+    },
+    "deployment_selector": {
+      "evidence": {
+        "default_policy": "quasar-dogi-hybrid",
+        "hardness_passed": true,
+        "passed_modes": 4,
+        "total_modes": 4
+      },
+      "next": "Use this as the implementation policy matrix.",
+      "status": "done-deployment-selector",
+      "summary": "Deployment selector defines default hybrid, tenant-isolation, strict-residual, and fallback-overflow modes from measured artifacts."
+    },
+    "dogi_exact": {
+      "evidence": {
+        "nullblk_waf": 1.6808599999999998,
+        "physical_original_lba_gc_write_gib": 10.1494,
+        "physical_original_lba_trace": "/home/bigdatalab/skim/PQC_ZNS/artifacts/traces/fast-dynamic-pressure/alibaba-pqc8000-original-lba.dogi",
+        "physical_original_lba_user_write_gib": 4.58887,
+        "physical_original_lba_waf": 3.2117427602002238,
+        "physical_pressure_gc_write_gib": 9.1416,
+        "physical_pressure_suite_best_placement": "CostBenefit",
+        "physical_pressure_suite_best_waf": 2.803532778684755,
+        "physical_pressure_suite_completed_runs": 3,
+        "physical_pressure_suite_total_runs": 3,
+        "physical_pressure_trace": "/home/bigdatalab/skim/PQC_ZNS/artifacts/traces/fast-dynamic-pressure/alibaba-pqc8000-compact.dogi",
+        "physical_pressure_user_write_gib": 4.58789,
+        "physical_pressure_waf": 2.992549952156656,
+        "physical_suite_aggregate_waf": 2.4006662646819312,
+        "physical_suite_avg_waf": 2.3331446463391456,
+        "physical_suite_gc_write_gib": 11.477537,
+        "physical_suite_logical_size_gb": 2,
+        "physical_suite_user_write_gib": 8.194341,
+        "physical_suite_workloads": 6
+      },
+      "next": "Use this as exact DOGI physical pressure evidence; compact and original-LBA units remain separate from packed QUASAR replay.",
+      "status": "done-nullblk-plus-physical-full-compact-plus-dynamic-pressure-plus-original-lba",
+      "summary": "External DOGI prototype completed on null_blk/ZenFS and on a six-workload compact-LBA physical ZNS PQC2000 suite. It also completed DOGI/Greedy/CostBenefit on an Alibaba-like p8000 compact physical ZNS pressure trace. The Alibaba-like p8000 original-LBA span also completed on the public DOGI stack."
+    },
+    "fast_db_pressure": {
+      "evidence": {
+        "dogi_gc_blocks": 11256,
+        "dogi_stale_secret_blocks": 38438,
+        "dogi_waf": 1.0300788045438876,
+        "failed_rows": 0,
+        "gc_reduction": 0.9458955223880597,
+        "hybrid_gc_blocks": 609,
+        "hybrid_physical_resets": 80,
+        "hybrid_stale_secret_blocks": 0,
+        "hybrid_waf": 1.0016273980070387,
+        "rows": 24,
+        "total_physical_gib": 24.309326171875
+      },
+      "next": "Use as a stress figure; keep DOGI-paper six-workload suite as the fairness matrix.",
+      "status": "done-physical-sysbench-pressure",
+      "summary": "FAST-style Sysbench-OLTP pressure replay completed on physical ZNS; QUASAR-DOGI hybrid keeps stale secrets at zero and sharply reduces GC blocks."
+    },
+    "fast_ycsb_pressure": {
+      "evidence": {
+        "physical": {
+          "ycsb-a-pqc10000": {
+            "dogi_gc_blocks": 3357,
+            "dogi_stale_secret_blocks": 150221,
+            "dogi_waf": 1.0065625238250697,
+            "failed_rows": 0,
+            "hybrid_gc_blocks": 0,
+            "hybrid_physical_resets": 26,
+            "hybrid_stale_secret_blocks": 0,
+            "hybrid_waf": 1.0,
+            "logical_zones": 1024,
+            "ok": true,
+            "rows": 6,
+            "total_physical_gib": 13.04815673828125
+          },
+          "ycsb-a-pqc4000": {
+            "dogi_gc_blocks": 15316,
+            "dogi_stale_secret_blocks": 46266,
+            "dogi_waf": 1.045357087859368,
+            "failed_rows": 0,
+            "hybrid_gc_blocks": 0,
+            "hybrid_physical_resets": 28,
+            "hybrid_stale_secret_blocks": 0,
+            "hybrid_waf": 1.0,
+            "logical_zones": 560,
+            "ok": true,
+            "rows": 6,
+            "total_physical_gib": 9.19986343383789
+          },
+          "ycsb-a-pqc6000": {
+            "dogi_gc_blocks": 15308,
+            "dogi_stale_secret_blocks": 76950,
+            "dogi_waf": 1.0375701618108681,
+            "failed_rows": 0,
+            "hybrid_gc_blocks": 0,
+            "hybrid_physical_resets": 28,
+            "hybrid_stale_secret_blocks": 0,
+            "hybrid_waf": 1.0,
+            "logical_zones": 712,
+            "ok": true,
+            "rows": 6,
+            "total_physical_gib": 10.782684326171875
+          },
+          "ycsb-f-pqc10000": {
+            "dogi_gc_blocks": 13741,
+            "dogi_stale_secret_blocks": 144901,
+            "dogi_waf": 1.027909461309415,
+            "failed_rows": 0,
+            "hybrid_gc_blocks": 0,
+            "hybrid_physical_resets": 26,
+            "hybrid_stale_secret_blocks": 0,
+            "hybrid_waf": 1.0,
+            "logical_zones": 900,
+            "ok": true,
+            "rows": 6,
+            "total_physical_gib": 12.630523681640625
+          },
+          "ycsb-f-pqc6000": {
+            "dogi_gc_blocks": 4166,
+            "dogi_stale_secret_blocks": 96050,
+            "dogi_waf": 1.0105298543867232,
+            "failed_rows": 0,
+            "hybrid_gc_blocks": 0,
+            "hybrid_physical_resets": 28,
+            "hybrid_stale_secret_blocks": 0,
+            "hybrid_waf": 1.0,
+            "logical_zones": 733,
+            "ok": true,
+            "rows": 6,
+            "total_physical_gib": 10.318489074707031
+          },
+          "ycsb-f-pqc8000": {
+            "dogi_gc_blocks": 24289,
+            "dogi_stale_secret_blocks": 100847,
+            "dogi_waf": 1.0528106695424917,
+            "failed_rows": 0,
+            "hybrid_gc_blocks": 0,
+            "hybrid_physical_resets": 28,
+            "hybrid_stale_secret_blocks": 0,
+            "hybrid_waf": 1.0,
+            "logical_zones": 733,
+            "ok": true,
+            "rows": 6,
+            "total_physical_gib": 12.040512084960938
+          }
+        },
+        "pressure_curve": {
+          "failed_rows": 0,
+          "row_count": 9,
+          "semantic_gap_rows": 9,
+          "waf_pressure_rows": 7
+        },
+        "simulator_workloads": 4,
+        "waf_pressure_workloads": [
+          "ycsb-a-pqc4000",
+          "ycsb-a-pqc8000",
+          "ycsb-f-pqc8000"
+        ],
+        "ycsb_f_straggler_baselines": {
+          "dogi-history::secret-group": {
+            "max_live_physical_zones": 8,
+            "ok": true,
+            "physical_resets": 0,
+            "physical_waf": 1.0528106695424917,
+            "secret_waiting_end": 52036,
+            "stale_secret_blocks": 100847
+          },
+          "fifo::secret-group": {
+            "max_live_physical_zones": 3,
+            "ok": true,
+            "physical_resets": 0,
+            "physical_waf": 1.0758643643055719,
+            "secret_waiting_end": 56832,
+            "stale_secret_blocks": 92959
+          },
+          "midas-style::secret-group": {
+            "max_live_physical_zones": 5,
+            "ok": true,
+            "physical_resets": 0,
+            "physical_waf": 1.0192814464998565,
+            "secret_waiting_end": 25726,
+            "stale_secret_blocks": 128224
+          },
+          "sepbit-style::secret-group": {
+            "max_live_physical_zones": 7,
+            "ok": true,
+            "physical_resets": 0,
+            "physical_waf": 1.0364406447993808,
+            "secret_waiting_end": 35292,
+            "stale_secret_blocks": 114520
+          }
+        }
+      },
+      "next": "Use as DOGI-axis pressure evidence; keep p2000 six-workload suite as fairness evidence.",
+      "status": "done-physical-ycsb-pressure",
+      "summary": "FAST/YCSB-A/F pressure sweep completed; representative physical ZNS replays confirm that high-PQC YCSB can expose DOGI-style WAF/GC and stale-secret failures, and same-straggler actual-ZNS baseline replay confirms FIFO/SepBIT/MiDAS/DOGI issue no semantic resets. The actual-ZNS pressure curve includes p2000 as a negative WAF control plus p4000/p8000 pressure points."
+    },
+    "midas_exact": {
+      "evidence": {
+        "compact_lba": true,
+        "compact_span_blocks": 77111,
+        "dataw": 295064,
+        "dogi_lines": 1532604,
+        "dogi_tombstones": 674196,
+        "gcdw": 3778,
+        "recomputed_waf": 1.012804001843668,
+        "runtime_seconds": 6.0,
+        "storage_capacity_gib": 1.0,
+        "total_waf": 1.01,
+        "trace": "artifacts/traces/midas-exact/exchange-pqc2000-repeat4-compact.dogi"
+      },
+      "next": "Do not claim MiDAS collapses on every PQC trace; position QUASAR on death-cohort reset/security semantics and DOGI-style failure modes.",
+      "status": "done-local-memory-repeat4",
+      "summary": "External MiDAS memory-backed prototype completed on a 1.53M-request PQC repeat4 compact trace and remained strong with WAF 1.01."
+    },
+    "multitenant_pressure": {
+      "evidence": {
+        "current_max_live_physical_zones": 5,
+        "current_physical_resets": 41,
+        "current_reset_secret_tenant_impurity": 0.941918466480374,
+        "current_waf": 1.0000176287042315,
+        "decision": "add-tenant-isolation-mode",
+        "failed_rows": 0,
+        "rows": 7,
+        "tenant_mode_max_live_physical_zones": 71,
+        "tenant_mode_physical_resets": 1281,
+        "tenant_mode_reset_secret_tenant_impurity": 0.0,
+        "tenant_mode_waf": 1.002867602554987
+      },
+      "next": "Expose this as an optional tenant-isolation mode, not as the default low-overhead policy.",
+      "status": "done-physical-multitenant-isolation",
+      "summary": "Multi-tenant pressure replay completed; tuned adaptive hybrid eliminates reset-time secret tenant mixing at measurable reset/open-zone cost."
+    },
+    "openssl_oqsprovider": {
+      "evidence": {
+        "avg_client_handshake_ns": 35818860.416666664,
+        "group": "mlkem768",
+        "openssl_bin": "/usr/bin/openssl",
+        "provider_module_path": "/home/bigdatalab/skim/PQC_ZNS/artifacts/external/oqs-provider/_build-local/lib",
+        "sessions": 60
+      },
+      "next": "Use this as the local TLS socket trace; add real service logs only if deployment realism is required.",
+      "status": "done-local-tls-socket",
+      "summary": "OpenSSL s_server/s_client with oqsprovider completed 60 TLS 1.3 handshakes using group mlkem768."
+    },
+    "physical_robustness": {
+      "evidence": {
+        "clean_dogi_stale": 46266,
+        "clean_hybrid_stale": 0,
+        "device_limits": {
+          "mar": 13,
+          "mor": 13,
+          "numzrwa": 13
+        },
+        "missing_hybrid_stale": 3361,
+        "straggler_epoch_bin_failed_rows": 0,
+        "straggler_epoch_bin_max_zones": 13,
+        "straggler_residual_failed_rows": 0,
+        "straggler_residual_max_zones": 13,
+        "straggler_residual_migrated_blocks": 234549,
+        "straggler_residual_waiting_end": 0,
+        "straggler_secret_group_failed_rows": 1,
+        "straggler_secret_group_max_zones": 30,
+        "wrong_hybrid_stale": 0
+      },
+      "next": "Use residual epoch-bin fallback as the open-zone-aware straggler mode; sweep thresholds on more workloads before making it the default.",
+      "status": "done-physical-hint-robustness",
+      "summary": "Physical ZNS robustness replay completed: clean/missing/wrong hints run, stragglers expose an open-zone-limit failure, and residual epoch-bin fallback completes with zero final secret waiting."
+    },
+    "reproducibility_manifest": {
+      "evidence": {
+        "artifact_count": 37,
+        "command_count": 10,
+        "missing_or_empty": []
+      },
+      "next": "Use this as the artifact index when writing or rerunning the paper experiments.",
+      "status": "done-reproducibility-manifest",
+      "summary": "Reproducibility manifest records actual-ZNS artifacts, hashes, claims, and regeneration commands."
+    },
+    "reproducibility_validation": {
+      "evidence": {
+        "artifact_count": 37,
+        "mismatch_count": 0
+      },
+      "next": "Regenerate the manifest whenever any indexed artifact is intentionally updated.",
+      "status": "done-reproducibility-validation",
+      "summary": "Current artifact files match the reproducibility manifest byte sizes and SHA256 hashes."
+    },
+    "residual_fallback": {
+      "evidence": {
+        "budget_physical_rows": 4,
+        "budget_rows": 4,
+        "controller_decisions": 9,
+        "dryrun_rows": 48,
+        "physical_representatives": {
+          "exchange-pqc2000": {
+            "max_live_physical_zones": 10,
+            "physical_waf": 1.0182406941323605,
+            "residual_migrated_blocks": 3515
+          },
+          "sysbench-oltp-pqc4000": {
+            "max_live_physical_zones": 13,
+            "physical_waf": 1.216127268158819,
+            "residual_migrated_blocks": 36679
+          },
+          "ycsb-a-pqc4000": {
+            "max_live_physical_zones": 13,
+            "physical_waf": 1.7098490861062083,
+            "residual_migrated_blocks": 234549
+          }
+        },
+        "ycsb_f_budget_min_waf": 1.1096309180844703,
+        "ycsb_f_budget_physical_min_waf": 1.1096309180844703,
+        "ycsb_f_budget_physical_rows": [
+          {
+            "copy_budget": 50000,
+            "max_live_physical_zones": 12,
+            "physical_waf": 1.1096309180844703,
+            "residual_migrated_blocks": 44105,
+            "residual_migration_budget_skips": 68,
+            "secret_waiting_end": 70656
+          },
+          {
+            "copy_budget": 100000,
+            "max_live_physical_zones": 12,
+            "physical_waf": 1.2054965483502744,
+            "residual_migrated_blocks": 88196,
+            "residual_migration_budget_skips": 64,
+            "secret_waiting_end": 68608
+          },
+          {
+            "copy_budget": 200000,
+            "max_live_physical_zones": 12,
+            "physical_waf": 1.4461096917975758,
+            "residual_migrated_blocks": 198860,
+            "residual_migration_budget_skips": 51,
+            "secret_waiting_end": 43008
+          },
+          {
+            "copy_budget": 400000,
+            "max_live_physical_zones": 12,
+            "physical_waf": 1.8357906180355492,
+            "residual_migrated_blocks": 378084,
+            "residual_migration_budget_skips": 40,
+            "secret_waiting_end": 39936
+          }
+        ],
+        "ycsb_f_controller": {
+          "balanced": {
+            "copy_budget": null,
+            "failed_rows": 0,
+            "max_active_pack_keys": 12,
+            "max_live_physical_zones": 13,
+            "max_secret_waiting": 67605,
+            "mode": "threshold-only-residual",
+            "packing": "epoch-bin-6",
+            "physical_bytes_written": 2723975168,
+            "physical_gc_blocks": 153107,
+            "physical_reset_commands": 10,
+            "physical_waf": 1.3328955808012175,
+            "recommended_copy_budget": 146790,
+            "residual_migrated_blocks": 146790,
+            "residual_migration_budget_skips": null,
+            "residual_migration_commands": 10,
+            "secret_waiting_end": 31744,
+            "sim_gc_blocks": 6317,
+            "sim_stale_secret_blocks": 72773,
+            "sim_waf": 1.013734818209886,
+            "threshold": 32768,
+            "workload": "ycsb-f-pqc8000"
+          },
+          "low_overhead": {
+            "copy_budget": null,
+            "failed_rows": 0,
+            "max_active_pack_keys": 12,
+            "max_live_physical_zones": 12,
+            "max_secret_waiting": 71722,
+            "mode": "no-residual-copy",
+            "packing": "epoch-bin-5",
+            "physical_bytes_written": 2122723328,
+            "physical_gc_blocks": 6317,
+            "physical_reset_commands": 0,
+            "physical_waf": 1.0137348480730555,
+            "recommended_copy_budget": 0,
+            "residual_migrated_blocks": 0,
+            "residual_migration_budget_skips": null,
+            "residual_migration_commands": 0,
+            "secret_waiting_end": 71722,
+            "sim_gc_blocks": 6317,
+            "sim_stale_secret_blocks": 72773,
+            "sim_waf": 1.013734818209886,
+            "threshold": 4096,
+            "workload": "ycsb-f-pqc8000"
+          },
+          "strict_zero_wait": {
+            "copy_budget": null,
+            "failed_rows": 0,
+            "max_active_pack_keys": 12,
+            "max_live_physical_zones": 13,
+            "max_secret_waiting": 44544,
+            "mode": "strict-zero-wait",
+            "packing": "epoch-bin-5",
+            "physical_bytes_written": 6907240448,
+            "physical_gc_blocks": 1174412,
+            "physical_reset_commands": 49,
+            "physical_waf": 3.553485894439311,
+            "recommended_copy_budget": null,
+            "residual_migrated_blocks": 1168095,
+            "residual_migration_budget_skips": null,
+            "residual_migration_commands": 49,
+            "secret_waiting_end": 0,
+            "sim_gc_blocks": 6317,
+            "sim_stale_secret_blocks": 72773,
+            "sim_waf": 1.013734818209886,
+            "threshold": 32768,
+            "workload": "ycsb-f-pqc8000"
+          }
+        },
+        "ycsb_f_controller_physical": {
+          "balanced": {
+            "failed_rows": 0,
+            "max_live_physical_zones": 13,
+            "physical_waf": 1.3328955808012175,
+            "residual_migrated_blocks": 146790,
+            "secret_waiting_end": 31744
+          },
+          "low_overhead": {
+            "failed_rows": 0,
+            "max_live_physical_zones": 12,
+            "physical_waf": 1.0137348480730555,
+            "residual_migrated_blocks": 0,
+            "secret_waiting_end": 71722
+          },
+          "strict_zero_wait": {
+            "failed_rows": 0,
+            "max_live_physical_zones": 13,
+            "physical_waf": 3.553485894439311,
+            "residual_migrated_blocks": 1168095,
+            "secret_waiting_end": 0
+          }
+        },
+        "ycsb_f_strict_physical_waf": 3.553485894439311
+      },
+      "next": "Use the controller as the deployable policy hook; broaden actual ZNS budget points only if finer-grained WAF/exposure tuning is needed.",
+      "status": "done-residual-controller-frontier",
+      "summary": "Residual fallback sweep completed: strict actual ZNS representatives reach zero final secret waiting, actual YCSB-F low-overhead, balanced, and strict controller modes were verified on the ZNS device, YCSB-F shows strict zero-wait mode can be too expensive, actual copy-budget rows define a bounded-overhead mode, and the residual controller exposes the WAF/exposure trade-off instead of hiding it."
+    },
+    "security_capability": {
+      "evidence": {
+        "block_erase": true,
+        "crypto_erase": true,
+        "crypto_erase_executed": true,
+        "device_model": "WZS4C8T1TDSP303",
+        "overwrite": false,
+        "sanicap_hex": "0x60000003",
+        "sanitize_cdw10_info": 4,
+        "sanitize_execution_validated": true,
+        "sanitize_log_status": "(1) Most Recent Sanitize Command Completed Successfully."
+      },
+      "next": "Use this as device command-path evidence; do not claim zone reset alone physically erases NAND.",
+      "status": "done-sanitize-validated",
+      "summary": "Physical ZNS security capability is recorded and the NVMe crypto-erase sanitize command path completed successfully. Zone reset alone remains a reclaim/exposure primitive unless paired with explicit sanitize or equivalent hardware crypto-erase."
+    },
+    "sepbit_exact": {
+      "evidence": {
+        "bytes_to_storage": 15853268992,
+        "bytes_to_system": 6606848000,
+        "compact_lba": true,
+        "method": "SepBIT",
+        "ngc": 7382,
+        "nosep_ngc": 11467,
+        "nosep_wa": 3.696108,
+        "requests": 1532604,
+        "runtime_seconds": 14.444,
+        "selection": "Greedy",
+        "tombstones": 674196
+      },
+      "next": "Use this as exact SepBIT large-trace evidence; keep units separate from native ZNS physical replay.",
+      "status": "done-local-simulator-repeat4",
+      "summary": "External SepBIT trace_replay completed on the 1.53M-request PQC repeat4 compact trace with WA 2.399521; NoSep WA was 3.696108."
+    },
+    "workload_hardness": {
+      "evidence": {
+        "by_tier": {
+          "claim-gate": {
+            "passed": 1,
+            "total": 1
+          },
+          "fairness": {
+            "passed": 1,
+            "total": 1
+          },
+          "hostile-robustness": {
+            "passed": 3,
+            "total": 3
+          },
+          "negative-control": {
+            "passed": 2,
+            "total": 2
+          },
+          "pressure": {
+            "passed": 2,
+            "total": 2
+          }
+        },
+        "claim_gate": {
+          "db_pressure_eligible": true,
+          "dynamic_baseline_complete_rows": 3,
+          "eligible_dynamic_examples": [
+            {
+              "dogi_gc_blocks": 43006,
+              "dogi_waf": 1.0716089961652904,
+              "gc_reduction": 0.9994884434730038,
+              "hybrid_gc_blocks": 22,
+              "hybrid_waf": 1.00003663204938,
+              "path": "artifacts/results/fast-dynamic-pressure/packed-physical-zonefs-exchange-pqc8000-z768-helper.json",
+              "policies_present": [
+                "dogi-history",
+                "fifo",
+                "midas-style",
+                "quasar",
+                "quasar-dogi-hybrid",
+                "sepbit-style"
+              ],
+              "stale_secret_reduction_blocks": 75422
+            },
+            {
+              "dogi_gc_blocks": 43227,
+              "dogi_waf": 1.0727331770771114,
+              "gc_reduction": 0.9959516043213732,
+              "hybrid_gc_blocks": 175,
+              "hybrid_waf": 1.0002944526797717,
+              "path": "artifacts/results/fast-dynamic-pressure/packed-physical-zonefs-varmail-pqc8000-z768-helper.json",
+              "policies_present": [
+                "dogi-history",
+                "fifo",
+                "midas-style",
+                "quasar",
+                "quasar-dogi-hybrid",
+                "sepbit-style"
+              ],
+              "stale_secret_reduction_blocks": 79600
+            },
+            {
+              "dogi_gc_blocks": 65010,
+              "dogi_waf": 1.0974490270087152,
+              "gc_reduction": 0.9232118135671435,
+              "hybrid_gc_blocks": 4992,
+              "hybrid_waf": 1.0074829340536458,
+              "path": "artifacts/results/fast-dynamic-pressure/packed-physical-zonefs-alibaba-pqc8000-z768-helper.json",
+              "policies_present": [
+                "dogi-history",
+                "fifo",
+                "midas-style",
+                "quasar",
+                "quasar-dogi-hybrid",
+                "sepbit-style"
+              ],
+              "stale_secret_reduction_blocks": 65184
+            }
+          ],
+          "eligible_dynamic_rows": 3,
+          "eligible_ycsb_examples": [
+            {
+              "baselines_present": [
+                "dogi-history",
+                "fifo",
+                "midas-style",
+                "sepbit-style"
+              ],
+              "dogi_gc_blocks": 15316,
+              "dogi_stale_secret_blocks": 46266,
+              "hybrid_gc_blocks": 0,
+              "hybrid_stale_secret_blocks": 0,
+              "pqc_level": 4000,
+              "workloads": [
+                "ycsb-a-pqc4000"
+              ]
+            },
+            {
+              "baselines_present": [
+                "dogi-history",
+                "fifo",
+                "midas-style",
+                "sepbit-style"
+              ],
+              "dogi_gc_blocks": 15308,
+              "dogi_stale_secret_blocks": 76950,
+              "hybrid_gc_blocks": 0,
+              "hybrid_stale_secret_blocks": 0,
+              "pqc_level": 6000,
+              "workloads": [
+                "ycsb-a-pqc6000"
+              ]
+            },
+            {
+              "baselines_present": [
+                "dogi-history",
+                "fifo",
+                "midas-style",
+                "sepbit-style"
+              ],
+              "dogi_gc_blocks": 4166,
+              "dogi_stale_secret_blocks": 96050,
+              "hybrid_gc_blocks": 0,
+              "hybrid_stale_secret_blocks": 0,
+              "pqc_level": 6000,
+              "workloads": [
+                "ycsb-f-pqc6000"
+              ]
+            }
+          ],
+          "eligible_ycsb_pressure_rows": 7,
+          "minimum_rule": ">=3 YCSB pressure rows with all history baselines, DB pressure eligible, >=2 dynamic pressure rows with all policies",
+          "required_all_policies": [
+            "dogi-history",
+            "fifo",
+            "midas-style",
+            "quasar",
+            "quasar-dogi-hybrid",
+            "sepbit-style"
+          ],
+          "required_history_baselines": [
+            "dogi-history",
+            "fifo",
+            "midas-style",
+            "sepbit-style"
+          ],
+          "ycsb_baseline_complete_rows": 9
+        },
+        "passed_entries": 9,
+        "total_entries": 9
+      },
+      "next": "Use this as the benchmark guardrail against relying on an overly easy PQC trace.",
+      "status": "done-workload-hardness-matrix",
+      "summary": "Workload suite separates DOGI-axis fairness, negative WAF controls, pressure rows, headline-claim eligibility, and QUASAR-hostile robustness cases."
+    },
+    "zns_fdp_replay": {
+      "evidence": {
+        "device": "/dev/nvme0n1",
+        "dogi_policy_replay_dogi_stale_secrets": 99898,
+        "dogi_policy_replay_hybrid_max_open_zones": 12,
+        "dogi_policy_replay_hybrid_resets": 105,
+        "dogi_policy_replay_hybrid_stale_secrets": 0,
+        "dogi_policy_replay_rows": 30,
+        "hybrid_block_reduction_vs_dogi": 0.04276687213435144,
+        "model": "WZS4C8T1TDSP303",
+        "mount": "/mnt/zn540",
+        "packed_analysis_rows": 120,
+        "packed_any_secret_waiting_end": 62635,
+        "packed_group_max_live_physical_zones": 12,
+        "packed_group_secret_waiting_end": 0,
+        "packed_logical_zone_max_live_physical_zones": 390,
+        "packed_physical_append_engine": "helper",
+        "packed_physical_group_avg_utilization": 0.09836990013043286,
+        "packed_physical_group_max_live_physical_zones": 12,
+        "packed_physical_group_resets": 105,
+        "packed_physical_group_secret_waiting_end": 0,
+        "packed_physical_helper_chunk_blocks": 1,
+        "packed_physical_rows": 72,
+        "packed_physical_secret_group_avg_utilization": 0.7216600413958528,
+        "packed_physical_secret_group_max_live_physical_zones": 5,
+        "packed_physical_secret_group_resets": 98,
+        "packed_physical_secret_group_secret_waiting_end": 0,
+        "packed_physical_wall_time_s": 472.459942448,
+        "policy_replay_dogi_stale_secrets": 3840,
+        "policy_replay_hybrid_resets": 142,
+        "policy_replay_hybrid_stale_secrets": 0,
+        "policy_replay_rows": 20,
+        "rows": 30,
+        "scale": 40,
+        "stale_secret_blocks_avoided": 44726,
+        "total_gib_written": 511.4024353027344
+      },
+      "next": "Use this as physical write-pressure and packed placement evidence; add xNVMe/SPDK only if lower-overhead replay is needed.",
+      "status": "done-physical-zonefs-write-pressure-plus-policy-and-packed-replay",
+      "summary": "Physical ZNS SSD detected; DOGI-shaped PQC2000 policy write-pressure suite completed with 511.40 GiB of zonefs append traffic, direct policy-operation zonefs replay completed for PQC/liboqs traces, physical-capacity DOGI-shaped policy-operation replay completed, and packed logical-to-physical zonefs replay completed."
+    }
+  },
+  "inputs": {
+    "acceptance": "artifacts/results/acceptance-report.json",
+    "actual_zns_overhead": "artifacts/results/actual-zns-overhead-summary.json",
+    "adaptive_policy_comparison": "artifacts/results/adaptive-policy-comparison.json",
+    "claim_matrix": "artifacts/results/quasar-claim-matrix.json",
+    "deployment_selector": "artifacts/results/quasar-deployment-policy-selector.json",
+    "dogi_physical_original_lba_run": "artifacts/results/dogi-exact/alibaba-pqc8000-original-lba-dogi-cwd-app.json",
+    "dogi_physical_pressure_run": "artifacts/results/dogi-exact/alibaba-pqc8000-dogi.json",
+    "dogi_physical_pressure_suite": "artifacts/results/dogi-exact/alibaba-pqc8000-suite.json",
+    "dogi_physical_run": "artifacts/results/dogi-physical-zns-compact-exchange-clean-run.json",
+    "dogi_physical_suite": "artifacts/results/dogi-physical-zns-full-pqc2000-compact-lg2/summary.json",
+    "dogi_preflight": "artifacts/results/dogi-preflight.json",
+    "dogi_run": "artifacts/results/dogi-nullblk-full-run.json",
+    "fast_db_pressure": "artifacts/results/fast-db-pressure/sysbench-pressure-summary.json",
+    "fast_ycsb_pressure": "artifacts/results/fast-ycsb-pressure/ycsb-pressure-summary.json",
+    "midas": "artifacts/results/midas-preflight.json",
+    "midas_repeat_run": "artifacts/results/midas-exact/exchange-pqc2000-repeat4-compact.json",
+    "midas_run": "artifacts/results/midas-exact/pqc-pressure-1g.json",
+    "multitenant_pressure": "artifacts/results/multitenant-pressure/multitenant-pressure-summary.json",
+    "openssl": "artifacts/results/openssl-pqc-capability.json",
+    "openssl_oqsprovider_run": "artifacts/results/openssl-oqsprovider/summary.json",
+    "openssl_oqsprovider_service_run": "artifacts/results/openssl-oqsprovider-kem-service/summary.json",
+    "openssl_oqsprovider_tls_socket_run": "artifacts/results/openssl-oqsprovider-tls-socket/summary.json",
+    "packed_physical_zonefs_replay": "artifacts/results/packed-physical-zonefs-replay-dogi-paper-pqc2000-z512-secret-group-helper.json",
+    "packed_policy_replay_analysis": "artifacts/results/packed-policy-replay-dogi-pqc2000-z512-pressure-physical-zones.json",
+    "physical_policy_dogi_zonefs_replay": "artifacts/results/physical-policy-zonefs-replay-dogi-pqc2000-physical-capacity.json",
+    "physical_policy_zonefs_replay": "artifacts/results/physical-policy-zonefs-replay-pqc-direct.json",
+    "physical_robustness": "artifacts/results/physical-robustness-ycsb-a-pqc4000/summary.json",
+    "physical_zns": "artifacts/results/physical-zns-readiness.json",
+    "physical_zonefs_append": "artifacts/results/physical-zonefs-append.json",
+    "physical_zonefs_replay": "artifacts/results/physical-zonefs-replay-kms.json",
+    "physical_zonefs_suite": "artifacts/results/physical-zonefs-dogi-pqc2000-suite-summary.json",
+    "physical_zonefs_write_pressure": "artifacts/results/physical-zonefs-write-pressure-pqc2000-rf0-scale40.json",
+    "reproducibility_manifest": "artifacts/results/quasar-reproducibility-manifest.json",
+    "reproducibility_validation": "artifacts/results/quasar-reproducibility-validation.json",
+    "residual_fallback_sweep": "artifacts/results/residual-fallback-sweep/summary.json",
+    "security_capability": "artifacts/results/physical-zns-security-capability.json",
+    "sepbit_nosep_repeat_run": "artifacts/results/sepbit-exact/exchange-pqc2000-repeat4-compact-nosep.json",
+    "sepbit_repeat_run": "artifacts/results/sepbit-exact/exchange-pqc2000-repeat4-compact-sepbit.json",
+    "sepbit_run": "artifacts/results/sepbit-exact/pqc-pressure-1g-sepbit.json",
+    "workload_hardness": "artifacts/results/workload-hardness-matrix.json",
+    "ycsb_f_straggler_baselines": "artifacts/results/fast-ycsb-pressure/packed-physical-zonefs-ycsb-f-pqc8000-straggler005-baselines-helper.json",
+    "ycsb_pressure_curve": "artifacts/results/fast-ycsb-pressure/ycsb-actual-zns-pressure-curve.json",
+    "zns": "artifacts/results/zns-preflight.json"
+  },
+  "paper_ready_external": true,
+  "pending": []
+}

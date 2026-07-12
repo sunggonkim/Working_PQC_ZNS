@@ -1,0 +1,15 @@
+{
+  "completed": true,
+  "gc_write_gib": 10.1494,
+  "log": "artifacts/results/dogi-exact/alibaba-pqc8000-original-lba-dogi-cwd-app.log",
+  "placement_algorithm": "DOGI",
+  "placement_name": "DOGI",
+  "saw_dogi_select": true,
+  "saw_mlp_status": true,
+  "saw_zenfs_mount": true,
+  "selection_algorithm": "DogiSelect",
+  "trace_path": "/home/bigdatalab/skim/PQC_ZNS/artifacts/traces/fast-dynamic-pressure/alibaba-pqc8000-original-lba.dogi",
+  "user_write_gib": 4.58887,
+  "waf": 3.2117427602002238,
+  "zenfs_free_mb": 971454.0
+}

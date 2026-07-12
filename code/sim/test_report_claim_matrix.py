@@ -67,16 +67,28 @@ class ClaimMatrixTests(unittest.TestCase):
         }
         readiness = {"paper_ready_external": True}
         acceptance = {"passed_gates": 35, "total_gates": 35}
+        fdp_mapping = {
+            "runs": [
+                {
+                    "handles": 64,
+                    "family_count": 86,
+                    "family_purity": 0.96,
+                    "intent_purity": 0.98,
+                    "avg_families_per_occupied_handle": 1.7,
+                }
+            ]
+        }
 
-        claims = claim_matrix.build_claims(unified, readiness, acceptance)
+        claims = claim_matrix.build_claims(unified, readiness, acceptance, fdp_mapping)
         summary = claim_matrix.summarize(claims)
         text = claim_matrix.markdown(summary)
 
-        self.assertEqual(summary["claim_count"], 11)
+        self.assertEqual(summary["claim_count"], 12)
         self.assertIn("supported-boundary", summary["by_status"])
         self.assertIn("Forbidden Overclaims", text)
         self.assertIn("Zone reset alone", text)
         self.assertIn("YCSB baseline-complete rows=7", text)
+        self.assertIn("FDP can carry", text)
 
 
 if __name__ == "__main__":

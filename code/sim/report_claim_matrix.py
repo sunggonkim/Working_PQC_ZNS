@@ -42,6 +42,7 @@ def build_claims(
     unified: dict[str, Any],
     readiness: dict[str, Any],
     acceptance: dict[str, Any],
+    fdp_mapping: dict[str, Any] | None = None,
 ) -> list[dict[str, Any]]:
     fair = unified["same_path_physical_zns"]
     ycsb_curve = unified["ycsb_pressure_curve"]
@@ -56,6 +57,9 @@ def build_claims(
     selector = unified["deployment_selector"]
     manifest = unified["reproducibility_manifest"]
     validation = unified["reproducibility_validation"]
+    fdp_runs = (fdp_mapping or {}).get("runs", [])
+    fdp_best = max(fdp_runs, key=lambda row: row.get("handles", 0), default={})
+    fdp_mid = next((row for row in fdp_runs if row.get("handles") == 64), fdp_best)
 
     claims = [
         make_claim(
@@ -214,6 +218,22 @@ def build_claims(
             "Do not mix exact-baseline internal units with QUASAR native ZNS throughput as if they were identical.",
         ),
         make_claim(
+            "FDP can carry QUASAR's lifecycle signal, but scarce placement handles create collision pressure.",
+            "supported-boundary",
+            [
+                f"FDP handle-model runs={len(fdp_runs)}",
+                f"families={fdp_best.get('family_count')}",
+                f"best handles={fdp_best.get('handles')} family purity={fdp_best.get('family_purity')}",
+                f"64-handle intent purity={fdp_mid.get('intent_purity')}",
+                f"64-handle avg families/handle={fdp_mid.get('avg_families_per_occupied_handle')}",
+            ],
+            (
+                "A trace-driven FDP mapping shows that QUASAR families retain high intent/family purity as placement "
+                "handles increase, but small handle counts collide multiple death cohorts and require admission or binning."
+            ),
+            "This is a trace-driven handle-pressure model, not a physical FDP device performance result.",
+        ),
+        make_claim(
             "The current artifact set is paper-ready for the scoped system claim.",
             "supported",
             [
@@ -284,6 +304,7 @@ def main() -> int:
     parser.add_argument("--unified", type=Path, default=Path("artifacts/results/unified-baseline-comparison.json"))
     parser.add_argument("--readiness", type=Path, default=Path("artifacts/results/external-readiness.json"))
     parser.add_argument("--acceptance", type=Path, default=Path("artifacts/results/acceptance-report.json"))
+    parser.add_argument("--fdp-mapping", type=Path, default=Path("artifacts/results/pqc-mixed-fdp-mapping.json"))
     parser.add_argument("--out", type=Path, default=Path("artifacts/results/quasar-claim-matrix.json"))
     parser.add_argument("--markdown-out", type=Path, default=Path("artifacts/results/quasar-claim-matrix.md"))
     args = parser.parse_args()
@@ -293,6 +314,7 @@ def main() -> int:
             load_json(args.unified),
             load_json(args.readiness),
             load_json(args.acceptance),
+            load_json(args.fdp_mapping),
         )
     )
     args.out.parent.mkdir(parents=True, exist_ok=True)

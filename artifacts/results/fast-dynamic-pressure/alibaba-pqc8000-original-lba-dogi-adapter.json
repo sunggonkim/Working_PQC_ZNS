@@ -1,0 +1,18 @@
+{
+  "compact_lba": false,
+  "compact_lba_entries": 0,
+  "compact_span_blocks": 0,
+  "dogi_lines": 1038786,
+  "dogi_tombstones": 472021,
+  "dogi_trace": "artifacts/traces/fast-dynamic-pressure/alibaba-pqc8000-original-lba.dogi",
+  "dogi_writes": 566765,
+  "global_cc_snippet": "char wk_name[128] = \"/home/bigdatalab/skim/PQC_ZNS/artifacts/traces/fast-dynamic-pressure/alibaba-pqc8000-original-lba.dogi\";\nint LogicalSizeGb = 42;\nconst char kZnsDevicePath[] = \"/dev/<zns-device>\";\nconst char kZbdDeviceName[] = \"<zns-device-name>\";",
+  "logical_size_gb": 42,
+  "max_lba": 10895998,
+  "max_ts": 200000,
+  "original_max_lba": 10895998,
+  "skipped_expires": 0,
+  "source_jsonl": "artifacts/traces/fast-dynamic-pressure/alibaba-pqc8000.jsonl",
+  "tombstone_model": "one 4KiB overwrite at expired object LBA",
+  "user_write_bytes": 2994659328
+}

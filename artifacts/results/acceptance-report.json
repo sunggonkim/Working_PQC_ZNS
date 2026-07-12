@@ -1013,9 +1013,10 @@
       "evidence": {
         "by_status": {
           "qualified": 1,
-          "supported": 10
+          "supported": 10,
+          "supported-boundary": 1
         },
-        "claim_count": 11
+        "claim_count": 12
       },
       "name": "claim_matrix_maps_supported_qualified_and_boundary_claims",
       "passed": true
@@ -1203,8 +1204,8 @@
     },
     {
       "evidence": {
-        "artifact_count": 37,
-        "command_count": 10,
+        "artifact_count": 39,
+        "command_count": 12,
         "missing_or_empty": [],
         "missing_required": []
       },
@@ -1213,7 +1214,7 @@
     },
     {
       "evidence": {
-        "artifact_count": 37,
+        "artifact_count": 39,
         "mismatch_count": 0,
         "mismatches": []
       },

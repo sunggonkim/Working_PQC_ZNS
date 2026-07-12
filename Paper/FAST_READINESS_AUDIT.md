@@ -19,7 +19,7 @@ fallback modes.
 | Avoid toy PQC-only claims. | Workload-hardness matrix separates fairness, negative controls, pressure, claim-gate rows, and hostile robustness. | Satisfied. |
 | Keep DOGI fair. | Non-PQC controls preserve DOGI/hybrid history-placement behavior; hybrid keeps DOGI-style payload placement. | Satisfied. |
 | Use physical ZNS evidence. | WD ZN540-class actual-ZNS zonefs replay, physical pressure suites, xNVMe latency probe, and sanitize command-path validation. | Satisfied with zonefs/xNVMe caveat. |
-| Address ZNS-vs-FDP interface risk. | Background and Discussion now frame QUASAR as lifecycle-placement policy: native ZNS is evaluated for observability, FDP maps the same family signal to placement handles. | Satisfied for paper narrative; no FDP hardware result. |
+| Address ZNS-vs-FDP interface risk. | Background and Discussion frame QUASAR as lifecycle-placement policy; Evaluation now includes a trace-driven FDP handle-pressure model showing family/intent purity across 8--128 handles. | Satisfied as a deployment model; no physical FDP hardware result. |
 | Give concrete hint plumbing. | Design has a hint-delivery table covering replay/user-space, SPDK/xNVMe-style request metadata, xattr/ioctl, io_uring, and FDP placement handles. | Satisfied for design; kernel implementation remains future work. |
 | Scope stored-secret threat model. | Background clarifies QUASAR targets persisted PQC lifecycle state such as KMS envelopes, key-wrap records, audit logs, recovery records, and spill paths, not universal TLS session-key persistence. | Satisfied. |
 | Include exact public baselines. | Exact DOGI, MiDAS, and SepBIT sanity runs are included but not unit-mixed with same-path replay. | Satisfied with caveat. |
@@ -47,15 +47,15 @@ fallback modes.
 
 | Gap | Why It Matters | Status |
 | --- | --- | --- |
-| Figure polish | FAST reviewers read plots before prose. Motivation now has a one-column semantic-gap diagnostic with a separate legend PDF above the plot. Figure 5 carries component ablation, Figure 6 carries open-zone/config sensitivity, and Figure 7 carries prototype overhead. Numeric graph labels were removed to avoid table/figure duplication. | Checked for current build. |
+| Figure polish | FAST reviewers read plots before prose. Motivation has a one-column semantic-gap diagnostic; Evaluation now has component ablation, open-zone/config sensitivity, FDP handle pressure, and prototype overhead figures. Numeric graph labels were removed to avoid table/figure duplication. | Checked after current rebuild. |
 | Table-heavy Evaluation | The paper still carries exact measured matrices in tables, but the main reviewer attacks now have figure paths: pressure, component attribution, open-zone sensitivity, and overhead. | Intentional auditability tradeoff. |
 | Full production SPDK path | Zonefs helper replay validates actual-ZNS append/reset behavior, but not final production p99 latency. | Explicitly scoped; xNVMe probe partially addresses command path. |
 | Real YCSB/JDBC block traces | Would strengthen external validity beyond DOGI-shaped YCSB pressure generation. | Optional strengthening for the scoped claim; not represented as completed. |
-| FDP implementation | The paper now explains FDP mapping, but there is no real FDP device or emulator result. | Future strengthening, not a current claim. |
+| FDP implementation | The paper now has a trace-driven FDP placement-handle model and figure, but there is no real FDP device result. | Partially addressed; physical FDP remains future strengthening. |
 | End-to-end app p99 | Sysbench/MySQL is an execution gate, not full QUASAR-integrated DB block tracing. | Explicitly scoped. |
 | More device diversity | One WD ZN540-class device plus emulator/exact-baseline artifacts is not a wear-leveling study. | Explicit limitation. |
 | Final prose pass | Evaluation was consolidated into five FAST-style subsections with `\textbf{}` run-in leads while preserving the evidence and claim boundaries. | Checked for current build. |
-| Final figure/caption inspection | Current visual pass checked Figure 5 plus the compact one-column Figure 6--7 layout after label removal. Repeat only if figures move or new plots are added. | Checked for current build. |
+| Final figure/caption inspection | Current pass includes the newly added compact FDP handle-pressure figure plus the open-zone and prototype figures. | Checked after current rebuild. |
 
 ## FAST Reviewer Attack Readiness
 
@@ -68,7 +68,7 @@ fallback modes.
 | "Did QUASAR buy WAF by wasting zones?" | Open-zone/config sensitivity shows exact cohort placement can exceed the device limit, binning fits the budget, and strict cleanup has explicit WAF cost. |
 | "Hints are unrealistic or abusable." | The paper defines a trust boundary, privileged hint emitters, opaque cohort IDs, per-tenant quotas, and overflow fallback. |
 | "How does the 32-byte hint cross the stack?" | The paper gives concrete attachment points and states that POSIX write alone does not carry the hint. |
-| "Why not FDP instead of ZNS?" | The paper maps QUASAR families to FDP handles and explains why ZNS is used first for measurable append/reset accounting. |
+| "Why not FDP instead of ZNS?" | The paper maps QUASAR families to FDP handles, reports handle-count collision/purity pressure, and explains why ZNS is used first for measurable append/reset accounting. |
 | "Zone reset is not secure erase." | The paper says this directly and claims reset eligibility/exposure reduction by default; sanitize/crypto-erase is a separate device capability path. |
 | "Why are these PQC artifacts stored?" | The paper scopes to deployments that already persist bounded lifecycle state and does not require universal TLS key persistence. |
 | "Strict exposure costs too much." | The paper shows residual migration can be expensive and treats strict zero-wait as an opt-in mode. |
@@ -91,13 +91,13 @@ matching the argument mechanics is the goal.
 | Main result. | Same-path actual-ZNS fairness and pressure rows. | Good. |
 | Ablation. | Component ablation uses subfloats for WAF, GC, and expired PQC secrets, with the table kept as qualitative checkpoint support. | Good. |
 | Sensitivity/robustness. | Open-zone budget, missing/wrong hints, stragglers, binning, and residual cleanup cost are figure-backed. | Good. |
-| Cost and limitation. | Prototype overhead figure separates actual-ZNS zonefs accounting from C-level decision cost; text keeps the xNVMe/SPDK caveat. | Good. |
+| Cost and limitation. | Prototype overhead figure separates actual-ZNS zonefs accounting from C-level decision cost; FDP handle-pressure figure separates deployment modeling from physical FDP claims; text keeps the xNVMe/SPDK caveat. | Good. |
 
 ## Bottom Line
 
 This is no longer "too easy" or "just a simulator". The current draft has a
 defensible FAST-style spine and clean scoped claims. It is still not a magical
-guarantee of acceptance: full SPDK, real YCSB/JDBC block traces, and more device
+guarantee of acceptance: full SPDK, real YCSB/JDBC block traces, physical FDP, and more device
 diversity would make it stronger. But the paper now answers the
 core FAST reviewer question directly:
 

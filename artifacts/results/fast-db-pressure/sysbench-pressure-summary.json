@@ -1,0 +1,221 @@
+{
+  "physical": {
+    "append_engine": "helper",
+    "by_policy_packing": {
+      "dogi-history::secret-group": {
+        "avg_space_utilization": 0.16003202617223772,
+        "max_live_physical_zones": 6,
+        "max_secret_blocks_waiting_for_physical_reset": 16827,
+        "physical_reset_commands": 0,
+        "secret_blocks_waiting_for_physical_reset": 20388,
+        "sim_gc_blocks": 11256,
+        "sim_stale_secret_blocks": 38438,
+        "sim_waf": 1.0300788045438876
+      },
+      "fifo::secret-group": {
+        "avg_space_utilization": 0.4943156264507892,
+        "max_live_physical_zones": 2,
+        "max_secret_blocks_waiting_for_physical_reset": 15360,
+        "physical_reset_commands": 0,
+        "secret_blocks_waiting_for_physical_reset": 20480,
+        "sim_gc_blocks": 26938,
+        "sim_stale_secret_blocks": 38736,
+        "sim_waf": 1.0719849712867133
+      },
+      "midas-style::secret-group": {
+        "avg_space_utilization": 0.19265247794800372,
+        "max_live_physical_zones": 5,
+        "max_secret_blocks_waiting_for_physical_reset": 14446,
+        "physical_reset_commands": 0,
+        "secret_blocks_waiting_for_physical_reset": 16087,
+        "sim_gc_blocks": 12949,
+        "sim_stale_secret_blocks": 42815,
+        "sim_waf": 1.034602917558529
+      },
+      "quasar-dogi-hybrid::group": {
+        "avg_space_utilization": 0.11428514433280276,
+        "max_live_physical_zones": 13,
+        "max_secret_blocks_waiting_for_physical_reset": 1952,
+        "physical_reset_commands": 88,
+        "secret_blocks_waiting_for_physical_reset": 0,
+        "sim_gc_blocks": 609,
+        "sim_stale_secret_blocks": 0,
+        "sim_waf": 1.0016273980070387
+      },
+      "quasar-dogi-hybrid::secret-group": {
+        "avg_space_utilization": 0.8355276520427113,
+        "max_live_physical_zones": 5,
+        "max_secret_blocks_waiting_for_physical_reset": 1952,
+        "physical_reset_commands": 80,
+        "secret_blocks_waiting_for_physical_reset": 0,
+        "sim_gc_blocks": 609,
+        "sim_stale_secret_blocks": 0,
+        "sim_waf": 1.0016273980070387
+      },
+      "quasar::secret-group": {
+        "avg_space_utilization": 0.8460603818477251,
+        "max_live_physical_zones": 5,
+        "max_secret_blocks_waiting_for_physical_reset": 1952,
+        "physical_reset_commands": 80,
+        "secret_blocks_waiting_for_physical_reset": 0,
+        "sim_gc_blocks": 6567,
+        "sim_stale_secret_blocks": 0,
+        "sim_waf": 1.0175486415635848
+      },
+      "sepbit-style::secret-group": {
+        "avg_space_utilization": 0.16226714832869082,
+        "max_live_physical_zones": 6,
+        "max_secret_blocks_waiting_for_physical_reset": 16064,
+        "physical_reset_commands": 0,
+        "secret_blocks_waiting_for_physical_reset": 19353,
+        "sim_gc_blocks": 18651,
+        "sim_stale_secret_blocks": 41002,
+        "sim_waf": 1.049840066057929
+      }
+    },
+    "failed_rows": 0,
+    "helper_chunk_blocks": 1,
+    "hybrid_vs_dogi_secret_group": {
+      "gc_reduction": 0.9458955223880597,
+      "stale_secret_reduction_blocks": 38438,
+      "waf_reduction": 0.027620611560342668
+    },
+    "rows": 24,
+    "total_physical_gib": 24.309326171875,
+    "wall_time_s": 204.725868174
+  },
+  "simulator": {
+    "sysbench-oltp-pqc2000": {
+      "hybrid_vs_dogi": {
+        "gc_reduction": 0.7629230510186901,
+        "stale_secret_reduction_blocks": 12254,
+        "waf_reduction": 0.025572430763673645
+      },
+      "policies": {
+        "dogi-history": {
+          "epoch_impurity": 0.066892824435358,
+          "gc_write_blocks": 5939,
+          "intent_impurity": 0.0652030905362003,
+          "stale_secret_blocks_remaining": 12254,
+          "waf": 1.0346815070892994,
+          "write_latency_p99_ns": 58748.0
+        },
+        "epoch-oracle": {
+          "epoch_impurity": 0.06733138132521573,
+          "gc_write_blocks": 9560,
+          "intent_impurity": 0.07129129206598991,
+          "stale_secret_blocks_remaining": 1097,
+          "waf": 1.055826773492794,
+          "write_latency_p99_ns": 40000.0
+        },
+        "fifo": {
+          "epoch_impurity": 0.06733138132521573,
+          "gc_write_blocks": 15764,
+          "intent_impurity": 0.07129129206598991,
+          "stale_secret_blocks_remaining": 12306,
+          "waf": 1.0920557800565276,
+          "write_latency_p99_ns": 40000.0
+        },
+        "midas-style": {
+          "epoch_impurity": 0.06427438182826628,
+          "gc_write_blocks": 7138,
+          "intent_impurity": 0.06374553381402608,
+          "stale_secret_blocks_remaining": 14289,
+          "waf": 1.0416832122585318,
+          "write_latency_p99_ns": 40480.0
+        },
+        "quasar": {
+          "epoch_impurity": 0.03200175422755943,
+          "gc_write_blocks": 7617,
+          "intent_impurity": 0.0,
+          "stale_secret_blocks_remaining": 0,
+          "waf": 1.0444803905538296,
+          "write_latency_p99_ns": 40800.0
+        },
+        "quasar-dogi-hybrid": {
+          "epoch_impurity": 0.03200175422755943,
+          "gc_write_blocks": 1408,
+          "intent_impurity": 0.0,
+          "stale_secret_blocks_remaining": 0,
+          "waf": 1.0082221858868048,
+          "write_latency_p99_ns": 44661.0
+        },
+        "sepbit-style": {
+          "epoch_impurity": 0.06653165993782811,
+          "gc_write_blocks": 10693,
+          "intent_impurity": 0.06650586247371883,
+          "stale_secret_blocks_remaining": 13306,
+          "waf": 1.0624430636985822,
+          "write_latency_p99_ns": 40480.0
+        }
+      },
+      "zones": 367
+    },
+    "sysbench-oltp-pqc4000": {
+      "hybrid_vs_dogi": {
+        "gc_reduction": 0.9481724567160801,
+        "stale_secret_reduction_blocks": 22979,
+        "waf_reduction": 0.03955903876115406
+      },
+      "policies": {
+        "dogi-history": {
+          "epoch_impurity": 0.12320555482142642,
+          "gc_write_blocks": 8837,
+          "intent_impurity": 0.10912629290150523,
+          "stale_secret_blocks_remaining": 22979,
+          "waf": 1.0435378104476951,
+          "write_latency_p99_ns": 58748.0
+        },
+        "epoch-oracle": {
+          "epoch_impurity": 0.12881563614958616,
+          "gc_write_blocks": 5731,
+          "intent_impurity": 0.1350624076498925,
+          "stale_secret_blocks_remaining": 2210,
+          "waf": 1.028235282525262,
+          "write_latency_p99_ns": 40000.0
+        },
+        "fifo": {
+          "epoch_impurity": 0.12881563614958616,
+          "gc_write_blocks": 18882,
+          "intent_impurity": 0.1350624076498925,
+          "stale_secret_blocks_remaining": 23731,
+          "waf": 1.0930271513945204,
+          "write_latency_p99_ns": 40000.0
+        },
+        "midas-style": {
+          "epoch_impurity": 0.11172110567855556,
+          "gc_write_blocks": 10005,
+          "intent_impurity": 0.09417008036711795,
+          "stale_secret_blocks_remaining": 25194,
+          "waf": 1.0492922704004966,
+          "write_latency_p99_ns": 40480.0
+        },
+        "quasar": {
+          "epoch_impurity": 0.03179846954098243,
+          "gc_write_blocks": 4153,
+          "intent_impurity": 0.0,
+          "stale_secret_blocks_remaining": 0,
+          "waf": 1.02046084947259,
+          "write_latency_p99_ns": 40800.0
+        },
+        "quasar-dogi-hybrid": {
+          "epoch_impurity": 0.03179846954098243,
+          "gc_write_blocks": 458,
+          "intent_impurity": 0.0,
+          "stale_secret_blocks_remaining": 0,
+          "waf": 1.002256457755465,
+          "write_latency_p99_ns": 59548.0
+        },
+        "sepbit-style": {
+          "epoch_impurity": 0.12004613000492534,
+          "gc_write_blocks": 13850,
+          "intent_impurity": 0.12133152337133453,
+          "stale_secret_blocks_remaining": 24878,
+          "waf": 1.0682356766663545,
+          "write_latency_p99_ns": 40480.0
+        }
+      },
+      "zones": 404
+    }
+  }
+}

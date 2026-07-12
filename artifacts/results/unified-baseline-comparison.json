@@ -1,0 +1,4710 @@
+{
+  "actual_zns_overhead": {
+    "artifact_count": 7,
+    "by_policy": {
+      "dogi-history": {
+        "append_avg_ns": 118838715.38928571,
+        "append_count": 560,
+        "append_max_ns": 163623772,
+        "append_worst_p95_ns": 152620017,
+        "append_worst_p99_ns": 161604806,
+        "cpu_policy": {
+          "label": "dogi-mlp",
+          "max_ns_per_write": 6417.861,
+          "median_ns_per_write": 2397.786,
+          "min_ns_per_write": 350.371
+        },
+        "failed_rows": 0,
+        "max_live_physical_zones": 8,
+        "physical_append_commands": 560,
+        "physical_bytes_written": 16679141376,
+        "physical_mib_written": 15906.46875,
+        "physical_reset_commands": 988,
+        "policy": "dogi-history",
+        "reset_avg_ns": 1825870.1305668016,
+        "reset_count": 988,
+        "reset_max_ns": 21463549,
+        "reset_worst_p95_ns": 7725103,
+        "reset_worst_p99_ns": 15608150,
+        "rows": 14,
+        "semantic_physical_reset_commands": 0,
+        "throughput_mib_s": 208.09710400551958,
+        "total_wall_time_s": 76.43772279300002
+      },
+      "fifo": {
+        "append_avg_ns": 130987868.66602316,
+        "append_count": 518,
+        "append_max_ns": 164439306,
+        "append_worst_p95_ns": 162772895,
+        "append_worst_p99_ns": 164100599,
+        "cpu_policy": {},
+        "failed_rows": 0,
+        "max_live_physical_zones": 3,
+        "physical_append_commands": 518,
+        "physical_bytes_written": 16892334080,
+        "physical_mib_written": 16109.78515625,
+        "physical_reset_commands": 929,
+        "policy": "fifo",
+        "reset_avg_ns": 1586552.817007535,
+        "reset_count": 929,
+        "reset_max_ns": 22639306,
+        "reset_worst_p95_ns": 2344455,
+        "reset_worst_p99_ns": 17642869,
+        "rows": 14,
+        "semantic_physical_reset_commands": 0,
+        "throughput_mib_s": 235.25756983497695,
+        "total_wall_time_s": 68.477223358
+      },
+      "midas-style": {
+        "append_avg_ns": 121813843.76383764,
+        "append_count": 542,
+        "append_max_ns": 163644910,
+        "append_worst_p95_ns": 154748231,
+        "append_worst_p99_ns": 161600503,
+        "cpu_policy": {},
+        "failed_rows": 0,
+        "max_live_physical_zones": 6,
+        "physical_append_commands": 542,
+        "physical_bytes_written": 16524238848,
+        "physical_mib_written": 15758.7421875,
+        "physical_reset_commands": 969,
+        "policy": "midas-style",
+        "reset_avg_ns": 1724138.0123839008,
+        "reset_count": 969,
+        "reset_max_ns": 24476883,
+        "reset_worst_p95_ns": 7500922,
+        "reset_worst_p99_ns": 19536261,
+        "rows": 14,
+        "semantic_physical_reset_commands": 0,
+        "throughput_mib_s": 199.03456713391287,
+        "total_wall_time_s": 79.175906047
+      },
+      "quasar": {
+        "append_avg_ns": 89539467.7607527,
+        "append_count": 744,
+        "append_max_ns": 164768485,
+        "append_worst_p95_ns": 158039437,
+        "append_worst_p99_ns": 162671145,
+        "cpu_policy": {
+          "label": "quasar-hint",
+          "max_ns_per_write": 22.855,
+          "median_ns_per_write": 16.819,
+          "min_ns_per_write": 15.728
+        },
+        "failed_rows": 0,
+        "max_live_physical_zones": 6,
+        "physical_append_commands": 744,
+        "physical_bytes_written": 16449593344,
+        "physical_mib_written": 15687.5546875,
+        "physical_reset_commands": 1232,
+        "policy": "quasar",
+        "reset_avg_ns": 2975219.2719155843,
+        "reset_count": 1232,
+        "reset_max_ns": 25613030,
+        "reset_worst_p95_ns": 8271055,
+        "reset_worst_p99_ns": 22550349,
+        "rows": 14,
+        "semantic_physical_reset_commands": 318,
+        "throughput_mib_s": 186.0145921997686,
+        "total_wall_time_s": 84.335075555
+      },
+      "quasar-dogi-hybrid": {
+        "append_avg_ns": 88841471.01076716,
+        "append_count": 743,
+        "append_max_ns": 163977251,
+        "append_worst_p95_ns": 158853713,
+        "append_worst_p99_ns": 163608756,
+        "cpu_policy": {
+          "label": "quasar-dogi-hybrid",
+          "max_ns_per_write": 1908.089,
+          "median_ns_per_write": 1178.816,
+          "min_ns_per_write": 307.406
+        },
+        "failed_rows": 0,
+        "max_live_physical_zones": 6,
+        "physical_append_commands": 743,
+        "physical_bytes_written": 16416043008,
+        "physical_mib_written": 15655.55859375,
+        "physical_reset_commands": 1232,
+        "policy": "quasar-dogi-hybrid",
+        "reset_avg_ns": 2974007.237012987,
+        "reset_count": 1232,
+        "reset_max_ns": 24812667,
+        "reset_worst_p95_ns": 8011476,
+        "reset_worst_p99_ns": 22883272,
+        "rows": 14,
+        "semantic_physical_reset_commands": 318,
+        "throughput_mib_s": 177.25302639798917,
+        "total_wall_time_s": 88.32322308899998
+      },
+      "sepbit-style": {
+        "append_avg_ns": 118434034.45601436,
+        "append_count": 557,
+        "append_max_ns": 161480578,
+        "append_worst_p95_ns": 153757252,
+        "append_worst_p99_ns": 157742692,
+        "cpu_policy": {},
+        "failed_rows": 0,
+        "max_live_physical_zones": 7,
+        "physical_append_commands": 557,
+        "physical_bytes_written": 16582877184,
+        "physical_mib_written": 15814.6640625,
+        "physical_reset_commands": 984,
+        "policy": "sepbit-style",
+        "reset_avg_ns": 1842653.7794715448,
+        "reset_count": 984,
+        "reset_max_ns": 22052960,
+        "reset_worst_p95_ns": 8495412,
+        "reset_worst_p99_ns": 15497881,
+        "rows": 14,
+        "semantic_physical_reset_commands": 0,
+        "throughput_mib_s": 209.7652725798149,
+        "total_wall_time_s": 75.392193703
+      }
+    },
+    "caveat": "Actual-ZNS latency is measured through zonefs helper appends/truncates and includes user-space helper overhead. C-level CPU numbers isolate only placement-decision cost.",
+    "failed_rows": 0,
+    "hybrid_vs_dogi": {
+      "append_avg_ratio": 0.7475802033011285,
+      "cpu_median_ns_ratio": 0.4916268591108631,
+      "semantic_reset_delta": 318,
+      "throughput_ratio": 0.85178036112068
+    },
+    "row_count": 84,
+    "scope": "actual ZNS replay overhead plus C-level policy-decision overhead"
+  },
+  "adaptive_policy_comparison": {
+    "candidate_policy": "quasar-adaptive-hybrid",
+    "decision": "keep-current-hybrid",
+    "decision_reason": "Adaptive binning did not beat the current hybrid on WAF, GC blocks, stale-secret blocks, or family count in the current single-tenant pressure suite.",
+    "default_policy": "quasar-dogi-hybrid",
+    "scope": "adaptive QUASAR admission/binning comparison on YCSB and Sysbench pressure suites",
+    "sysbench_pressure": {
+      "adaptive_wins": 0,
+      "current_wins": 2,
+      "ties": 0,
+      "workloads": {
+        "sysbench-oltp-pqc2000": {
+          "adaptive": {
+            "coarse_bin_writes": 0,
+            "gc_write_blocks": 1496,
+            "quasar_family_count": 47,
+            "stale_secret_blocks_remaining": 0,
+            "tenant_bin_writes": 88,
+            "waf": 1.00873607250473,
+            "zone_utilization": 0.9877145686619718
+          },
+          "current": {
+            "gc_write_blocks": 1408,
+            "quasar_family_count": 43,
+            "stale_secret_blocks_remaining": 0,
+            "waf": 1.0082221858868048,
+            "zone_utilization": 0.9873019520308123
+          },
+          "winner": "quasar-dogi-hybrid",
+          "zones": 367
+        },
+        "sysbench-oltp-pqc4000": {
+          "adaptive": {
+            "coarse_bin_writes": 0,
+            "gc_write_blocks": 519,
+            "quasar_family_count": 47,
+            "stale_secret_blocks_remaining": 0,
+            "tenant_bin_writes": 89,
+            "waf": 1.0025569903386164,
+            "zone_utilization": 0.9928032138242894
+          },
+          "current": {
+            "gc_write_blocks": 458,
+            "quasar_family_count": 43,
+            "stale_secret_blocks_remaining": 0,
+            "waf": 1.002256457755465,
+            "zone_utilization": 0.9925540247429306
+          },
+          "winner": "quasar-dogi-hybrid",
+          "zones": 404
+        }
+      }
+    },
+    "ycsb_pressure": {
+      "adaptive_wins": 0,
+      "current_wins": 4,
+      "ties": 0,
+      "workloads": {
+        "ycsb-a-pqc4000": {
+          "adaptive": {
+            "coarse_bin_writes": 0,
+            "gc_write_blocks": 0,
+            "quasar_family_count": 33,
+            "stale_secret_blocks_remaining": 0,
+            "tenant_bin_writes": 60,
+            "waf": 1.0,
+            "zone_utilization": 0.9935708073416507
+          },
+          "current": {
+            "gc_write_blocks": 0,
+            "quasar_family_count": 31,
+            "stale_secret_blocks_remaining": 0,
+            "waf": 1.0,
+            "zone_utilization": 0.9935953931644359
+          },
+          "winner": "quasar-dogi-hybrid",
+          "zones": 560
+        },
+        "ycsb-a-pqc8000": {
+          "adaptive": {
+            "coarse_bin_writes": 0,
+            "gc_write_blocks": 0,
+            "quasar_family_count": 33,
+            "stale_secret_blocks_remaining": 0,
+            "tenant_bin_writes": 64,
+            "waf": 1.0,
+            "zone_utilization": 0.9935475457074722
+          },
+          "current": {
+            "gc_write_blocks": 0,
+            "quasar_family_count": 31,
+            "stale_secret_blocks_remaining": 0,
+            "waf": 1.0,
+            "zone_utilization": 0.9935475457074722
+          },
+          "winner": "quasar-dogi-hybrid",
+          "zones": 863
+        },
+        "ycsb-f-pqc4000": {
+          "adaptive": {
+            "coarse_bin_writes": 0,
+            "gc_write_blocks": 0,
+            "quasar_family_count": 33,
+            "stale_secret_blocks_remaining": 0,
+            "tenant_bin_writes": 61,
+            "waf": 1.0,
+            "zone_utilization": 0.9906670026881721
+          },
+          "current": {
+            "gc_write_blocks": 0,
+            "quasar_family_count": 31,
+            "stale_secret_blocks_remaining": 0,
+            "waf": 1.0,
+            "zone_utilization": 0.9907069726980728
+          },
+          "winner": "quasar-dogi-hybrid",
+          "zones": 488
+        },
+        "ycsb-f-pqc8000": {
+          "adaptive": {
+            "coarse_bin_writes": 0,
+            "gc_write_blocks": 0,
+            "quasar_family_count": 33,
+            "stale_secret_blocks_remaining": 0,
+            "tenant_bin_writes": 63,
+            "waf": 1.0,
+            "zone_utilization": 0.9939784053156147
+          },
+          "current": {
+            "gc_write_blocks": 0,
+            "quasar_family_count": 31,
+            "stale_secret_blocks_remaining": 0,
+            "waf": 1.0,
+            "zone_utilization": 0.9939784053156147
+          },
+          "winner": "quasar-dogi-hybrid",
+          "zones": 733
+        }
+      }
+    }
+  },
+  "claim_matrix": {
+    "by_status": {
+      "qualified": 1,
+      "supported": 10,
+      "supported-boundary": 1
+    },
+    "claim_count": 12,
+    "claims": [
+      {
+        "caveat": "This is a semantic/exposure claim; WAF may remain near 1.0 on easy traces.",
+        "claim": "Storage-history baselines miss PQC death cohorts.",
+        "evidence": [
+          "same-path physical ZNS fairness rows=72 failed=0",
+          "YCSB pressure semantic-gap rows=9/9"
+        ],
+        "paper_wording": "FIFO, SepBIT-style, MiDAS-style, and DOGI-style placement retain expired PQC secret bytes because they do not receive protocol death-cohort information.",
+        "status": "supported"
+      },
+      {
+        "caveat": "Requires correct lifecycle hints and durable epoch-close logic.",
+        "claim": "QUASAR-DOGI hybrid removes stale-secret exposure on clean hinted actual-ZNS replays.",
+        "evidence": [
+          "same-path physical ZNS hybrid secret waiting end is zero",
+          "YCSB curve semantic-gap rows=9",
+          "Sysbench stale secret blocks removed=38438"
+        ],
+        "paper_wording": "QUASAR-DOGI hybrid keeps DOGI-style payload placement while placing PQC secrets by death cohort, making expired secret cohorts reset-eligible.",
+        "status": "supported"
+      },
+      {
+        "caveat": "Do not claim QUASAR dominates every workload on total WAF.",
+        "claim": "WAF/GC gains are pressure-dependent, not universal.",
+        "evidence": [
+          "actual-ZNS YCSB WAF-pressure rows=7/9",
+          "Sysbench GC reduction=0.9458955223880597",
+          "workload-hardness passed=9/9"
+        ],
+        "paper_wording": "WAF improvements appear when PQC metadata density and free-zone pressure create real GC work; otherwise the main benefit is stale-secret exposure reduction.",
+        "status": "supported"
+      },
+      {
+        "caveat": "Clean epoch traces remain sanity checks; the main benchmark must use DOGI/FAST-compatible overlays and hostile stress.",
+        "claim": "The evaluation is not based on an overly easy PQC-only trace.",
+        "evidence": [
+          "workload-hardness tiers={'claim-gate': {'passed': 1, 'total': 1}, 'fairness': {'passed': 1, 'total': 1}, 'hostile-robustness': {'passed': 3, 'total': 3}, 'negative-control': {'passed': 2, 'total': 2}, 'pressure': {'passed': 2, 'total': 2}}",
+          "headline gate passed=True",
+          "eligible YCSB pressure rows=7",
+          "YCSB baseline-complete rows=9",
+          "eligible dynamic rows=3",
+          "dynamic baseline-complete rows=3",
+          "YCSB pressure rows=7",
+          "Sysbench GC reduction=0.9458955223880597"
+        ],
+        "paper_wording": "The workload suite separates negative controls, DOGI-compatible pressure workloads, FAST-style DB pressure, and QUASAR-hostile robustness cases.",
+        "status": "supported"
+      },
+      {
+        "caveat": "Do not present adaptive binning or strict residual migration as free default behavior.",
+        "claim": "The improved deployable QUASAR design uses explicit modes rather than one universal knob.",
+        "evidence": [
+          "deployment-selector modes=4/4",
+          "default policy=quasar-dogi-hybrid",
+          "workload-hardness passed=True"
+        ],
+        "paper_wording": "QUASAR-DOGI hybrid is the default; tenant isolation, residual migration, and overflow fallback are enabled only when the measured workload/security objective requires their overhead.",
+        "status": "supported"
+      },
+      {
+        "caveat": "The manifest indexes current artifacts; long-running raw physical replays may still need explicit rerun time and device availability.",
+        "claim": "The actual-ZNS comparison is reproducible from an artifact manifest.",
+        "evidence": [
+          "manifest passed=True",
+          "manifest artifacts=37",
+          "manifest commands=10",
+          "hash validation mismatches=0"
+        ],
+        "paper_wording": "The paper artifact set records hashes, roles, claims, and regeneration commands for the actual-ZNS comparison, pressure curves, overhead, selector, figures, and acceptance reports; a validation pass confirms the current files still match those hashes.",
+        "status": "supported"
+      },
+      {
+        "caveat": "Strict mode is not the default for every workload.",
+        "claim": "Residual migration is a deployable strict-exposure mode with explicit cost.",
+        "evidence": [
+          "residual decision=use-residual-fallback-as-strict-exposure-mode",
+          "actual budget rows=4"
+        ],
+        "paper_wording": "QUASAR exposes low-overhead, balanced, and strict-zero-wait modes; strict exposure can force zero waiting but may pay high copy/WAF cost on hostile YCSB-F straggler workloads.",
+        "status": "supported"
+      },
+      {
+        "caveat": "Actual-ZNS latency uses zonefs helper appends/truncates, so use as overhead accounting, not final production p99.",
+        "claim": "Hybrid has explicit reset overhead but lower policy-decision CPU cost than DOGI-style MLP.",
+        "evidence": [
+          "actual-ZNS overhead rows=84 failed=0",
+          "hybrid/DOGI CPU median ratio=0.4916268591108631",
+          "semantic reset delta=318"
+        ],
+        "paper_wording": "Hybrid pays actual semantic reset work but its C-level placement-decision path remains cheaper than DOGI-style MLP inference.",
+        "status": "supported"
+      },
+      {
+        "caveat": "QUASAR proves reset eligibility and stale-secret exposure reduction, and this device's NVMe crypto-erase sanitize command path has been executed and validated. Zone reset alone is still not a physical erase proof; a strong physical erase claim requires explicitly issuing sanitize or equivalent hardware crypto-erase semantics at the epoch boundary.",
+        "claim": "Zone reset alone is not physical erase, but the device crypto-erase path is validated.",
+        "evidence": [
+          "SANICAP=0x60000003",
+          "sanitize_supported=True",
+          "sanitize_log_status=(1) Most Recent Sanitize Command Completed Successfully.",
+          "crypto_erase_executed=True",
+          "sanitize_execution_validated=True"
+        ],
+        "paper_wording": "QUASAR proves reset eligibility and stale-secret exposure reduction. On the evaluated device, NVMe crypto-erase sanitize completed successfully; physical-erasure claims still require explicitly issuing sanitize or equivalent crypto-erase at epoch boundaries.",
+        "status": "supported"
+      },
+      {
+        "caveat": "Do not mix exact-baseline internal units with QUASAR native ZNS throughput as if they were identical.",
+        "claim": "Exact external baselines are included but have non-identical unit systems.",
+        "evidence": [
+          "DOGI exact aggregate WAF=2.4006662646819312",
+          "MiDAS exact WAF=1.01",
+          "SepBIT exact WA=2.399521"
+        ],
+        "paper_wording": "External DOGI/MiDAS/SepBIT runs validate baseline realism, while same-path packed ZNS replay is used for apples-to-apples physical placement comparison.",
+        "status": "qualified"
+      },
+      {
+        "caveat": "This is a trace-driven handle-pressure model, not a physical FDP device performance result.",
+        "claim": "FDP can carry QUASAR's lifecycle signal, but scarce placement handles create collision pressure.",
+        "evidence": [
+          "FDP handle-model runs=5",
+          "families=86",
+          "best handles=128 family purity=0.9797956733905692",
+          "64-handle intent purity=0.9820920644033297",
+          "64-handle avg families/handle=1.7551020408163265"
+        ],
+        "paper_wording": "A trace-driven FDP mapping shows that QUASAR families retain high intent/family purity as placement handles increase, but small handle counts collide multiple death cohorts and require admission or binning.",
+        "status": "supported-boundary"
+      },
+      {
+        "caveat": "Lower-overhead xNVMe/SPDK replay remains optional strengthening.",
+        "claim": "The current artifact set is paper-ready for the scoped system claim.",
+        "evidence": [
+          "acceptance=41/41",
+          "external readiness paper_ready=True"
+        ],
+        "paper_wording": "The scoped claim is ready: PQC death-cohort hints improve ZNS placement/reset scheduling under clean hints, pressure, and measured fallback modes.",
+        "status": "supported"
+      }
+    ]
+  },
+  "deployment_selector": {
+    "default_policy": "quasar-dogi-hybrid",
+    "hardness_passed": true,
+    "main_takeaway": "The improved deployable design is not a single universal knob. The default remains QUASAR-DOGI hybrid; tenant isolation and residual migration are explicit modes enabled only when the workload/security objective requires their overhead.",
+    "modes": [
+      {
+        "evidence": {
+          "adaptive_decision": "keep-current-hybrid",
+          "adaptive_wins": 0,
+          "current_wins": 6,
+          "sysbench_workloads": 2,
+          "ycsb_workloads": 4
+        },
+        "mode": "default",
+        "passed": true,
+        "policy": "quasar-dogi-hybrid",
+        "rule": "Use exact PQC death-cohort placement for secrets and DOGI-style fallback for payload.",
+        "when": "single-tenant or normal PQC pressure without tenant isolation requirement"
+      },
+      {
+        "evidence": {
+          "decision": "add-tenant-isolation-mode",
+          "gc_extra_blocks": 485,
+          "physical_reset_extra_commands": 1240,
+          "reset_secret_tenant_impurity_reduction": 1.0,
+          "waf_increase": 0.0028499738507554717
+        },
+        "mode": "tenant-isolation",
+        "passed": true,
+        "policy": "quasar-adaptive-hybrid tenant-local bins",
+        "rule": "Add tenant-local death-cohort bins only when reset-time tenant impurity is a security/isolation concern.",
+        "when": "multi-tenant secret reset must not mix tenant cohorts"
+      },
+      {
+        "evidence": {
+          "decision": "use-residual-fallback-as-strict-exposure-mode",
+          "profiles": [
+            "low_overhead",
+            "balanced",
+            "strict_zero_wait"
+          ],
+          "strict_zero_wait_max_waf": 3.553485894439311,
+          "strict_zero_wait_rows": 3,
+          "strict_zero_wait_successes": 3
+        },
+        "mode": "strict-residual",
+        "passed": true,
+        "policy": "epoch-bin residual-migration controller",
+        "rule": "Select low-overhead, balanced, or strict-zero-wait residual budget based on exposure objective.",
+        "when": "delayed expiry or stragglers would otherwise leave secret bytes waiting"
+      },
+      {
+        "evidence": {
+          "fallback_failed_rows": 0,
+          "fallback_physical_waf": 1.7098490861062083,
+          "fallback_secret_waiting_end": 0,
+          "missing_hint_failed_rows": 0,
+          "wrong_epoch_failed_rows": 0
+        },
+        "mode": "fallback-overflow",
+        "passed": true,
+        "policy": "overflow and conservative reset confirmation",
+        "rule": "Route uncertain data away from exact secret zones and reset only after epoch-manager confirmation.",
+        "when": "hint confidence is low, missing, or inconsistent"
+      }
+    ],
+    "passed": true,
+    "passed_modes": 4,
+    "scope": "QUASAR deployment policy selector derived from actual-ZNS and simulator pressure artifacts",
+    "selector": [
+      {
+        "condition": "tenant isolation required",
+        "otherwise": "continue",
+        "select": "tenant-isolation"
+      },
+      {
+        "condition": "strict zero stale-secret waiting required under stragglers",
+        "otherwise": "continue",
+        "select": "strict-residual"
+      },
+      {
+        "condition": "hint confidence is low or missing",
+        "otherwise": "continue",
+        "select": "fallback-overflow"
+      },
+      {
+        "condition": "normal single-tenant PQC pressure",
+        "otherwise": "default",
+        "select": "default"
+      }
+    ],
+    "total_modes": 4
+  },
+  "exact_external_baselines": {
+    "dogi_physical_compact": {
+      "aggregate_waf": 2.4006662646819312,
+      "avg_waf": 2.3331446463391456,
+      "caveat": "Compacted LBA span preserves reuse order but is not the full original LBA span used by a production run.",
+      "completed": true,
+      "logical_size_gb": 2,
+      "rows": [
+        {
+          "completed": true,
+          "gc_write_gib": 3.25293,
+          "user_write_gib": 1.86328,
+          "waf": 2.7458084667897475,
+          "workload": "alibaba"
+        },
+        {
+          "completed": true,
+          "gc_write_gib": 2.54297,
+          "user_write_gib": 1.53711,
+          "waf": 2.6543838762352725,
+          "workload": "exchange"
+        },
+        {
+          "completed": true,
+          "gc_write_gib": 0.938477,
+          "user_write_gib": 0.962891,
+          "waf": 1.9746451052092087,
+          "workload": "fio-zipf"
+        },
+        {
+          "completed": true,
+          "gc_write_gib": 2.30566,
+          "user_write_gib": 1.54102,
+          "waf": 2.4961908346419905,
+          "workload": "varmail"
+        },
+        {
+          "completed": true,
+          "gc_write_gib": 1.29004,
+          "user_write_gib": 1.15527,
+          "waf": 2.1166567122837088,
+          "workload": "ycsb-a"
+        },
+        {
+          "completed": true,
+          "gc_write_gib": 1.14746,
+          "user_write_gib": 1.13477,
+          "waf": 2.011182882874944,
+          "workload": "ycsb-f"
+        }
+      ],
+      "scope": "exact external DOGI prototype on physical ZNS, compacted LBA span",
+      "total_gc_write_gib": 11.477537,
+      "total_user_write_gib": 8.194341,
+      "workloads": 6
+    },
+    "dogi_physical_dynamic_pressure": {
+      "caveat": "This is the public DOGI binary on a compacted Alibaba-like PQC pressure trace. It validates the exact DOGI stack on the physical ZNS device, but units still differ from QUASAR's same-path packed replay.",
+      "completed": true,
+      "gc_write_gib": 9.1416,
+      "placement_algorithm": "DOGI",
+      "saw_zenfs_mount": true,
+      "scope": "exact external DOGI prototype on physical ZNS, Alibaba-like p8000 compact trace",
+      "selection_algorithm": "DogiSelect",
+      "trace_path": "/home/bigdatalab/skim/PQC_ZNS/artifacts/traces/fast-dynamic-pressure/alibaba-pqc8000-compact.dogi",
+      "user_write_gib": 4.58789,
+      "waf": 2.992549952156656
+    },
+    "dogi_physical_dynamic_pressure_suite": {
+      "best_placement": "CostBenefit",
+      "best_waf": 2.803532778684755,
+      "caveat": "These are public DOGI prototype internal GiB counters on a compacted trace. They are exact DOGI-stack evidence but should not be mixed as apples-to-apples numbers with QUASAR's packed replay metrics.",
+      "completed_runs": 3,
+      "rows": [
+        {
+          "completed": true,
+          "gc_write_gib": 9.1416,
+          "path": "artifacts/results/dogi-exact/alibaba-pqc8000-dogi.json",
+          "placement": "DOGI",
+          "placement_algorithm": "DOGI",
+          "saw_zenfs_mount": true,
+          "selection_algorithm": "DogiSelect",
+          "trace_path": "/home/bigdatalab/skim/PQC_ZNS/artifacts/traces/fast-dynamic-pressure/alibaba-pqc8000-compact.dogi",
+          "user_write_gib": 4.58789,
+          "waf": 2.992549952156656
+        },
+        {
+          "completed": true,
+          "gc_write_gib": 8.30566,
+          "path": "artifacts/results/dogi-exact/alibaba-pqc8000-greedy.json",
+          "placement": "Greedy",
+          "placement_algorithm": "Greedy",
+          "saw_zenfs_mount": true,
+          "selection_algorithm": "Greedy",
+          "trace_path": "/home/bigdatalab/skim/PQC_ZNS/artifacts/traces/fast-dynamic-pressure/alibaba-pqc8000-compact.dogi",
+          "user_write_gib": 4.58887,
+          "waf": 2.8099575712539253
+        },
+        {
+          "completed": true,
+          "gc_write_gib": 8.27441,
+          "path": "artifacts/results/dogi-exact/alibaba-pqc8000-costbenefit.json",
+          "placement": "CostBenefit",
+          "placement_algorithm": "CostBenefit",
+          "saw_zenfs_mount": true,
+          "selection_algorithm": "CostBenefit",
+          "trace_path": "/home/bigdatalab/skim/PQC_ZNS/artifacts/traces/fast-dynamic-pressure/alibaba-pqc8000-compact.dogi",
+          "user_write_gib": 4.58789,
+          "waf": 2.803532778684755
+        }
+      ],
+      "scope": "exact public DOGI prototype placement variants on physical ZNS, Alibaba-like p8000 compact trace",
+      "total_runs": 3
+    },
+    "dogi_physical_original_lba_pressure": {
+      "caveat": "This run keeps the original LBA span and therefore removes the compact-LBA caveat for the Alibaba-like p8000 DOGI pressure trace. It is still an exact DOGI-stack counter, not a same-path QUASAR packed-replay metric.",
+      "completed": true,
+      "gc_write_gib": 10.1494,
+      "placement_algorithm": "DOGI",
+      "saw_zenfs_mount": true,
+      "scope": "exact external DOGI prototype on physical ZNS, Alibaba-like p8000 original LBA span",
+      "selection_algorithm": "DogiSelect",
+      "trace_path": "/home/bigdatalab/skim/PQC_ZNS/artifacts/traces/fast-dynamic-pressure/alibaba-pqc8000-original-lba.dogi",
+      "user_write_gib": 4.58887,
+      "waf": 3.2117427602002238
+    },
+    "midas_memory_repeat4": {
+      "caveat": "MiDAS exact artifact uses internal page/traffic units and a memory-backed prototype, so it is evidence about MiDAS strength but not a direct ZNS throughput comparison.",
+      "completed": true,
+      "counters": {
+        "datar": 0,
+        "dataw": 295064,
+        "gcdr": 9162,
+        "gcdw": 3778,
+        "trim": 1831
+      },
+      "recomputed_waf_from_dataw_gcdw": 1.012804001843668,
+      "runtime_seconds": 6.0,
+      "scope": "exact external MiDAS memory-backed prototype on exchange-pqc2000 repeat4 compact trace",
+      "total_waf": 1.01
+    },
+    "sepbit_repeat4": {
+      "bytes_to_storage": 15853268992,
+      "bytes_to_system": 6606848000,
+      "caveat": "SepBIT numbers are trace_replay simulator WA, not native ZNS physical append latency.",
+      "completed": true,
+      "ngc": 7382,
+      "nosep_ngc": 11467,
+      "nosep_wa": 3.696108,
+      "scope": "exact external SepBIT trace_replay simulator on the same exchange repeat4 compact trace",
+      "wa": 2.399521
+    }
+  },
+  "fast_db_pressure": {
+    "append_engine": "helper",
+    "by_policy": {
+      "dogi-history::secret-group": {
+        "avg_space_utilization": 0.16003202617223772,
+        "max_live_physical_zones": 6,
+        "max_secret_blocks_waiting_for_physical_reset": 16827,
+        "physical_reset_commands": 0,
+        "secret_blocks_waiting_for_physical_reset": 20388,
+        "sim_gc_blocks": 11256,
+        "sim_stale_secret_blocks": 38438,
+        "sim_waf": 1.0300788045438876
+      },
+      "fifo::secret-group": {
+        "avg_space_utilization": 0.4943156264507892,
+        "max_live_physical_zones": 2,
+        "max_secret_blocks_waiting_for_physical_reset": 15360,
+        "physical_reset_commands": 0,
+        "secret_blocks_waiting_for_physical_reset": 20480,
+        "sim_gc_blocks": 26938,
+        "sim_stale_secret_blocks": 38736,
+        "sim_waf": 1.0719849712867133
+      },
+      "midas-style::secret-group": {
+        "avg_space_utilization": 0.19265247794800372,
+        "max_live_physical_zones": 5,
+        "max_secret_blocks_waiting_for_physical_reset": 14446,
+        "physical_reset_commands": 0,
+        "secret_blocks_waiting_for_physical_reset": 16087,
+        "sim_gc_blocks": 12949,
+        "sim_stale_secret_blocks": 42815,
+        "sim_waf": 1.034602917558529
+      },
+      "quasar-dogi-hybrid::group": {
+        "avg_space_utilization": 0.11428514433280276,
+        "max_live_physical_zones": 13,
+        "max_secret_blocks_waiting_for_physical_reset": 1952,
+        "physical_reset_commands": 88,
+        "secret_blocks_waiting_for_physical_reset": 0,
+        "sim_gc_blocks": 609,
+        "sim_stale_secret_blocks": 0,
+        "sim_waf": 1.0016273980070387
+      },
+      "quasar-dogi-hybrid::secret-group": {
+        "avg_space_utilization": 0.8355276520427113,
+        "max_live_physical_zones": 5,
+        "max_secret_blocks_waiting_for_physical_reset": 1952,
+        "physical_reset_commands": 80,
+        "secret_blocks_waiting_for_physical_reset": 0,
+        "sim_gc_blocks": 609,
+        "sim_stale_secret_blocks": 0,
+        "sim_waf": 1.0016273980070387
+      },
+      "quasar::secret-group": {
+        "avg_space_utilization": 0.8460603818477251,
+        "max_live_physical_zones": 5,
+        "max_secret_blocks_waiting_for_physical_reset": 1952,
+        "physical_reset_commands": 80,
+        "secret_blocks_waiting_for_physical_reset": 0,
+        "sim_gc_blocks": 6567,
+        "sim_stale_secret_blocks": 0,
+        "sim_waf": 1.0175486415635848
+      },
+      "sepbit-style::secret-group": {
+        "avg_space_utilization": 0.16226714832869082,
+        "max_live_physical_zones": 6,
+        "max_secret_blocks_waiting_for_physical_reset": 16064,
+        "physical_reset_commands": 0,
+        "secret_blocks_waiting_for_physical_reset": 19353,
+        "sim_gc_blocks": 18651,
+        "sim_stale_secret_blocks": 41002,
+        "sim_waf": 1.049840066057929
+      }
+    },
+    "failed_rows": 0,
+    "hybrid_vs_dogi": {
+      "gc_reduction": 0.9458955223880597,
+      "stale_secret_reduction_blocks": 38438,
+      "waf_reduction": 0.027620611560342668
+    },
+    "rows": 24,
+    "scope": "FAST-style Sysbench-OLTP pressure stress, not a DOGI paper workload",
+    "total_physical_gib": 24.309326171875,
+    "wall_time_s": 204.725868174
+  },
+  "fast_ycsb_pressure": {
+    "physical": {
+      "ycsb-a-pqc10000": {
+        "append_engine": "helper",
+        "by_policy": {
+          "dogi-history": {
+            "avg_space_utilization": 0.2588289592038069,
+            "max_live_physical_zones": 8,
+            "max_secret_blocks_waiting_for_physical_reset": 9490,
+            "physical_reset_commands": 0,
+            "secret_blocks_waiting_for_physical_reset": 9490,
+            "sim_gc_blocks": 3357,
+            "sim_stale_secret_blocks": 150221,
+            "sim_waf": 1.0065625238250697
+          },
+          "fifo": {
+            "avg_space_utilization": 0.7003817993655215,
+            "max_live_physical_zones": 3,
+            "max_secret_blocks_waiting_for_physical_reset": 19456,
+            "physical_reset_commands": 0,
+            "secret_blocks_waiting_for_physical_reset": 19456,
+            "sim_gc_blocks": 11770,
+            "sim_stale_secret_blocks": 141424,
+            "sim_waf": 1.0230089083768457
+          },
+          "midas-style": {
+            "avg_space_utilization": 0.34308565943206437,
+            "max_live_physical_zones": 6,
+            "max_secret_blocks_waiting_for_physical_reset": 20,
+            "physical_reset_commands": 0,
+            "secret_blocks_waiting_for_physical_reset": 20,
+            "sim_gc_blocks": 16,
+            "sim_stale_secret_blocks": 158884,
+            "sim_waf": 1.0000312780402745
+          },
+          "quasar": {
+            "avg_space_utilization": 0.7410522574280408,
+            "max_live_physical_zones": 6,
+            "max_secret_blocks_waiting_for_physical_reset": 12836,
+            "physical_reset_commands": 26,
+            "secret_blocks_waiting_for_physical_reset": 0,
+            "sim_gc_blocks": 0,
+            "sim_stale_secret_blocks": 0,
+            "sim_waf": 1.0
+          },
+          "quasar-dogi-hybrid": {
+            "avg_space_utilization": 0.7410522574280408,
+            "max_live_physical_zones": 6,
+            "max_secret_blocks_waiting_for_physical_reset": 12836,
+            "physical_reset_commands": 26,
+            "secret_blocks_waiting_for_physical_reset": 0,
+            "sim_gc_blocks": 0,
+            "sim_stale_secret_blocks": 0,
+            "sim_waf": 1.0
+          },
+          "sepbit-style": {
+            "avg_space_utilization": 0.2941205730202945,
+            "max_live_physical_zones": 7,
+            "max_secret_blocks_waiting_for_physical_reset": 26,
+            "physical_reset_commands": 0,
+            "secret_blocks_waiting_for_physical_reset": 26,
+            "sim_gc_blocks": 107,
+            "sim_stale_secret_blocks": 158845,
+            "sim_waf": 1.000209171894335
+          }
+        },
+        "failed_rows": 0,
+        "helper_chunk_blocks": 1,
+        "hybrid_vs_dogi": {
+          "gc_reduction": 1.0,
+          "stale_secret_reduction_blocks": 150221,
+          "waf_reduction": 0.006519737889834473
+        },
+        "logical_zones": 1024,
+        "rows": 6,
+        "scope": "representative physical packed ZNS replay",
+        "total_physical_gib": 13.04815673828125,
+        "traces": [
+          "artifacts/traces/fast-ycsb-pressure/ycsb-a-pqc10000.jsonl"
+        ],
+        "wall_time_s": 145.208133714
+      },
+      "ycsb-a-pqc4000": {
+        "append_engine": "helper",
+        "by_policy": {
+          "dogi-history": {
+            "avg_space_utilization": 0.1854253714020427,
+            "max_live_physical_zones": 8,
+            "max_secret_blocks_waiting_for_physical_reset": 16944,
+            "physical_reset_commands": 0,
+            "secret_blocks_waiting_for_physical_reset": 16944,
+            "sim_gc_blocks": 15316,
+            "sim_stale_secret_blocks": 46266,
+            "sim_waf": 1.045357087859368
+          },
+          "fifo": {
+            "avg_space_utilization": 0.5090408348808418,
+            "max_live_physical_zones": 3,
+            "max_secret_blocks_waiting_for_physical_reset": 26624,
+            "physical_reset_commands": 0,
+            "secret_blocks_waiting_for_physical_reset": 26624,
+            "sim_gc_blocks": 27370,
+            "sim_stale_secret_blocks": 40488,
+            "sim_waf": 1.0810540281216314
+          },
+          "midas-style": {
+            "avg_space_utilization": 0.2398620057644692,
+            "max_live_physical_zones": 6,
+            "max_secret_blocks_waiting_for_physical_reset": 4387,
+            "physical_reset_commands": 0,
+            "secret_blocks_waiting_for_physical_reset": 4387,
+            "sim_gc_blocks": 3121,
+            "sim_stale_secret_blocks": 63159,
+            "sim_waf": 1.009242587569149
+          },
+          "quasar": {
+            "avg_space_utilization": 0.5936647661327762,
+            "max_live_physical_zones": 6,
+            "max_secret_blocks_waiting_for_physical_reset": 5027,
+            "physical_reset_commands": 28,
+            "secret_blocks_waiting_for_physical_reset": 0,
+            "sim_gc_blocks": 1218,
+            "sim_stale_secret_blocks": 0,
+            "sim_waf": 1.0036070079010648
+          },
+          "quasar-dogi-hybrid": {
+            "avg_space_utilization": 0.5914559395311049,
+            "max_live_physical_zones": 6,
+            "max_secret_blocks_waiting_for_physical_reset": 5027,
+            "physical_reset_commands": 28,
+            "secret_blocks_waiting_for_physical_reset": 0,
+            "sim_gc_blocks": 0,
+            "sim_stale_secret_blocks": 0,
+            "sim_waf": 1.0
+          },
+          "sepbit-style": {
+            "avg_space_utilization": 0.20533019962859797,
+            "max_live_physical_zones": 7,
+            "max_secret_blocks_waiting_for_physical_reset": 772,
+            "physical_reset_commands": 0,
+            "secret_blocks_waiting_for_physical_reset": 772,
+            "sim_gc_blocks": 2608,
+            "sim_stale_secret_blocks": 65571,
+            "sim_waf": 1.007723379807863
+          }
+        },
+        "failed_rows": 0,
+        "helper_chunk_blocks": 1,
+        "hybrid_vs_dogi": {
+          "gc_reduction": 1.0,
+          "stale_secret_reduction_blocks": 46266,
+          "waf_reduction": 0.043389085305049355
+        },
+        "logical_zones": 560,
+        "rows": 6,
+        "scope": "representative physical packed ZNS replay",
+        "total_physical_gib": 9.19986343383789,
+        "traces": [
+          "artifacts/traces/fast-ycsb-pressure/ycsb-a-pqc4000.jsonl"
+        ],
+        "wall_time_s": 106.256165085
+      },
+      "ycsb-a-pqc6000": {
+        "append_engine": "helper",
+        "by_policy": {
+          "dogi-history": {
+            "avg_space_utilization": 0.24806371451784057,
+            "max_live_physical_zones": 7,
+            "max_secret_blocks_waiting_for_physical_reset": 22291,
+            "physical_reset_commands": 0,
+            "secret_blocks_waiting_for_physical_reset": 22291,
+            "sim_gc_blocks": 15308,
+            "sim_stale_secret_blocks": 76950,
+            "sim_waf": 1.0375701618108681
+          },
+          "fifo": {
+            "avg_space_utilization": 0.5921009362426494,
+            "max_live_physical_zones": 3,
+            "max_secret_blocks_waiting_for_physical_reset": 28672,
+            "physical_reset_commands": 0,
+            "secret_blocks_waiting_for_physical_reset": 28672,
+            "sim_gc_blocks": 26297,
+            "sim_stale_secret_blocks": 70210,
+            "sim_waf": 1.0645402760086489
+          },
+          "midas-style": {
+            "avg_space_utilization": 0.2817632166898793,
+            "max_live_physical_zones": 6,
+            "max_secret_blocks_waiting_for_physical_reset": 3453,
+            "physical_reset_commands": 0,
+            "secret_blocks_waiting_for_physical_reset": 3453,
+            "sim_gc_blocks": 2662,
+            "sim_stale_secret_blocks": 98395,
+            "sim_waf": 1.0065333009367998
+          },
+          "quasar": {
+            "avg_space_utilization": 0.6560251276694522,
+            "max_live_physical_zones": 6,
+            "max_secret_blocks_waiting_for_physical_reset": 7636,
+            "physical_reset_commands": 28,
+            "secret_blocks_waiting_for_physical_reset": 0,
+            "sim_gc_blocks": 0,
+            "sim_stale_secret_blocks": 0,
+            "sim_waf": 1.0
+          },
+          "quasar-dogi-hybrid": {
+            "avg_space_utilization": 0.6560251276694522,
+            "max_live_physical_zones": 6,
+            "max_secret_blocks_waiting_for_physical_reset": 7636,
+            "physical_reset_commands": 28,
+            "secret_blocks_waiting_for_physical_reset": 0,
+            "sim_gc_blocks": 0,
+            "sim_stale_secret_blocks": 0,
+            "sim_waf": 1.0
+          },
+          "sepbit-style": {
+            "avg_space_utilization": 0.24098334493964718,
+            "max_live_physical_zones": 7,
+            "max_secret_blocks_waiting_for_physical_reset": 308,
+            "physical_reset_commands": 0,
+            "secret_blocks_waiting_for_physical_reset": 308,
+            "sim_gc_blocks": 1643,
+            "sim_stale_secret_blocks": 100770,
+            "sim_waf": 1.0040323867164396
+          }
+        },
+        "failed_rows": 0,
+        "helper_chunk_blocks": 1,
+        "hybrid_vs_dogi": {
+          "gc_reduction": 1.0,
+          "stale_secret_reduction_blocks": 76950,
+          "waf_reduction": 0.036209755439860616
+        },
+        "logical_zones": 712,
+        "rows": 6,
+        "scope": "representative physical packed ZNS replay",
+        "total_physical_gib": 10.782684326171875,
+        "traces": [
+          "artifacts/traces/fast-ycsb-pressure/ycsb-a-pqc6000.jsonl"
+        ],
+        "wall_time_s": 124.102412133
+      },
+      "ycsb-f-pqc10000": {
+        "append_engine": "helper",
+        "by_policy": {
+          "dogi-history": {
+            "avg_space_utilization": 0.2530190017119313,
+            "max_live_physical_zones": 8,
+            "max_secret_blocks_waiting_for_physical_reset": 33094,
+            "physical_reset_commands": 0,
+            "secret_blocks_waiting_for_physical_reset": 33094,
+            "sim_gc_blocks": 13741,
+            "sim_stale_secret_blocks": 144901,
+            "sim_waf": 1.027909461309415
+          },
+          "fifo": {
+            "avg_space_utilization": 0.6860927344475395,
+            "max_live_physical_zones": 3,
+            "max_secret_blocks_waiting_for_physical_reset": 34816,
+            "physical_reset_commands": 0,
+            "secret_blocks_waiting_for_physical_reset": 34816,
+            "sim_gc_blocks": 23150,
+            "sim_stale_secret_blocks": 133533,
+            "sim_waf": 1.0470201607825456
+          },
+          "midas-style": {
+            "avg_space_utilization": 0.32979461660476633,
+            "max_live_physical_zones": 6,
+            "max_secret_blocks_waiting_for_physical_reset": 1036,
+            "physical_reset_commands": 0,
+            "secret_blocks_waiting_for_physical_reset": 1036,
+            "sim_gc_blocks": 1228,
+            "sim_stale_secret_blocks": 172228,
+            "sim_waf": 1.0024942011853548
+          },
+          "quasar": {
+            "avg_space_utilization": 0.672647545264624,
+            "max_live_physical_zones": 6,
+            "max_secret_blocks_waiting_for_physical_reset": 13863,
+            "physical_reset_commands": 26,
+            "secret_blocks_waiting_for_physical_reset": 0,
+            "sim_gc_blocks": 0,
+            "sim_stale_secret_blocks": 0,
+            "sim_waf": 1.0
+          },
+          "quasar-dogi-hybrid": {
+            "avg_space_utilization": 0.672647545264624,
+            "max_live_physical_zones": 6,
+            "max_secret_blocks_waiting_for_physical_reset": 13863,
+            "physical_reset_commands": 26,
+            "secret_blocks_waiting_for_physical_reset": 0,
+            "sim_gc_blocks": 0,
+            "sim_stale_secret_blocks": 0,
+            "sim_waf": 1.0
+          },
+          "sepbit-style": {
+            "avg_space_utilization": 0.28559148676880225,
+            "max_live_physical_zones": 7,
+            "max_secret_blocks_waiting_for_physical_reset": 12690,
+            "physical_reset_commands": 0,
+            "secret_blocks_waiting_for_physical_reset": 12690,
+            "sim_gc_blocks": 6845,
+            "sim_stale_secret_blocks": 159007,
+            "sim_waf": 1.0139029373890507
+          }
+        },
+        "failed_rows": 0,
+        "helper_chunk_blocks": 1,
+        "hybrid_vs_dogi": {
+          "gc_reduction": 1.0,
+          "stale_secret_reduction_blocks": 144901,
+          "waf_reduction": 0.0271516727493317
+        },
+        "logical_zones": 900,
+        "rows": 6,
+        "scope": "representative physical packed ZNS replay",
+        "total_physical_gib": 12.630523681640625,
+        "traces": [
+          "artifacts/traces/fast-ycsb-pressure/ycsb-f-pqc10000.jsonl"
+        ],
+        "wall_time_s": 143.23232692
+      },
+      "ycsb-f-pqc6000": {
+        "append_engine": "helper",
+        "by_policy": {
+          "dogi-history": {
+            "avg_space_utilization": 0.20483466443245124,
+            "max_live_physical_zones": 8,
+            "max_secret_blocks_waiting_for_physical_reset": 14935,
+            "physical_reset_commands": 0,
+            "secret_blocks_waiting_for_physical_reset": 14935,
+            "sim_gc_blocks": 4166,
+            "sim_stale_secret_blocks": 96050,
+            "sim_waf": 1.0105298543867232
+          },
+          "fifo": {
+            "avg_space_utilization": 0.556071794722996,
+            "max_live_physical_zones": 3,
+            "max_secret_blocks_waiting_for_physical_reset": 23552,
+            "physical_reset_commands": 0,
+            "secret_blocks_waiting_for_physical_reset": 23552,
+            "sim_gc_blocks": 12310,
+            "sim_stale_secret_blocks": 87275,
+            "sim_waf": 1.031114380100951
+          },
+          "midas-style": {
+            "avg_space_utilization": 0.2706888589059115,
+            "max_live_physical_zones": 6,
+            "max_secret_blocks_waiting_for_physical_reset": 199,
+            "physical_reset_commands": 0,
+            "secret_blocks_waiting_for_physical_reset": 199,
+            "sim_gc_blocks": 156,
+            "sim_stale_secret_blocks": 110745,
+            "sim_waf": 1.0003943008363727
+          },
+          "quasar": {
+            "avg_space_utilization": 0.6104685323816156,
+            "max_live_physical_zones": 6,
+            "max_secret_blocks_waiting_for_physical_reset": 8048,
+            "physical_reset_commands": 28,
+            "secret_blocks_waiting_for_physical_reset": 0,
+            "sim_gc_blocks": 0,
+            "sim_stale_secret_blocks": 0,
+            "sim_waf": 1.0
+          },
+          "quasar-dogi-hybrid": {
+            "avg_space_utilization": 0.6104685323816156,
+            "max_live_physical_zones": 6,
+            "max_secret_blocks_waiting_for_physical_reset": 8048,
+            "physical_reset_commands": 28,
+            "secret_blocks_waiting_for_physical_reset": 0,
+            "sim_gc_blocks": 0,
+            "sim_stale_secret_blocks": 0,
+            "sim_waf": 1.0
+          },
+          "sepbit-style": {
+            "avg_space_utilization": 0.23322110442366362,
+            "max_live_physical_zones": 7,
+            "max_secret_blocks_waiting_for_physical_reset": 3667,
+            "physical_reset_commands": 0,
+            "secret_blocks_waiting_for_physical_reset": 3667,
+            "sim_gc_blocks": 2476,
+            "sim_stale_secret_blocks": 104079,
+            "sim_waf": 1.0062582619926852
+          }
+        },
+        "failed_rows": 0,
+        "helper_chunk_blocks": 1,
+        "hybrid_vs_dogi": {
+          "gc_reduction": 1.0,
+          "stale_secret_reduction_blocks": 96050,
+          "waf_reduction": 0.010420131914968099
+        },
+        "logical_zones": 733,
+        "rows": 6,
+        "scope": "representative physical packed ZNS replay",
+        "total_physical_gib": 10.318489074707031,
+        "traces": [
+          "artifacts/traces/fast-ycsb-pressure/ycsb-f-pqc6000.jsonl"
+        ],
+        "wall_time_s": 115.407125223
+      },
+      "ycsb-f-pqc8000": {
+        "append_engine": "helper",
+        "by_policy": {
+          "dogi-history": {
+            "avg_space_utilization": 0.24310467081592385,
+            "max_live_physical_zones": 8,
+            "max_secret_blocks_waiting_for_physical_reset": 52036,
+            "physical_reset_commands": 0,
+            "secret_blocks_waiting_for_physical_reset": 52036,
+            "sim_gc_blocks": 24289,
+            "sim_stale_secret_blocks": 100847,
+            "sim_waf": 1.0528106695424917
+          },
+          "fifo": {
+            "avg_space_utilization": 0.6610775011606314,
+            "max_live_physical_zones": 3,
+            "max_secret_blocks_waiting_for_physical_reset": 56832,
+            "physical_reset_commands": 0,
+            "secret_blocks_waiting_for_physical_reset": 56832,
+            "sim_gc_blocks": 34875,
+            "sim_stale_secret_blocks": 92959,
+            "sim_waf": 1.0758274157147019
+          },
+          "midas-style": {
+            "avg_space_utilization": 0.37778116295264624,
+            "max_live_physical_zones": 5,
+            "max_secret_blocks_waiting_for_physical_reset": 25726,
+            "physical_reset_commands": 0,
+            "secret_blocks_waiting_for_physical_reset": 25726,
+            "sim_gc_blocks": 8868,
+            "sim_stale_secret_blocks": 128224,
+            "sim_waf": 1.0192813626539923
+          },
+          "quasar": {
+            "avg_space_utilization": 0.6580779944289693,
+            "max_live_physical_zones": 6,
+            "max_secret_blocks_waiting_for_physical_reset": 11213,
+            "physical_reset_commands": 28,
+            "secret_blocks_waiting_for_physical_reset": 0,
+            "sim_gc_blocks": 0,
+            "sim_stale_secret_blocks": 0,
+            "sim_waf": 1.0
+          },
+          "quasar-dogi-hybrid": {
+            "avg_space_utilization": 0.6580779944289693,
+            "max_live_physical_zones": 6,
+            "max_secret_blocks_waiting_for_physical_reset": 11213,
+            "physical_reset_commands": 28,
+            "secret_blocks_waiting_for_physical_reset": 0,
+            "sim_gc_blocks": 0,
+            "sim_stale_secret_blocks": 0,
+            "sim_waf": 1.0
+          },
+          "sepbit-style": {
+            "avg_space_utilization": 0.27393284089401776,
+            "max_live_physical_zones": 7,
+            "max_secret_blocks_waiting_for_physical_reset": 35292,
+            "physical_reset_commands": 0,
+            "secret_blocks_waiting_for_physical_reset": 35292,
+            "sim_gc_blocks": 16760,
+            "sim_stale_secret_blocks": 114520,
+            "sim_waf": 1.0364406447993808
+          }
+        },
+        "failed_rows": 0,
+        "helper_chunk_blocks": 1,
+        "hybrid_vs_dogi": {
+          "gc_reduction": 1.0,
+          "stale_secret_reduction_blocks": 100847,
+          "waf_reduction": 0.05016160176780982
+        },
+        "logical_zones": 733,
+        "rows": 6,
+        "scope": "representative physical packed ZNS replay",
+        "total_physical_gib": 12.040512084960938,
+        "traces": [
+          "artifacts/traces/fast-ycsb-pressure/ycsb-f-pqc8000.jsonl"
+        ],
+        "wall_time_s": 134.766313024
+      }
+    },
+    "scope": "FAST/YCSB-A/F pressure stress with higher PQC ratios and tight free-zone margins",
+    "simulator": {
+      "ycsb-a-pqc4000": {
+        "hybrid_vs_dogi": {
+          "gc_reduction": 1.0,
+          "stale_secret_reduction_blocks": 46266,
+          "waf_reduction": 0.043389085305049355
+        },
+        "policies": {
+          "dogi-history": {
+            "epoch_impurity": 0.1533234087525711,
+            "gc_write_blocks": 15316,
+            "intent_impurity": 0.09344636748980079,
+            "stale_secret_blocks_remaining": 46266,
+            "waf": 1.045357087859368,
+            "zone_utilization": 0.9953652871621622
+          },
+          "epoch-oracle": {
+            "epoch_impurity": 0.25612236780799347,
+            "gc_write_blocks": 8164,
+            "intent_impurity": 0.2656454197302181,
+            "stale_secret_blocks_remaining": 1270,
+            "waf": 1.0241770217605042,
+            "zone_utilization": 0.9971354166666667
+          },
+          "fifo": {
+            "epoch_impurity": 0.2899871586531359,
+            "gc_write_blocks": 27370,
+            "intent_impurity": 0.2762594179347023,
+            "stale_secret_blocks_remaining": 40488,
+            "waf": 1.0810540281216314,
+            "zone_utilization": 0.9988386824324325
+          },
+          "midas-style": {
+            "epoch_impurity": 0.0728774844596975,
+            "gc_write_blocks": 3121,
+            "intent_impurity": 0.0703205791106515,
+            "stale_secret_blocks_remaining": 63159,
+            "waf": 1.009242587569149,
+            "zone_utilization": 0.9963752815315315
+          },
+          "quasar": {
+            "epoch_impurity": 0.01861427094105481,
+            "gc_write_blocks": 1218,
+            "intent_impurity": 0.0,
+            "stale_secret_blocks_remaining": 0,
+            "waf": 1.0036070079010648,
+            "zone_utilization": 0.998143971080306
+          },
+          "quasar-dogi-hybrid": {
+            "epoch_impurity": 0.01861427094105481,
+            "gc_write_blocks": 0,
+            "intent_impurity": 0.0,
+            "stale_secret_blocks_remaining": 0,
+            "waf": 1.0,
+            "zone_utilization": 0.9935953931644359
+          },
+          "sepbit-style": {
+            "epoch_impurity": 0.11307203654670045,
+            "gc_write_blocks": 2608,
+            "intent_impurity": 0.1097991976999216,
+            "stale_secret_blocks_remaining": 65571,
+            "waf": 1.007723379807863,
+            "zone_utilization": 0.9963823198198198
+          }
+        },
+        "zones": 560
+      },
+      "ycsb-a-pqc8000": {
+        "hybrid_vs_dogi": {
+          "gc_reduction": 1.0,
+          "stale_secret_reduction_blocks": 110018,
+          "waf_reduction": 0.027443057998993034
+        },
+        "policies": {
+          "dogi-history": {
+            "epoch_impurity": 0.12433946223474304,
+            "gc_write_blocks": 13462,
+            "intent_impurity": 0.06926269816132957,
+            "stale_secret_blocks_remaining": 110018,
+            "waf": 1.0282174305830667,
+            "zone_utilization": 0.9957500182109557
+          },
+          "epoch-oracle": {
+            "epoch_impurity": 0.20973011718815116,
+            "gc_write_blocks": 0,
+            "intent_impurity": 0.2165313640834153,
+            "stale_secret_blocks_remaining": 43274,
+            "waf": 1.0,
+            "zone_utilization": 0.9967060933857809
+          },
+          "fifo": {
+            "epoch_impurity": 0.27707579722949205,
+            "gc_write_blocks": 23672,
+            "intent_impurity": 0.22249912483955392,
+            "stale_secret_blocks_remaining": 102724,
+            "waf": 1.0496184086140508,
+            "zone_utilization": 0.9993102600524476
+          },
+          "midas-style": {
+            "epoch_impurity": 0.03314774375302139,
+            "gc_write_blocks": 1611,
+            "intent_impurity": 0.03790694960742803,
+            "stale_secret_blocks_remaining": 134789,
+            "waf": 1.0033767850742328,
+            "zone_utilization": 0.9980423222610723
+          },
+          "quasar": {
+            "epoch_impurity": 0.013927553384787211,
+            "gc_write_blocks": 0,
+            "intent_impurity": 0.0,
+            "stale_secret_blocks_remaining": 0,
+            "waf": 1.0,
+            "zone_utilization": 0.99990625
+          },
+          "quasar-dogi-hybrid": {
+            "epoch_impurity": 0.013927553384787211,
+            "gc_write_blocks": 0,
+            "intent_impurity": 0.0,
+            "stale_secret_blocks_remaining": 0,
+            "waf": 1.0,
+            "zone_utilization": 0.9935475457074722
+          },
+          "sepbit-style": {
+            "epoch_impurity": 0.08874960409408392,
+            "gc_write_blocks": 1186,
+            "intent_impurity": 0.08659920985514011,
+            "stale_secret_blocks_remaining": 135454,
+            "waf": 1.002485951022992,
+            "zone_utilization": 0.9970748652389277
+          }
+        },
+        "zones": 863
+      },
+      "ycsb-f-pqc4000": {
+        "hybrid_vs_dogi": {
+          "gc_reduction": null,
+          "stale_secret_reduction_blocks": 74274,
+          "waf_reduction": 0.0
+        },
+        "policies": {
+          "dogi-history": {
+            "epoch_impurity": 0.07806145074437758,
+            "gc_write_blocks": 0,
+            "intent_impurity": 0.0783021856192588,
+            "stale_secret_blocks_remaining": 74274,
+            "waf": 1.0,
+            "zone_utilization": 0.9965659340659341
+          },
+          "epoch-oracle": {
+            "epoch_impurity": 0.22121000950269243,
+            "gc_write_blocks": 0,
+            "intent_impurity": 0.23139689578713968,
+            "stale_secret_blocks_remaining": 66087,
+            "waf": 1.0,
+            "zone_utilization": 0.9951923076923077
+          },
+          "fifo": {
+            "epoch_impurity": 0.21837187203040861,
+            "gc_write_blocks": 239,
+            "intent_impurity": 0.2285334178017105,
+            "stale_secret_blocks_remaining": 73732,
+            "waf": 1.0007249102203242,
+            "zone_utilization": 0.9999543913118132
+          },
+          "midas-style": {
+            "epoch_impurity": 0.05702882483370288,
+            "gc_write_blocks": 0,
+            "intent_impurity": 0.06404814697497624,
+            "stale_secret_blocks_remaining": 74274,
+            "waf": 1.0,
+            "zone_utilization": 0.9965659340659341
+          },
+          "quasar": {
+            "epoch_impurity": 0.022958504909724422,
+            "gc_write_blocks": 0,
+            "intent_impurity": 0.0,
+            "stale_secret_blocks_remaining": 0,
+            "waf": 1.0,
+            "zone_utilization": 0.9975460737179487
+          },
+          "quasar-dogi-hybrid": {
+            "epoch_impurity": 0.022958504909724422,
+            "gc_write_blocks": 0,
+            "intent_impurity": 0.0,
+            "stale_secret_blocks_remaining": 0,
+            "waf": 1.0,
+            "zone_utilization": 0.992095002276867
+          },
+          "sepbit-style": {
+            "epoch_impurity": 0.08413050364269876,
+            "gc_write_blocks": 0,
+            "intent_impurity": 0.08006335128286347,
+            "stale_secret_blocks_remaining": 74274,
+            "waf": 1.0,
+            "zone_utilization": 0.9951923076923077
+          }
+        },
+        "zones": 733
+      },
+      "ycsb-f-pqc8000": {
+        "hybrid_vs_dogi": {
+          "gc_reduction": 1.0,
+          "stale_secret_reduction_blocks": 100847,
+          "waf_reduction": 0.05016160176780982
+        },
+        "policies": {
+          "dogi-history": {
+            "epoch_impurity": 0.1608330515161763,
+            "gc_write_blocks": 24289,
+            "intent_impurity": 0.07098974185548416,
+            "stale_secret_blocks_remaining": 100847,
+            "waf": 1.0528106695424917,
+            "zone_utilization": 0.9966973944024725
+          },
+          "epoch-oracle": {
+            "epoch_impurity": 0.1887141622515312,
+            "gc_write_blocks": 0,
+            "intent_impurity": 0.19520535076842144,
+            "stale_secret_blocks_remaining": 19962,
+            "waf": 1.0,
+            "zone_utilization": 0.9943069625686813
+          },
+          "fifo": {
+            "epoch_impurity": 0.3086367564724007,
+            "gc_write_blocks": 34875,
+            "intent_impurity": 0.2029271408710029,
+            "stale_secret_blocks_remaining": 92959,
+            "waf": 1.0758274157147019,
+            "zone_utilization": 0.9999597570398352
+          },
+          "midas-style": {
+            "epoch_impurity": 0.07793183782362004,
+            "gc_write_blocks": 8868,
+            "intent_impurity": 0.03813925525119303,
+            "stale_secret_blocks_remaining": 128224,
+            "waf": 1.0192813626539923,
+            "zone_utilization": 0.9961152129120879
+          },
+          "quasar": {
+            "epoch_impurity": 0.01708751362116259,
+            "gc_write_blocks": 0,
+            "intent_impurity": 0.0,
+            "stale_secret_blocks_remaining": 0,
+            "waf": 1.0,
+            "zone_utilization": 0.9972916666666667
+          },
+          "quasar-dogi-hybrid": {
+            "epoch_impurity": 0.01708751362116259,
+            "gc_write_blocks": 0,
+            "intent_impurity": 0.0,
+            "stale_secret_blocks_remaining": 0,
+            "waf": 1.0,
+            "zone_utilization": 0.9939784053156147
+          },
+          "sepbit-style": {
+            "epoch_impurity": 0.1613121406831248,
+            "gc_write_blocks": 16760,
+            "intent_impurity": 0.07329124863788374,
+            "stale_secret_blocks_remaining": 114520,
+            "waf": 1.0364406447993808,
+            "zone_utilization": 0.9966893458104396
+          }
+        },
+        "zones": 733
+      }
+    }
+  },
+  "multitenant_pressure": {
+    "decision": "add-tenant-isolation-mode",
+    "physical": {
+      "append_engine": "helper",
+      "by_policy": {
+        "dogi-history": {
+          "avg_space_utilization": 0.14517503772051996,
+          "max_live_physical_zones": 6,
+          "max_secret_blocks_waiting_for_physical_reset": 14722,
+          "physical_reset_commands": 0,
+          "quasar_family_count": null,
+          "reset_secret_epoch_impurity": 0.016652059596844872,
+          "reset_secret_tenant_impurity": 0.9141834647969618,
+          "secret_blocks_waiting_for_physical_reset": 14722,
+          "sim_gc_blocks": 4446,
+          "sim_stale_secret_blocks": 24599,
+          "sim_waf": 1.0261257396710484
+        },
+        "fifo": {
+          "avg_space_utilization": 0.4383741005106778,
+          "max_live_physical_zones": 2,
+          "max_secret_blocks_waiting_for_physical_reset": 12288,
+          "physical_reset_commands": 0,
+          "quasar_family_count": null,
+          "reset_secret_epoch_impurity": 0.01484469544171037,
+          "reset_secret_tenant_impurity": 0.9113352158128277,
+          "secret_blocks_waiting_for_physical_reset": 12288,
+          "sim_gc_blocks": 6017,
+          "sim_stale_secret_blocks": 25896,
+          "sim_waf": 1.0353573044535984
+        },
+        "midas-style": {
+          "avg_space_utilization": 0.1739808205663881,
+          "max_live_physical_zones": 6,
+          "max_secret_blocks_waiting_for_physical_reset": 7201,
+          "physical_reset_commands": 1,
+          "quasar_family_count": null,
+          "reset_secret_epoch_impurity": 0.026994270603790217,
+          "reset_secret_tenant_impurity": 0.8918025561921551,
+          "secret_blocks_waiting_for_physical_reset": 7201,
+          "sim_gc_blocks": 4162,
+          "sim_stale_secret_blocks": 29215,
+          "sim_waf": 1.024456889003802
+        },
+        "quasar": {
+          "avg_space_utilization": 0.7163598247446611,
+          "max_live_physical_zones": 5,
+          "max_secret_blocks_waiting_for_physical_reset": 1941,
+          "physical_reset_commands": 41,
+          "quasar_family_count": 45,
+          "reset_secret_epoch_impurity": 0.0,
+          "reset_secret_tenant_impurity": 0.941918466480374,
+          "secret_blocks_waiting_for_physical_reset": 0,
+          "sim_gc_blocks": 87,
+          "sim_stale_secret_blocks": 0,
+          "sim_waf": 1.0005112324227128
+        },
+        "quasar-adaptive-hybrid": {
+          "avg_space_utilization": 0.7178142409470752,
+          "max_live_physical_zones": 71,
+          "max_secret_blocks_waiting_for_physical_reset": 71,
+          "physical_reset_commands": 1281,
+          "quasar_family_count": 1284,
+          "reset_secret_epoch_impurity": 0.0,
+          "reset_secret_tenant_impurity": 0.0,
+          "secret_blocks_waiting_for_physical_reset": 0,
+          "sim_gc_blocks": 488,
+          "sim_stale_secret_blocks": 0,
+          "sim_waf": 1.002867602554987
+        },
+        "quasar-dogi-hybrid": {
+          "avg_space_utilization": 0.7160551590064995,
+          "max_live_physical_zones": 5,
+          "max_secret_blocks_waiting_for_physical_reset": 1941,
+          "physical_reset_commands": 41,
+          "quasar_family_count": 44,
+          "reset_secret_epoch_impurity": 0.0,
+          "reset_secret_tenant_impurity": 0.941918466480374,
+          "secret_blocks_waiting_for_physical_reset": 0,
+          "sim_gc_blocks": 3,
+          "sim_stale_secret_blocks": 0,
+          "sim_waf": 1.0000176287042315
+        },
+        "sepbit-style": {
+          "avg_space_utilization": 0.17463149953574744,
+          "max_live_physical_zones": 5,
+          "max_secret_blocks_waiting_for_physical_reset": 586,
+          "physical_reset_commands": 0,
+          "quasar_family_count": null,
+          "reset_secret_epoch_impurity": 0.003297609233305854,
+          "reset_secret_tenant_impurity": 0.7996702390766695,
+          "secret_blocks_waiting_for_physical_reset": 586,
+          "sim_gc_blocks": 5027,
+          "sim_stale_secret_blocks": 37078,
+          "sim_waf": 1.0295398320572111
+        }
+      },
+      "failed_rows": 0,
+      "helper_chunk_blocks": 1,
+      "logical_zones": 373,
+      "rows": 7,
+      "tenant_isolation_vs_current": {
+        "gc_extra_blocks": 485,
+        "max_live_physical_zone_extra_count": 66,
+        "physical_reset_extra_commands": 1240,
+        "reset_secret_tenant_impurity_reduction": 1.0,
+        "waf_increase": 0.0028499738507554717
+      },
+      "traces": [
+        "artifacts/traces/multitenant-pressure/multitenant-t032-pqc4000.jsonl"
+      ],
+      "wall_time_s": 85.208728209
+    },
+    "scope": "multi-tenant PQC pressure with reset-time secret tenant isolation",
+    "simulator": {
+      "multitenant-t032-pqc4000": {
+        "current": {
+          "gc_write_blocks": 3,
+          "quasar_coarse_bin_writes": null,
+          "quasar_family_count": 44,
+          "quasar_tenant_bin_writes": null,
+          "reset_secret_epoch_impurity": 0.0,
+          "reset_secret_impurity_blocks": 38291,
+          "reset_secret_tenant_impurity": 0.941918466480374,
+          "stale_secret_blocks_remaining": 0,
+          "tenant_impurity": 0.3585977715514433,
+          "waf": 1.0000176287042315,
+          "zone_utilization": 0.9900325157122905
+        },
+        "dogi": {
+          "gc_write_blocks": 4446,
+          "quasar_coarse_bin_writes": null,
+          "quasar_family_count": null,
+          "quasar_tenant_bin_writes": null,
+          "reset_secret_epoch_impurity": 0.016652059596844872,
+          "reset_secret_impurity_blocks": 13692,
+          "reset_secret_tenant_impurity": 0.9141834647969618,
+          "stale_secret_blocks_remaining": 24599,
+          "tenant_impurity": 0.35206880823613734,
+          "waf": 1.0261257396710484,
+          "zone_utilization": 0.9920123556385869
+        },
+        "tenant_isolation": {
+          "gc_write_blocks": 488,
+          "quasar_coarse_bin_writes": 0,
+          "quasar_family_count": 1284,
+          "quasar_tenant_bin_writes": 24893,
+          "reset_secret_epoch_impurity": 0.0,
+          "reset_secret_impurity_blocks": 38291,
+          "reset_secret_tenant_impurity": 0.0,
+          "stale_secret_blocks_remaining": 0,
+          "tenant_impurity": 0.35966638430963704,
+          "waf": 1.002867602554987,
+          "zone_utilization": 0.9878893185618729
+        },
+        "tenant_isolation_vs_current": {
+          "family_extra_count": 1240,
+          "gc_extra_blocks": 485,
+          "reset_secret_tenant_impurity_reduction": 1.0,
+          "waf_increase": 0.0028499738507554717
+        },
+        "zones": 373
+      },
+      "multitenant-t032-pqc8000": {
+        "current": {
+          "gc_write_blocks": 0,
+          "quasar_coarse_bin_writes": null,
+          "quasar_family_count": 44,
+          "quasar_tenant_bin_writes": null,
+          "reset_secret_epoch_impurity": 0.0,
+          "reset_secret_impurity_blocks": 77151,
+          "reset_secret_tenant_impurity": 0.9418542857513188,
+          "stale_secret_blocks_remaining": 0,
+          "tenant_impurity": 0.43131771312938394,
+          "waf": 1.0,
+          "zone_utilization": 0.9907504857512953
+        },
+        "dogi": {
+          "gc_write_blocks": 9352,
+          "quasar_coarse_bin_writes": null,
+          "quasar_family_count": null,
+          "quasar_tenant_bin_writes": null,
+          "reset_secret_epoch_impurity": 0.004010123919403083,
+          "reset_secret_impurity_blocks": 30423,
+          "reset_secret_tenant_impurity": 0.9232159879038885,
+          "stale_secret_blocks_remaining": 46728,
+          "tenant_impurity": 0.4209042438297921,
+          "waf": 1.0402938451927013,
+          "zone_utilization": 0.9921291307471264
+        },
+        "tenant_isolation": {
+          "gc_write_blocks": 72,
+          "quasar_coarse_bin_writes": 0,
+          "quasar_family_count": 1284,
+          "quasar_tenant_bin_writes": 50100,
+          "reset_secret_epoch_impurity": 0.0,
+          "reset_secret_impurity_blocks": 77151,
+          "reset_secret_tenant_impurity": 0.0,
+          "stale_secret_blocks_remaining": 0,
+          "tenant_impurity": 0.43163602878483,
+          "waf": 1.0003102177987462,
+          "zone_utilization": 0.9931451263850416
+        },
+        "tenant_isolation_vs_current": {
+          "family_extra_count": 1240,
+          "gc_extra_blocks": 72,
+          "reset_secret_tenant_impurity_reduction": 1.0,
+          "waf_increase": 0.00031021779874618183
+        },
+        "zones": 440
+      }
+    }
+  },
+  "physical_robustness": {
+    "clean": {
+      "dogi": {
+        "avg_space_utilization": 0.1854253714020427,
+        "failed_rows": 0,
+        "max_active_pack_keys": 7,
+        "max_live_physical_zones": 8,
+        "max_secret_waiting": 16944,
+        "physical_bytes_written": 1675231232,
+        "physical_reset_commands": 0,
+        "physical_waf": 1.045357087859368,
+        "residual_migrated_blocks": null,
+        "residual_migration_commands": null,
+        "secret_waiting_end": 16944,
+        "sim_gc_blocks": 15316,
+        "sim_stale_secret_blocks": 46266,
+        "sim_waf": 1.045357087859368
+      },
+      "failed_rows": 0,
+      "hybrid": {
+        "avg_space_utilization": 0.5914559395311049,
+        "failed_rows": 0,
+        "max_active_pack_keys": 5,
+        "max_live_physical_zones": 6,
+        "max_secret_waiting": 5027,
+        "physical_bytes_written": 1612496896,
+        "physical_reset_commands": 28,
+        "physical_waf": 1.0,
+        "residual_migrated_blocks": null,
+        "residual_migration_commands": null,
+        "secret_waiting_end": 0,
+        "sim_gc_blocks": 0,
+        "sim_stale_secret_blocks": 0,
+        "sim_waf": 1.0
+      },
+      "rows": 2
+    },
+    "decision": "add-open-zone-aware-residual-fallback",
+    "decision_reason": "Exact secret-group packing is best for clean hints, missing hints, and wrong epochs, but delayed expiry/stragglers can exceed the WD ZN540 open-zone budget. Epoch-bin-4 keeps max live physical zones at the device limit and completes, but leaves stale-secret exposure. Epoch-bin-5 plus residual migration completes on the actual ZNS device, keeps max live physical zones within mor/mar, and reduces final secret waiting to zero at explicit GC-copy cost.",
+    "device_limits": {
+      "mar": 13,
+      "mor": 13,
+      "numzrwa": 13
+    },
+    "missing_hint_5pct": {
+      "failed_rows": 0,
+      "hybrid": {
+        "avg_space_utilization": 0.14939864786443827,
+        "failed_rows": 0,
+        "max_active_pack_keys": 11,
+        "max_live_physical_zones": 12,
+        "max_secret_waiting": 4546,
+        "physical_bytes_written": 1612496896,
+        "physical_reset_commands": 28,
+        "physical_waf": 1.0,
+        "residual_migrated_blocks": null,
+        "residual_migration_commands": null,
+        "secret_waiting_end": 7,
+        "sim_gc_blocks": 0,
+        "sim_stale_secret_blocks": 3361,
+        "sim_waf": 1.0
+      },
+      "rows": 2
+    },
+    "scope": "actual ZNS bad-hint and straggler replay on YCSB-A p4000",
+    "straggler_5pct_epoch_bin_4": {
+      "failed_rows": 0,
+      "hybrid": {
+        "avg_space_utilization": 0.11127162791943433,
+        "failed_rows": 0,
+        "max_active_pack_keys": 13,
+        "max_live_physical_zones": 13,
+        "max_secret_waiting": 40454,
+        "physical_bytes_written": 1633591296,
+        "physical_reset_commands": 0,
+        "physical_waf": 1.0152513059856194,
+        "residual_migrated_blocks": null,
+        "residual_migration_commands": null,
+        "secret_waiting_end": 40454,
+        "sim_gc_blocks": 5150,
+        "sim_stale_secret_blocks": 25477,
+        "sim_waf": 1.0152513059856194
+      },
+      "rows": 1
+    },
+    "straggler_5pct_epoch_bin_5_residual_12288": {
+      "failed_rows": 0,
+      "hybrid": {
+        "avg_space_utilization": 0.1083171328536057,
+        "failed_rows": 0,
+        "max_active_pack_keys": 12,
+        "max_live_physical_zones": 13,
+        "max_secret_waiting": 23558,
+        "physical_bytes_written": 2594304000,
+        "physical_reset_commands": 27,
+        "physical_waf": 1.7098490861062083,
+        "residual_migrated_blocks": 234549,
+        "residual_migration_commands": 27,
+        "secret_waiting_end": 0,
+        "sim_gc_blocks": 5150,
+        "sim_stale_secret_blocks": 25477,
+        "sim_waf": 1.0152513059856194
+      },
+      "rows": 1
+    },
+    "straggler_5pct_exact_secret_group": {
+      "failed_rows": 1,
+      "hybrid": {
+        "avg_space_utilization": 0.048217705431754875,
+        "failed_rows": 1,
+        "max_active_pack_keys": 29,
+        "max_live_physical_zones": 30,
+        "max_secret_waiting": 40454,
+        "physical_bytes_written": 1273225216,
+        "physical_reset_commands": 0,
+        "physical_waf": 1.0152513059856194,
+        "residual_migrated_blocks": null,
+        "residual_migration_commands": null,
+        "secret_waiting_end": 40454,
+        "sim_gc_blocks": 5150,
+        "sim_stale_secret_blocks": 25477,
+        "sim_waf": 1.0152513059856194
+      },
+      "rows": 2
+    },
+    "straggler_5pct_exact_secret_group_nobatch": {
+      "failed_rows": 1,
+      "hybrid": {
+        "avg_space_utilization": 0.05045748220365212,
+        "failed_rows": 1,
+        "max_active_pack_keys": 15,
+        "max_live_physical_zones": 15,
+        "max_secret_waiting": 6,
+        "physical_bytes_written": 854732800,
+        "physical_reset_commands": 0,
+        "physical_waf": 1.0,
+        "residual_migrated_blocks": null,
+        "residual_migration_commands": null,
+        "secret_waiting_end": 6,
+        "sim_gc_blocks": 5150,
+        "sim_stale_secret_blocks": 25477,
+        "sim_waf": 1.0152513059856194
+      },
+      "rows": 2
+    },
+    "trace": "artifacts/traces/fast-ycsb-pressure/ycsb-a-pqc4000.jsonl",
+    "wrong_epoch_5pct": {
+      "failed_rows": 0,
+      "hybrid": {
+        "avg_space_utilization": 0.5914559395311049,
+        "failed_rows": 0,
+        "max_active_pack_keys": 11,
+        "max_live_physical_zones": 12,
+        "max_secret_waiting": 4637,
+        "physical_bytes_written": 1612496896,
+        "physical_reset_commands": 112,
+        "physical_waf": 1.0,
+        "residual_migrated_blocks": null,
+        "residual_migration_commands": null,
+        "secret_waiting_end": 0,
+        "sim_gc_blocks": 0,
+        "sim_stale_secret_blocks": 0,
+        "sim_waf": 1.0
+      },
+      "rows": 2
+    }
+  },
+  "reproducibility_manifest": {
+    "artifact_count": 39,
+    "artifacts": [
+      {
+        "bytes": 310144,
+        "claim": "storage-history baselines miss PQC death cohorts even when WAF is near 1.0",
+        "exists": true,
+        "id": "same_path_actual_zns_fairness",
+        "path": "artifacts/results/packed-physical-zonefs-replay-dogi-paper-pqc2000-z512-secret-group-helper.json",
+        "role": "six DOGI/FAST workload-axis actual-ZNS fairness matrix",
+        "sha256": "a2a68a144d0ca2639dbb2437524a69454e7e0037b9ca87c712b4c3d1bbd60ece"
+      },
+      {
+        "bytes": 16180,
+        "claim": "WAF/GC gains are pressure-dependent while semantic reset gap is broad",
+        "exists": true,
+        "id": "ycsb_actual_zns_pressure_curve",
+        "path": "artifacts/results/fast-ycsb-pressure/ycsb-actual-zns-pressure-curve.json",
+        "role": "actual-ZNS YCSB p2000 negative control plus p4000/p6000/p8000/p10000 pressure curve",
+        "sha256": "a4b6b8a29a465bbb12a05e2ac65dc95ed2a5d86c8468c2eaecda4e4fc4068930"
+      },
+      {
+        "bytes": 61422,
+        "claim": "easy YCSB point keeps WAF near 1.0 while exposing stale-secret reset gap",
+        "exists": true,
+        "id": "ycsb_actual_zns_p2000_raw",
+        "path": "artifacts/results/fast-ycsb-pressure/packed-physical-zonefs-ycsb-pqc2000-z512-helper.json",
+        "role": "raw actual-ZNS packed replay for YCSB p2000 negative WAF control",
+        "sha256": "9505e243ac1a36a61f8454f3ad8fec11177d9869781e5ec895a44f4496e79062"
+      },
+      {
+        "bytes": 31634,
+        "claim": "YCSB-A p4000 creates DOGI-style GC while hybrid drains secrets",
+        "exists": true,
+        "id": "ycsb_actual_zns_a_p4000_raw",
+        "path": "artifacts/results/fast-ycsb-pressure/packed-physical-zonefs-ycsb-a-pqc4000-z560-helper.json",
+        "role": "raw actual-ZNS packed replay for YCSB-A p4000 pressure point",
+        "sha256": "af9c9667f1a015d649ae5d61825a75fb7d978b522035b1b214ecfc316b0c5793"
+      },
+      {
+        "bytes": 34976,
+        "claim": "YCSB-A p6000 strengthens the intermediate pressure curve",
+        "exists": true,
+        "id": "ycsb_actual_zns_a_p6000_raw",
+        "path": "artifacts/results/fast-ycsb-pressure/packed-physical-zonefs-ycsb-a-pqc6000-z712-helper.json",
+        "role": "raw actual-ZNS packed replay for YCSB-A p6000 pressure point",
+        "sha256": "f8f6e4fdafb0712834710bd9720c9d6a5cc6af6b37d9e312d64cdbd0b1451665"
+      },
+      {
+        "bytes": 33134,
+        "claim": "YCSB-A p8000 preserves stale-secret gap under higher PQC density",
+        "exists": true,
+        "id": "ycsb_actual_zns_a_p8000_raw",
+        "path": "artifacts/results/fast-ycsb-pressure/packed-physical-zonefs-ycsb-a-pqc8000-z863-helper.json",
+        "role": "raw actual-ZNS packed replay for YCSB-A p8000 pressure point",
+        "sha256": "100bbb6db346c74e5122bb98a55919d57eef86f2c6ad2992354ba7f34f3f3d7f"
+      },
+      {
+        "bytes": 32766,
+        "claim": "YCSB-F p4000 remains an easy WAF point but exposes stale-secret gap",
+        "exists": true,
+        "id": "ycsb_actual_zns_f_p4000_raw",
+        "path": "artifacts/results/fast-ycsb-pressure/packed-physical-zonefs-ycsb-f-pqc4000-z733-helper.json",
+        "role": "raw actual-ZNS packed replay for YCSB-F p4000 easy/stale-secret point",
+        "sha256": "a7c9938d4ea777f76593731a85a18ffd70a1f8ec21329a5800260a2a2df2d1b6"
+      },
+      {
+        "bytes": 34924,
+        "claim": "YCSB-F p6000 captures the transition from easy WAF to pressure",
+        "exists": true,
+        "id": "ycsb_actual_zns_f_p6000_raw",
+        "path": "artifacts/results/fast-ycsb-pressure/packed-physical-zonefs-ycsb-f-pqc6000-z733-helper.json",
+        "role": "raw actual-ZNS packed replay for YCSB-F p6000 pressure point",
+        "sha256": "30d917927795775e6af95a0b0066eae2ffceda67c537fe1fab95840f80314453"
+      },
+      {
+        "bytes": 31665,
+        "claim": "YCSB-F p8000 creates strong DOGI-style WAF/GC separation",
+        "exists": true,
+        "id": "ycsb_actual_zns_f_p8000_raw",
+        "path": "artifacts/results/fast-ycsb-pressure/packed-physical-zonefs-ycsb-f-pqc8000-z733-helper.json",
+        "role": "raw actual-ZNS packed replay for YCSB-F p8000 pressure point",
+        "sha256": "a107b694ebf3d6604143f3cc895360c572b31399f5e92116d08bf61b35dc02ac"
+      },
+      {
+        "bytes": 34941,
+        "claim": "YCSB-A p10000 confirms the realistic failure mode is stale-secret exposure plus moderate DOGI-style GC, not a toy WAF explosion",
+        "exists": true,
+        "id": "ycsb_actual_zns_a_p10000_raw",
+        "path": "artifacts/results/fast-ycsb-pressure/packed-physical-zonefs-ycsb-a-pqc10000-z1024-helper.json",
+        "role": "raw actual-ZNS packed replay for larger YCSB-A p10000 pressure point",
+        "sha256": "5ce08c4851b2d86d6432b40f3cd036c8c2bb137635f2a823a8ad7acc0cfde1b9"
+      },
+      {
+        "bytes": 35041,
+        "claim": "YCSB-F p10000 strengthens DOGI-axis pressure while QUASAR/hybrid keeps GC and stale secrets at zero",
+        "exists": true,
+        "id": "ycsb_actual_zns_f_p10000_raw",
+        "path": "artifacts/results/fast-ycsb-pressure/packed-physical-zonefs-ycsb-f-pqc10000-z900-helper.json",
+        "role": "raw actual-ZNS packed replay for larger YCSB-F p10000 pressure point",
+        "sha256": "322531c09f4db15d1d917427c6e4082adf8a0b7581badc6277d3ca66417681af"
+      },
+      {
+        "bytes": 7872,
+        "claim": "update-heavy PQC metadata pressure can create large DOGI-style GC copy cost",
+        "exists": true,
+        "id": "sysbench_actual_zns_pressure",
+        "path": "artifacts/results/fast-db-pressure/sysbench-pressure-summary.json",
+        "role": "FAST-style DB pressure actual-ZNS replay summary",
+        "sha256": "fa0fe82fb8634b5c74b5970bdc343f289cbb549bd34cb560ccaeea70c8370d79"
+      },
+      {
+        "bytes": 12800,
+        "claim": "dynamic service workloads also expose DOGI-style GC and stale-secret cost under PQC pressure",
+        "exists": true,
+        "id": "dynamic_exchange_actual_zns_pressure",
+        "path": "artifacts/results/fast-dynamic-pressure/dynamic-pressure-summary.json",
+        "role": "DOGI dynamic-axis Exchange/Varmail/Alibaba pressure actual-ZNS replay summary",
+        "sha256": "30435480f439ea10866534c08c88df93ff000639840cd1caee6d07fa72492646"
+      },
+      {
+        "bytes": 35237,
+        "claim": "Exchange p8000 creates DOGI/SepBIT/MiDAS GC while hybrid drains secrets",
+        "exists": true,
+        "id": "dynamic_exchange_actual_zns_raw",
+        "path": "artifacts/results/fast-dynamic-pressure/packed-physical-zonefs-exchange-pqc8000-z768-helper.json",
+        "role": "raw actual-ZNS packed replay for Exchange p8000 dynamic pressure",
+        "sha256": "d2faf27bd1c3ca4e6bc643fcca6cd694e9db7f837b5355799683f99da83fc57d"
+      },
+      {
+        "bytes": 35235,
+        "claim": "Varmail p8000 creates DOGI/SepBIT/MiDAS GC while hybrid drains secrets",
+        "exists": true,
+        "id": "dynamic_varmail_actual_zns_raw",
+        "path": "artifacts/results/fast-dynamic-pressure/packed-physical-zonefs-varmail-pqc8000-z768-helper.json",
+        "role": "raw actual-ZNS packed replay for Varmail p8000 dynamic pressure",
+        "sha256": "1097e724e2dcb4a7b71424c1f93b9750287f0de9d67d2217020e365cde4c0ebb"
+      },
+      {
+        "bytes": 35267,
+        "claim": "Alibaba p8000 creates DOGI/SepBIT/MiDAS GC while hybrid drains secrets",
+        "exists": true,
+        "id": "dynamic_alibaba_actual_zns_raw",
+        "path": "artifacts/results/fast-dynamic-pressure/packed-physical-zonefs-alibaba-pqc8000-z768-helper.json",
+        "role": "raw actual-ZNS packed replay for Alibaba p8000 dynamic pressure",
+        "sha256": "c1b0d70291fdea82eefeae9e61dccb8a193c2ddf723544c99c0c7b14135421fa"
+      },
+      {
+        "bytes": 499,
+        "claim": "public DOGI binary completes on the hard dynamic PQC pressure trace and reports high GC/WAF",
+        "exists": true,
+        "id": "dogi_exact_alibaba_pressure",
+        "path": "artifacts/results/dogi-exact/alibaba-pqc8000-dogi.json",
+        "role": "exact public DOGI prototype run on physical ZNS with Alibaba p8000 compact trace",
+        "sha256": "39592d4f23d943b1041b98bff4c5f088b424304022ba30be83069d87fcebcea3"
+      },
+      {
+        "bytes": 2064,
+        "claim": "all public DOGI-family placements complete and report high WAF on the hard dynamic PQC pressure trace",
+        "exists": true,
+        "id": "dogi_exact_alibaba_suite",
+        "path": "artifacts/results/dogi-exact/alibaba-pqc8000-suite.json",
+        "role": "exact public DOGI prototype DOGI/Greedy/CostBenefit suite on physical ZNS",
+        "sha256": "f0b1425a00ee6bd95c95bd6ca2389dadb68a8f6da89038e45477d5898d001c18"
+      },
+      {
+        "bytes": 846,
+        "claim": "original-LBA DOGI replay requires a 42GiB logical span instead of the compact 2GiB span",
+        "exists": true,
+        "id": "dogi_original_lba_adapter",
+        "path": "artifacts/results/fast-dynamic-pressure/alibaba-pqc8000-original-lba-dogi-adapter.json",
+        "role": "original-LBA DOGI adapter summary for Alibaba p8000 without compacting the LBA span",
+        "sha256": "63938bb0eea17a659c9a015631a295d1996b622596e80d4a8b8a7b62241c015b"
+      },
+      {
+        "bytes": 6141,
+        "claim": "the original-LBA trace is syntactically runnable by the DOGI prototype and the device/tool chain is visible",
+        "exists": true,
+        "id": "dogi_original_lba_preflight",
+        "path": "artifacts/results/fast-dynamic-pressure/alibaba-pqc8000-original-lba-dogi-preflight-nvme0n1.json",
+        "role": "preflight for the original-LBA DOGI run on the physical ZNS device",
+        "sha256": "9e35230c38ee79ebf226c03e4218fe53fe82e16b62ea1237bfe97215b81dab39"
+      },
+      {
+        "bytes": 527,
+        "claim": "the original-LBA DOGI run completes when executed from the prototype app working directory, reporting WAF on the 42GiB Alibaba p8000 span",
+        "exists": true,
+        "id": "dogi_original_lba_completed_run",
+        "path": "artifacts/results/dogi-exact/alibaba-pqc8000-original-lba-dogi-cwd-app.json",
+        "role": "completed original-LBA public DOGI physical run summary",
+        "sha256": "dbfd67fcd4972ba37967189ce09e21d5c1ab1955c63f8671c51bc98bab55667c"
+      },
+      {
+        "bytes": 23117,
+        "claim": "history baselines issue no semantic resets under delayed-expiry stragglers",
+        "exists": true,
+        "id": "ycsb_f_straggler_baselines",
+        "path": "artifacts/results/fast-ycsb-pressure/packed-physical-zonefs-ycsb-f-pqc8000-straggler005-baselines-helper.json",
+        "role": "actual-ZNS hard straggler replay for FIFO/SepBIT/MiDAS/DOGI baselines",
+        "sha256": "862b9ff20002d258657594602b5ad068ae2613e02ac967474e917df5fea00e29"
+      },
+      {
+        "bytes": 39597,
+        "claim": "hybrid pays reset work but policy-decision CPU remains below DOGI-style MLP",
+        "exists": true,
+        "id": "actual_zns_overhead",
+        "path": "artifacts/results/actual-zns-overhead-summary.json",
+        "role": "actual-ZNS helper-path overhead plus C policy CPU accounting",
+        "sha256": "c4f59381973acb8aaa3f5be1f390c97ade18d1d4b4fb1903a74faa8161f5033f"
+      },
+      {
+        "bytes": 809,
+        "claim": "native xNVMe command-path p99 is measured without zonefs helper append overhead",
+        "exists": true,
+        "id": "xnvme_zns_latency",
+        "path": "artifacts/results/xnvme-zns-latency/summary.json",
+        "role": "raw xNVMe/Linux NVMe ioctl ZNS append/reset latency probe",
+        "sha256": "cf22d6dac2dea485cf95aac27882401970ef5ce7a17860a3448fe33c33603900"
+      },
+      {
+        "bytes": 5671,
+        "claim": "xNVMe replay evidence is backed by an inspectable in-tree tool",
+        "exists": true,
+        "id": "xnvme_zns_latency_source",
+        "path": "code/quasar/xnvme_zns_latency.c",
+        "role": "source for the xNVMe native ZNS latency probe",
+        "sha256": "0fc74b8d7bb942da3ebae56cb9c05ea7ffd359829afe24df83f612b9a824490d"
+      },
+      {
+        "bytes": 1083,
+        "claim": "the evaluated device supports sanitize and records whether crypto-erase execution was validated",
+        "exists": true,
+        "id": "physical_zns_security_capability",
+        "path": "artifacts/results/physical-zns-security-capability.json",
+        "role": "physical ZNS sanitize/security capability and claim-boundary summary",
+        "sha256": "ec57ce25b9bcaed6986cb65b79d2e79dd5107b14213a36d2d62fe9933abfed82"
+      },
+      {
+        "bytes": 1180,
+        "claim": "the device crypto-erase sanitize command path completed successfully and zonefs was restored",
+        "exists": true,
+        "id": "physical_zns_sanitize_execution",
+        "path": "artifacts/results/physical-zns-sanitize-exec/summary.json",
+        "role": "destructive NVMe crypto-erase sanitize execution summary for the physical ZNS SSD",
+        "sha256": "81f36dd378cd8b02b3b8ad49ca4c0423db14c960c6567dcc0bbeb10bfbec7e23"
+      },
+      {
+        "bytes": 13129,
+        "claim": "evaluation does not rely on an overly easy PQC-only trace",
+        "exists": true,
+        "id": "workload_hardness",
+        "path": "artifacts/results/workload-hardness-matrix.json",
+        "role": "benchmark guardrail for fairness, negative-control, pressure, and hostile tiers",
+        "sha256": "778373eaa330f270bcab6ffe12238f7da83501db3f9e5e398c3451602fed1af9"
+      },
+      {
+        "bytes": 3363,
+        "claim": "QUASAR improvement is an explicit mode selector, not one universal knob",
+        "exists": true,
+        "id": "deployment_selector",
+        "path": "artifacts/results/quasar-deployment-policy-selector.json",
+        "role": "deployable policy selector for default, tenant-isolation, strict-residual, and fallback modes",
+        "sha256": "5effb3c19a59ff6f810204b6817ff61056810c7d7517da235dd294a171331215"
+      },
+      {
+        "bytes": 91046,
+        "claim": "FDP can carry QUASAR lifecycle families, but scarce handles collide death cohorts",
+        "exists": true,
+        "id": "fdp_handle_pressure",
+        "path": "artifacts/results/pqc-mixed-fdp-mapping.json",
+        "role": "trace-driven QUASAR-to-FDP placement-handle pressure model",
+        "sha256": "2c5d3ef6463032f348dec8b56e700651a854e2e625160bbb15bdbb8ded6960d8"
+      },
+      {
+        "bytes": 13196,
+        "claim": "FDP handle pressure is reported as deployment modeling, not physical FDP performance",
+        "exists": true,
+        "id": "fdp_handle_pressure_figure",
+        "path": "artifacts/figures/fast-style/fig8-fdp-handle-pressure.pdf",
+        "role": "paper Figure 8 for FDP handle-count purity and collision pressure",
+        "sha256": "7ca6986bd95bfabf05f32390737c4578aa6d0ebfd7e9fa4bc8009c705be801dc"
+      },
+      {
+        "bytes": 181032,
+        "claim": "paper-ready comparison summary",
+        "exists": true,
+        "id": "unified_comparison",
+        "path": "artifacts/results/unified-baseline-comparison.json",
+        "role": "single JSON summary separating same-path, pressure, exact external, and boundary evidence",
+        "sha256": "59690302aa3e5b955061181628080cb9aad24ae030b19d65cde6a25cf0b20656"
+      },
+      {
+        "bytes": 8168,
+        "claim": "supported, qualified, and boundary claims are separated",
+        "exists": true,
+        "id": "claim_matrix",
+        "path": "artifacts/results/quasar-claim-matrix.json",
+        "role": "claim-to-evidence guardrail",
+        "sha256": "73714a28e53ee66e2aaf88e206fd5beba7e1a286954df476ee02b9bd73f1b86b"
+      },
+      {
+        "bytes": 33770,
+        "claim": "no current blockers or pending paper-grade evidence gaps for scoped claim",
+        "exists": true,
+        "id": "external_readiness",
+        "path": "artifacts/results/external-readiness.json",
+        "role": "conservative readiness report for external/system evidence",
+        "sha256": "3e06aae19557c5f93e8f20181cf6309a25b2565bcae0919b965ab40ac6034796"
+      },
+      {
+        "bytes": 6484,
+        "claim": "scoped claim is ready while optional strengthening work is separated",
+        "exists": true,
+        "id": "goal_completion_audit",
+        "path": "artifacts/results/actual-zns-goal-completion-audit.json",
+        "role": "requirement-by-requirement audit of the actual-ZNS comparison goal",
+        "sha256": "56054ce06ec5e8d9b7b1d1c549abe5b702581c6852694412617dde7fe083d453"
+      },
+      {
+        "bytes": 38756,
+        "claim": "all reproducibility and evidence gates pass",
+        "exists": true,
+        "id": "acceptance",
+        "path": "artifacts/results/acceptance-report.json",
+        "role": "local acceptance gate summary",
+        "sha256": "84a20e866e515ccbe96498a2078678fdbf3e5d95540450ba7d0a902af470f344"
+      },
+      {
+        "bytes": 100733,
+        "claim": "visualizes negative control and pressure rows",
+        "exists": true,
+        "id": "ycsb_pressure_figure",
+        "path": "artifacts/figures/actual-zns/ycsb-pressure-waf-stale.png",
+        "role": "paper figure for actual-ZNS YCSB WAF/stale-secret curve",
+        "sha256": "98973b42e75fc5c079c0862f5b5989a72cb5c6568da1272aecab5cebb4e04998"
+      },
+      {
+        "bytes": 64105,
+        "claim": "visualizes throughput, CPU, and semantic reset cost",
+        "exists": true,
+        "id": "overhead_figure",
+        "path": "artifacts/figures/actual-zns/overhead-accounting.png",
+        "role": "paper figure for actual-ZNS overhead accounting",
+        "sha256": "d7a58350fd01ffb2f53eaa7a4ddccd6a4a1a3dc27ac5bef252ae56524bda09a1"
+      },
+      {
+        "bytes": 55961,
+        "claim": "visualizes fairness, pressure, and hostile coverage",
+        "exists": true,
+        "id": "workload_hardness_figure",
+        "path": "artifacts/figures/actual-zns/workload-hardness.png",
+        "role": "paper figure for workload hardness tiers",
+        "sha256": "e49e3cced335fe6241065282a468edf16b0aaedb55590fcefda18677337b2ed4"
+      }
+    ],
+    "command_count": 12,
+    "missing_or_empty": [],
+    "passed": true,
+    "scope": "reproducibility manifest for actual-ZNS baseline-vs-QUASAR comparison"
+  },
+  "reproducibility_validation": {
+    "artifact_count": 39,
+    "mismatch_count": 0,
+    "mismatches": [],
+    "passed": true,
+    "scope": "validation that current artifact files match quasar-reproducibility-manifest hashes"
+  },
+  "residual_fallback_sweep": {
+    "best_candidates": {
+      "exchange-pqc2000": {
+        "best_low_waf": [
+          {
+            "artifact": "artifacts/results/residual-fallback-sweep/exchange-pqc2000-th12288-dryrun.json",
+            "failed_rows": 0,
+            "max_active_pack_keys": 10,
+            "max_live_physical_zones": 10,
+            "max_secret_waiting": 25,
+            "packing": "epoch-bin-5",
+            "physical_bytes_written": 975732736,
+            "physical_gc_blocks": 3515,
+            "physical_reset_commands": 1,
+            "physical_waf": 1.0182406941323605,
+            "residual_migrated_blocks": 3515,
+            "residual_migration_budget_skips": null,
+            "residual_migration_commands": 1,
+            "secret_waiting_end": 0,
+            "sim_gc_blocks": 0,
+            "sim_stale_secret_blocks": 14838,
+            "sim_waf": 1.0,
+            "threshold": 12288,
+            "workload": "exchange-pqc2000"
+          },
+          {
+            "artifact": "artifacts/results/residual-fallback-sweep/exchange-pqc2000-th12288-dryrun.json",
+            "failed_rows": 0,
+            "max_active_pack_keys": 10,
+            "max_live_physical_zones": 10,
+            "max_secret_waiting": 25,
+            "packing": "epoch-bin-6",
+            "physical_bytes_written": 975732736,
+            "physical_gc_blocks": 3515,
+            "physical_reset_commands": 1,
+            "physical_waf": 1.0182406941323605,
+            "residual_migrated_blocks": 3515,
+            "residual_migration_budget_skips": null,
+            "residual_migration_commands": 1,
+            "secret_waiting_end": 0,
+            "sim_gc_blocks": 0,
+            "sim_stale_secret_blocks": 14838,
+            "sim_waf": 1.0,
+            "threshold": 12288,
+            "workload": "exchange-pqc2000"
+          },
+          {
+            "artifact": "artifacts/results/residual-fallback-sweep/exchange-pqc2000-th12288-dryrun.json",
+            "failed_rows": 0,
+            "max_active_pack_keys": 10,
+            "max_live_physical_zones": 10,
+            "max_secret_waiting": 25,
+            "packing": "epoch-bin-8",
+            "physical_bytes_written": 975732736,
+            "physical_gc_blocks": 3515,
+            "physical_reset_commands": 1,
+            "physical_waf": 1.0182406941323605,
+            "residual_migrated_blocks": 3515,
+            "residual_migration_budget_skips": null,
+            "residual_migration_commands": 1,
+            "secret_waiting_end": 0,
+            "sim_gc_blocks": 0,
+            "sim_stale_secret_blocks": 14838,
+            "sim_waf": 1.0,
+            "threshold": 12288,
+            "workload": "exchange-pqc2000"
+          },
+          {
+            "artifact": "artifacts/results/residual-fallback-sweep/exchange-pqc2000-th16384-dryrun.json",
+            "failed_rows": 0,
+            "max_active_pack_keys": 10,
+            "max_live_physical_zones": 10,
+            "max_secret_waiting": 25,
+            "packing": "epoch-bin-5",
+            "physical_bytes_written": 975732736,
+            "physical_gc_blocks": 3515,
+            "physical_reset_commands": 1,
+            "physical_waf": 1.0182406941323605,
+            "residual_migrated_blocks": 3515,
+            "residual_migration_budget_skips": null,
+            "residual_migration_commands": 1,
+            "secret_waiting_end": 0,
+            "sim_gc_blocks": 0,
+            "sim_stale_secret_blocks": 14838,
+            "sim_waf": 1.0,
+            "threshold": 16384,
+            "workload": "exchange-pqc2000"
+          },
+          {
+            "artifact": "artifacts/results/residual-fallback-sweep/exchange-pqc2000-th16384-dryrun.json",
+            "failed_rows": 0,
+            "max_active_pack_keys": 10,
+            "max_live_physical_zones": 10,
+            "max_secret_waiting": 25,
+            "packing": "epoch-bin-6",
+            "physical_bytes_written": 975732736,
+            "physical_gc_blocks": 3515,
+            "physical_reset_commands": 1,
+            "physical_waf": 1.0182406941323605,
+            "residual_migrated_blocks": 3515,
+            "residual_migration_budget_skips": null,
+            "residual_migration_commands": 1,
+            "secret_waiting_end": 0,
+            "sim_gc_blocks": 0,
+            "sim_stale_secret_blocks": 14838,
+            "sim_waf": 1.0,
+            "threshold": 16384,
+            "workload": "exchange-pqc2000"
+          }
+        ],
+        "best_zero_wait": [
+          {
+            "artifact": "artifacts/results/residual-fallback-sweep/exchange-pqc2000-th12288-dryrun.json",
+            "failed_rows": 0,
+            "max_active_pack_keys": 10,
+            "max_live_physical_zones": 10,
+            "max_secret_waiting": 25,
+            "packing": "epoch-bin-5",
+            "physical_bytes_written": 975732736,
+            "physical_gc_blocks": 3515,
+            "physical_reset_commands": 1,
+            "physical_waf": 1.0182406941323605,
+            "residual_migrated_blocks": 3515,
+            "residual_migration_budget_skips": null,
+            "residual_migration_commands": 1,
+            "secret_waiting_end": 0,
+            "sim_gc_blocks": 0,
+            "sim_stale_secret_blocks": 14838,
+            "sim_waf": 1.0,
+            "threshold": 12288,
+            "workload": "exchange-pqc2000"
+          },
+          {
+            "artifact": "artifacts/results/residual-fallback-sweep/exchange-pqc2000-th12288-dryrun.json",
+            "failed_rows": 0,
+            "max_active_pack_keys": 10,
+            "max_live_physical_zones": 10,
+            "max_secret_waiting": 25,
+            "packing": "epoch-bin-6",
+            "physical_bytes_written": 975732736,
+            "physical_gc_blocks": 3515,
+            "physical_reset_commands": 1,
+            "physical_waf": 1.0182406941323605,
+            "residual_migrated_blocks": 3515,
+            "residual_migration_budget_skips": null,
+            "residual_migration_commands": 1,
+            "secret_waiting_end": 0,
+            "sim_gc_blocks": 0,
+            "sim_stale_secret_blocks": 14838,
+            "sim_waf": 1.0,
+            "threshold": 12288,
+            "workload": "exchange-pqc2000"
+          },
+          {
+            "artifact": "artifacts/results/residual-fallback-sweep/exchange-pqc2000-th12288-dryrun.json",
+            "failed_rows": 0,
+            "max_active_pack_keys": 10,
+            "max_live_physical_zones": 10,
+            "max_secret_waiting": 25,
+            "packing": "epoch-bin-8",
+            "physical_bytes_written": 975732736,
+            "physical_gc_blocks": 3515,
+            "physical_reset_commands": 1,
+            "physical_waf": 1.0182406941323605,
+            "residual_migrated_blocks": 3515,
+            "residual_migration_budget_skips": null,
+            "residual_migration_commands": 1,
+            "secret_waiting_end": 0,
+            "sim_gc_blocks": 0,
+            "sim_stale_secret_blocks": 14838,
+            "sim_waf": 1.0,
+            "threshold": 12288,
+            "workload": "exchange-pqc2000"
+          },
+          {
+            "artifact": "artifacts/results/residual-fallback-sweep/exchange-pqc2000-th16384-dryrun.json",
+            "failed_rows": 0,
+            "max_active_pack_keys": 10,
+            "max_live_physical_zones": 10,
+            "max_secret_waiting": 25,
+            "packing": "epoch-bin-5",
+            "physical_bytes_written": 975732736,
+            "physical_gc_blocks": 3515,
+            "physical_reset_commands": 1,
+            "physical_waf": 1.0182406941323605,
+            "residual_migrated_blocks": 3515,
+            "residual_migration_budget_skips": null,
+            "residual_migration_commands": 1,
+            "secret_waiting_end": 0,
+            "sim_gc_blocks": 0,
+            "sim_stale_secret_blocks": 14838,
+            "sim_waf": 1.0,
+            "threshold": 16384,
+            "workload": "exchange-pqc2000"
+          },
+          {
+            "artifact": "artifacts/results/residual-fallback-sweep/exchange-pqc2000-th16384-dryrun.json",
+            "failed_rows": 0,
+            "max_active_pack_keys": 10,
+            "max_live_physical_zones": 10,
+            "max_secret_waiting": 25,
+            "packing": "epoch-bin-6",
+            "physical_bytes_written": 975732736,
+            "physical_gc_blocks": 3515,
+            "physical_reset_commands": 1,
+            "physical_waf": 1.0182406941323605,
+            "residual_migrated_blocks": 3515,
+            "residual_migration_budget_skips": null,
+            "residual_migration_commands": 1,
+            "secret_waiting_end": 0,
+            "sim_gc_blocks": 0,
+            "sim_stale_secret_blocks": 14838,
+            "sim_waf": 1.0,
+            "threshold": 16384,
+            "workload": "exchange-pqc2000"
+          }
+        ]
+      },
+      "sysbench-oltp-pqc4000": {
+        "best_low_waf": [
+          {
+            "artifact": "artifacts/results/residual-fallback-sweep/sysbench-oltp-pqc4000-th4096-dryrun.json",
+            "failed_rows": 0,
+            "max_active_pack_keys": 12,
+            "max_live_physical_zones": 13,
+            "max_secret_waiting": 17436,
+            "packing": "epoch-bin-8",
+            "physical_bytes_written": 1305972736,
+            "physical_gc_blocks": 43868,
+            "physical_reset_commands": 15,
+            "physical_waf": 1.216127268158819,
+            "residual_migrated_blocks": 36679,
+            "residual_migration_budget_skips": null,
+            "residual_migration_commands": 15,
+            "secret_waiting_end": 0,
+            "sim_gc_blocks": 7189,
+            "sim_stale_secret_blocks": 9103,
+            "sim_waf": 1.0354185039389476,
+            "threshold": 4096,
+            "workload": "sysbench-oltp-pqc4000"
+          },
+          {
+            "artifact": "artifacts/results/residual-fallback-sweep/sysbench-oltp-pqc4000-th8192-dryrun.json",
+            "failed_rows": 0,
+            "max_active_pack_keys": 12,
+            "max_live_physical_zones": 13,
+            "max_secret_waiting": 7708,
+            "packing": "epoch-bin-8",
+            "physical_bytes_written": 1992314880,
+            "physical_gc_blocks": 211432,
+            "physical_reset_commands": 44,
+            "physical_waf": 2.0416754937848878,
+            "residual_migrated_blocks": 204243,
+            "residual_migration_budget_skips": null,
+            "residual_migration_commands": 44,
+            "secret_waiting_end": 0,
+            "sim_gc_blocks": 7189,
+            "sim_stale_secret_blocks": 9103,
+            "sim_waf": 1.0354185039389476,
+            "threshold": 8192,
+            "workload": "sysbench-oltp-pqc4000"
+          },
+          {
+            "artifact": "artifacts/results/residual-fallback-sweep/sysbench-oltp-pqc4000-th12288-dryrun.json",
+            "failed_rows": 0,
+            "max_active_pack_keys": 12,
+            "max_live_physical_zones": 13,
+            "max_secret_waiting": 3612,
+            "packing": "epoch-bin-8",
+            "physical_bytes_written": 2332307456,
+            "physical_gc_blocks": 294438,
+            "physical_reset_commands": 52,
+            "physical_waf": 2.450626437999143,
+            "residual_migrated_blocks": 287249,
+            "residual_migration_budget_skips": null,
+            "residual_migration_commands": 52,
+            "secret_waiting_end": 0,
+            "sim_gc_blocks": 7189,
+            "sim_stale_secret_blocks": 9103,
+            "sim_waf": 1.0354185039389476,
+            "threshold": 12288,
+            "workload": "sysbench-oltp-pqc4000"
+          },
+          {
+            "artifact": "artifacts/results/residual-fallback-sweep/sysbench-oltp-pqc4000-th16384-dryrun.json",
+            "failed_rows": 0,
+            "max_active_pack_keys": 12,
+            "max_live_physical_zones": 13,
+            "max_secret_waiting": 512,
+            "packing": "epoch-bin-8",
+            "physical_bytes_written": 2727936000,
+            "physical_gc_blocks": 391027,
+            "physical_reset_commands": 59,
+            "physical_waf": 2.926497612983008,
+            "residual_migrated_blocks": 383838,
+            "residual_migration_budget_skips": null,
+            "residual_migration_commands": 59,
+            "secret_waiting_end": 0,
+            "sim_gc_blocks": 7189,
+            "sim_stale_secret_blocks": 9103,
+            "sim_waf": 1.0354185039389476,
+            "threshold": 16384,
+            "workload": "sysbench-oltp-pqc4000"
+          }
+        ],
+        "best_zero_wait": [
+          {
+            "artifact": "artifacts/results/residual-fallback-sweep/sysbench-oltp-pqc4000-th4096-dryrun.json",
+            "failed_rows": 0,
+            "max_active_pack_keys": 12,
+            "max_live_physical_zones": 13,
+            "max_secret_waiting": 17436,
+            "packing": "epoch-bin-8",
+            "physical_bytes_written": 1305972736,
+            "physical_gc_blocks": 43868,
+            "physical_reset_commands": 15,
+            "physical_waf": 1.216127268158819,
+            "residual_migrated_blocks": 36679,
+            "residual_migration_budget_skips": null,
+            "residual_migration_commands": 15,
+            "secret_waiting_end": 0,
+            "sim_gc_blocks": 7189,
+            "sim_stale_secret_blocks": 9103,
+            "sim_waf": 1.0354185039389476,
+            "threshold": 4096,
+            "workload": "sysbench-oltp-pqc4000"
+          },
+          {
+            "artifact": "artifacts/results/residual-fallback-sweep/sysbench-oltp-pqc4000-th8192-dryrun.json",
+            "failed_rows": 0,
+            "max_active_pack_keys": 12,
+            "max_live_physical_zones": 13,
+            "max_secret_waiting": 7708,
+            "packing": "epoch-bin-8",
+            "physical_bytes_written": 1992314880,
+            "physical_gc_blocks": 211432,
+            "physical_reset_commands": 44,
+            "physical_waf": 2.0416754937848878,
+            "residual_migrated_blocks": 204243,
+            "residual_migration_budget_skips": null,
+            "residual_migration_commands": 44,
+            "secret_waiting_end": 0,
+            "sim_gc_blocks": 7189,
+            "sim_stale_secret_blocks": 9103,
+            "sim_waf": 1.0354185039389476,
+            "threshold": 8192,
+            "workload": "sysbench-oltp-pqc4000"
+          },
+          {
+            "artifact": "artifacts/results/residual-fallback-sweep/sysbench-oltp-pqc4000-th12288-dryrun.json",
+            "failed_rows": 0,
+            "max_active_pack_keys": 12,
+            "max_live_physical_zones": 13,
+            "max_secret_waiting": 3612,
+            "packing": "epoch-bin-8",
+            "physical_bytes_written": 2332307456,
+            "physical_gc_blocks": 294438,
+            "physical_reset_commands": 52,
+            "physical_waf": 2.450626437999143,
+            "residual_migrated_blocks": 287249,
+            "residual_migration_budget_skips": null,
+            "residual_migration_commands": 52,
+            "secret_waiting_end": 0,
+            "sim_gc_blocks": 7189,
+            "sim_stale_secret_blocks": 9103,
+            "sim_waf": 1.0354185039389476,
+            "threshold": 12288,
+            "workload": "sysbench-oltp-pqc4000"
+          },
+          {
+            "artifact": "artifacts/results/residual-fallback-sweep/sysbench-oltp-pqc4000-th16384-dryrun.json",
+            "failed_rows": 0,
+            "max_active_pack_keys": 12,
+            "max_live_physical_zones": 13,
+            "max_secret_waiting": 512,
+            "packing": "epoch-bin-8",
+            "physical_bytes_written": 2727936000,
+            "physical_gc_blocks": 391027,
+            "physical_reset_commands": 59,
+            "physical_waf": 2.926497612983008,
+            "residual_migrated_blocks": 383838,
+            "residual_migration_budget_skips": null,
+            "residual_migration_commands": 59,
+            "secret_waiting_end": 0,
+            "sim_gc_blocks": 7189,
+            "sim_stale_secret_blocks": 9103,
+            "sim_waf": 1.0354185039389476,
+            "threshold": 16384,
+            "workload": "sysbench-oltp-pqc4000"
+          }
+        ]
+      },
+      "ycsb-f-pqc8000": {
+        "best_low_waf": [
+          {
+            "artifact": "artifacts/results/residual-fallback-sweep/ycsb-f-pqc8000-th4096-dryrun.json",
+            "failed_rows": 0,
+            "max_active_pack_keys": 12,
+            "max_live_physical_zones": 12,
+            "max_secret_waiting": 71722,
+            "packing": "epoch-bin-5",
+            "physical_bytes_written": 2122723328,
+            "physical_gc_blocks": 6317,
+            "physical_reset_commands": 0,
+            "physical_waf": 1.0137348480730555,
+            "residual_migrated_blocks": 0,
+            "residual_migration_budget_skips": null,
+            "residual_migration_commands": 0,
+            "secret_waiting_end": 71722,
+            "sim_gc_blocks": 6317,
+            "sim_stale_secret_blocks": 72773,
+            "sim_waf": 1.013734818209886,
+            "threshold": 4096,
+            "workload": "ycsb-f-pqc8000"
+          },
+          {
+            "artifact": "artifacts/results/residual-fallback-sweep/ycsb-f-pqc8000-th4096-dryrun.json",
+            "failed_rows": 0,
+            "max_active_pack_keys": 12,
+            "max_live_physical_zones": 12,
+            "max_secret_waiting": 71722,
+            "packing": "epoch-bin-6",
+            "physical_bytes_written": 2122723328,
+            "physical_gc_blocks": 6317,
+            "physical_reset_commands": 0,
+            "physical_waf": 1.0137348480730555,
+            "residual_migrated_blocks": 0,
+            "residual_migration_budget_skips": null,
+            "residual_migration_commands": 0,
+            "secret_waiting_end": 71722,
+            "sim_gc_blocks": 6317,
+            "sim_stale_secret_blocks": 72773,
+            "sim_waf": 1.013734818209886,
+            "threshold": 4096,
+            "workload": "ycsb-f-pqc8000"
+          },
+          {
+            "artifact": "artifacts/results/residual-fallback-sweep/ycsb-f-pqc8000-th4096-dryrun.json",
+            "failed_rows": 0,
+            "max_active_pack_keys": 11,
+            "max_live_physical_zones": 11,
+            "max_secret_waiting": 71722,
+            "packing": "epoch-bin-8",
+            "physical_bytes_written": 2122723328,
+            "physical_gc_blocks": 6317,
+            "physical_reset_commands": 0,
+            "physical_waf": 1.0137348480730555,
+            "residual_migrated_blocks": 0,
+            "residual_migration_budget_skips": null,
+            "residual_migration_commands": 0,
+            "secret_waiting_end": 71722,
+            "sim_gc_blocks": 6317,
+            "sim_stale_secret_blocks": 72773,
+            "sim_waf": 1.013734818209886,
+            "threshold": 4096,
+            "workload": "ycsb-f-pqc8000"
+          },
+          {
+            "artifact": "artifacts/results/residual-fallback-sweep/ycsb-f-pqc8000-th8192-dryrun.json",
+            "failed_rows": 0,
+            "max_active_pack_keys": 12,
+            "max_live_physical_zones": 12,
+            "max_secret_waiting": 71722,
+            "packing": "epoch-bin-5",
+            "physical_bytes_written": 2122723328,
+            "physical_gc_blocks": 6317,
+            "physical_reset_commands": 0,
+            "physical_waf": 1.0137348480730555,
+            "residual_migrated_blocks": 0,
+            "residual_migration_budget_skips": null,
+            "residual_migration_commands": 0,
+            "secret_waiting_end": 71722,
+            "sim_gc_blocks": 6317,
+            "sim_stale_secret_blocks": 72773,
+            "sim_waf": 1.013734818209886,
+            "threshold": 8192,
+            "workload": "ycsb-f-pqc8000"
+          },
+          {
+            "artifact": "artifacts/results/residual-fallback-sweep/ycsb-f-pqc8000-th8192-dryrun.json",
+            "failed_rows": 0,
+            "max_active_pack_keys": 12,
+            "max_live_physical_zones": 12,
+            "max_secret_waiting": 71722,
+            "packing": "epoch-bin-6",
+            "physical_bytes_written": 2122723328,
+            "physical_gc_blocks": 6317,
+            "physical_reset_commands": 0,
+            "physical_waf": 1.0137348480730555,
+            "residual_migrated_blocks": 0,
+            "residual_migration_budget_skips": null,
+            "residual_migration_commands": 0,
+            "secret_waiting_end": 71722,
+            "sim_gc_blocks": 6317,
+            "sim_stale_secret_blocks": 72773,
+            "sim_waf": 1.013734818209886,
+            "threshold": 8192,
+            "workload": "ycsb-f-pqc8000"
+          }
+        ],
+        "best_zero_wait": [
+          {
+            "artifact": "artifacts/results/residual-fallback-sweep/ycsb-f-pqc8000-th32768-dryrun.json",
+            "failed_rows": 0,
+            "max_active_pack_keys": 12,
+            "max_live_physical_zones": 13,
+            "max_secret_waiting": 44544,
+            "packing": "epoch-bin-5",
+            "physical_bytes_written": 6907240448,
+            "physical_gc_blocks": 1174412,
+            "physical_reset_commands": 49,
+            "physical_waf": 3.553485894439311,
+            "residual_migrated_blocks": 1168095,
+            "residual_migration_budget_skips": null,
+            "residual_migration_commands": 49,
+            "secret_waiting_end": 0,
+            "sim_gc_blocks": 6317,
+            "sim_stale_secret_blocks": 72773,
+            "sim_waf": 1.013734818209886,
+            "threshold": 32768,
+            "workload": "ycsb-f-pqc8000"
+          },
+          {
+            "artifact": "artifacts/results/residual-fallback-sweep/ycsb-f-pqc8000-th65536-dryrun.json",
+            "failed_rows": 0,
+            "max_active_pack_keys": 11,
+            "max_live_physical_zones": 12,
+            "max_secret_waiting": 24597,
+            "packing": "epoch-bin-8",
+            "physical_bytes_written": 17338339328,
+            "physical_gc_blocks": 3721067,
+            "physical_reset_commands": 94,
+            "physical_waf": 9.090595205740067,
+            "residual_migrated_blocks": 3714750,
+            "residual_migration_budget_skips": null,
+            "residual_migration_commands": 94,
+            "secret_waiting_end": 0,
+            "sim_gc_blocks": 6317,
+            "sim_stale_secret_blocks": 72773,
+            "sim_waf": 1.013734818209886,
+            "threshold": 65536,
+            "workload": "ycsb-f-pqc8000"
+          },
+          {
+            "artifact": "artifacts/results/residual-fallback-sweep/ycsb-f-pqc8000-th131072-dryrun.json",
+            "failed_rows": 0,
+            "max_active_pack_keys": 12,
+            "max_live_physical_zones": 13,
+            "max_secret_waiting": 512,
+            "packing": "epoch-bin-5",
+            "physical_bytes_written": 23396446208,
+            "physical_gc_blocks": 5200097,
+            "physical_reset_commands": 142,
+            "physical_waf": 12.306402130782192,
+            "residual_migrated_blocks": 5193780,
+            "residual_migration_budget_skips": null,
+            "residual_migration_commands": 142,
+            "secret_waiting_end": 0,
+            "sim_gc_blocks": 6317,
+            "sim_stale_secret_blocks": 72773,
+            "sim_waf": 1.013734818209886,
+            "threshold": 131072,
+            "workload": "ycsb-f-pqc8000"
+          },
+          {
+            "artifact": "artifacts/results/residual-fallback-sweep/ycsb-f-pqc8000-th65536-dryrun.json",
+            "failed_rows": 0,
+            "max_active_pack_keys": 12,
+            "max_live_physical_zones": 13,
+            "max_secret_waiting": 512,
+            "packing": "epoch-bin-5",
+            "physical_bytes_written": 23396446208,
+            "physical_gc_blocks": 5200097,
+            "physical_reset_commands": 142,
+            "physical_waf": 12.306402130782192,
+            "residual_migrated_blocks": 5193780,
+            "residual_migration_budget_skips": null,
+            "residual_migration_commands": 142,
+            "secret_waiting_end": 0,
+            "sim_gc_blocks": 6317,
+            "sim_stale_secret_blocks": 72773,
+            "sim_waf": 1.013734818209886,
+            "threshold": 65536,
+            "workload": "ycsb-f-pqc8000"
+          },
+          {
+            "artifact": "artifacts/results/residual-fallback-sweep/ycsb-f-pqc8000-th65536-dryrun.json",
+            "failed_rows": 0,
+            "max_active_pack_keys": 12,
+            "max_live_physical_zones": 13,
+            "max_secret_waiting": 1557,
+            "packing": "epoch-bin-6",
+            "physical_bytes_written": 26366300160,
+            "physical_gc_blocks": 5925159,
+            "physical_reset_commands": 139,
+            "physical_waf": 13.882880904495298,
+            "residual_migrated_blocks": 5918842,
+            "residual_migration_budget_skips": null,
+            "residual_migration_commands": 139,
+            "secret_waiting_end": 0,
+            "sim_gc_blocks": 6317,
+            "sim_stale_secret_blocks": 72773,
+            "sim_waf": 1.013734818209886,
+            "threshold": 65536,
+            "workload": "ycsb-f-pqc8000"
+          }
+        ]
+      }
+    },
+    "budget_physical_rows": [
+      {
+        "artifact": "artifacts/results/residual-fallback-sweep/ycsb-f-pqc8000-th32768-budget50000-epoch-bin-5-physical.json",
+        "copy_budget": 50000,
+        "evidence": "actual-zns",
+        "execute": true,
+        "failed_rows": 0,
+        "max_active_pack_keys": 12,
+        "max_live_physical_zones": 12,
+        "max_secret_waiting": 70656,
+        "packing": "epoch-bin-5",
+        "physical_bytes_written": 2303377408,
+        "physical_gc_blocks": 50422,
+        "physical_reset_commands": 4,
+        "physical_waf": 1.1096309180844703,
+        "residual_migrated_blocks": 44105,
+        "residual_migration_budget_skips": 68,
+        "residual_migration_commands": 4,
+        "secret_waiting_end": 70656,
+        "sim_gc_blocks": 6317,
+        "sim_stale_secret_blocks": 72773,
+        "sim_waf": 1.013734818209886,
+        "threshold": 32768,
+        "workload": "ycsb-f-pqc8000"
+      },
+      {
+        "artifact": "artifacts/results/residual-fallback-sweep/ycsb-f-pqc8000-th32768-budget100000-epoch-bin-5-physical.json",
+        "copy_budget": 100000,
+        "evidence": "actual-zns",
+        "execute": true,
+        "failed_rows": 0,
+        "max_active_pack_keys": 12,
+        "max_live_physical_zones": 12,
+        "max_secret_waiting": 68608,
+        "packing": "epoch-bin-5",
+        "physical_bytes_written": 2483974144,
+        "physical_gc_blocks": 94513,
+        "physical_reset_commands": 8,
+        "physical_waf": 1.2054965483502744,
+        "residual_migrated_blocks": 88196,
+        "residual_migration_budget_skips": 64,
+        "residual_migration_commands": 8,
+        "secret_waiting_end": 68608,
+        "sim_gc_blocks": 6317,
+        "sim_stale_secret_blocks": 72773,
+        "sim_waf": 1.013734818209886,
+        "threshold": 32768,
+        "workload": "ycsb-f-pqc8000"
+      },
+      {
+        "artifact": "artifacts/results/residual-fallback-sweep/ycsb-f-pqc8000-th32768-budget200000-epoch-bin-5-physical.json",
+        "copy_budget": 200000,
+        "evidence": "actual-zns",
+        "execute": true,
+        "failed_rows": 0,
+        "max_active_pack_keys": 12,
+        "max_live_physical_zones": 12,
+        "max_secret_waiting": 44544,
+        "packing": "epoch-bin-5",
+        "physical_bytes_written": 2937253888,
+        "physical_gc_blocks": 205177,
+        "physical_reset_commands": 12,
+        "physical_waf": 1.4461096917975758,
+        "residual_migrated_blocks": 198860,
+        "residual_migration_budget_skips": 51,
+        "residual_migration_commands": 12,
+        "secret_waiting_end": 43008,
+        "sim_gc_blocks": 6317,
+        "sim_stale_secret_blocks": 72773,
+        "sim_waf": 1.013734818209886,
+        "threshold": 32768,
+        "workload": "ycsb-f-pqc8000"
+      },
+      {
+        "artifact": "artifacts/results/residual-fallback-sweep/ycsb-f-pqc8000-th32768-budget400000-epoch-bin-5-physical.json",
+        "copy_budget": 400000,
+        "evidence": "actual-zns",
+        "execute": true,
+        "failed_rows": 0,
+        "max_active_pack_keys": 12,
+        "max_live_physical_zones": 12,
+        "max_secret_waiting": 44544,
+        "packing": "epoch-bin-5",
+        "physical_bytes_written": 3671355392,
+        "physical_gc_blocks": 384401,
+        "physical_reset_commands": 18,
+        "physical_waf": 1.8357906180355492,
+        "residual_migrated_blocks": 378084,
+        "residual_migration_budget_skips": 40,
+        "residual_migration_commands": 18,
+        "secret_waiting_end": 39936,
+        "sim_gc_blocks": 6317,
+        "sim_stale_secret_blocks": 72773,
+        "sim_waf": 1.013734818209886,
+        "threshold": 32768,
+        "workload": "ycsb-f-pqc8000"
+      }
+    ],
+    "budget_rows": [
+      {
+        "artifact": "artifacts/results/residual-fallback-sweep/ycsb-f-pqc8000-th32768-budget50000-dryrun.json",
+        "copy_budget": 50000,
+        "failed_rows": 0,
+        "max_active_pack_keys": 12,
+        "max_live_physical_zones": 12,
+        "max_secret_waiting": 70656,
+        "packing": "epoch-bin-5",
+        "physical_bytes_written": 2303377408,
+        "physical_gc_blocks": 50422,
+        "physical_reset_commands": 4,
+        "physical_waf": 1.1096309180844703,
+        "residual_migrated_blocks": 44105,
+        "residual_migration_budget_skips": 68,
+        "residual_migration_commands": 4,
+        "secret_waiting_end": 70656,
+        "sim_gc_blocks": 6317,
+        "sim_stale_secret_blocks": 72773,
+        "sim_waf": 1.013734818209886,
+        "threshold": 32768,
+        "workload": "ycsb-f-pqc8000"
+      },
+      {
+        "artifact": "artifacts/results/residual-fallback-sweep/ycsb-f-pqc8000-th32768-budget100000-dryrun.json",
+        "copy_budget": 100000,
+        "failed_rows": 0,
+        "max_active_pack_keys": 12,
+        "max_live_physical_zones": 12,
+        "max_secret_waiting": 68608,
+        "packing": "epoch-bin-5",
+        "physical_bytes_written": 2483974144,
+        "physical_gc_blocks": 94513,
+        "physical_reset_commands": 8,
+        "physical_waf": 1.2054965483502744,
+        "residual_migrated_blocks": 88196,
+        "residual_migration_budget_skips": 64,
+        "residual_migration_commands": 8,
+        "secret_waiting_end": 68608,
+        "sim_gc_blocks": 6317,
+        "sim_stale_secret_blocks": 72773,
+        "sim_waf": 1.013734818209886,
+        "threshold": 32768,
+        "workload": "ycsb-f-pqc8000"
+      },
+      {
+        "artifact": "artifacts/results/residual-fallback-sweep/ycsb-f-pqc8000-th32768-budget200k-dryrun.json",
+        "copy_budget": 200000,
+        "failed_rows": 0,
+        "max_active_pack_keys": 12,
+        "max_live_physical_zones": 12,
+        "max_secret_waiting": 44544,
+        "packing": "epoch-bin-5",
+        "physical_bytes_written": 2937253888,
+        "physical_gc_blocks": 205177,
+        "physical_reset_commands": 12,
+        "physical_waf": 1.4461096917975758,
+        "residual_migrated_blocks": 198860,
+        "residual_migration_budget_skips": 51,
+        "residual_migration_commands": 12,
+        "secret_waiting_end": 43008,
+        "sim_gc_blocks": 6317,
+        "sim_stale_secret_blocks": 72773,
+        "sim_waf": 1.013734818209886,
+        "threshold": 32768,
+        "workload": "ycsb-f-pqc8000"
+      },
+      {
+        "artifact": "artifacts/results/residual-fallback-sweep/ycsb-f-pqc8000-th32768-budget400000-dryrun.json",
+        "copy_budget": 400000,
+        "failed_rows": 0,
+        "max_active_pack_keys": 12,
+        "max_live_physical_zones": 12,
+        "max_secret_waiting": 44544,
+        "packing": "epoch-bin-5",
+        "physical_bytes_written": 3671355392,
+        "physical_gc_blocks": 384401,
+        "physical_reset_commands": 18,
+        "physical_waf": 1.8357906180355492,
+        "residual_migrated_blocks": 378084,
+        "residual_migration_budget_skips": 40,
+        "residual_migration_commands": 18,
+        "secret_waiting_end": 39936,
+        "sim_gc_blocks": 6317,
+        "sim_stale_secret_blocks": 72773,
+        "sim_waf": 1.013734818209886,
+        "threshold": 32768,
+        "workload": "ycsb-f-pqc8000"
+      }
+    ],
+    "controller_decisions": [
+      {
+        "constraints": {
+          "max_physical_waf": 1.15,
+          "max_secret_waiting": null,
+          "mor": 13,
+          "zero_wait": false
+        },
+        "description": "minimize copy/WAF cost; accept bounded stale-secret waiting",
+        "profile": "low_overhead",
+        "relaxed_constraints": [],
+        "selected": {
+          "copy_budget": null,
+          "failed_rows": 0,
+          "max_active_pack_keys": 10,
+          "max_live_physical_zones": 10,
+          "max_secret_waiting": 25,
+          "mode": "strict-zero-wait",
+          "packing": "epoch-bin-5",
+          "physical_bytes_written": 975732736,
+          "physical_gc_blocks": 3515,
+          "physical_reset_commands": 1,
+          "physical_waf": 1.0182406941323605,
+          "recommended_copy_budget": 3515,
+          "residual_migrated_blocks": 3515,
+          "residual_migration_budget_skips": null,
+          "residual_migration_commands": 1,
+          "secret_waiting_end": 0,
+          "sim_gc_blocks": 0,
+          "sim_stale_secret_blocks": 14838,
+          "sim_waf": 1.0,
+          "threshold": 12288,
+          "workload": "exchange-pqc2000"
+        },
+        "workload": "exchange-pqc2000"
+      },
+      {
+        "constraints": {
+          "max_physical_waf": 1.5,
+          "max_secret_waiting": 50000,
+          "mor": 13,
+          "zero_wait": false
+        },
+        "description": "reduce waiting while keeping physical WAF below a deployable cap",
+        "profile": "balanced",
+        "relaxed_constraints": [],
+        "selected": {
+          "copy_budget": null,
+          "failed_rows": 0,
+          "max_active_pack_keys": 10,
+          "max_live_physical_zones": 10,
+          "max_secret_waiting": 25,
+          "mode": "strict-zero-wait",
+          "packing": "epoch-bin-5",
+          "physical_bytes_written": 975732736,
+          "physical_gc_blocks": 3515,
+          "physical_reset_commands": 1,
+          "physical_waf": 1.0182406941323605,
+          "recommended_copy_budget": 3515,
+          "residual_migrated_blocks": 3515,
+          "residual_migration_budget_skips": null,
+          "residual_migration_commands": 1,
+          "secret_waiting_end": 0,
+          "sim_gc_blocks": 0,
+          "sim_stale_secret_blocks": 14838,
+          "sim_waf": 1.0,
+          "threshold": 12288,
+          "workload": "exchange-pqc2000"
+        },
+        "workload": "exchange-pqc2000"
+      },
+      {
+        "constraints": {
+          "max_physical_waf": null,
+          "max_secret_waiting": 0,
+          "mor": 13,
+          "zero_wait": true
+        },
+        "description": "force zero final stale-secret waiting if any in-budget candidate exists",
+        "profile": "strict_zero_wait",
+        "relaxed_constraints": [],
+        "selected": {
+          "copy_budget": null,
+          "failed_rows": 0,
+          "max_active_pack_keys": 10,
+          "max_live_physical_zones": 10,
+          "max_secret_waiting": 25,
+          "mode": "strict-zero-wait",
+          "packing": "epoch-bin-5",
+          "physical_bytes_written": 975732736,
+          "physical_gc_blocks": 3515,
+          "physical_reset_commands": 1,
+          "physical_waf": 1.0182406941323605,
+          "recommended_copy_budget": null,
+          "residual_migrated_blocks": 3515,
+          "residual_migration_budget_skips": null,
+          "residual_migration_commands": 1,
+          "secret_waiting_end": 0,
+          "sim_gc_blocks": 0,
+          "sim_stale_secret_blocks": 14838,
+          "sim_waf": 1.0,
+          "threshold": 12288,
+          "workload": "exchange-pqc2000"
+        },
+        "workload": "exchange-pqc2000"
+      },
+      {
+        "constraints": {
+          "max_physical_waf": 1.15,
+          "max_secret_waiting": null,
+          "mor": 13,
+          "zero_wait": false
+        },
+        "description": "minimize copy/WAF cost; accept bounded stale-secret waiting",
+        "profile": "low_overhead",
+        "relaxed_constraints": [
+          "physical-waf-cap"
+        ],
+        "selected": {
+          "copy_budget": null,
+          "failed_rows": 0,
+          "max_active_pack_keys": 12,
+          "max_live_physical_zones": 13,
+          "max_secret_waiting": 17436,
+          "mode": "strict-zero-wait",
+          "packing": "epoch-bin-8",
+          "physical_bytes_written": 1305972736,
+          "physical_gc_blocks": 43868,
+          "physical_reset_commands": 15,
+          "physical_waf": 1.216127268158819,
+          "recommended_copy_budget": 36679,
+          "residual_migrated_blocks": 36679,
+          "residual_migration_budget_skips": null,
+          "residual_migration_commands": 15,
+          "secret_waiting_end": 0,
+          "sim_gc_blocks": 7189,
+          "sim_stale_secret_blocks": 9103,
+          "sim_waf": 1.0354185039389476,
+          "threshold": 4096,
+          "workload": "sysbench-oltp-pqc4000"
+        },
+        "workload": "sysbench-oltp-pqc4000"
+      },
+      {
+        "constraints": {
+          "max_physical_waf": 1.5,
+          "max_secret_waiting": 50000,
+          "mor": 13,
+          "zero_wait": false
+        },
+        "description": "reduce waiting while keeping physical WAF below a deployable cap",
+        "profile": "balanced",
+        "relaxed_constraints": [],
+        "selected": {
+          "copy_budget": null,
+          "failed_rows": 0,
+          "max_active_pack_keys": 12,
+          "max_live_physical_zones": 13,
+          "max_secret_waiting": 17436,
+          "mode": "strict-zero-wait",
+          "packing": "epoch-bin-8",
+          "physical_bytes_written": 1305972736,
+          "physical_gc_blocks": 43868,
+          "physical_reset_commands": 15,
+          "physical_waf": 1.216127268158819,
+          "recommended_copy_budget": 36679,
+          "residual_migrated_blocks": 36679,
+          "residual_migration_budget_skips": null,
+          "residual_migration_commands": 15,
+          "secret_waiting_end": 0,
+          "sim_gc_blocks": 7189,
+          "sim_stale_secret_blocks": 9103,
+          "sim_waf": 1.0354185039389476,
+          "threshold": 4096,
+          "workload": "sysbench-oltp-pqc4000"
+        },
+        "workload": "sysbench-oltp-pqc4000"
+      },
+      {
+        "constraints": {
+          "max_physical_waf": null,
+          "max_secret_waiting": 0,
+          "mor": 13,
+          "zero_wait": true
+        },
+        "description": "force zero final stale-secret waiting if any in-budget candidate exists",
+        "profile": "strict_zero_wait",
+        "relaxed_constraints": [],
+        "selected": {
+          "copy_budget": null,
+          "failed_rows": 0,
+          "max_active_pack_keys": 12,
+          "max_live_physical_zones": 13,
+          "max_secret_waiting": 17436,
+          "mode": "strict-zero-wait",
+          "packing": "epoch-bin-8",
+          "physical_bytes_written": 1305972736,
+          "physical_gc_blocks": 43868,
+          "physical_reset_commands": 15,
+          "physical_waf": 1.216127268158819,
+          "recommended_copy_budget": null,
+          "residual_migrated_blocks": 36679,
+          "residual_migration_budget_skips": null,
+          "residual_migration_commands": 15,
+          "secret_waiting_end": 0,
+          "sim_gc_blocks": 7189,
+          "sim_stale_secret_blocks": 9103,
+          "sim_waf": 1.0354185039389476,
+          "threshold": 4096,
+          "workload": "sysbench-oltp-pqc4000"
+        },
+        "workload": "sysbench-oltp-pqc4000"
+      },
+      {
+        "constraints": {
+          "max_physical_waf": 1.15,
+          "max_secret_waiting": null,
+          "mor": 13,
+          "zero_wait": false
+        },
+        "description": "minimize copy/WAF cost; accept bounded stale-secret waiting",
+        "profile": "low_overhead",
+        "relaxed_constraints": [],
+        "selected": {
+          "copy_budget": null,
+          "failed_rows": 0,
+          "max_active_pack_keys": 12,
+          "max_live_physical_zones": 12,
+          "max_secret_waiting": 71722,
+          "mode": "no-residual-copy",
+          "packing": "epoch-bin-5",
+          "physical_bytes_written": 2122723328,
+          "physical_gc_blocks": 6317,
+          "physical_reset_commands": 0,
+          "physical_waf": 1.0137348480730555,
+          "recommended_copy_budget": 0,
+          "residual_migrated_blocks": 0,
+          "residual_migration_budget_skips": null,
+          "residual_migration_commands": 0,
+          "secret_waiting_end": 71722,
+          "sim_gc_blocks": 6317,
+          "sim_stale_secret_blocks": 72773,
+          "sim_waf": 1.013734818209886,
+          "threshold": 4096,
+          "workload": "ycsb-f-pqc8000"
+        },
+        "workload": "ycsb-f-pqc8000"
+      },
+      {
+        "constraints": {
+          "max_physical_waf": 1.5,
+          "max_secret_waiting": 50000,
+          "mor": 13,
+          "zero_wait": false
+        },
+        "description": "reduce waiting while keeping physical WAF below a deployable cap",
+        "profile": "balanced",
+        "relaxed_constraints": [],
+        "selected": {
+          "copy_budget": null,
+          "failed_rows": 0,
+          "max_active_pack_keys": 12,
+          "max_live_physical_zones": 13,
+          "max_secret_waiting": 67605,
+          "mode": "threshold-only-residual",
+          "packing": "epoch-bin-6",
+          "physical_bytes_written": 2723975168,
+          "physical_gc_blocks": 153107,
+          "physical_reset_commands": 10,
+          "physical_waf": 1.3328955808012175,
+          "recommended_copy_budget": 146790,
+          "residual_migrated_blocks": 146790,
+          "residual_migration_budget_skips": null,
+          "residual_migration_commands": 10,
+          "secret_waiting_end": 31744,
+          "sim_gc_blocks": 6317,
+          "sim_stale_secret_blocks": 72773,
+          "sim_waf": 1.013734818209886,
+          "threshold": 32768,
+          "workload": "ycsb-f-pqc8000"
+        },
+        "workload": "ycsb-f-pqc8000"
+      },
+      {
+        "constraints": {
+          "max_physical_waf": null,
+          "max_secret_waiting": 0,
+          "mor": 13,
+          "zero_wait": true
+        },
+        "description": "force zero final stale-secret waiting if any in-budget candidate exists",
+        "profile": "strict_zero_wait",
+        "relaxed_constraints": [],
+        "selected": {
+          "copy_budget": null,
+          "failed_rows": 0,
+          "max_active_pack_keys": 12,
+          "max_live_physical_zones": 13,
+          "max_secret_waiting": 44544,
+          "mode": "strict-zero-wait",
+          "packing": "epoch-bin-5",
+          "physical_bytes_written": 6907240448,
+          "physical_gc_blocks": 1174412,
+          "physical_reset_commands": 49,
+          "physical_waf": 3.553485894439311,
+          "recommended_copy_budget": null,
+          "residual_migrated_blocks": 1168095,
+          "residual_migration_budget_skips": null,
+          "residual_migration_commands": 49,
+          "secret_waiting_end": 0,
+          "sim_gc_blocks": 6317,
+          "sim_stale_secret_blocks": 72773,
+          "sim_waf": 1.013734818209886,
+          "threshold": 32768,
+          "workload": "ycsb-f-pqc8000"
+        },
+        "workload": "ycsb-f-pqc8000"
+      }
+    ],
+    "decision": "use-residual-fallback-as-strict-exposure-mode",
+    "device_limits": {
+      "mar": 13,
+      "mor": 13,
+      "numzrwa": 13
+    },
+    "dryrun_row_count": 48,
+    "physical_rows": [
+      {
+        "artifact": "artifacts/results/residual-fallback-sweep/exchange-pqc2000-th4096-epochbin5-physical.json",
+        "execute": true,
+        "failed_rows": 0,
+        "max_active_pack_keys": 10,
+        "max_live_physical_zones": 10,
+        "max_secret_waiting": 25,
+        "packing": "epoch-bin-5",
+        "physical_bytes_written": 975732736,
+        "physical_gc_blocks": 3515,
+        "physical_reset_commands": 1,
+        "physical_waf": 1.0182406941323605,
+        "profile": "",
+        "residual_migrated_blocks": 3515,
+        "residual_migration_budget_skips": null,
+        "residual_migration_commands": 1,
+        "secret_waiting_end": 0,
+        "sim_gc_blocks": 0,
+        "sim_stale_secret_blocks": 14838,
+        "sim_waf": 1.0,
+        "threshold": 4096,
+        "workload": "exchange-pqc2000"
+      },
+      {
+        "artifact": "artifacts/results/residual-fallback-sweep/sysbench-oltp-pqc4000-th4096-epochbin8-physical.json",
+        "execute": true,
+        "failed_rows": 0,
+        "max_active_pack_keys": 12,
+        "max_live_physical_zones": 13,
+        "max_secret_waiting": 17436,
+        "packing": "epoch-bin-8",
+        "physical_bytes_written": 1305972736,
+        "physical_gc_blocks": 43868,
+        "physical_reset_commands": 15,
+        "physical_waf": 1.216127268158819,
+        "profile": "",
+        "residual_migrated_blocks": 36679,
+        "residual_migration_budget_skips": null,
+        "residual_migration_commands": 15,
+        "secret_waiting_end": 0,
+        "sim_gc_blocks": 7189,
+        "sim_stale_secret_blocks": 9103,
+        "sim_waf": 1.0354185039389476,
+        "threshold": 4096,
+        "workload": "sysbench-oltp-pqc4000"
+      },
+      {
+        "artifact": "artifacts/results/physical-robustness-ycsb-a-pqc4000/straggler005-residual-th12288-epochbin5-physical.json",
+        "execute": true,
+        "failed_rows": 0,
+        "max_active_pack_keys": 12,
+        "max_live_physical_zones": 13,
+        "max_secret_waiting": 23558,
+        "packing": "epoch-bin-5",
+        "physical_bytes_written": 2594304000,
+        "physical_gc_blocks": 239699,
+        "physical_reset_commands": 27,
+        "physical_waf": 1.7098490861062083,
+        "profile": "",
+        "residual_migrated_blocks": 234549,
+        "residual_migration_budget_skips": null,
+        "residual_migration_commands": 27,
+        "secret_waiting_end": 0,
+        "sim_gc_blocks": 5150,
+        "sim_stale_secret_blocks": 25477,
+        "sim_waf": 1.0152513059856194,
+        "threshold": 12288,
+        "workload": "ycsb-a-pqc4000"
+      },
+      {
+        "artifact": "artifacts/results/residual-fallback-sweep/ycsb-f-pqc8000-controller-low-overhead-physical.json",
+        "execute": true,
+        "failed_rows": 0,
+        "max_active_pack_keys": 12,
+        "max_live_physical_zones": 12,
+        "max_secret_waiting": 71722,
+        "packing": "epoch-bin-5",
+        "physical_bytes_written": 2122723328,
+        "physical_gc_blocks": 6317,
+        "physical_reset_commands": 0,
+        "physical_waf": 1.0137348480730555,
+        "profile": "low_overhead",
+        "residual_migrated_blocks": 0,
+        "residual_migration_budget_skips": 0,
+        "residual_migration_commands": 0,
+        "secret_waiting_end": 71722,
+        "sim_gc_blocks": 6317,
+        "sim_stale_secret_blocks": 72773,
+        "sim_waf": 1.013734818209886,
+        "threshold": 4096,
+        "workload": "ycsb-f-pqc8000"
+      },
+      {
+        "artifact": "artifacts/results/residual-fallback-sweep/ycsb-f-pqc8000-controller-balanced-physical.json",
+        "execute": true,
+        "failed_rows": 0,
+        "max_active_pack_keys": 12,
+        "max_live_physical_zones": 13,
+        "max_secret_waiting": 67605,
+        "packing": "epoch-bin-6",
+        "physical_bytes_written": 2723975168,
+        "physical_gc_blocks": 153107,
+        "physical_reset_commands": 10,
+        "physical_waf": 1.3328955808012175,
+        "profile": "balanced",
+        "residual_migrated_blocks": 146790,
+        "residual_migration_budget_skips": 0,
+        "residual_migration_commands": 10,
+        "secret_waiting_end": 31744,
+        "sim_gc_blocks": 6317,
+        "sim_stale_secret_blocks": 72773,
+        "sim_waf": 1.013734818209886,
+        "threshold": 32768,
+        "workload": "ycsb-f-pqc8000"
+      },
+      {
+        "artifact": "artifacts/results/residual-fallback-sweep/ycsb-f-pqc8000-controller-strict-physical.json",
+        "execute": true,
+        "failed_rows": 0,
+        "max_active_pack_keys": 12,
+        "max_live_physical_zones": 13,
+        "max_secret_waiting": 44544,
+        "packing": "epoch-bin-5",
+        "physical_bytes_written": 6907240448,
+        "physical_gc_blocks": 1174412,
+        "physical_reset_commands": 49,
+        "physical_waf": 3.553485894439311,
+        "profile": "strict_zero_wait",
+        "residual_migrated_blocks": 1168095,
+        "residual_migration_budget_skips": 0,
+        "residual_migration_commands": 49,
+        "secret_waiting_end": 0,
+        "sim_gc_blocks": 6317,
+        "sim_stale_secret_blocks": 72773,
+        "sim_waf": 1.013734818209886,
+        "threshold": 32768,
+        "workload": "ycsb-f-pqc8000"
+      }
+    ],
+    "scope": "residual fallback threshold sweep across straggler workloads"
+  },
+  "same_path_physical_zns": {
+    "append_engine": "helper",
+    "artifact": "packed-physical-zonefs-replay-dogi-paper-pqc2000-z512-secret-group-helper",
+    "by_policy": {
+      "dogi-history": {
+        "avg_space_utilization": 0.13039361120783038,
+        "max_live_physical_zones": 6,
+        "max_secret_waiting": 56,
+        "physical_reset_commands": 0,
+        "secret_waiting_end": 56,
+        "sim_gc_blocks": 625,
+        "sim_stale_secret_blocks": 99834,
+        "sim_waf": 1.000632838335625
+      },
+      "fifo": {
+        "avg_space_utilization": 0.362723401391468,
+        "max_live_physical_zones": 3,
+        "max_secret_waiting": 0,
+        "physical_reset_commands": 0,
+        "secret_waiting_end": 0,
+        "sim_gc_blocks": 3903,
+        "sim_stale_secret_blocks": 99141,
+        "sim_waf": 1.0039519488383113
+      },
+      "midas-style": {
+        "avg_space_utilization": 0.15646701388888887,
+        "max_live_physical_zones": 5,
+        "max_secret_waiting": 0,
+        "physical_reset_commands": 0,
+        "secret_waiting_end": 0,
+        "sim_gc_blocks": 581,
+        "sim_stale_secret_blocks": 99898,
+        "sim_waf": 1.000588286516797
+      },
+      "quasar": {
+        "avg_space_utilization": 0.7222736043407614,
+        "max_live_physical_zones": 5,
+        "max_secret_waiting": 2380,
+        "physical_reset_commands": 98,
+        "secret_waiting_end": 0,
+        "sim_gc_blocks": 1121,
+        "sim_stale_secret_blocks": 0,
+        "sim_waf": 1.001135058838777
+      },
+      "quasar-dogi-hybrid": {
+        "avg_space_utilization": 0.7216600413958528,
+        "max_live_physical_zones": 5,
+        "max_secret_waiting": 2380,
+        "physical_reset_commands": 98,
+        "secret_waiting_end": 0,
+        "sim_gc_blocks": 106,
+        "sim_stale_secret_blocks": 0,
+        "sim_waf": 1.000107329381722
+      },
+      "sepbit-style": {
+        "avg_space_utilization": 0.13055642199912307,
+        "max_live_physical_zones": 6,
+        "max_secret_waiting": 85,
+        "physical_reset_commands": 0,
+        "secret_waiting_end": 85,
+        "sim_gc_blocks": 2241,
+        "sim_stale_secret_blocks": 99822,
+        "sim_waf": 1.0022691051362171
+      }
+    },
+    "failed_rows": 0,
+    "helper_chunk_blocks": 1,
+    "hybrid_vs_dogi": {
+      "gc_reduction": 0.8304,
+      "stale_secret_reduction_blocks": 99834,
+      "waf_reduction": 0.0005251766020164017
+    },
+    "physical_zone_capacity": 275712,
+    "rows": 72,
+    "scope": "same physical ZNS packed replay over six DOGI-paper workload axes at pqc2000",
+    "wall_time_s": 472.459942448
+  },
+  "security_capability": {
+    "claim_boundary": "QUASAR proves reset eligibility and stale-secret exposure reduction, and this device's NVMe crypto-erase sanitize command path has been executed and validated. Zone reset alone is still not a physical erase proof; a strong physical erase claim requires explicitly issuing sanitize or equivalent hardware crypto-erase semantics at the epoch boundary.",
+    "crypto_erase_executed": true,
+    "device_model": "WZS4C8T1TDSP303",
+    "firmware": "R6Z10009",
+    "sanicap_hex": "0x60000003",
+    "sanitize_cdw10_info": 4,
+    "sanitize_completed": true,
+    "sanitize_execution_validated": true,
+    "sanitize_log_status": "(1) Most Recent Sanitize Command Completed Successfully.",
+    "sanitize_operations_supported": {
+      "block_erase": true,
+      "crypto_erase": true,
+      "overwrite": false
+    },
+    "sanitize_progress": 65535,
+    "sanitize_supported": true
+  },
+  "workload_hardness": {
+    "by_tier": {
+      "claim-gate": {
+        "passed": 1,
+        "total": 1
+      },
+      "fairness": {
+        "passed": 1,
+        "total": 1
+      },
+      "hostile-robustness": {
+        "passed": 3,
+        "total": 3
+      },
+      "negative-control": {
+        "passed": 2,
+        "total": 2
+      },
+      "pressure": {
+        "passed": 2,
+        "total": 2
+      }
+    },
+    "entries": [
+      {
+        "evidence": {
+          "dogi_stale_secret_blocks": 99834,
+          "dogi_waf": 1.000632838335625,
+          "failed_rows": 0,
+          "hybrid_semantic_resets": 98,
+          "hybrid_stale_secret_blocks": 0,
+          "hybrid_waf": 1.000107329381722,
+          "rows": 72
+        },
+        "name": "DOGI six-axis fairness matrix",
+        "paper_use": "Use for fairness and semantic-exposure evidence; do not oversell WAF here.",
+        "passed": true,
+        "purpose": "Match DOGI/FAST workload axes without pretending every row is a WAF stress test.",
+        "tier": "fairness"
+      },
+      {
+        "evidence": {
+          "comparisons": {
+            "alibaba-pqc0000": {
+              "dogi_history_wins": true,
+              "dogi_waf": 1.0030021649414789,
+              "fifo_waf": 1.0276706582775184,
+              "hybrid_inherits_dogi_win": true,
+              "hybrid_waf": 1.0030021649414789,
+              "pure_quasar_waf": 1.0276706582775184,
+              "stale_secret_blocks": 0
+            },
+            "exchange-pqc0000": {
+              "dogi_history_wins": true,
+              "dogi_waf": 1.2655009907902708,
+              "fifo_waf": 1.4338737332772056,
+              "hybrid_inherits_dogi_win": true,
+              "hybrid_waf": 1.2655009907902708,
+              "pure_quasar_waf": 1.4338737332772056,
+              "stale_secret_blocks": 0
+            },
+            "fio-zipf-pqc0000": {
+              "dogi_history_wins": true,
+              "dogi_waf": 1.00102,
+              "fifo_waf": 1.03836,
+              "hybrid_inherits_dogi_win": true,
+              "hybrid_waf": 1.00102,
+              "pure_quasar_waf": 1.03836,
+              "stale_secret_blocks": 0
+            },
+            "varmail-pqc0000": {
+              "dogi_history_wins": true,
+              "dogi_waf": 1.2891513021315082,
+              "fifo_waf": 1.4455304104746047,
+              "hybrid_inherits_dogi_win": true,
+              "hybrid_waf": 1.2891513021315082,
+              "pure_quasar_waf": 1.4455304104746047,
+              "stale_secret_blocks": 0
+            },
+            "ycsb-a-pqc0000": {
+              "dogi_history_wins": true,
+              "dogi_waf": 1.006009422774911,
+              "fifo_waf": 1.069661228806769,
+              "hybrid_inherits_dogi_win": true,
+              "hybrid_waf": 1.006009422774911,
+              "pure_quasar_waf": 1.069661228806769,
+              "stale_secret_blocks": 0
+            },
+            "ycsb-f-pqc0000": {
+              "dogi_history_wins": true,
+              "dogi_waf": 1.005922668250325,
+              "fifo_waf": 1.0623083960643949,
+              "hybrid_inherits_dogi_win": true,
+              "hybrid_waf": 1.005922668250325,
+              "pure_quasar_waf": 1.0623083960643949,
+              "stale_secret_blocks": 0
+            }
+          },
+          "missing_policy_workloads": [],
+          "passed_workloads": [
+            "alibaba-pqc0000",
+            "exchange-pqc0000",
+            "fio-zipf-pqc0000",
+            "varmail-pqc0000",
+            "ycsb-a-pqc0000",
+            "ycsb-f-pqc0000"
+          ],
+          "pqc0000_workloads": [
+            "alibaba-pqc0000",
+            "exchange-pqc0000",
+            "fio-zipf-pqc0000",
+            "varmail-pqc0000",
+            "ycsb-a-pqc0000",
+            "ycsb-f-pqc0000"
+          ]
+        },
+        "name": "DOGI-favorable non-PQC control",
+        "paper_use": "Use before the PQC-overlay results: QUASAR is not a universal history-placement replacement; the hybrid preserves DOGI's advantage.",
+        "passed": true,
+        "purpose": "Prove that the evaluation does not cripple DOGI: when no PQC death-cohort signal exists, DOGI-style history placement is the right tool.",
+        "tier": "negative-control"
+      },
+      {
+        "evidence": {
+          "dogi_gc_blocks": 0,
+          "dogi_stale_secret_blocks": 35472,
+          "dogi_waf": 1.0,
+          "hybrid_gc_blocks": 0,
+          "hybrid_semantic_resets": 28,
+          "hybrid_stale_secret_blocks": 0,
+          "hybrid_waf": 1.0,
+          "workloads": [
+            "ycsb-a-pqc2000",
+            "ycsb-f-pqc2000"
+          ]
+        },
+        "name": "YCSB p2000 negative WAF control",
+        "paper_use": "Use as an honest negative control: WAF does not separate, but semantic reset does.",
+        "passed": true,
+        "purpose": "Prove that easy DOGI-axis workloads are not WAF stress tests.",
+        "tier": "negative-control"
+      },
+      {
+        "evidence": {
+          "failed_rows": 0,
+          "max_dogi_gc_blocks": 24289,
+          "max_dogi_stale_secret_blocks": 150221,
+          "pressure_workloads": [
+            [
+              "ycsb-a-pqc4000"
+            ],
+            [
+              "ycsb-a-pqc6000"
+            ],
+            [
+              "ycsb-f-pqc6000"
+            ],
+            [
+              "ycsb-a-pqc8000"
+            ],
+            [
+              "ycsb-f-pqc8000"
+            ],
+            [
+              "ycsb-a-pqc10000"
+            ],
+            [
+              "ycsb-f-pqc10000"
+            ]
+          ],
+          "row_count": 9,
+          "semantic_gap_rows": 9,
+          "waf_pressure_rows": 7
+        },
+        "name": "YCSB p4000/p6000/p8000/p10000 DOGI-compatible pressure",
+        "paper_use": "Use as the main DOGI-compatible WAF/GC pressure curve.",
+        "passed": true,
+        "purpose": "Use DOGI/FAST YCSB axes with enough PQC density and zone pressure to create GC.",
+        "tier": "pressure"
+      },
+      {
+        "evidence": {
+          "failed_rows": 0,
+          "gc_reduction": 0.9458955223880597,
+          "rows": 24,
+          "stale_secret_reduction_blocks": 38438,
+          "waf_reduction": 0.027620611560342668
+        },
+        "name": "Sysbench-OLTP FAST-style DB pressure",
+        "paper_use": "Label as FAST-style DB pressure, not a DOGI-paper workload.",
+        "passed": true,
+        "purpose": "Show that the result is not only a synthetic YCSB artifact.",
+        "tier": "pressure"
+      },
+      {
+        "evidence": {
+          "db_pressure_eligible": true,
+          "dynamic_baseline_complete_rows": 3,
+          "eligible_dynamic_examples": [
+            {
+              "dogi_gc_blocks": 43006,
+              "dogi_waf": 1.0716089961652904,
+              "gc_reduction": 0.9994884434730038,
+              "hybrid_gc_blocks": 22,
+              "hybrid_waf": 1.00003663204938,
+              "path": "artifacts/results/fast-dynamic-pressure/packed-physical-zonefs-exchange-pqc8000-z768-helper.json",
+              "policies_present": [
+                "dogi-history",
+                "fifo",
+                "midas-style",
+                "quasar",
+                "quasar-dogi-hybrid",
+                "sepbit-style"
+              ],
+              "stale_secret_reduction_blocks": 75422
+            },
+            {
+              "dogi_gc_blocks": 43227,
+              "dogi_waf": 1.0727331770771114,
+              "gc_reduction": 0.9959516043213732,
+              "hybrid_gc_blocks": 175,
+              "hybrid_waf": 1.0002944526797717,
+              "path": "artifacts/results/fast-dynamic-pressure/packed-physical-zonefs-varmail-pqc8000-z768-helper.json",
+              "policies_present": [
+                "dogi-history",
+                "fifo",
+                "midas-style",
+                "quasar",
+                "quasar-dogi-hybrid",
+                "sepbit-style"
+              ],
+              "stale_secret_reduction_blocks": 79600
+            },
+            {
+              "dogi_gc_blocks": 65010,
+              "dogi_waf": 1.0974490270087152,
+              "gc_reduction": 0.9232118135671435,
+              "hybrid_gc_blocks": 4992,
+              "hybrid_waf": 1.0074829340536458,
+              "path": "artifacts/results/fast-dynamic-pressure/packed-physical-zonefs-alibaba-pqc8000-z768-helper.json",
+              "policies_present": [
+                "dogi-history",
+                "fifo",
+                "midas-style",
+                "quasar",
+                "quasar-dogi-hybrid",
+                "sepbit-style"
+              ],
+              "stale_secret_reduction_blocks": 65184
+            }
+          ],
+          "eligible_dynamic_rows": 3,
+          "eligible_ycsb_examples": [
+            {
+              "baselines_present": [
+                "dogi-history",
+                "fifo",
+                "midas-style",
+                "sepbit-style"
+              ],
+              "dogi_gc_blocks": 15316,
+              "dogi_stale_secret_blocks": 46266,
+              "hybrid_gc_blocks": 0,
+              "hybrid_stale_secret_blocks": 0,
+              "pqc_level": 4000,
+              "workloads": [
+                "ycsb-a-pqc4000"
+              ]
+            },
+            {
+              "baselines_present": [
+                "dogi-history",
+                "fifo",
+                "midas-style",
+                "sepbit-style"
+              ],
+              "dogi_gc_blocks": 15308,
+              "dogi_stale_secret_blocks": 76950,
+              "hybrid_gc_blocks": 0,
+              "hybrid_stale_secret_blocks": 0,
+              "pqc_level": 6000,
+              "workloads": [
+                "ycsb-a-pqc6000"
+              ]
+            },
+            {
+              "baselines_present": [
+                "dogi-history",
+                "fifo",
+                "midas-style",
+                "sepbit-style"
+              ],
+              "dogi_gc_blocks": 4166,
+              "dogi_stale_secret_blocks": 96050,
+              "hybrid_gc_blocks": 0,
+              "hybrid_stale_secret_blocks": 0,
+              "pqc_level": 6000,
+              "workloads": [
+                "ycsb-f-pqc6000"
+              ]
+            }
+          ],
+          "eligible_ycsb_pressure_rows": 7,
+          "minimum_rule": ">=3 YCSB pressure rows with all history baselines, DB pressure eligible, >=2 dynamic pressure rows with all policies",
+          "required_all_policies": [
+            "dogi-history",
+            "fifo",
+            "midas-style",
+            "quasar",
+            "quasar-dogi-hybrid",
+            "sepbit-style"
+          ],
+          "required_history_baselines": [
+            "dogi-history",
+            "fifo",
+            "midas-style",
+            "sepbit-style"
+          ],
+          "ycsb_baseline_complete_rows": 9
+        },
+        "name": "Main WAF/GC claim eligibility gate",
+        "paper_use": "Use only these eligible pressure rows for the headline WAF/GC claim; keep easy p2000 rows as negative controls.",
+        "passed": true,
+        "purpose": "Prevent easy negative-control workloads from being used as the headline WAF figure.",
+        "tier": "claim-gate"
+      },
+      {
+        "evidence": {
+          "decision": "add-tenant-isolation-mode",
+          "failed_rows": 0,
+          "gc_extra_blocks": 485,
+          "physical_reset_extra_commands": 1240,
+          "reset_secret_tenant_impurity_reduction": 1.0,
+          "waf_increase": 0.0028499738507554717
+        },
+        "name": "Multi-tenant PQC pressure",
+        "paper_use": "Use to justify a tenant-isolation mode rather than one universal allocator setting.",
+        "passed": true,
+        "purpose": "Attack QUASAR's open-zone/family count assumptions with many tenants.",
+        "tier": "hostile-robustness"
+      },
+      {
+        "evidence": {
+          "decision": "add-open-zone-aware-residual-fallback",
+          "fallback_failed_rows": 0,
+          "fallback_physical_waf": 1.7098490861062083,
+          "fallback_residual_migrated_blocks": 234549,
+          "fallback_secret_waiting_end": 0,
+          "missing_hint_failed_rows": 0,
+          "missing_hint_secret_waiting_end": 7,
+          "straggler_exact_failed_rows": 1,
+          "straggler_exact_secret_waiting_end": 40454,
+          "wrong_epoch_failed_rows": 0,
+          "wrong_epoch_secret_waiting_end": 0
+        },
+        "name": "Bad-hint and straggler robustness",
+        "paper_use": "Use as the design-boundary figure: exact cohorting is not enough under stragglers.",
+        "passed": true,
+        "purpose": "Show that QUASAR has boundaries and needs fallback under imperfect lifetimes.",
+        "tier": "hostile-robustness"
+      },
+      {
+        "evidence": {
+          "decision": "use-residual-fallback-as-strict-exposure-mode",
+          "physical_workloads": [
+            "exchange-pqc2000",
+            "sysbench-oltp-pqc4000",
+            "ycsb-a-pqc4000",
+            "ycsb-f-pqc8000"
+          ],
+          "ycsb_f_strict_zero_wait_residual_blocks": 1168095,
+          "ycsb_f_strict_zero_wait_secret_waiting_end": 0,
+          "ycsb_f_strict_zero_wait_waf": 3.553485894439311
+        },
+        "name": "Residual fallback frontier",
+        "paper_use": "Use to present low-overhead, balanced, and strict-zero-wait modes.",
+        "passed": true,
+        "purpose": "Measure when strict zero-wait exposure is affordable and when it is too expensive.",
+        "tier": "hostile-robustness"
+      }
+    ],
+    "main_takeaway": "The suite now contains a DOGI-favorable non-PQC control, a negative WAF control, DOGI-compatible pressure rows, FAST-style DB pressure, dynamic service pressure, an explicit main-claim eligibility gate, and QUASAR-hostile robustness cases. This prevents the paper from relying on an overly easy PQC-only workload.",
+    "passed": true,
+    "passed_entries": 9,
+    "scope": "DOGI/FAST-compatible workload hardness matrix for QUASAR evaluation",
+    "total_entries": 9
+  },
+  "xnvme_zns_latency": {
+    "append_avg_ns": 21487.328,
+    "append_count": 4096,
+    "append_max_ns": 174261,
+    "append_p50_ns": 21843,
+    "append_p95_ns": 23124,
+    "append_p99_ns": 26064,
+    "backend": "xnvme-linux-nvme-sync",
+    "caveat": "Raw xNVMe/Linux NVMe ioctl Zone Append probe. This bypasses zonefs helper overhead, but it is not an SPDK poll-mode result because the local build lacks a new enough liburing/SPDK backend.",
+    "completed": true,
+    "device": "/dev/nvme0n1",
+    "mounted_after": true,
+    "nonempty_after_lines": 0,
+    "reset_after_ns": 4469600,
+    "reset_before_ns": 27612,
+    "throughput_mib_s": 181.793
+  },
+  "ycsb_f_straggler_baselines": {
+    "by_policy": {
+      "dogi-history": {
+        "append_blocks": 536215,
+        "avg_space_utilization": 0.24310467081592385,
+        "delayed_logical_resets": 322,
+        "delayed_reset_ratio": 1.0,
+        "failed_rows": 0,
+        "gc_blocks": 24289,
+        "logical_reset_commands": 322,
+        "max_active_pack_keys": 7,
+        "max_live_physical_zones": 8,
+        "max_secret_blocks_waiting_for_physical_reset": 52036,
+        "packing": "secret-group",
+        "physical_append_commands": 70,
+        "physical_bytes_written": 2196336640,
+        "physical_reset_commands": 0,
+        "physical_waf": 1.0528106695424917,
+        "policy": "dogi-history",
+        "prefill_blocks": 52000,
+        "residual_migrated_blocks": 0,
+        "residual_migration_budget_skips": 0,
+        "residual_migration_commands": 0,
+        "rows": 1,
+        "secret_blocks_waiting_for_physical_reset": 52036,
+        "secret_logical_reset_blocks": 52036,
+        "sim_gc_blocks": 24289,
+        "sim_stale_secret_blocks": 100847,
+        "sim_user_blocks": 459926,
+        "sim_waf": 1.0528106695424917,
+        "user_blocks": 459926
+      },
+      "fifo": {
+        "append_blocks": 546801,
+        "avg_space_utilization": 0.6610775011606314,
+        "delayed_logical_resets": 340,
+        "delayed_reset_ratio": 1.0,
+        "failed_rows": 0,
+        "gc_blocks": 34875,
+        "logical_reset_commands": 340,
+        "max_active_pack_keys": 2,
+        "max_live_physical_zones": 3,
+        "max_secret_blocks_waiting_for_physical_reset": 56832,
+        "packing": "secret-group",
+        "physical_append_commands": 68,
+        "physical_bytes_written": 2239696896,
+        "physical_reset_commands": 0,
+        "physical_waf": 1.0758643643055719,
+        "policy": "fifo",
+        "prefill_blocks": 52224,
+        "residual_migrated_blocks": 0,
+        "residual_migration_budget_skips": 0,
+        "residual_migration_commands": 0,
+        "rows": 1,
+        "secret_blocks_waiting_for_physical_reset": 56832,
+        "secret_logical_reset_blocks": 56832,
+        "sim_gc_blocks": 34875,
+        "sim_stale_secret_blocks": 92959,
+        "sim_user_blocks": 459926,
+        "sim_waf": 1.0758274157147019,
+        "user_blocks": 459702
+      },
+      "midas-style": {
+        "append_blocks": 520794,
+        "avg_space_utilization": 0.37778116295264624,
+        "delayed_logical_resets": 293,
+        "delayed_reset_ratio": 1.0,
+        "failed_rows": 0,
+        "gc_blocks": 8868,
+        "logical_reset_commands": 293,
+        "max_active_pack_keys": 4,
+        "max_live_physical_zones": 5,
+        "max_secret_blocks_waiting_for_physical_reset": 25726,
+        "packing": "secret-group",
+        "physical_append_commands": 66,
+        "physical_bytes_written": 2133172224,
+        "physical_reset_commands": 0,
+        "physical_waf": 1.0192814464998565,
+        "policy": "midas-style",
+        "prefill_blocks": 52002,
+        "residual_migrated_blocks": 0,
+        "residual_migration_budget_skips": 0,
+        "residual_migration_commands": 0,
+        "rows": 1,
+        "secret_blocks_waiting_for_physical_reset": 25726,
+        "secret_logical_reset_blocks": 25726,
+        "sim_gc_blocks": 8868,
+        "sim_stale_secret_blocks": 128224,
+        "sim_user_blocks": 459926,
+        "sim_waf": 1.0192813626539923,
+        "user_blocks": 459924
+      },
+      "sepbit-style": {
+        "append_blocks": 528686,
+        "avg_space_utilization": 0.27393284089401776,
+        "delayed_logical_resets": 307,
+        "delayed_reset_ratio": 1.0,
+        "failed_rows": 0,
+        "gc_blocks": 16760,
+        "logical_reset_commands": 307,
+        "max_active_pack_keys": 6,
+        "max_live_physical_zones": 7,
+        "max_secret_blocks_waiting_for_physical_reset": 35292,
+        "packing": "secret-group",
+        "physical_append_commands": 69,
+        "physical_bytes_written": 2165497856,
+        "physical_reset_commands": 0,
+        "physical_waf": 1.0364406447993808,
+        "policy": "sepbit-style",
+        "prefill_blocks": 52000,
+        "residual_migrated_blocks": 0,
+        "residual_migration_budget_skips": 0,
+        "residual_migration_commands": 0,
+        "rows": 1,
+        "secret_blocks_waiting_for_physical_reset": 35292,
+        "secret_logical_reset_blocks": 35292,
+        "sim_gc_blocks": 16760,
+        "sim_stale_secret_blocks": 114520,
+        "sim_user_blocks": 459926,
+        "sim_waf": 1.0364406447993808,
+        "user_blocks": 459926
+      }
+    },
+    "failed_rows": 0,
+    "rows": 4,
+    "scope": "YCSB-F p8000 with 5% delayed-expiry stragglers on actual ZNS for history baselines",
+    "wall_time_s": 90.183464053
+  },
+  "ycsb_pressure_curve": {
+    "failed_rows": 0,
+    "row_count": 9,
+    "rows": [
+      {
+        "artifact": "artifacts/results/fast-ycsb-pressure/packed-physical-zonefs-ycsb-pqc2000-z512-helper.json",
+        "baseline_semantic_failures": {
+          "dogi-history": {
+            "gc_blocks": 0,
+            "secret_waiting_end": 0,
+            "semantic_resets": 0,
+            "stale_secret_blocks": 35472,
+            "waf": 1.0
+          },
+          "fifo": {
+            "gc_blocks": 0,
+            "secret_waiting_end": 0,
+            "semantic_resets": 0,
+            "stale_secret_blocks": 35472,
+            "waf": 1.0
+          },
+          "midas-style": {
+            "gc_blocks": 0,
+            "secret_waiting_end": 0,
+            "semantic_resets": 0,
+            "stale_secret_blocks": 35472,
+            "waf": 1.0
+          },
+          "sepbit-style": {
+            "gc_blocks": 0,
+            "secret_waiting_end": 0,
+            "semantic_resets": 0,
+            "stale_secret_blocks": 35472,
+            "waf": 1.0
+          }
+        },
+        "dogi_gc_blocks": 0,
+        "dogi_max_live_physical_zones": 6,
+        "dogi_secret_waiting_end": 0,
+        "dogi_semantic_resets": 0,
+        "dogi_stale_secret_blocks": 35472,
+        "dogi_waf": 1.0,
+        "failed_rows": 0,
+        "gc_reduction": null,
+        "hybrid_gc_blocks": 0,
+        "hybrid_max_live_physical_zones": 5,
+        "hybrid_secret_waiting_end": 0,
+        "hybrid_semantic_resets": 28,
+        "hybrid_stale_secret_blocks": 0,
+        "hybrid_waf": 1.0,
+        "logical_zones": 512,
+        "pqc_level": 2000,
+        "row_count": 12,
+        "semantic_gap": true,
+        "waf_pressure": false,
+        "waf_reduction": 0.0,
+        "wall_time_s": 94.281856085,
+        "workloads": [
+          "ycsb-a-pqc2000",
+          "ycsb-f-pqc2000"
+        ]
+      },
+      {
+        "artifact": "artifacts/results/fast-ycsb-pressure/packed-physical-zonefs-ycsb-a-pqc4000-z560-helper.json",
+        "baseline_semantic_failures": {
+          "dogi-history": {
+            "gc_blocks": 15316,
+            "secret_waiting_end": 16944,
+            "semantic_resets": 0,
+            "stale_secret_blocks": 46266,
+            "waf": 1.045357087859368
+          },
+          "fifo": {
+            "gc_blocks": 27370,
+            "secret_waiting_end": 26624,
+            "semantic_resets": 0,
+            "stale_secret_blocks": 40488,
+            "waf": 1.0810540281216314
+          },
+          "midas-style": {
+            "gc_blocks": 3121,
+            "secret_waiting_end": 4387,
+            "semantic_resets": 0,
+            "stale_secret_blocks": 63159,
+            "waf": 1.009242587569149
+          },
+          "sepbit-style": {
+            "gc_blocks": 2608,
+            "secret_waiting_end": 772,
+            "semantic_resets": 0,
+            "stale_secret_blocks": 65571,
+            "waf": 1.007723379807863
+          }
+        },
+        "dogi_gc_blocks": 15316,
+        "dogi_max_live_physical_zones": 8,
+        "dogi_secret_waiting_end": 16944,
+        "dogi_semantic_resets": 0,
+        "dogi_stale_secret_blocks": 46266,
+        "dogi_waf": 1.045357087859368,
+        "failed_rows": 0,
+        "gc_reduction": 1.0,
+        "hybrid_gc_blocks": 0,
+        "hybrid_max_live_physical_zones": 6,
+        "hybrid_secret_waiting_end": 0,
+        "hybrid_semantic_resets": 28,
+        "hybrid_stale_secret_blocks": 0,
+        "hybrid_waf": 1.0,
+        "logical_zones": 560,
+        "pqc_level": 4000,
+        "row_count": 6,
+        "semantic_gap": true,
+        "waf_pressure": true,
+        "waf_reduction": 0.043389085305049355,
+        "wall_time_s": 106.256165085,
+        "workloads": [
+          "ycsb-a-pqc4000"
+        ]
+      },
+      {
+        "artifact": "artifacts/results/fast-ycsb-pressure/packed-physical-zonefs-ycsb-f-pqc4000-z733-helper.json",
+        "baseline_semantic_failures": {
+          "dogi-history": {
+            "gc_blocks": 0,
+            "secret_waiting_end": 0,
+            "semantic_resets": 0,
+            "stale_secret_blocks": 74274,
+            "waf": 1.0
+          },
+          "fifo": {
+            "gc_blocks": 239,
+            "secret_waiting_end": 512,
+            "semantic_resets": 0,
+            "stale_secret_blocks": 73732,
+            "waf": 1.0007249102203242
+          },
+          "midas-style": {
+            "gc_blocks": 0,
+            "secret_waiting_end": 0,
+            "semantic_resets": 0,
+            "stale_secret_blocks": 74274,
+            "waf": 1.0
+          },
+          "sepbit-style": {
+            "gc_blocks": 0,
+            "secret_waiting_end": 0,
+            "semantic_resets": 0,
+            "stale_secret_blocks": 74274,
+            "waf": 1.0
+          }
+        },
+        "dogi_gc_blocks": 0,
+        "dogi_max_live_physical_zones": 8,
+        "dogi_secret_waiting_end": 0,
+        "dogi_semantic_resets": 0,
+        "dogi_stale_secret_blocks": 74274,
+        "dogi_waf": 1.0,
+        "failed_rows": 0,
+        "gc_reduction": null,
+        "hybrid_gc_blocks": 0,
+        "hybrid_max_live_physical_zones": 6,
+        "hybrid_secret_waiting_end": 0,
+        "hybrid_semantic_resets": 28,
+        "hybrid_stale_secret_blocks": 0,
+        "hybrid_waf": 1.0,
+        "logical_zones": 733,
+        "pqc_level": 4000,
+        "row_count": 6,
+        "semantic_gap": true,
+        "waf_pressure": false,
+        "waf_reduction": 0.0,
+        "wall_time_s": 97.100367138,
+        "workloads": [
+          "ycsb-f-pqc4000"
+        ]
+      },
+      {
+        "artifact": "artifacts/results/fast-ycsb-pressure/packed-physical-zonefs-ycsb-a-pqc6000-z712-helper.json",
+        "baseline_semantic_failures": {
+          "dogi-history": {
+            "gc_blocks": 15308,
+            "secret_waiting_end": 22291,
+            "semantic_resets": 0,
+            "stale_secret_blocks": 76950,
+            "waf": 1.0375701618108681
+          },
+          "fifo": {
+            "gc_blocks": 26297,
+            "secret_waiting_end": 28672,
+            "semantic_resets": 0,
+            "stale_secret_blocks": 70210,
+            "waf": 1.0645402760086489
+          },
+          "midas-style": {
+            "gc_blocks": 2662,
+            "secret_waiting_end": 3453,
+            "semantic_resets": 0,
+            "stale_secret_blocks": 98395,
+            "waf": 1.0065333009367998
+          },
+          "sepbit-style": {
+            "gc_blocks": 1643,
+            "secret_waiting_end": 308,
+            "semantic_resets": 0,
+            "stale_secret_blocks": 100770,
+            "waf": 1.0040323867164396
+          }
+        },
+        "dogi_gc_blocks": 15308,
+        "dogi_max_live_physical_zones": 7,
+        "dogi_secret_waiting_end": 22291,
+        "dogi_semantic_resets": 0,
+        "dogi_stale_secret_blocks": 76950,
+        "dogi_waf": 1.0375701618108681,
+        "failed_rows": 0,
+        "gc_reduction": 1.0,
+        "hybrid_gc_blocks": 0,
+        "hybrid_max_live_physical_zones": 6,
+        "hybrid_secret_waiting_end": 0,
+        "hybrid_semantic_resets": 28,
+        "hybrid_stale_secret_blocks": 0,
+        "hybrid_waf": 1.0,
+        "logical_zones": 712,
+        "pqc_level": 6000,
+        "row_count": 6,
+        "semantic_gap": true,
+        "waf_pressure": true,
+        "waf_reduction": 0.036209755439860616,
+        "wall_time_s": 124.102412133,
+        "workloads": [
+          "ycsb-a-pqc6000"
+        ]
+      },
+      {
+        "artifact": "artifacts/results/fast-ycsb-pressure/packed-physical-zonefs-ycsb-f-pqc6000-z733-helper.json",
+        "baseline_semantic_failures": {
+          "dogi-history": {
+            "gc_blocks": 4166,
+            "secret_waiting_end": 14935,
+            "semantic_resets": 0,
+            "stale_secret_blocks": 96050,
+            "waf": 1.0105298543867232
+          },
+          "fifo": {
+            "gc_blocks": 12310,
+            "secret_waiting_end": 23552,
+            "semantic_resets": 0,
+            "stale_secret_blocks": 87275,
+            "waf": 1.031114380100951
+          },
+          "midas-style": {
+            "gc_blocks": 156,
+            "secret_waiting_end": 199,
+            "semantic_resets": 0,
+            "stale_secret_blocks": 110745,
+            "waf": 1.0003943008363727
+          },
+          "sepbit-style": {
+            "gc_blocks": 2476,
+            "secret_waiting_end": 3667,
+            "semantic_resets": 0,
+            "stale_secret_blocks": 104079,
+            "waf": 1.0062582619926852
+          }
+        },
+        "dogi_gc_blocks": 4166,
+        "dogi_max_live_physical_zones": 8,
+        "dogi_secret_waiting_end": 14935,
+        "dogi_semantic_resets": 0,
+        "dogi_stale_secret_blocks": 96050,
+        "dogi_waf": 1.0105298543867232,
+        "failed_rows": 0,
+        "gc_reduction": 1.0,
+        "hybrid_gc_blocks": 0,
+        "hybrid_max_live_physical_zones": 6,
+        "hybrid_secret_waiting_end": 0,
+        "hybrid_semantic_resets": 28,
+        "hybrid_stale_secret_blocks": 0,
+        "hybrid_waf": 1.0,
+        "logical_zones": 733,
+        "pqc_level": 6000,
+        "row_count": 6,
+        "semantic_gap": true,
+        "waf_pressure": true,
+        "waf_reduction": 0.010420131914968099,
+        "wall_time_s": 115.407125223,
+        "workloads": [
+          "ycsb-f-pqc6000"
+        ]
+      },
+      {
+        "artifact": "artifacts/results/fast-ycsb-pressure/packed-physical-zonefs-ycsb-a-pqc8000-z863-helper.json",
+        "baseline_semantic_failures": {
+          "dogi-history": {
+            "gc_blocks": 13462,
+            "secret_waiting_end": 26251,
+            "semantic_resets": 0,
+            "stale_secret_blocks": 110018,
+            "waf": 1.0282174305830667
+          },
+          "fifo": {
+            "gc_blocks": 23672,
+            "secret_waiting_end": 29696,
+            "semantic_resets": 0,
+            "stale_secret_blocks": 102724,
+            "waf": 1.0496184086140508
+          },
+          "midas-style": {
+            "gc_blocks": 1611,
+            "secret_waiting_end": 1186,
+            "semantic_resets": 0,
+            "stale_secret_blocks": 134789,
+            "waf": 1.0033767850742328
+          },
+          "sepbit-style": {
+            "gc_blocks": 1186,
+            "secret_waiting_end": 148,
+            "semantic_resets": 0,
+            "stale_secret_blocks": 135454,
+            "waf": 1.002485951022992
+          }
+        },
+        "dogi_gc_blocks": 13462,
+        "dogi_max_live_physical_zones": 8,
+        "dogi_secret_waiting_end": 26251,
+        "dogi_semantic_resets": 0,
+        "dogi_stale_secret_blocks": 110018,
+        "dogi_waf": 1.0282174305830667,
+        "failed_rows": 0,
+        "gc_reduction": 1.0,
+        "hybrid_gc_blocks": 0,
+        "hybrid_max_live_physical_zones": 6,
+        "hybrid_secret_waiting_end": 0,
+        "hybrid_semantic_resets": 28,
+        "hybrid_stale_secret_blocks": 0,
+        "hybrid_waf": 1.0,
+        "logical_zones": 863,
+        "pqc_level": 8000,
+        "row_count": 6,
+        "semantic_gap": true,
+        "waf_pressure": true,
+        "waf_reduction": 0.027443057998993034,
+        "wall_time_s": 139.506559813,
+        "workloads": [
+          "ycsb-a-pqc8000"
+        ]
+      },
+      {
+        "artifact": "artifacts/results/fast-ycsb-pressure/packed-physical-zonefs-ycsb-f-pqc8000-z733-helper.json",
+        "baseline_semantic_failures": {
+          "dogi-history": {
+            "gc_blocks": 24289,
+            "secret_waiting_end": 52036,
+            "semantic_resets": 0,
+            "stale_secret_blocks": 100847,
+            "waf": 1.0528106695424917
+          },
+          "fifo": {
+            "gc_blocks": 34875,
+            "secret_waiting_end": 56832,
+            "semantic_resets": 0,
+            "stale_secret_blocks": 92959,
+            "waf": 1.0758274157147019
+          },
+          "midas-style": {
+            "gc_blocks": 8868,
+            "secret_waiting_end": 25726,
+            "semantic_resets": 0,
+            "stale_secret_blocks": 128224,
+            "waf": 1.0192813626539923
+          },
+          "sepbit-style": {
+            "gc_blocks": 16760,
+            "secret_waiting_end": 35292,
+            "semantic_resets": 0,
+            "stale_secret_blocks": 114520,
+            "waf": 1.0364406447993808
+          }
+        },
+        "dogi_gc_blocks": 24289,
+        "dogi_max_live_physical_zones": 8,
+        "dogi_secret_waiting_end": 52036,
+        "dogi_semantic_resets": 0,
+        "dogi_stale_secret_blocks": 100847,
+        "dogi_waf": 1.0528106695424917,
+        "failed_rows": 0,
+        "gc_reduction": 1.0,
+        "hybrid_gc_blocks": 0,
+        "hybrid_max_live_physical_zones": 6,
+        "hybrid_secret_waiting_end": 0,
+        "hybrid_semantic_resets": 28,
+        "hybrid_stale_secret_blocks": 0,
+        "hybrid_waf": 1.0,
+        "logical_zones": 733,
+        "pqc_level": 8000,
+        "row_count": 6,
+        "semantic_gap": true,
+        "waf_pressure": true,
+        "waf_reduction": 0.05016160176780982,
+        "wall_time_s": 134.766313024,
+        "workloads": [
+          "ycsb-f-pqc8000"
+        ]
+      },
+      {
+        "artifact": "artifacts/results/fast-ycsb-pressure/packed-physical-zonefs-ycsb-a-pqc10000-z1024-helper.json",
+        "baseline_semantic_failures": {
+          "dogi-history": {
+            "gc_blocks": 3357,
+            "secret_waiting_end": 9490,
+            "semantic_resets": 0,
+            "stale_secret_blocks": 150221,
+            "waf": 1.0065625238250697
+          },
+          "fifo": {
+            "gc_blocks": 11770,
+            "secret_waiting_end": 19456,
+            "semantic_resets": 0,
+            "stale_secret_blocks": 141424,
+            "waf": 1.0230089083768457
+          },
+          "midas-style": {
+            "gc_blocks": 16,
+            "secret_waiting_end": 20,
+            "semantic_resets": 0,
+            "stale_secret_blocks": 158884,
+            "waf": 1.0000312780402745
+          },
+          "sepbit-style": {
+            "gc_blocks": 107,
+            "secret_waiting_end": 26,
+            "semantic_resets": 0,
+            "stale_secret_blocks": 158845,
+            "waf": 1.000209171894335
+          }
+        },
+        "dogi_gc_blocks": 3357,
+        "dogi_max_live_physical_zones": 8,
+        "dogi_secret_waiting_end": 9490,
+        "dogi_semantic_resets": 0,
+        "dogi_stale_secret_blocks": 150221,
+        "dogi_waf": 1.0065625238250697,
+        "failed_rows": 0,
+        "gc_reduction": 1.0,
+        "hybrid_gc_blocks": 0,
+        "hybrid_max_live_physical_zones": 6,
+        "hybrid_secret_waiting_end": 0,
+        "hybrid_semantic_resets": 26,
+        "hybrid_stale_secret_blocks": 0,
+        "hybrid_waf": 1.0,
+        "logical_zones": 1024,
+        "pqc_level": 10000,
+        "row_count": 6,
+        "semantic_gap": true,
+        "waf_pressure": true,
+        "waf_reduction": 0.006519737889834473,
+        "wall_time_s": 145.208133714,
+        "workloads": [
+          "ycsb-a-pqc10000"
+        ]
+      },
+      {
+        "artifact": "artifacts/results/fast-ycsb-pressure/packed-physical-zonefs-ycsb-f-pqc10000-z900-helper.json",
+        "baseline_semantic_failures": {
+          "dogi-history": {
+            "gc_blocks": 13741,
+            "secret_waiting_end": 33094,
+            "semantic_resets": 0,
+            "stale_secret_blocks": 144901,
+            "waf": 1.027909461309415
+          },
+          "fifo": {
+            "gc_blocks": 23150,
+            "secret_waiting_end": 34816,
+            "semantic_resets": 0,
+            "stale_secret_blocks": 133533,
+            "waf": 1.0470201607825456
+          },
+          "midas-style": {
+            "gc_blocks": 1228,
+            "secret_waiting_end": 1036,
+            "semantic_resets": 0,
+            "stale_secret_blocks": 172228,
+            "waf": 1.0024942011853548
+          },
+          "sepbit-style": {
+            "gc_blocks": 6845,
+            "secret_waiting_end": 12690,
+            "semantic_resets": 0,
+            "stale_secret_blocks": 159007,
+            "waf": 1.0139029373890507
+          }
+        },
+        "dogi_gc_blocks": 13741,
+        "dogi_max_live_physical_zones": 8,
+        "dogi_secret_waiting_end": 33094,
+        "dogi_semantic_resets": 0,
+        "dogi_stale_secret_blocks": 144901,
+        "dogi_waf": 1.027909461309415,
+        "failed_rows": 0,
+        "gc_reduction": 1.0,
+        "hybrid_gc_blocks": 0,
+        "hybrid_max_live_physical_zones": 6,
+        "hybrid_secret_waiting_end": 0,
+        "hybrid_semantic_resets": 26,
+        "hybrid_stale_secret_blocks": 0,
+        "hybrid_waf": 1.0,
+        "logical_zones": 900,
+        "pqc_level": 10000,
+        "row_count": 6,
+        "semantic_gap": true,
+        "waf_pressure": true,
+        "waf_reduction": 0.0271516727493317,
+        "wall_time_s": 143.23232692,
+        "workloads": [
+          "ycsb-f-pqc10000"
+        ]
+      }
+    ],
+    "scope": "actual ZNS YCSB easy-to-pressure curve",
+    "semantic_gap_rows": 9,
+    "waf_pressure_rows": 7
+  }
+}

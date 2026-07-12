@@ -1,0 +1,51 @@
+{
+  "best_placement": "CostBenefit",
+  "best_waf": 2.803532778684755,
+  "caveat": "These are public DOGI prototype internal GiB counters on a compacted trace. They are exact DOGI-stack evidence but should not be mixed as apples-to-apples numbers with QUASAR's packed replay metrics.",
+  "completed_runs": 3,
+  "device": "/dev/nvme0n1",
+  "dogi_waf": 2.992549952156656,
+  "logical_size_gb": 2,
+  "rows": [
+    {
+      "completed": true,
+      "gc_write_gib": 9.1416,
+      "path": "artifacts/results/dogi-exact/alibaba-pqc8000-dogi.json",
+      "placement": "DOGI",
+      "placement_algorithm": "DOGI",
+      "saw_zenfs_mount": true,
+      "selection_algorithm": "DogiSelect",
+      "trace_path": "/home/bigdatalab/skim/PQC_ZNS/artifacts/traces/fast-dynamic-pressure/alibaba-pqc8000-compact.dogi",
+      "user_write_gib": 4.58789,
+      "waf": 2.992549952156656
+    },
+    {
+      "completed": true,
+      "gc_write_gib": 8.30566,
+      "path": "artifacts/results/dogi-exact/alibaba-pqc8000-greedy.json",
+      "placement": "Greedy",
+      "placement_algorithm": "Greedy",
+      "saw_zenfs_mount": true,
+      "selection_algorithm": "Greedy",
+      "trace_path": "/home/bigdatalab/skim/PQC_ZNS/artifacts/traces/fast-dynamic-pressure/alibaba-pqc8000-compact.dogi",
+      "user_write_gib": 4.58887,
+      "waf": 2.8099575712539253
+    },
+    {
+      "completed": true,
+      "gc_write_gib": 8.27441,
+      "path": "artifacts/results/dogi-exact/alibaba-pqc8000-costbenefit.json",
+      "placement": "CostBenefit",
+      "placement_algorithm": "CostBenefit",
+      "saw_zenfs_mount": true,
+      "selection_algorithm": "CostBenefit",
+      "trace_path": "/home/bigdatalab/skim/PQC_ZNS/artifacts/traces/fast-dynamic-pressure/alibaba-pqc8000-compact.dogi",
+      "user_write_gib": 4.58789,
+      "waf": 2.803532778684755
+    }
+  ],
+  "scheduler": "mq-deadline",
+  "scope": "exact public DOGI prototype placement variants on physical ZNS",
+  "total_runs": 3,
+  "trace": "/home/bigdatalab/skim/PQC_ZNS/artifacts/traces/fast-dynamic-pressure/alibaba-pqc8000-compact.dogi"
+}

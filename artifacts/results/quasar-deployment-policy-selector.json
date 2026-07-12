@@ -1,0 +1,93 @@
+{
+  "default_policy": "quasar-dogi-hybrid",
+  "hardness_passed": true,
+  "main_takeaway": "The improved deployable design is not a single universal knob. The default remains QUASAR-DOGI hybrid; tenant isolation and residual migration are explicit modes enabled only when the workload/security objective requires their overhead.",
+  "modes": [
+    {
+      "evidence": {
+        "adaptive_decision": "keep-current-hybrid",
+        "adaptive_wins": 0,
+        "current_wins": 6,
+        "sysbench_workloads": 2,
+        "ycsb_workloads": 4
+      },
+      "mode": "default",
+      "passed": true,
+      "policy": "quasar-dogi-hybrid",
+      "rule": "Use exact PQC death-cohort placement for secrets and DOGI-style fallback for payload.",
+      "when": "single-tenant or normal PQC pressure without tenant isolation requirement"
+    },
+    {
+      "evidence": {
+        "decision": "add-tenant-isolation-mode",
+        "gc_extra_blocks": 485,
+        "physical_reset_extra_commands": 1240,
+        "reset_secret_tenant_impurity_reduction": 1.0,
+        "waf_increase": 0.0028499738507554717
+      },
+      "mode": "tenant-isolation",
+      "passed": true,
+      "policy": "quasar-adaptive-hybrid tenant-local bins",
+      "rule": "Add tenant-local death-cohort bins only when reset-time tenant impurity is a security/isolation concern.",
+      "when": "multi-tenant secret reset must not mix tenant cohorts"
+    },
+    {
+      "evidence": {
+        "decision": "use-residual-fallback-as-strict-exposure-mode",
+        "profiles": [
+          "low_overhead",
+          "balanced",
+          "strict_zero_wait"
+        ],
+        "strict_zero_wait_max_waf": 3.553485894439311,
+        "strict_zero_wait_rows": 3,
+        "strict_zero_wait_successes": 3
+      },
+      "mode": "strict-residual",
+      "passed": true,
+      "policy": "epoch-bin residual-migration controller",
+      "rule": "Select low-overhead, balanced, or strict-zero-wait residual budget based on exposure objective.",
+      "when": "delayed expiry or stragglers would otherwise leave secret bytes waiting"
+    },
+    {
+      "evidence": {
+        "fallback_failed_rows": 0,
+        "fallback_physical_waf": 1.7098490861062083,
+        "fallback_secret_waiting_end": 0,
+        "missing_hint_failed_rows": 0,
+        "wrong_epoch_failed_rows": 0
+      },
+      "mode": "fallback-overflow",
+      "passed": true,
+      "policy": "overflow and conservative reset confirmation",
+      "rule": "Route uncertain data away from exact secret zones and reset only after epoch-manager confirmation.",
+      "when": "hint confidence is low, missing, or inconsistent"
+    }
+  ],
+  "passed": true,
+  "passed_modes": 4,
+  "scope": "QUASAR deployment policy selector derived from actual-ZNS and simulator pressure artifacts",
+  "selector": [
+    {
+      "condition": "tenant isolation required",
+      "otherwise": "continue",
+      "select": "tenant-isolation"
+    },
+    {
+      "condition": "strict zero stale-secret waiting required under stragglers",
+      "otherwise": "continue",
+      "select": "strict-residual"
+    },
+    {
+      "condition": "hint confidence is low or missing",
+      "otherwise": "continue",
+      "select": "fallback-overflow"
+    },
+    {
+      "condition": "normal single-tenant PQC pressure",
+      "otherwise": "default",
+      "select": "default"
+    }
+  ],
+  "total_modes": 4
+}

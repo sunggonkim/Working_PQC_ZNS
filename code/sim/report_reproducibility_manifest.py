@@ -186,6 +186,18 @@ ARTIFACTS = [
         "claim": "QUASAR improvement is an explicit mode selector, not one universal knob",
     },
     {
+        "id": "fdp_handle_pressure",
+        "path": "artifacts/results/pqc-mixed-fdp-mapping.json",
+        "role": "trace-driven QUASAR-to-FDP placement-handle pressure model",
+        "claim": "FDP can carry QUASAR lifecycle families, but scarce handles collide death cohorts",
+    },
+    {
+        "id": "fdp_handle_pressure_figure",
+        "path": "artifacts/figures/fast-style/fig8-fdp-handle-pressure.pdf",
+        "role": "paper Figure 8 for FDP handle-count purity and collision pressure",
+        "claim": "FDP handle pressure is reported as deployment modeling, not physical FDP performance",
+    },
+    {
         "id": "unified_comparison",
         "path": "artifacts/results/unified-baseline-comparison.json",
         "role": "single JSON summary separating same-path, pressure, exact external, and boundary evidence",
@@ -252,6 +264,14 @@ COMMANDS = [
     {
         "step": "actual_zns_figures",
         "command": "python3 code/sim/plot_actual_zns_comparison.py",
+    },
+    {
+        "step": "fdp_mapping",
+        "command": "python3 code/quasar/fdp_mapping.py --trace artifacts/traces/pqc-mixed.jsonl --handles 8 16 32 64 128 --out artifacts/results/pqc-mixed-fdp-mapping.json --markdown-out artifacts/results/pqc-mixed-fdp-mapping.md",
+    },
+    {
+        "step": "fast_style_figures",
+        "command": "python3 code/sim/plot_fast_style_quasar_figures.py",
     },
     {
         "step": "unified_report",

@@ -1198,6 +1198,8 @@ def gate_reproducibility_manifest(manifest: dict) -> Gate:
         "actual_zns_overhead",
         "workload_hardness",
         "deployment_selector",
+        "fdp_handle_pressure",
+        "fdp_handle_pressure_figure",
         "unified_comparison",
         "claim_matrix",
         "external_readiness",

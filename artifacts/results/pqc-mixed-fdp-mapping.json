@@ -1,0 +1,2359 @@
+{
+  "runs": [
+    {
+      "avg_families_per_occupied_handle": 10.75,
+      "bin_width": 1,
+      "cert_epochs": 12,
+      "collision_handle_fraction": 1.0,
+      "collision_handles": 8,
+      "collisions_top": {
+        "0": {
+          "EPOCH_SECRET:e14:EPHEMERAL_SECRET:SECRET": 376,
+          "EPOCH_SECRET:e16:KEM_ARTIFACT:SECRET": 1037,
+          "EPOCH_SECRET:e1:KEM_ARTIFACT:SECRET": 1116,
+          "EPOCH_SECRET:e20:EPHEMERAL_SECRET:SECRET": 458,
+          "EPOCH_SECRET:e25:KEM_ARTIFACT:SECRET": 1079,
+          "EPOCH_SECRET:e26:KEM_ARTIFACT:SECRET": 1007,
+          "EPOCH_SECRET:e35:EPHEMERAL_SECRET:SECRET": 426,
+          "EPOCH_SECRET:e4:KEM_ARTIFACT:SECRET": 981,
+          "EPOCH_SECRET:e5:EPHEMERAL_SECRET:SECRET": 421,
+          "ROTATION:r3:CERT_METADATA": 2612
+        },
+        "1": {
+          "EPOCH_SECRET:e15:KEM_ARTIFACT:SECRET": 985,
+          "EPOCH_SECRET:e20:KEM_ARTIFACT:SECRET": 1035,
+          "EPOCH_SECRET:e21:KEM_ARTIFACT:SECRET": 999,
+          "EPOCH_SECRET:e28:KEM_ARTIFACT:SECRET": 1051,
+          "EPOCH_SECRET:e2:KEM_ARTIFACT:SECRET": 1026,
+          "EPOCH_SECRET:e30:EPHEMERAL_SECRET:SECRET": 455,
+          "EPOCH_SECRET:e32:EPHEMERAL_SECRET:SECRET": 433,
+          "EPOCH_SECRET:e32:KEM_ARTIFACT:SECRET": 1074,
+          "EPOCH_SECRET:e33:KEM_ARTIFACT:SECRET": 1093,
+          "EPOCH_SECRET:e36:KEM_ARTIFACT:SECRET": 1011
+        },
+        "2": {
+          "EPOCH_SECRET:e12:KEM_ARTIFACT:SECRET": 1030,
+          "EPOCH_SECRET:e13:EPHEMERAL_SECRET:SECRET": 448,
+          "EPOCH_SECRET:e13:KEM_ARTIFACT:SECRET": 1019,
+          "EPOCH_SECRET:e17:KEM_ARTIFACT:SECRET": 1122,
+          "EPOCH_SECRET:e18:KEM_ARTIFACT:SECRET": 1043,
+          "EPOCH_SECRET:e22:KEM_ARTIFACT:SECRET": 1023,
+          "EPOCH_SECRET:e26:EPHEMERAL_SECRET:SECRET": 458,
+          "EPOCH_SECRET:e37:KEM_ARTIFACT:SECRET": 1069,
+          "PAYLOAD": 506434,
+          "ROTATION:r0:CERT_METADATA": 7446
+        },
+        "3": {
+          "EPOCH_SECRET:e14:KEM_ARTIFACT:SECRET": 1050,
+          "EPOCH_SECRET:e35:KEM_ARTIFACT:SECRET": 1016,
+          "EPOCH_SECRET:e4:EPHEMERAL_SECRET:SECRET": 377,
+          "EPOCH_SECRET:e9:KEM_ARTIFACT:SECRET": 1016
+        },
+        "4": {
+          "APPEND_LOG:SIGNATURE_LOG": 23254,
+          "EPOCH_SECRET:e24:KEM_ARTIFACT:SECRET": 1135,
+          "EPOCH_SECRET:e27:EPHEMERAL_SECRET:SECRET": 430,
+          "EPOCH_SECRET:e3:EPHEMERAL_SECRET:SECRET": 423,
+          "EPOCH_SECRET:e6:KEM_ARTIFACT:SECRET": 1109,
+          "EPOCH_SECRET:e7:KEM_ARTIFACT:SECRET": 1036,
+          "EPOCH_SECRET:e8:KEM_ARTIFACT:SECRET": 969,
+          "EPOCH_SECRET:e9:EPHEMERAL_SECRET:SECRET": 413
+        },
+        "5": {
+          "EPOCH_SECRET:e0:KEM_ARTIFACT:SECRET": 1045,
+          "EPOCH_SECRET:e10:KEM_ARTIFACT:SECRET": 1016,
+          "EPOCH_SECRET:e11:EPHEMERAL_SECRET:SECRET": 423,
+          "EPOCH_SECRET:e11:KEM_ARTIFACT:SECRET": 956,
+          "EPOCH_SECRET:e21:EPHEMERAL_SECRET:SECRET": 425,
+          "EPOCH_SECRET:e23:EPHEMERAL_SECRET:SECRET": 417,
+          "EPOCH_SECRET:e30:KEM_ARTIFACT:SECRET": 996,
+          "EPOCH_SECRET:e3:KEM_ARTIFACT:SECRET": 1086,
+          "ROTATION:r1:CERT_METADATA": 7554,
+          "ROTATION:r2:CERT_METADATA": 7663
+        },
+        "6": {
+          "EPOCH_SECRET:e15:EPHEMERAL_SECRET:SECRET": 413,
+          "EPOCH_SECRET:e18:EPHEMERAL_SECRET:SECRET": 398,
+          "EPOCH_SECRET:e19:KEM_ARTIFACT:SECRET": 993,
+          "EPOCH_SECRET:e25:EPHEMERAL_SECRET:SECRET": 417,
+          "EPOCH_SECRET:e28:EPHEMERAL_SECRET:SECRET": 431,
+          "EPOCH_SECRET:e29:KEM_ARTIFACT:SECRET": 1025,
+          "EPOCH_SECRET:e2:EPHEMERAL_SECRET:SECRET": 432,
+          "EPOCH_SECRET:e34:KEM_ARTIFACT:SECRET": 1008,
+          "EPOCH_SECRET:e38:KEM_ARTIFACT:SECRET": 1007,
+          "EPOCH_SECRET:e8:EPHEMERAL_SECRET:SECRET": 431
+        },
+        "7": {
+          "EPOCH_SECRET:e1:EPHEMERAL_SECRET:SECRET": 398,
+          "EPOCH_SECRET:e23:KEM_ARTIFACT:SECRET": 997,
+          "EPOCH_SECRET:e27:KEM_ARTIFACT:SECRET": 1042,
+          "EPOCH_SECRET:e29:EPHEMERAL_SECRET:SECRET": 404,
+          "EPOCH_SECRET:e31:EPHEMERAL_SECRET:SECRET": 413,
+          "EPOCH_SECRET:e31:KEM_ARTIFACT:SECRET": 1053,
+          "EPOCH_SECRET:e37:EPHEMERAL_SECRET:SECRET": 411,
+          "EPOCH_SECRET:e39:KEM_ARTIFACT:SECRET": 1127,
+          "EPOCH_SECRET:e5:KEM_ARTIFACT:SECRET": 980,
+          "EPOCH_SECRET:e7:EPHEMERAL_SECRET:SECRET": 438
+        }
+      },
+      "empty_handles": 0,
+      "family_count": 86,
+      "family_purity": 0.8876627697607056,
+      "family_to_handle": {
+        "APPEND_LOG:SIGNATURE_LOG": 4,
+        "EPOCH_SECRET:e0:EPHEMERAL_SECRET:SECRET": 6,
+        "EPOCH_SECRET:e0:KEM_ARTIFACT:SECRET": 5,
+        "EPOCH_SECRET:e10:EPHEMERAL_SECRET:SECRET": 5,
+        "EPOCH_SECRET:e10:KEM_ARTIFACT:SECRET": 5,
+        "EPOCH_SECRET:e11:EPHEMERAL_SECRET:SECRET": 5,
+        "EPOCH_SECRET:e11:KEM_ARTIFACT:SECRET": 5,
+        "EPOCH_SECRET:e12:EPHEMERAL_SECRET:SECRET": 2,
+        "EPOCH_SECRET:e12:KEM_ARTIFACT:SECRET": 2,
+        "EPOCH_SECRET:e13:EPHEMERAL_SECRET:SECRET": 2,
+        "EPOCH_SECRET:e13:KEM_ARTIFACT:SECRET": 2,
+        "EPOCH_SECRET:e14:EPHEMERAL_SECRET:SECRET": 0,
+        "EPOCH_SECRET:e14:KEM_ARTIFACT:SECRET": 3,
+        "EPOCH_SECRET:e15:EPHEMERAL_SECRET:SECRET": 6,
+        "EPOCH_SECRET:e15:KEM_ARTIFACT:SECRET": 1,
+        "EPOCH_SECRET:e16:EPHEMERAL_SECRET:SECRET": 2,
+        "EPOCH_SECRET:e16:KEM_ARTIFACT:SECRET": 0,
+        "EPOCH_SECRET:e17:EPHEMERAL_SECRET:SECRET": 1,
+        "EPOCH_SECRET:e17:KEM_ARTIFACT:SECRET": 2,
+        "EPOCH_SECRET:e18:EPHEMERAL_SECRET:SECRET": 6,
+        "EPOCH_SECRET:e18:KEM_ARTIFACT:SECRET": 2,
+        "EPOCH_SECRET:e19:EPHEMERAL_SECRET:SECRET": 2,
+        "EPOCH_SECRET:e19:KEM_ARTIFACT:SECRET": 6,
+        "EPOCH_SECRET:e1:EPHEMERAL_SECRET:SECRET": 7,
+        "EPOCH_SECRET:e1:KEM_ARTIFACT:SECRET": 0,
+        "EPOCH_SECRET:e20:EPHEMERAL_SECRET:SECRET": 0,
+        "EPOCH_SECRET:e20:KEM_ARTIFACT:SECRET": 1,
+        "EPOCH_SECRET:e21:EPHEMERAL_SECRET:SECRET": 5,
+        "EPOCH_SECRET:e21:KEM_ARTIFACT:SECRET": 1,
+        "EPOCH_SECRET:e22:EPHEMERAL_SECRET:SECRET": 2,
+        "EPOCH_SECRET:e22:KEM_ARTIFACT:SECRET": 2,
+        "EPOCH_SECRET:e23:EPHEMERAL_SECRET:SECRET": 5,
+        "EPOCH_SECRET:e23:KEM_ARTIFACT:SECRET": 7,
+        "EPOCH_SECRET:e24:EPHEMERAL_SECRET:SECRET": 1,
+        "EPOCH_SECRET:e24:KEM_ARTIFACT:SECRET": 4,
+        "EPOCH_SECRET:e25:EPHEMERAL_SECRET:SECRET": 6,
+        "EPOCH_SECRET:e25:KEM_ARTIFACT:SECRET": 0,
+        "EPOCH_SECRET:e26:EPHEMERAL_SECRET:SECRET": 2,
+        "EPOCH_SECRET:e26:KEM_ARTIFACT:SECRET": 0,
+        "EPOCH_SECRET:e27:EPHEMERAL_SECRET:SECRET": 4,
+        "EPOCH_SECRET:e27:KEM_ARTIFACT:SECRET": 7,
+        "EPOCH_SECRET:e28:EPHEMERAL_SECRET:SECRET": 6,
+        "EPOCH_SECRET:e28:KEM_ARTIFACT:SECRET": 1,
+        "EPOCH_SECRET:e29:EPHEMERAL_SECRET:SECRET": 7,
+        "EPOCH_SECRET:e29:KEM_ARTIFACT:SECRET": 6,
+        "EPOCH_SECRET:e2:EPHEMERAL_SECRET:SECRET": 6,
+        "EPOCH_SECRET:e2:KEM_ARTIFACT:SECRET": 1,
+        "EPOCH_SECRET:e30:EPHEMERAL_SECRET:SECRET": 1,
+        "EPOCH_SECRET:e30:KEM_ARTIFACT:SECRET": 5,
+        "EPOCH_SECRET:e31:EPHEMERAL_SECRET:SECRET": 7,
+        "EPOCH_SECRET:e31:KEM_ARTIFACT:SECRET": 7,
+        "EPOCH_SECRET:e32:EPHEMERAL_SECRET:SECRET": 1,
+        "EPOCH_SECRET:e32:KEM_ARTIFACT:SECRET": 1,
+        "EPOCH_SECRET:e33:EPHEMERAL_SECRET:SECRET": 2,
+        "EPOCH_SECRET:e33:KEM_ARTIFACT:SECRET": 1,
+        "EPOCH_SECRET:e34:EPHEMERAL_SECRET:SECRET": 1,
+        "EPOCH_SECRET:e34:KEM_ARTIFACT:SECRET": 6,
+        "EPOCH_SECRET:e35:EPHEMERAL_SECRET:SECRET": 0,
+        "EPOCH_SECRET:e35:KEM_ARTIFACT:SECRET": 3,
+        "EPOCH_SECRET:e36:EPHEMERAL_SECRET:SECRET": 2,
+        "EPOCH_SECRET:e36:KEM_ARTIFACT:SECRET": 1,
+        "EPOCH_SECRET:e37:EPHEMERAL_SECRET:SECRET": 7,
+        "EPOCH_SECRET:e37:KEM_ARTIFACT:SECRET": 2,
+        "EPOCH_SECRET:e38:EPHEMERAL_SECRET:SECRET": 2,
+        "EPOCH_SECRET:e38:KEM_ARTIFACT:SECRET": 6,
+        "EPOCH_SECRET:e39:EPHEMERAL_SECRET:SECRET": 2,
+        "EPOCH_SECRET:e39:KEM_ARTIFACT:SECRET": 7,
+        "EPOCH_SECRET:e3:EPHEMERAL_SECRET:SECRET": 4,
+        "EPOCH_SECRET:e3:KEM_ARTIFACT:SECRET": 5,
+        "EPOCH_SECRET:e4:EPHEMERAL_SECRET:SECRET": 3,
+        "EPOCH_SECRET:e4:KEM_ARTIFACT:SECRET": 0,
+        "EPOCH_SECRET:e5:EPHEMERAL_SECRET:SECRET": 0,
+        "EPOCH_SECRET:e5:KEM_ARTIFACT:SECRET": 7,
+        "EPOCH_SECRET:e6:EPHEMERAL_SECRET:SECRET": 5,
+        "EPOCH_SECRET:e6:KEM_ARTIFACT:SECRET": 4,
+        "EPOCH_SECRET:e7:EPHEMERAL_SECRET:SECRET": 7,
+        "EPOCH_SECRET:e7:KEM_ARTIFACT:SECRET": 4,
+        "EPOCH_SECRET:e8:EPHEMERAL_SECRET:SECRET": 6,
+        "EPOCH_SECRET:e8:KEM_ARTIFACT:SECRET": 4,
+        "EPOCH_SECRET:e9:EPHEMERAL_SECRET:SECRET": 4,
+        "EPOCH_SECRET:e9:KEM_ARTIFACT:SECRET": 3,
+        "PAYLOAD": 2,
+        "ROTATION:r0:CERT_METADATA": 2,
+        "ROTATION:r1:CERT_METADATA": 5,
+        "ROTATION:r2:CERT_METADATA": 5,
+        "ROTATION:r3:CERT_METADATA": 0
+      },
+      "handle_summary": {
+        "0": {
+          "blocks": 9513,
+          "dominant_family": "ROTATION:r3:CERT_METADATA",
+          "dominant_family_blocks": 2612,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 5220,
+          "families": 10
+        },
+        "1": {
+          "blocks": 10383,
+          "dominant_family": "EPOCH_SECRET:e33:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1093,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 8274,
+          "families": 13
+        },
+        "2": {
+          "blocks": 524405,
+          "dominant_family": "PAYLOAD",
+          "dominant_family_blocks": 506434,
+          "dominant_intent": "PAYLOAD",
+          "dominant_intent_blocks": 506434,
+          "families": 18
+        },
+        "3": {
+          "blocks": 3459,
+          "dominant_family": "EPOCH_SECRET:e14:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1050,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 3082,
+          "families": 4
+        },
+        "4": {
+          "blocks": 28769,
+          "dominant_family": "APPEND_LOG:SIGNATURE_LOG",
+          "dominant_family_blocks": 23254,
+          "dominant_intent": "SIGNATURE_LOG",
+          "dominant_intent_blocks": 23254,
+          "families": 8
+        },
+        "5": {
+          "blocks": 22409,
+          "dominant_family": "ROTATION:r2:CERT_METADATA",
+          "dominant_family_blocks": 7663,
+          "dominant_intent": "CERT_METADATA",
+          "dominant_intent_blocks": 15217,
+          "families": 12
+        },
+        "6": {
+          "blocks": 6935,
+          "dominant_family": "EPOCH_SECRET:e29:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1025,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 4033,
+          "families": 11
+        },
+        "7": {
+          "blocks": 7263,
+          "dominant_family": "EPOCH_SECRET:e39:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1127,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 5199,
+          "families": 10
+        }
+      },
+      "handles": 8,
+      "intent_purity": 0.9308098040239033,
+      "max_families_per_handle": 18,
+      "min_epoch_fill_blocks": 1,
+      "occupied_handles": 8,
+      "total_blocks": 613136,
+      "trace": "artifacts/traces/pqc-mixed.jsonl",
+      "writes": 80000
+    },
+    {
+      "avg_families_per_occupied_handle": 5.733333333333333,
+      "bin_width": 1,
+      "cert_epochs": 12,
+      "collision_handle_fraction": 1.0,
+      "collision_handles": 15,
+      "collisions_top": {
+        "0": {
+          "EPOCH_SECRET:e16:KEM_ARTIFACT:SECRET": 1037,
+          "EPOCH_SECRET:e1:KEM_ARTIFACT:SECRET": 1116,
+          "EPOCH_SECRET:e26:KEM_ARTIFACT:SECRET": 1007,
+          "EPOCH_SECRET:e4:KEM_ARTIFACT:SECRET": 981,
+          "EPOCH_SECRET:e5:EPHEMERAL_SECRET:SECRET": 421,
+          "ROTATION:r3:CERT_METADATA": 2612
+        },
+        "1": {
+          "EPOCH_SECRET:e15:KEM_ARTIFACT:SECRET": 985,
+          "EPOCH_SECRET:e20:KEM_ARTIFACT:SECRET": 1035,
+          "EPOCH_SECRET:e21:KEM_ARTIFACT:SECRET": 999,
+          "EPOCH_SECRET:e24:EPHEMERAL_SECRET:SECRET": 384,
+          "EPOCH_SECRET:e28:KEM_ARTIFACT:SECRET": 1051,
+          "EPOCH_SECRET:e30:EPHEMERAL_SECRET:SECRET": 455,
+          "EPOCH_SECRET:e32:EPHEMERAL_SECRET:SECRET": 433,
+          "EPOCH_SECRET:e32:KEM_ARTIFACT:SECRET": 1074
+        },
+        "10": {
+          "EPOCH_SECRET:e12:EPHEMERAL_SECRET:SECRET": 410,
+          "EPOCH_SECRET:e12:KEM_ARTIFACT:SECRET": 1030,
+          "EPOCH_SECRET:e13:EPHEMERAL_SECRET:SECRET": 448,
+          "EPOCH_SECRET:e17:KEM_ARTIFACT:SECRET": 1122,
+          "EPOCH_SECRET:e18:KEM_ARTIFACT:SECRET": 1043,
+          "EPOCH_SECRET:e19:EPHEMERAL_SECRET:SECRET": 422,
+          "EPOCH_SECRET:e22:KEM_ARTIFACT:SECRET": 1023,
+          "EPOCH_SECRET:e33:EPHEMERAL_SECRET:SECRET": 439,
+          "PAYLOAD": 506434,
+          "ROTATION:r0:CERT_METADATA": 7446
+        },
+        "12": {
+          "EPOCH_SECRET:e24:KEM_ARTIFACT:SECRET": 1135,
+          "EPOCH_SECRET:e27:EPHEMERAL_SECRET:SECRET": 430,
+          "EPOCH_SECRET:e3:EPHEMERAL_SECRET:SECRET": 423,
+          "EPOCH_SECRET:e6:KEM_ARTIFACT:SECRET": 1109,
+          "EPOCH_SECRET:e7:KEM_ARTIFACT:SECRET": 1036,
+          "EPOCH_SECRET:e8:KEM_ARTIFACT:SECRET": 969
+        },
+        "13": {
+          "EPOCH_SECRET:e0:KEM_ARTIFACT:SECRET": 1045,
+          "EPOCH_SECRET:e10:KEM_ARTIFACT:SECRET": 1016,
+          "EPOCH_SECRET:e11:KEM_ARTIFACT:SECRET": 956,
+          "EPOCH_SECRET:e30:KEM_ARTIFACT:SECRET": 996,
+          "EPOCH_SECRET:e3:KEM_ARTIFACT:SECRET": 1086,
+          "EPOCH_SECRET:e6:EPHEMERAL_SECRET:SECRET": 416,
+          "ROTATION:r1:CERT_METADATA": 7554,
+          "ROTATION:r2:CERT_METADATA": 7663
+        },
+        "14": {
+          "EPOCH_SECRET:e0:EPHEMERAL_SECRET:SECRET": 380,
+          "EPOCH_SECRET:e15:EPHEMERAL_SECRET:SECRET": 413,
+          "EPOCH_SECRET:e18:EPHEMERAL_SECRET:SECRET": 398,
+          "EPOCH_SECRET:e25:EPHEMERAL_SECRET:SECRET": 417,
+          "EPOCH_SECRET:e29:KEM_ARTIFACT:SECRET": 1025,
+          "EPOCH_SECRET:e34:KEM_ARTIFACT:SECRET": 1008
+        },
+        "15": {
+          "EPOCH_SECRET:e1:EPHEMERAL_SECRET:SECRET": 398,
+          "EPOCH_SECRET:e27:KEM_ARTIFACT:SECRET": 1042,
+          "EPOCH_SECRET:e31:EPHEMERAL_SECRET:SECRET": 413,
+          "EPOCH_SECRET:e5:KEM_ARTIFACT:SECRET": 980,
+          "EPOCH_SECRET:e7:EPHEMERAL_SECRET:SECRET": 438
+        },
+        "2": {
+          "EPOCH_SECRET:e13:KEM_ARTIFACT:SECRET": 1019,
+          "EPOCH_SECRET:e16:EPHEMERAL_SECRET:SECRET": 414,
+          "EPOCH_SECRET:e22:EPHEMERAL_SECRET:SECRET": 398,
+          "EPOCH_SECRET:e26:EPHEMERAL_SECRET:SECRET": 458,
+          "EPOCH_SECRET:e36:EPHEMERAL_SECRET:SECRET": 421,
+          "EPOCH_SECRET:e37:KEM_ARTIFACT:SECRET": 1069,
+          "EPOCH_SECRET:e38:EPHEMERAL_SECRET:SECRET": 413
+        },
+        "3": {
+          "EPOCH_SECRET:e14:KEM_ARTIFACT:SECRET": 1050,
+          "EPOCH_SECRET:e35:KEM_ARTIFACT:SECRET": 1016,
+          "EPOCH_SECRET:e4:EPHEMERAL_SECRET:SECRET": 377,
+          "EPOCH_SECRET:e9:KEM_ARTIFACT:SECRET": 1016
+        },
+        "4": {
+          "APPEND_LOG:SIGNATURE_LOG": 23254,
+          "EPOCH_SECRET:e9:EPHEMERAL_SECRET:SECRET": 413
+        },
+        "5": {
+          "EPOCH_SECRET:e10:EPHEMERAL_SECRET:SECRET": 412,
+          "EPOCH_SECRET:e11:EPHEMERAL_SECRET:SECRET": 423,
+          "EPOCH_SECRET:e21:EPHEMERAL_SECRET:SECRET": 425,
+          "EPOCH_SECRET:e23:EPHEMERAL_SECRET:SECRET": 417
+        },
+        "6": {
+          "EPOCH_SECRET:e19:KEM_ARTIFACT:SECRET": 993,
+          "EPOCH_SECRET:e28:EPHEMERAL_SECRET:SECRET": 431,
+          "EPOCH_SECRET:e2:EPHEMERAL_SECRET:SECRET": 432,
+          "EPOCH_SECRET:e38:KEM_ARTIFACT:SECRET": 1007,
+          "EPOCH_SECRET:e8:EPHEMERAL_SECRET:SECRET": 431
+        },
+        "7": {
+          "EPOCH_SECRET:e23:KEM_ARTIFACT:SECRET": 997,
+          "EPOCH_SECRET:e29:EPHEMERAL_SECRET:SECRET": 404,
+          "EPOCH_SECRET:e31:KEM_ARTIFACT:SECRET": 1053,
+          "EPOCH_SECRET:e37:EPHEMERAL_SECRET:SECRET": 411,
+          "EPOCH_SECRET:e39:KEM_ARTIFACT:SECRET": 1127
+        },
+        "8": {
+          "EPOCH_SECRET:e14:EPHEMERAL_SECRET:SECRET": 376,
+          "EPOCH_SECRET:e20:EPHEMERAL_SECRET:SECRET": 458,
+          "EPOCH_SECRET:e25:KEM_ARTIFACT:SECRET": 1079,
+          "EPOCH_SECRET:e35:EPHEMERAL_SECRET:SECRET": 426
+        },
+        "9": {
+          "EPOCH_SECRET:e17:EPHEMERAL_SECRET:SECRET": 423,
+          "EPOCH_SECRET:e2:KEM_ARTIFACT:SECRET": 1026,
+          "EPOCH_SECRET:e33:KEM_ARTIFACT:SECRET": 1093,
+          "EPOCH_SECRET:e34:EPHEMERAL_SECRET:SECRET": 414,
+          "EPOCH_SECRET:e36:KEM_ARTIFACT:SECRET": 1011
+        }
+      },
+      "empty_handles": 1,
+      "family_count": 86,
+      "family_purity": 0.8988038542835521,
+      "family_to_handle": {
+        "APPEND_LOG:SIGNATURE_LOG": 4,
+        "EPOCH_SECRET:e0:EPHEMERAL_SECRET:SECRET": 14,
+        "EPOCH_SECRET:e0:KEM_ARTIFACT:SECRET": 13,
+        "EPOCH_SECRET:e10:EPHEMERAL_SECRET:SECRET": 5,
+        "EPOCH_SECRET:e10:KEM_ARTIFACT:SECRET": 13,
+        "EPOCH_SECRET:e11:EPHEMERAL_SECRET:SECRET": 5,
+        "EPOCH_SECRET:e11:KEM_ARTIFACT:SECRET": 13,
+        "EPOCH_SECRET:e12:EPHEMERAL_SECRET:SECRET": 10,
+        "EPOCH_SECRET:e12:KEM_ARTIFACT:SECRET": 10,
+        "EPOCH_SECRET:e13:EPHEMERAL_SECRET:SECRET": 10,
+        "EPOCH_SECRET:e13:KEM_ARTIFACT:SECRET": 2,
+        "EPOCH_SECRET:e14:EPHEMERAL_SECRET:SECRET": 8,
+        "EPOCH_SECRET:e14:KEM_ARTIFACT:SECRET": 3,
+        "EPOCH_SECRET:e15:EPHEMERAL_SECRET:SECRET": 14,
+        "EPOCH_SECRET:e15:KEM_ARTIFACT:SECRET": 1,
+        "EPOCH_SECRET:e16:EPHEMERAL_SECRET:SECRET": 2,
+        "EPOCH_SECRET:e16:KEM_ARTIFACT:SECRET": 0,
+        "EPOCH_SECRET:e17:EPHEMERAL_SECRET:SECRET": 9,
+        "EPOCH_SECRET:e17:KEM_ARTIFACT:SECRET": 10,
+        "EPOCH_SECRET:e18:EPHEMERAL_SECRET:SECRET": 14,
+        "EPOCH_SECRET:e18:KEM_ARTIFACT:SECRET": 10,
+        "EPOCH_SECRET:e19:EPHEMERAL_SECRET:SECRET": 10,
+        "EPOCH_SECRET:e19:KEM_ARTIFACT:SECRET": 6,
+        "EPOCH_SECRET:e1:EPHEMERAL_SECRET:SECRET": 15,
+        "EPOCH_SECRET:e1:KEM_ARTIFACT:SECRET": 0,
+        "EPOCH_SECRET:e20:EPHEMERAL_SECRET:SECRET": 8,
+        "EPOCH_SECRET:e20:KEM_ARTIFACT:SECRET": 1,
+        "EPOCH_SECRET:e21:EPHEMERAL_SECRET:SECRET": 5,
+        "EPOCH_SECRET:e21:KEM_ARTIFACT:SECRET": 1,
+        "EPOCH_SECRET:e22:EPHEMERAL_SECRET:SECRET": 2,
+        "EPOCH_SECRET:e22:KEM_ARTIFACT:SECRET": 10,
+        "EPOCH_SECRET:e23:EPHEMERAL_SECRET:SECRET": 5,
+        "EPOCH_SECRET:e23:KEM_ARTIFACT:SECRET": 7,
+        "EPOCH_SECRET:e24:EPHEMERAL_SECRET:SECRET": 1,
+        "EPOCH_SECRET:e24:KEM_ARTIFACT:SECRET": 12,
+        "EPOCH_SECRET:e25:EPHEMERAL_SECRET:SECRET": 14,
+        "EPOCH_SECRET:e25:KEM_ARTIFACT:SECRET": 8,
+        "EPOCH_SECRET:e26:EPHEMERAL_SECRET:SECRET": 2,
+        "EPOCH_SECRET:e26:KEM_ARTIFACT:SECRET": 0,
+        "EPOCH_SECRET:e27:EPHEMERAL_SECRET:SECRET": 12,
+        "EPOCH_SECRET:e27:KEM_ARTIFACT:SECRET": 15,
+        "EPOCH_SECRET:e28:EPHEMERAL_SECRET:SECRET": 6,
+        "EPOCH_SECRET:e28:KEM_ARTIFACT:SECRET": 1,
+        "EPOCH_SECRET:e29:EPHEMERAL_SECRET:SECRET": 7,
+        "EPOCH_SECRET:e29:KEM_ARTIFACT:SECRET": 14,
+        "EPOCH_SECRET:e2:EPHEMERAL_SECRET:SECRET": 6,
+        "EPOCH_SECRET:e2:KEM_ARTIFACT:SECRET": 9,
+        "EPOCH_SECRET:e30:EPHEMERAL_SECRET:SECRET": 1,
+        "EPOCH_SECRET:e30:KEM_ARTIFACT:SECRET": 13,
+        "EPOCH_SECRET:e31:EPHEMERAL_SECRET:SECRET": 15,
+        "EPOCH_SECRET:e31:KEM_ARTIFACT:SECRET": 7,
+        "EPOCH_SECRET:e32:EPHEMERAL_SECRET:SECRET": 1,
+        "EPOCH_SECRET:e32:KEM_ARTIFACT:SECRET": 1,
+        "EPOCH_SECRET:e33:EPHEMERAL_SECRET:SECRET": 10,
+        "EPOCH_SECRET:e33:KEM_ARTIFACT:SECRET": 9,
+        "EPOCH_SECRET:e34:EPHEMERAL_SECRET:SECRET": 9,
+        "EPOCH_SECRET:e34:KEM_ARTIFACT:SECRET": 14,
+        "EPOCH_SECRET:e35:EPHEMERAL_SECRET:SECRET": 8,
+        "EPOCH_SECRET:e35:KEM_ARTIFACT:SECRET": 3,
+        "EPOCH_SECRET:e36:EPHEMERAL_SECRET:SECRET": 2,
+        "EPOCH_SECRET:e36:KEM_ARTIFACT:SECRET": 9,
+        "EPOCH_SECRET:e37:EPHEMERAL_SECRET:SECRET": 7,
+        "EPOCH_SECRET:e37:KEM_ARTIFACT:SECRET": 2,
+        "EPOCH_SECRET:e38:EPHEMERAL_SECRET:SECRET": 2,
+        "EPOCH_SECRET:e38:KEM_ARTIFACT:SECRET": 6,
+        "EPOCH_SECRET:e39:EPHEMERAL_SECRET:SECRET": 10,
+        "EPOCH_SECRET:e39:KEM_ARTIFACT:SECRET": 7,
+        "EPOCH_SECRET:e3:EPHEMERAL_SECRET:SECRET": 12,
+        "EPOCH_SECRET:e3:KEM_ARTIFACT:SECRET": 13,
+        "EPOCH_SECRET:e4:EPHEMERAL_SECRET:SECRET": 3,
+        "EPOCH_SECRET:e4:KEM_ARTIFACT:SECRET": 0,
+        "EPOCH_SECRET:e5:EPHEMERAL_SECRET:SECRET": 0,
+        "EPOCH_SECRET:e5:KEM_ARTIFACT:SECRET": 15,
+        "EPOCH_SECRET:e6:EPHEMERAL_SECRET:SECRET": 13,
+        "EPOCH_SECRET:e6:KEM_ARTIFACT:SECRET": 12,
+        "EPOCH_SECRET:e7:EPHEMERAL_SECRET:SECRET": 15,
+        "EPOCH_SECRET:e7:KEM_ARTIFACT:SECRET": 12,
+        "EPOCH_SECRET:e8:EPHEMERAL_SECRET:SECRET": 6,
+        "EPOCH_SECRET:e8:KEM_ARTIFACT:SECRET": 12,
+        "EPOCH_SECRET:e9:EPHEMERAL_SECRET:SECRET": 4,
+        "EPOCH_SECRET:e9:KEM_ARTIFACT:SECRET": 3,
+        "PAYLOAD": 10,
+        "ROTATION:r0:CERT_METADATA": 10,
+        "ROTATION:r1:CERT_METADATA": 13,
+        "ROTATION:r2:CERT_METADATA": 13,
+        "ROTATION:r3:CERT_METADATA": 0
+      },
+      "handle_summary": {
+        "0": {
+          "blocks": 7174,
+          "dominant_family": "ROTATION:r3:CERT_METADATA",
+          "dominant_family_blocks": 2612,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 4141,
+          "families": 6
+        },
+        "1": {
+          "blocks": 6416,
+          "dominant_family": "EPOCH_SECRET:e32:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1074,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 5144,
+          "families": 8
+        },
+        "10": {
+          "blocks": 520213,
+          "dominant_family": "PAYLOAD",
+          "dominant_family_blocks": 506434,
+          "dominant_intent": "PAYLOAD",
+          "dominant_intent_blocks": 506434,
+          "families": 11
+        },
+        "12": {
+          "blocks": 5102,
+          "dominant_family": "EPOCH_SECRET:e24:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1135,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 4249,
+          "families": 6
+        },
+        "13": {
+          "blocks": 20732,
+          "dominant_family": "ROTATION:r2:CERT_METADATA",
+          "dominant_family_blocks": 7663,
+          "dominant_intent": "CERT_METADATA",
+          "dominant_intent_blocks": 15217,
+          "families": 8
+        },
+        "14": {
+          "blocks": 3641,
+          "dominant_family": "EPOCH_SECRET:e29:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1025,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 2033,
+          "families": 6
+        },
+        "15": {
+          "blocks": 3271,
+          "dominant_family": "EPOCH_SECRET:e27:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1042,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 2022,
+          "families": 5
+        },
+        "2": {
+          "blocks": 4192,
+          "dominant_family": "EPOCH_SECRET:e37:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1069,
+          "dominant_intent": "EPHEMERAL_SECRET",
+          "dominant_intent_blocks": 2104,
+          "families": 7
+        },
+        "3": {
+          "blocks": 3459,
+          "dominant_family": "EPOCH_SECRET:e14:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1050,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 3082,
+          "families": 4
+        },
+        "4": {
+          "blocks": 23667,
+          "dominant_family": "APPEND_LOG:SIGNATURE_LOG",
+          "dominant_family_blocks": 23254,
+          "dominant_intent": "SIGNATURE_LOG",
+          "dominant_intent_blocks": 23254,
+          "families": 2
+        },
+        "5": {
+          "blocks": 1677,
+          "dominant_family": "EPOCH_SECRET:e21:EPHEMERAL_SECRET:SECRET",
+          "dominant_family_blocks": 425,
+          "dominant_intent": "EPHEMERAL_SECRET",
+          "dominant_intent_blocks": 1677,
+          "families": 4
+        },
+        "6": {
+          "blocks": 3294,
+          "dominant_family": "EPOCH_SECRET:e38:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1007,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 2000,
+          "families": 5
+        },
+        "7": {
+          "blocks": 3992,
+          "dominant_family": "EPOCH_SECRET:e39:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1127,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 3177,
+          "families": 5
+        },
+        "8": {
+          "blocks": 2339,
+          "dominant_family": "EPOCH_SECRET:e25:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1079,
+          "dominant_intent": "EPHEMERAL_SECRET",
+          "dominant_intent_blocks": 1260,
+          "families": 4
+        },
+        "9": {
+          "blocks": 3967,
+          "dominant_family": "EPOCH_SECRET:e33:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1093,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 3130,
+          "families": 5
+        }
+      },
+      "handles": 16,
+      "intent_purity": 0.9442016126927795,
+      "max_families_per_handle": 11,
+      "min_epoch_fill_blocks": 1,
+      "occupied_handles": 15,
+      "total_blocks": 613136,
+      "trace": "artifacts/traces/pqc-mixed.jsonl",
+      "writes": 80000
+    },
+    {
+      "avg_families_per_occupied_handle": 3.0714285714285716,
+      "bin_width": 1,
+      "cert_epochs": 12,
+      "collision_handle_fraction": 0.9285714285714286,
+      "collision_handles": 26,
+      "collisions_top": {
+        "0": {
+          "EPOCH_SECRET:e16:KEM_ARTIFACT:SECRET": 1037,
+          "EPOCH_SECRET:e1:KEM_ARTIFACT:SECRET": 1116,
+          "EPOCH_SECRET:e26:KEM_ARTIFACT:SECRET": 1007,
+          "EPOCH_SECRET:e4:KEM_ARTIFACT:SECRET": 981,
+          "ROTATION:r3:CERT_METADATA": 2612
+        },
+        "1": {
+          "EPOCH_SECRET:e15:KEM_ARTIFACT:SECRET": 985,
+          "EPOCH_SECRET:e21:KEM_ARTIFACT:SECRET": 999,
+          "EPOCH_SECRET:e24:EPHEMERAL_SECRET:SECRET": 384,
+          "EPOCH_SECRET:e28:KEM_ARTIFACT:SECRET": 1051,
+          "EPOCH_SECRET:e30:EPHEMERAL_SECRET:SECRET": 455,
+          "EPOCH_SECRET:e32:EPHEMERAL_SECRET:SECRET": 433
+        },
+        "10": {
+          "EPOCH_SECRET:e12:EPHEMERAL_SECRET:SECRET": 410,
+          "EPOCH_SECRET:e13:EPHEMERAL_SECRET:SECRET": 448,
+          "EPOCH_SECRET:e17:KEM_ARTIFACT:SECRET": 1122,
+          "EPOCH_SECRET:e18:KEM_ARTIFACT:SECRET": 1043,
+          "EPOCH_SECRET:e19:EPHEMERAL_SECRET:SECRET": 422,
+          "ROTATION:r0:CERT_METADATA": 7446
+        },
+        "12": {
+          "EPOCH_SECRET:e27:EPHEMERAL_SECRET:SECRET": 430,
+          "EPOCH_SECRET:e3:EPHEMERAL_SECRET:SECRET": 423,
+          "EPOCH_SECRET:e8:KEM_ARTIFACT:SECRET": 969
+        },
+        "13": {
+          "EPOCH_SECRET:e10:KEM_ARTIFACT:SECRET": 1016,
+          "EPOCH_SECRET:e11:KEM_ARTIFACT:SECRET": 956,
+          "EPOCH_SECRET:e30:KEM_ARTIFACT:SECRET": 996,
+          "EPOCH_SECRET:e6:EPHEMERAL_SECRET:SECRET": 416,
+          "ROTATION:r2:CERT_METADATA": 7663
+        },
+        "14": {
+          "EPOCH_SECRET:e0:EPHEMERAL_SECRET:SECRET": 380,
+          "EPOCH_SECRET:e15:EPHEMERAL_SECRET:SECRET": 413,
+          "EPOCH_SECRET:e25:EPHEMERAL_SECRET:SECRET": 417,
+          "EPOCH_SECRET:e34:KEM_ARTIFACT:SECRET": 1008
+        },
+        "17": {
+          "EPOCH_SECRET:e20:KEM_ARTIFACT:SECRET": 1035,
+          "EPOCH_SECRET:e32:KEM_ARTIFACT:SECRET": 1074
+        },
+        "18": {
+          "EPOCH_SECRET:e13:KEM_ARTIFACT:SECRET": 1019,
+          "EPOCH_SECRET:e22:EPHEMERAL_SECRET:SECRET": 398,
+          "EPOCH_SECRET:e26:EPHEMERAL_SECRET:SECRET": 458,
+          "EPOCH_SECRET:e36:EPHEMERAL_SECRET:SECRET": 421
+        },
+        "19": {
+          "EPOCH_SECRET:e35:KEM_ARTIFACT:SECRET": 1016,
+          "EPOCH_SECRET:e4:EPHEMERAL_SECRET:SECRET": 377,
+          "EPOCH_SECRET:e9:KEM_ARTIFACT:SECRET": 1016
+        },
+        "2": {
+          "EPOCH_SECRET:e16:EPHEMERAL_SECRET:SECRET": 414,
+          "EPOCH_SECRET:e37:KEM_ARTIFACT:SECRET": 1069,
+          "EPOCH_SECRET:e38:EPHEMERAL_SECRET:SECRET": 413
+        },
+        "22": {
+          "EPOCH_SECRET:e2:EPHEMERAL_SECRET:SECRET": 432,
+          "EPOCH_SECRET:e38:KEM_ARTIFACT:SECRET": 1007,
+          "EPOCH_SECRET:e8:EPHEMERAL_SECRET:SECRET": 431
+        },
+        "24": {
+          "EPOCH_SECRET:e20:EPHEMERAL_SECRET:SECRET": 458,
+          "EPOCH_SECRET:e25:KEM_ARTIFACT:SECRET": 1079
+        },
+        "25": {
+          "EPOCH_SECRET:e2:KEM_ARTIFACT:SECRET": 1026,
+          "EPOCH_SECRET:e33:KEM_ARTIFACT:SECRET": 1093,
+          "EPOCH_SECRET:e36:KEM_ARTIFACT:SECRET": 1011
+        },
+        "26": {
+          "EPOCH_SECRET:e12:KEM_ARTIFACT:SECRET": 1030,
+          "EPOCH_SECRET:e22:KEM_ARTIFACT:SECRET": 1023,
+          "EPOCH_SECRET:e33:EPHEMERAL_SECRET:SECRET": 439,
+          "EPOCH_SECRET:e39:EPHEMERAL_SECRET:SECRET": 396,
+          "PAYLOAD": 506434
+        },
+        "28": {
+          "EPOCH_SECRET:e24:KEM_ARTIFACT:SECRET": 1135,
+          "EPOCH_SECRET:e6:KEM_ARTIFACT:SECRET": 1109,
+          "EPOCH_SECRET:e7:KEM_ARTIFACT:SECRET": 1036
+        },
+        "29": {
+          "EPOCH_SECRET:e0:KEM_ARTIFACT:SECRET": 1045,
+          "EPOCH_SECRET:e3:KEM_ARTIFACT:SECRET": 1086,
+          "ROTATION:r1:CERT_METADATA": 7554
+        },
+        "31": {
+          "EPOCH_SECRET:e27:KEM_ARTIFACT:SECRET": 1042,
+          "EPOCH_SECRET:e31:EPHEMERAL_SECRET:SECRET": 413,
+          "EPOCH_SECRET:e5:KEM_ARTIFACT:SECRET": 980
+        },
+        "4": {
+          "APPEND_LOG:SIGNATURE_LOG": 23254,
+          "EPOCH_SECRET:e9:EPHEMERAL_SECRET:SECRET": 413
+        },
+        "6": {
+          "EPOCH_SECRET:e19:KEM_ARTIFACT:SECRET": 993,
+          "EPOCH_SECRET:e28:EPHEMERAL_SECRET:SECRET": 431
+        },
+        "7": {
+          "EPOCH_SECRET:e23:KEM_ARTIFACT:SECRET": 997,
+          "EPOCH_SECRET:e29:EPHEMERAL_SECRET:SECRET": 404,
+          "EPOCH_SECRET:e31:KEM_ARTIFACT:SECRET": 1053,
+          "EPOCH_SECRET:e37:EPHEMERAL_SECRET:SECRET": 411,
+          "EPOCH_SECRET:e39:KEM_ARTIFACT:SECRET": 1127
+        }
+      },
+      "empty_handles": 4,
+      "family_count": 86,
+      "family_purity": 0.9366209128154276,
+      "family_to_handle": {
+        "APPEND_LOG:SIGNATURE_LOG": 4,
+        "EPOCH_SECRET:e0:EPHEMERAL_SECRET:SECRET": 14,
+        "EPOCH_SECRET:e0:KEM_ARTIFACT:SECRET": 29,
+        "EPOCH_SECRET:e10:EPHEMERAL_SECRET:SECRET": 21,
+        "EPOCH_SECRET:e10:KEM_ARTIFACT:SECRET": 13,
+        "EPOCH_SECRET:e11:EPHEMERAL_SECRET:SECRET": 21,
+        "EPOCH_SECRET:e11:KEM_ARTIFACT:SECRET": 13,
+        "EPOCH_SECRET:e12:EPHEMERAL_SECRET:SECRET": 10,
+        "EPOCH_SECRET:e12:KEM_ARTIFACT:SECRET": 26,
+        "EPOCH_SECRET:e13:EPHEMERAL_SECRET:SECRET": 10,
+        "EPOCH_SECRET:e13:KEM_ARTIFACT:SECRET": 18,
+        "EPOCH_SECRET:e14:EPHEMERAL_SECRET:SECRET": 8,
+        "EPOCH_SECRET:e14:KEM_ARTIFACT:SECRET": 3,
+        "EPOCH_SECRET:e15:EPHEMERAL_SECRET:SECRET": 14,
+        "EPOCH_SECRET:e15:KEM_ARTIFACT:SECRET": 1,
+        "EPOCH_SECRET:e16:EPHEMERAL_SECRET:SECRET": 2,
+        "EPOCH_SECRET:e16:KEM_ARTIFACT:SECRET": 0,
+        "EPOCH_SECRET:e17:EPHEMERAL_SECRET:SECRET": 9,
+        "EPOCH_SECRET:e17:KEM_ARTIFACT:SECRET": 10,
+        "EPOCH_SECRET:e18:EPHEMERAL_SECRET:SECRET": 30,
+        "EPOCH_SECRET:e18:KEM_ARTIFACT:SECRET": 10,
+        "EPOCH_SECRET:e19:EPHEMERAL_SECRET:SECRET": 10,
+        "EPOCH_SECRET:e19:KEM_ARTIFACT:SECRET": 6,
+        "EPOCH_SECRET:e1:EPHEMERAL_SECRET:SECRET": 15,
+        "EPOCH_SECRET:e1:KEM_ARTIFACT:SECRET": 0,
+        "EPOCH_SECRET:e20:EPHEMERAL_SECRET:SECRET": 24,
+        "EPOCH_SECRET:e20:KEM_ARTIFACT:SECRET": 17,
+        "EPOCH_SECRET:e21:EPHEMERAL_SECRET:SECRET": 5,
+        "EPOCH_SECRET:e21:KEM_ARTIFACT:SECRET": 1,
+        "EPOCH_SECRET:e22:EPHEMERAL_SECRET:SECRET": 18,
+        "EPOCH_SECRET:e22:KEM_ARTIFACT:SECRET": 26,
+        "EPOCH_SECRET:e23:EPHEMERAL_SECRET:SECRET": 5,
+        "EPOCH_SECRET:e23:KEM_ARTIFACT:SECRET": 7,
+        "EPOCH_SECRET:e24:EPHEMERAL_SECRET:SECRET": 1,
+        "EPOCH_SECRET:e24:KEM_ARTIFACT:SECRET": 28,
+        "EPOCH_SECRET:e25:EPHEMERAL_SECRET:SECRET": 14,
+        "EPOCH_SECRET:e25:KEM_ARTIFACT:SECRET": 24,
+        "EPOCH_SECRET:e26:EPHEMERAL_SECRET:SECRET": 18,
+        "EPOCH_SECRET:e26:KEM_ARTIFACT:SECRET": 0,
+        "EPOCH_SECRET:e27:EPHEMERAL_SECRET:SECRET": 12,
+        "EPOCH_SECRET:e27:KEM_ARTIFACT:SECRET": 31,
+        "EPOCH_SECRET:e28:EPHEMERAL_SECRET:SECRET": 6,
+        "EPOCH_SECRET:e28:KEM_ARTIFACT:SECRET": 1,
+        "EPOCH_SECRET:e29:EPHEMERAL_SECRET:SECRET": 7,
+        "EPOCH_SECRET:e29:KEM_ARTIFACT:SECRET": 30,
+        "EPOCH_SECRET:e2:EPHEMERAL_SECRET:SECRET": 22,
+        "EPOCH_SECRET:e2:KEM_ARTIFACT:SECRET": 25,
+        "EPOCH_SECRET:e30:EPHEMERAL_SECRET:SECRET": 1,
+        "EPOCH_SECRET:e30:KEM_ARTIFACT:SECRET": 13,
+        "EPOCH_SECRET:e31:EPHEMERAL_SECRET:SECRET": 31,
+        "EPOCH_SECRET:e31:KEM_ARTIFACT:SECRET": 7,
+        "EPOCH_SECRET:e32:EPHEMERAL_SECRET:SECRET": 1,
+        "EPOCH_SECRET:e32:KEM_ARTIFACT:SECRET": 17,
+        "EPOCH_SECRET:e33:EPHEMERAL_SECRET:SECRET": 26,
+        "EPOCH_SECRET:e33:KEM_ARTIFACT:SECRET": 25,
+        "EPOCH_SECRET:e34:EPHEMERAL_SECRET:SECRET": 9,
+        "EPOCH_SECRET:e34:KEM_ARTIFACT:SECRET": 14,
+        "EPOCH_SECRET:e35:EPHEMERAL_SECRET:SECRET": 8,
+        "EPOCH_SECRET:e35:KEM_ARTIFACT:SECRET": 19,
+        "EPOCH_SECRET:e36:EPHEMERAL_SECRET:SECRET": 18,
+        "EPOCH_SECRET:e36:KEM_ARTIFACT:SECRET": 25,
+        "EPOCH_SECRET:e37:EPHEMERAL_SECRET:SECRET": 7,
+        "EPOCH_SECRET:e37:KEM_ARTIFACT:SECRET": 2,
+        "EPOCH_SECRET:e38:EPHEMERAL_SECRET:SECRET": 2,
+        "EPOCH_SECRET:e38:KEM_ARTIFACT:SECRET": 22,
+        "EPOCH_SECRET:e39:EPHEMERAL_SECRET:SECRET": 26,
+        "EPOCH_SECRET:e39:KEM_ARTIFACT:SECRET": 7,
+        "EPOCH_SECRET:e3:EPHEMERAL_SECRET:SECRET": 12,
+        "EPOCH_SECRET:e3:KEM_ARTIFACT:SECRET": 29,
+        "EPOCH_SECRET:e4:EPHEMERAL_SECRET:SECRET": 19,
+        "EPOCH_SECRET:e4:KEM_ARTIFACT:SECRET": 0,
+        "EPOCH_SECRET:e5:EPHEMERAL_SECRET:SECRET": 16,
+        "EPOCH_SECRET:e5:KEM_ARTIFACT:SECRET": 31,
+        "EPOCH_SECRET:e6:EPHEMERAL_SECRET:SECRET": 13,
+        "EPOCH_SECRET:e6:KEM_ARTIFACT:SECRET": 28,
+        "EPOCH_SECRET:e7:EPHEMERAL_SECRET:SECRET": 15,
+        "EPOCH_SECRET:e7:KEM_ARTIFACT:SECRET": 28,
+        "EPOCH_SECRET:e8:EPHEMERAL_SECRET:SECRET": 22,
+        "EPOCH_SECRET:e8:KEM_ARTIFACT:SECRET": 12,
+        "EPOCH_SECRET:e9:EPHEMERAL_SECRET:SECRET": 4,
+        "EPOCH_SECRET:e9:KEM_ARTIFACT:SECRET": 19,
+        "PAYLOAD": 26,
+        "ROTATION:r0:CERT_METADATA": 10,
+        "ROTATION:r1:CERT_METADATA": 29,
+        "ROTATION:r2:CERT_METADATA": 13,
+        "ROTATION:r3:CERT_METADATA": 0
+      },
+      "handle_summary": {
+        "0": {
+          "blocks": 6753,
+          "dominant_family": "ROTATION:r3:CERT_METADATA",
+          "dominant_family_blocks": 2612,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 4141,
+          "families": 5
+        },
+        "1": {
+          "blocks": 4307,
+          "dominant_family": "EPOCH_SECRET:e28:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1051,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 3035,
+          "families": 6
+        },
+        "10": {
+          "blocks": 10891,
+          "dominant_family": "ROTATION:r0:CERT_METADATA",
+          "dominant_family_blocks": 7446,
+          "dominant_intent": "CERT_METADATA",
+          "dominant_intent_blocks": 7446,
+          "families": 6
+        },
+        "12": {
+          "blocks": 1822,
+          "dominant_family": "EPOCH_SECRET:e8:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 969,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 969,
+          "families": 3
+        },
+        "13": {
+          "blocks": 11047,
+          "dominant_family": "ROTATION:r2:CERT_METADATA",
+          "dominant_family_blocks": 7663,
+          "dominant_intent": "CERT_METADATA",
+          "dominant_intent_blocks": 7663,
+          "families": 5
+        },
+        "14": {
+          "blocks": 2218,
+          "dominant_family": "EPOCH_SECRET:e34:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1008,
+          "dominant_intent": "EPHEMERAL_SECRET",
+          "dominant_intent_blocks": 1210,
+          "families": 4
+        },
+        "15": {
+          "blocks": 836,
+          "dominant_family": "EPOCH_SECRET:e7:EPHEMERAL_SECRET:SECRET",
+          "dominant_family_blocks": 438,
+          "dominant_intent": "EPHEMERAL_SECRET",
+          "dominant_intent_blocks": 836,
+          "families": 2
+        },
+        "16": {
+          "blocks": 421,
+          "dominant_family": "EPOCH_SECRET:e5:EPHEMERAL_SECRET:SECRET",
+          "dominant_family_blocks": 421,
+          "dominant_intent": "EPHEMERAL_SECRET",
+          "dominant_intent_blocks": 421,
+          "families": 1
+        },
+        "17": {
+          "blocks": 2109,
+          "dominant_family": "EPOCH_SECRET:e32:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1074,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 2109,
+          "families": 2
+        },
+        "18": {
+          "blocks": 2296,
+          "dominant_family": "EPOCH_SECRET:e13:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1019,
+          "dominant_intent": "EPHEMERAL_SECRET",
+          "dominant_intent_blocks": 1277,
+          "families": 4
+        },
+        "19": {
+          "blocks": 2409,
+          "dominant_family": "EPOCH_SECRET:e9:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1016,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 2032,
+          "families": 3
+        },
+        "2": {
+          "blocks": 1896,
+          "dominant_family": "EPOCH_SECRET:e37:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1069,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 1069,
+          "families": 3
+        },
+        "21": {
+          "blocks": 835,
+          "dominant_family": "EPOCH_SECRET:e11:EPHEMERAL_SECRET:SECRET",
+          "dominant_family_blocks": 423,
+          "dominant_intent": "EPHEMERAL_SECRET",
+          "dominant_intent_blocks": 835,
+          "families": 2
+        },
+        "22": {
+          "blocks": 1870,
+          "dominant_family": "EPOCH_SECRET:e38:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1007,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 1007,
+          "families": 3
+        },
+        "24": {
+          "blocks": 1537,
+          "dominant_family": "EPOCH_SECRET:e25:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1079,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 1079,
+          "families": 2
+        },
+        "25": {
+          "blocks": 3130,
+          "dominant_family": "EPOCH_SECRET:e33:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1093,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 3130,
+          "families": 3
+        },
+        "26": {
+          "blocks": 509322,
+          "dominant_family": "PAYLOAD",
+          "dominant_family_blocks": 506434,
+          "dominant_intent": "PAYLOAD",
+          "dominant_intent_blocks": 506434,
+          "families": 5
+        },
+        "28": {
+          "blocks": 3280,
+          "dominant_family": "EPOCH_SECRET:e24:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1135,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 3280,
+          "families": 3
+        },
+        "29": {
+          "blocks": 9685,
+          "dominant_family": "ROTATION:r1:CERT_METADATA",
+          "dominant_family_blocks": 7554,
+          "dominant_intent": "CERT_METADATA",
+          "dominant_intent_blocks": 7554,
+          "families": 3
+        },
+        "3": {
+          "blocks": 1050,
+          "dominant_family": "EPOCH_SECRET:e14:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1050,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 1050,
+          "families": 1
+        },
+        "30": {
+          "blocks": 1423,
+          "dominant_family": "EPOCH_SECRET:e29:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1025,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 1025,
+          "families": 2
+        },
+        "31": {
+          "blocks": 2435,
+          "dominant_family": "EPOCH_SECRET:e27:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1042,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 2022,
+          "families": 3
+        },
+        "4": {
+          "blocks": 23667,
+          "dominant_family": "APPEND_LOG:SIGNATURE_LOG",
+          "dominant_family_blocks": 23254,
+          "dominant_intent": "SIGNATURE_LOG",
+          "dominant_intent_blocks": 23254,
+          "families": 2
+        },
+        "5": {
+          "blocks": 842,
+          "dominant_family": "EPOCH_SECRET:e21:EPHEMERAL_SECRET:SECRET",
+          "dominant_family_blocks": 425,
+          "dominant_intent": "EPHEMERAL_SECRET",
+          "dominant_intent_blocks": 842,
+          "families": 2
+        },
+        "6": {
+          "blocks": 1424,
+          "dominant_family": "EPOCH_SECRET:e19:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 993,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 993,
+          "families": 2
+        },
+        "7": {
+          "blocks": 3992,
+          "dominant_family": "EPOCH_SECRET:e39:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1127,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 3177,
+          "families": 5
+        },
+        "8": {
+          "blocks": 802,
+          "dominant_family": "EPOCH_SECRET:e35:EPHEMERAL_SECRET:SECRET",
+          "dominant_family_blocks": 426,
+          "dominant_intent": "EPHEMERAL_SECRET",
+          "dominant_intent_blocks": 802,
+          "families": 2
+        },
+        "9": {
+          "blocks": 837,
+          "dominant_family": "EPOCH_SECRET:e17:EPHEMERAL_SECRET:SECRET",
+          "dominant_family_blocks": 423,
+          "dominant_intent": "EPHEMERAL_SECRET",
+          "dominant_intent_blocks": 837,
+          "families": 2
+        }
+      },
+      "handles": 32,
+      "intent_purity": 0.961497938467159,
+      "max_families_per_handle": 6,
+      "min_epoch_fill_blocks": 1,
+      "occupied_handles": 28,
+      "total_blocks": 613136,
+      "trace": "artifacts/traces/pqc-mixed.jsonl",
+      "writes": 80000
+    },
+    {
+      "avg_families_per_occupied_handle": 1.7551020408163265,
+      "bin_width": 1,
+      "cert_epochs": 12,
+      "collision_handle_fraction": 0.5510204081632653,
+      "collision_handles": 27,
+      "collisions_top": {
+        "0": {
+          "EPOCH_SECRET:e1:KEM_ARTIFACT:SECRET": 1116,
+          "EPOCH_SECRET:e4:KEM_ARTIFACT:SECRET": 981
+        },
+        "1": {
+          "EPOCH_SECRET:e28:KEM_ARTIFACT:SECRET": 1051,
+          "EPOCH_SECRET:e32:EPHEMERAL_SECRET:SECRET": 433
+        },
+        "10": {
+          "EPOCH_SECRET:e12:EPHEMERAL_SECRET:SECRET": 410,
+          "EPOCH_SECRET:e17:KEM_ARTIFACT:SECRET": 1122,
+          "EPOCH_SECRET:e18:KEM_ARTIFACT:SECRET": 1043,
+          "EPOCH_SECRET:e19:EPHEMERAL_SECRET:SECRET": 422
+        },
+        "13": {
+          "EPOCH_SECRET:e11:KEM_ARTIFACT:SECRET": 956,
+          "EPOCH_SECRET:e30:KEM_ARTIFACT:SECRET": 996,
+          "ROTATION:r2:CERT_METADATA": 7663
+        },
+        "18": {
+          "EPOCH_SECRET:e22:EPHEMERAL_SECRET:SECRET": 398,
+          "EPOCH_SECRET:e26:EPHEMERAL_SECRET:SECRET": 458,
+          "EPOCH_SECRET:e36:EPHEMERAL_SECRET:SECRET": 421
+        },
+        "25": {
+          "EPOCH_SECRET:e2:KEM_ARTIFACT:SECRET": 1026,
+          "EPOCH_SECRET:e36:KEM_ARTIFACT:SECRET": 1011
+        },
+        "26": {
+          "EPOCH_SECRET:e12:KEM_ARTIFACT:SECRET": 1030,
+          "EPOCH_SECRET:e22:KEM_ARTIFACT:SECRET": 1023,
+          "EPOCH_SECRET:e33:EPHEMERAL_SECRET:SECRET": 439,
+          "EPOCH_SECRET:e39:EPHEMERAL_SECRET:SECRET": 396
+        },
+        "31": {
+          "EPOCH_SECRET:e31:EPHEMERAL_SECRET:SECRET": 413,
+          "EPOCH_SECRET:e5:KEM_ARTIFACT:SECRET": 980
+        },
+        "32": {
+          "EPOCH_SECRET:e16:KEM_ARTIFACT:SECRET": 1037,
+          "EPOCH_SECRET:e26:KEM_ARTIFACT:SECRET": 1007,
+          "ROTATION:r3:CERT_METADATA": 2612
+        },
+        "33": {
+          "EPOCH_SECRET:e15:KEM_ARTIFACT:SECRET": 985,
+          "EPOCH_SECRET:e21:KEM_ARTIFACT:SECRET": 999,
+          "EPOCH_SECRET:e24:EPHEMERAL_SECRET:SECRET": 384,
+          "EPOCH_SECRET:e30:EPHEMERAL_SECRET:SECRET": 455
+        },
+        "4": {
+          "APPEND_LOG:SIGNATURE_LOG": 23254,
+          "EPOCH_SECRET:e9:EPHEMERAL_SECRET:SECRET": 413
+        },
+        "42": {
+          "EPOCH_SECRET:e13:EPHEMERAL_SECRET:SECRET": 448,
+          "ROTATION:r0:CERT_METADATA": 7446
+        },
+        "45": {
+          "EPOCH_SECRET:e10:KEM_ARTIFACT:SECRET": 1016,
+          "EPOCH_SECRET:e6:EPHEMERAL_SECRET:SECRET": 416
+        },
+        "46": {
+          "EPOCH_SECRET:e15:EPHEMERAL_SECRET:SECRET": 413,
+          "EPOCH_SECRET:e34:KEM_ARTIFACT:SECRET": 1008
+        },
+        "51": {
+          "EPOCH_SECRET:e35:KEM_ARTIFACT:SECRET": 1016,
+          "EPOCH_SECRET:e9:KEM_ARTIFACT:SECRET": 1016
+        },
+        "56": {
+          "EPOCH_SECRET:e20:EPHEMERAL_SECRET:SECRET": 458,
+          "EPOCH_SECRET:e25:KEM_ARTIFACT:SECRET": 1079
+        },
+        "60": {
+          "EPOCH_SECRET:e24:KEM_ARTIFACT:SECRET": 1135,
+          "EPOCH_SECRET:e7:KEM_ARTIFACT:SECRET": 1036
+        },
+        "61": {
+          "EPOCH_SECRET:e3:KEM_ARTIFACT:SECRET": 1086,
+          "ROTATION:r1:CERT_METADATA": 7554
+        },
+        "62": {
+          "EPOCH_SECRET:e18:EPHEMERAL_SECRET:SECRET": 398,
+          "EPOCH_SECRET:e29:KEM_ARTIFACT:SECRET": 1025
+        },
+        "7": {
+          "EPOCH_SECRET:e23:KEM_ARTIFACT:SECRET": 997,
+          "EPOCH_SECRET:e31:KEM_ARTIFACT:SECRET": 1053,
+          "EPOCH_SECRET:e39:KEM_ARTIFACT:SECRET": 1127
+        }
+      },
+      "empty_handles": 15,
+      "family_count": 86,
+      "family_purity": 0.9612076276715117,
+      "family_to_handle": {
+        "APPEND_LOG:SIGNATURE_LOG": 4,
+        "EPOCH_SECRET:e0:EPHEMERAL_SECRET:SECRET": 14,
+        "EPOCH_SECRET:e0:KEM_ARTIFACT:SECRET": 29,
+        "EPOCH_SECRET:e10:EPHEMERAL_SECRET:SECRET": 53,
+        "EPOCH_SECRET:e10:KEM_ARTIFACT:SECRET": 45,
+        "EPOCH_SECRET:e11:EPHEMERAL_SECRET:SECRET": 21,
+        "EPOCH_SECRET:e11:KEM_ARTIFACT:SECRET": 13,
+        "EPOCH_SECRET:e12:EPHEMERAL_SECRET:SECRET": 10,
+        "EPOCH_SECRET:e12:KEM_ARTIFACT:SECRET": 26,
+        "EPOCH_SECRET:e13:EPHEMERAL_SECRET:SECRET": 42,
+        "EPOCH_SECRET:e13:KEM_ARTIFACT:SECRET": 50,
+        "EPOCH_SECRET:e14:EPHEMERAL_SECRET:SECRET": 8,
+        "EPOCH_SECRET:e14:KEM_ARTIFACT:SECRET": 3,
+        "EPOCH_SECRET:e15:EPHEMERAL_SECRET:SECRET": 46,
+        "EPOCH_SECRET:e15:KEM_ARTIFACT:SECRET": 33,
+        "EPOCH_SECRET:e16:EPHEMERAL_SECRET:SECRET": 2,
+        "EPOCH_SECRET:e16:KEM_ARTIFACT:SECRET": 32,
+        "EPOCH_SECRET:e17:EPHEMERAL_SECRET:SECRET": 41,
+        "EPOCH_SECRET:e17:KEM_ARTIFACT:SECRET": 10,
+        "EPOCH_SECRET:e18:EPHEMERAL_SECRET:SECRET": 62,
+        "EPOCH_SECRET:e18:KEM_ARTIFACT:SECRET": 10,
+        "EPOCH_SECRET:e19:EPHEMERAL_SECRET:SECRET": 10,
+        "EPOCH_SECRET:e19:KEM_ARTIFACT:SECRET": 6,
+        "EPOCH_SECRET:e1:EPHEMERAL_SECRET:SECRET": 47,
+        "EPOCH_SECRET:e1:KEM_ARTIFACT:SECRET": 0,
+        "EPOCH_SECRET:e20:EPHEMERAL_SECRET:SECRET": 56,
+        "EPOCH_SECRET:e20:KEM_ARTIFACT:SECRET": 17,
+        "EPOCH_SECRET:e21:EPHEMERAL_SECRET:SECRET": 5,
+        "EPOCH_SECRET:e21:KEM_ARTIFACT:SECRET": 33,
+        "EPOCH_SECRET:e22:EPHEMERAL_SECRET:SECRET": 18,
+        "EPOCH_SECRET:e22:KEM_ARTIFACT:SECRET": 26,
+        "EPOCH_SECRET:e23:EPHEMERAL_SECRET:SECRET": 37,
+        "EPOCH_SECRET:e23:KEM_ARTIFACT:SECRET": 7,
+        "EPOCH_SECRET:e24:EPHEMERAL_SECRET:SECRET": 33,
+        "EPOCH_SECRET:e24:KEM_ARTIFACT:SECRET": 60,
+        "EPOCH_SECRET:e25:EPHEMERAL_SECRET:SECRET": 14,
+        "EPOCH_SECRET:e25:KEM_ARTIFACT:SECRET": 56,
+        "EPOCH_SECRET:e26:EPHEMERAL_SECRET:SECRET": 18,
+        "EPOCH_SECRET:e26:KEM_ARTIFACT:SECRET": 32,
+        "EPOCH_SECRET:e27:EPHEMERAL_SECRET:SECRET": 12,
+        "EPOCH_SECRET:e27:KEM_ARTIFACT:SECRET": 63,
+        "EPOCH_SECRET:e28:EPHEMERAL_SECRET:SECRET": 38,
+        "EPOCH_SECRET:e28:KEM_ARTIFACT:SECRET": 1,
+        "EPOCH_SECRET:e29:EPHEMERAL_SECRET:SECRET": 39,
+        "EPOCH_SECRET:e29:KEM_ARTIFACT:SECRET": 62,
+        "EPOCH_SECRET:e2:EPHEMERAL_SECRET:SECRET": 54,
+        "EPOCH_SECRET:e2:KEM_ARTIFACT:SECRET": 25,
+        "EPOCH_SECRET:e30:EPHEMERAL_SECRET:SECRET": 33,
+        "EPOCH_SECRET:e30:KEM_ARTIFACT:SECRET": 13,
+        "EPOCH_SECRET:e31:EPHEMERAL_SECRET:SECRET": 31,
+        "EPOCH_SECRET:e31:KEM_ARTIFACT:SECRET": 7,
+        "EPOCH_SECRET:e32:EPHEMERAL_SECRET:SECRET": 1,
+        "EPOCH_SECRET:e32:KEM_ARTIFACT:SECRET": 49,
+        "EPOCH_SECRET:e33:EPHEMERAL_SECRET:SECRET": 26,
+        "EPOCH_SECRET:e33:KEM_ARTIFACT:SECRET": 57,
+        "EPOCH_SECRET:e34:EPHEMERAL_SECRET:SECRET": 41,
+        "EPOCH_SECRET:e34:KEM_ARTIFACT:SECRET": 46,
+        "EPOCH_SECRET:e35:EPHEMERAL_SECRET:SECRET": 8,
+        "EPOCH_SECRET:e35:KEM_ARTIFACT:SECRET": 51,
+        "EPOCH_SECRET:e36:EPHEMERAL_SECRET:SECRET": 18,
+        "EPOCH_SECRET:e36:KEM_ARTIFACT:SECRET": 25,
+        "EPOCH_SECRET:e37:EPHEMERAL_SECRET:SECRET": 39,
+        "EPOCH_SECRET:e37:KEM_ARTIFACT:SECRET": 34,
+        "EPOCH_SECRET:e38:EPHEMERAL_SECRET:SECRET": 2,
+        "EPOCH_SECRET:e38:KEM_ARTIFACT:SECRET": 22,
+        "EPOCH_SECRET:e39:EPHEMERAL_SECRET:SECRET": 26,
+        "EPOCH_SECRET:e39:KEM_ARTIFACT:SECRET": 7,
+        "EPOCH_SECRET:e3:EPHEMERAL_SECRET:SECRET": 12,
+        "EPOCH_SECRET:e3:KEM_ARTIFACT:SECRET": 61,
+        "EPOCH_SECRET:e4:EPHEMERAL_SECRET:SECRET": 19,
+        "EPOCH_SECRET:e4:KEM_ARTIFACT:SECRET": 0,
+        "EPOCH_SECRET:e5:EPHEMERAL_SECRET:SECRET": 16,
+        "EPOCH_SECRET:e5:KEM_ARTIFACT:SECRET": 31,
+        "EPOCH_SECRET:e6:EPHEMERAL_SECRET:SECRET": 45,
+        "EPOCH_SECRET:e6:KEM_ARTIFACT:SECRET": 28,
+        "EPOCH_SECRET:e7:EPHEMERAL_SECRET:SECRET": 15,
+        "EPOCH_SECRET:e7:KEM_ARTIFACT:SECRET": 60,
+        "EPOCH_SECRET:e8:EPHEMERAL_SECRET:SECRET": 54,
+        "EPOCH_SECRET:e8:KEM_ARTIFACT:SECRET": 44,
+        "EPOCH_SECRET:e9:EPHEMERAL_SECRET:SECRET": 4,
+        "EPOCH_SECRET:e9:KEM_ARTIFACT:SECRET": 51,
+        "PAYLOAD": 58,
+        "ROTATION:r0:CERT_METADATA": 42,
+        "ROTATION:r1:CERT_METADATA": 61,
+        "ROTATION:r2:CERT_METADATA": 13,
+        "ROTATION:r3:CERT_METADATA": 32
+      },
+      "handle_summary": {
+        "0": {
+          "blocks": 2097,
+          "dominant_family": "EPOCH_SECRET:e1:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1116,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 2097,
+          "families": 2
+        },
+        "1": {
+          "blocks": 1484,
+          "dominant_family": "EPOCH_SECRET:e28:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1051,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 1051,
+          "families": 2
+        },
+        "10": {
+          "blocks": 2997,
+          "dominant_family": "EPOCH_SECRET:e17:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1122,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 2165,
+          "families": 4
+        },
+        "12": {
+          "blocks": 853,
+          "dominant_family": "EPOCH_SECRET:e27:EPHEMERAL_SECRET:SECRET",
+          "dominant_family_blocks": 430,
+          "dominant_intent": "EPHEMERAL_SECRET",
+          "dominant_intent_blocks": 853,
+          "families": 2
+        },
+        "13": {
+          "blocks": 9615,
+          "dominant_family": "ROTATION:r2:CERT_METADATA",
+          "dominant_family_blocks": 7663,
+          "dominant_intent": "CERT_METADATA",
+          "dominant_intent_blocks": 7663,
+          "families": 3
+        },
+        "14": {
+          "blocks": 797,
+          "dominant_family": "EPOCH_SECRET:e25:EPHEMERAL_SECRET:SECRET",
+          "dominant_family_blocks": 417,
+          "dominant_intent": "EPHEMERAL_SECRET",
+          "dominant_intent_blocks": 797,
+          "families": 2
+        },
+        "15": {
+          "blocks": 438,
+          "dominant_family": "EPOCH_SECRET:e7:EPHEMERAL_SECRET:SECRET",
+          "dominant_family_blocks": 438,
+          "dominant_intent": "EPHEMERAL_SECRET",
+          "dominant_intent_blocks": 438,
+          "families": 1
+        },
+        "16": {
+          "blocks": 421,
+          "dominant_family": "EPOCH_SECRET:e5:EPHEMERAL_SECRET:SECRET",
+          "dominant_family_blocks": 421,
+          "dominant_intent": "EPHEMERAL_SECRET",
+          "dominant_intent_blocks": 421,
+          "families": 1
+        },
+        "17": {
+          "blocks": 1035,
+          "dominant_family": "EPOCH_SECRET:e20:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1035,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 1035,
+          "families": 1
+        },
+        "18": {
+          "blocks": 1277,
+          "dominant_family": "EPOCH_SECRET:e26:EPHEMERAL_SECRET:SECRET",
+          "dominant_family_blocks": 458,
+          "dominant_intent": "EPHEMERAL_SECRET",
+          "dominant_intent_blocks": 1277,
+          "families": 3
+        },
+        "19": {
+          "blocks": 377,
+          "dominant_family": "EPOCH_SECRET:e4:EPHEMERAL_SECRET:SECRET",
+          "dominant_family_blocks": 377,
+          "dominant_intent": "EPHEMERAL_SECRET",
+          "dominant_intent_blocks": 377,
+          "families": 1
+        },
+        "2": {
+          "blocks": 827,
+          "dominant_family": "EPOCH_SECRET:e16:EPHEMERAL_SECRET:SECRET",
+          "dominant_family_blocks": 414,
+          "dominant_intent": "EPHEMERAL_SECRET",
+          "dominant_intent_blocks": 827,
+          "families": 2
+        },
+        "21": {
+          "blocks": 423,
+          "dominant_family": "EPOCH_SECRET:e11:EPHEMERAL_SECRET:SECRET",
+          "dominant_family_blocks": 423,
+          "dominant_intent": "EPHEMERAL_SECRET",
+          "dominant_intent_blocks": 423,
+          "families": 1
+        },
+        "22": {
+          "blocks": 1007,
+          "dominant_family": "EPOCH_SECRET:e38:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1007,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 1007,
+          "families": 1
+        },
+        "25": {
+          "blocks": 2037,
+          "dominant_family": "EPOCH_SECRET:e2:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1026,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 2037,
+          "families": 2
+        },
+        "26": {
+          "blocks": 2888,
+          "dominant_family": "EPOCH_SECRET:e12:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1030,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 2053,
+          "families": 4
+        },
+        "28": {
+          "blocks": 1109,
+          "dominant_family": "EPOCH_SECRET:e6:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1109,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 1109,
+          "families": 1
+        },
+        "29": {
+          "blocks": 1045,
+          "dominant_family": "EPOCH_SECRET:e0:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1045,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 1045,
+          "families": 1
+        },
+        "3": {
+          "blocks": 1050,
+          "dominant_family": "EPOCH_SECRET:e14:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1050,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 1050,
+          "families": 1
+        },
+        "31": {
+          "blocks": 1393,
+          "dominant_family": "EPOCH_SECRET:e5:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 980,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 980,
+          "families": 2
+        },
+        "32": {
+          "blocks": 4656,
+          "dominant_family": "ROTATION:r3:CERT_METADATA",
+          "dominant_family_blocks": 2612,
+          "dominant_intent": "CERT_METADATA",
+          "dominant_intent_blocks": 2612,
+          "families": 3
+        },
+        "33": {
+          "blocks": 2823,
+          "dominant_family": "EPOCH_SECRET:e21:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 999,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 1984,
+          "families": 4
+        },
+        "34": {
+          "blocks": 1069,
+          "dominant_family": "EPOCH_SECRET:e37:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1069,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 1069,
+          "families": 1
+        },
+        "37": {
+          "blocks": 417,
+          "dominant_family": "EPOCH_SECRET:e23:EPHEMERAL_SECRET:SECRET",
+          "dominant_family_blocks": 417,
+          "dominant_intent": "EPHEMERAL_SECRET",
+          "dominant_intent_blocks": 417,
+          "families": 1
+        },
+        "38": {
+          "blocks": 431,
+          "dominant_family": "EPOCH_SECRET:e28:EPHEMERAL_SECRET:SECRET",
+          "dominant_family_blocks": 431,
+          "dominant_intent": "EPHEMERAL_SECRET",
+          "dominant_intent_blocks": 431,
+          "families": 1
+        },
+        "39": {
+          "blocks": 815,
+          "dominant_family": "EPOCH_SECRET:e37:EPHEMERAL_SECRET:SECRET",
+          "dominant_family_blocks": 411,
+          "dominant_intent": "EPHEMERAL_SECRET",
+          "dominant_intent_blocks": 815,
+          "families": 2
+        },
+        "4": {
+          "blocks": 23667,
+          "dominant_family": "APPEND_LOG:SIGNATURE_LOG",
+          "dominant_family_blocks": 23254,
+          "dominant_intent": "SIGNATURE_LOG",
+          "dominant_intent_blocks": 23254,
+          "families": 2
+        },
+        "41": {
+          "blocks": 837,
+          "dominant_family": "EPOCH_SECRET:e17:EPHEMERAL_SECRET:SECRET",
+          "dominant_family_blocks": 423,
+          "dominant_intent": "EPHEMERAL_SECRET",
+          "dominant_intent_blocks": 837,
+          "families": 2
+        },
+        "42": {
+          "blocks": 7894,
+          "dominant_family": "ROTATION:r0:CERT_METADATA",
+          "dominant_family_blocks": 7446,
+          "dominant_intent": "CERT_METADATA",
+          "dominant_intent_blocks": 7446,
+          "families": 2
+        },
+        "44": {
+          "blocks": 969,
+          "dominant_family": "EPOCH_SECRET:e8:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 969,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 969,
+          "families": 1
+        },
+        "45": {
+          "blocks": 1432,
+          "dominant_family": "EPOCH_SECRET:e10:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1016,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 1016,
+          "families": 2
+        },
+        "46": {
+          "blocks": 1421,
+          "dominant_family": "EPOCH_SECRET:e34:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1008,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 1008,
+          "families": 2
+        },
+        "47": {
+          "blocks": 398,
+          "dominant_family": "EPOCH_SECRET:e1:EPHEMERAL_SECRET:SECRET",
+          "dominant_family_blocks": 398,
+          "dominant_intent": "EPHEMERAL_SECRET",
+          "dominant_intent_blocks": 398,
+          "families": 1
+        },
+        "49": {
+          "blocks": 1074,
+          "dominant_family": "EPOCH_SECRET:e32:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1074,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 1074,
+          "families": 1
+        },
+        "5": {
+          "blocks": 425,
+          "dominant_family": "EPOCH_SECRET:e21:EPHEMERAL_SECRET:SECRET",
+          "dominant_family_blocks": 425,
+          "dominant_intent": "EPHEMERAL_SECRET",
+          "dominant_intent_blocks": 425,
+          "families": 1
+        },
+        "50": {
+          "blocks": 1019,
+          "dominant_family": "EPOCH_SECRET:e13:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1019,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 1019,
+          "families": 1
+        },
+        "51": {
+          "blocks": 2032,
+          "dominant_family": "EPOCH_SECRET:e9:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1016,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 2032,
+          "families": 2
+        },
+        "53": {
+          "blocks": 412,
+          "dominant_family": "EPOCH_SECRET:e10:EPHEMERAL_SECRET:SECRET",
+          "dominant_family_blocks": 412,
+          "dominant_intent": "EPHEMERAL_SECRET",
+          "dominant_intent_blocks": 412,
+          "families": 1
+        },
+        "54": {
+          "blocks": 863,
+          "dominant_family": "EPOCH_SECRET:e2:EPHEMERAL_SECRET:SECRET",
+          "dominant_family_blocks": 432,
+          "dominant_intent": "EPHEMERAL_SECRET",
+          "dominant_intent_blocks": 863,
+          "families": 2
+        },
+        "56": {
+          "blocks": 1537,
+          "dominant_family": "EPOCH_SECRET:e25:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1079,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 1079,
+          "families": 2
+        },
+        "57": {
+          "blocks": 1093,
+          "dominant_family": "EPOCH_SECRET:e33:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1093,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 1093,
+          "families": 1
+        },
+        "58": {
+          "blocks": 506434,
+          "dominant_family": "PAYLOAD",
+          "dominant_family_blocks": 506434,
+          "dominant_intent": "PAYLOAD",
+          "dominant_intent_blocks": 506434,
+          "families": 1
+        },
+        "6": {
+          "blocks": 993,
+          "dominant_family": "EPOCH_SECRET:e19:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 993,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 993,
+          "families": 1
+        },
+        "60": {
+          "blocks": 2171,
+          "dominant_family": "EPOCH_SECRET:e24:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1135,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 2171,
+          "families": 2
+        },
+        "61": {
+          "blocks": 8640,
+          "dominant_family": "ROTATION:r1:CERT_METADATA",
+          "dominant_family_blocks": 7554,
+          "dominant_intent": "CERT_METADATA",
+          "dominant_intent_blocks": 7554,
+          "families": 2
+        },
+        "62": {
+          "blocks": 1423,
+          "dominant_family": "EPOCH_SECRET:e29:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1025,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 1025,
+          "families": 2
+        },
+        "63": {
+          "blocks": 1042,
+          "dominant_family": "EPOCH_SECRET:e27:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1042,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 1042,
+          "families": 1
+        },
+        "7": {
+          "blocks": 3177,
+          "dominant_family": "EPOCH_SECRET:e39:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1127,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 3177,
+          "families": 3
+        },
+        "8": {
+          "blocks": 802,
+          "dominant_family": "EPOCH_SECRET:e35:EPHEMERAL_SECRET:SECRET",
+          "dominant_family_blocks": 426,
+          "dominant_intent": "EPHEMERAL_SECRET",
+          "dominant_intent_blocks": 802,
+          "families": 2
+        }
+      },
+      "handles": 64,
+      "intent_purity": 0.9820920644033297,
+      "max_families_per_handle": 4,
+      "min_epoch_fill_blocks": 1,
+      "occupied_handles": 49,
+      "total_blocks": 613136,
+      "trace": "artifacts/traces/pqc-mixed.jsonl",
+      "writes": 80000
+    },
+    {
+      "avg_families_per_occupied_handle": 1.303030303030303,
+      "bin_width": 1,
+      "cert_epochs": 12,
+      "collision_handle_fraction": 0.25757575757575757,
+      "collision_handles": 17,
+      "collisions_top": {
+        "10": {
+          "EPOCH_SECRET:e12:EPHEMERAL_SECRET:SECRET": 410,
+          "EPOCH_SECRET:e17:KEM_ARTIFACT:SECRET": 1122
+        },
+        "105": {
+          "EPOCH_SECRET:e17:EPHEMERAL_SECRET:SECRET": 423,
+          "EPOCH_SECRET:e34:EPHEMERAL_SECRET:SECRET": 414
+        },
+        "118": {
+          "EPOCH_SECRET:e2:EPHEMERAL_SECRET:SECRET": 432,
+          "EPOCH_SECRET:e8:EPHEMERAL_SECRET:SECRET": 431
+        },
+        "125": {
+          "EPOCH_SECRET:e3:KEM_ARTIFACT:SECRET": 1086,
+          "ROTATION:r1:CERT_METADATA": 7554
+        },
+        "26": {
+          "EPOCH_SECRET:e22:KEM_ARTIFACT:SECRET": 1023,
+          "EPOCH_SECRET:e33:EPHEMERAL_SECRET:SECRET": 439
+        },
+        "32": {
+          "EPOCH_SECRET:e16:KEM_ARTIFACT:SECRET": 1037,
+          "EPOCH_SECRET:e26:KEM_ARTIFACT:SECRET": 1007,
+          "ROTATION:r3:CERT_METADATA": 2612
+        },
+        "42": {
+          "EPOCH_SECRET:e13:EPHEMERAL_SECRET:SECRET": 448,
+          "ROTATION:r0:CERT_METADATA": 7446
+        },
+        "68": {
+          "APPEND_LOG:SIGNATURE_LOG": 23254,
+          "EPOCH_SECRET:e9:EPHEMERAL_SECRET:SECRET": 413
+        },
+        "71": {
+          "EPOCH_SECRET:e23:KEM_ARTIFACT:SECRET": 997,
+          "EPOCH_SECRET:e39:KEM_ARTIFACT:SECRET": 1127
+        },
+        "72": {
+          "EPOCH_SECRET:e14:EPHEMERAL_SECRET:SECRET": 376,
+          "EPOCH_SECRET:e35:EPHEMERAL_SECRET:SECRET": 426
+        },
+        "74": {
+          "EPOCH_SECRET:e18:KEM_ARTIFACT:SECRET": 1043,
+          "EPOCH_SECRET:e19:EPHEMERAL_SECRET:SECRET": 422
+        },
+        "77": {
+          "EPOCH_SECRET:e11:KEM_ARTIFACT:SECRET": 956,
+          "EPOCH_SECRET:e30:KEM_ARTIFACT:SECRET": 996,
+          "ROTATION:r2:CERT_METADATA": 7663
+        },
+        "78": {
+          "EPOCH_SECRET:e0:EPHEMERAL_SECRET:SECRET": 380,
+          "EPOCH_SECRET:e25:EPHEMERAL_SECRET:SECRET": 417
+        },
+        "82": {
+          "EPOCH_SECRET:e22:EPHEMERAL_SECRET:SECRET": 398,
+          "EPOCH_SECRET:e36:EPHEMERAL_SECRET:SECRET": 421
+        },
+        "90": {
+          "EPOCH_SECRET:e12:KEM_ARTIFACT:SECRET": 1030,
+          "EPOCH_SECRET:e39:EPHEMERAL_SECRET:SECRET": 396
+        },
+        "95": {
+          "EPOCH_SECRET:e31:EPHEMERAL_SECRET:SECRET": 413,
+          "EPOCH_SECRET:e5:KEM_ARTIFACT:SECRET": 980
+        },
+        "97": {
+          "EPOCH_SECRET:e15:KEM_ARTIFACT:SECRET": 985,
+          "EPOCH_SECRET:e21:KEM_ARTIFACT:SECRET": 999,
+          "EPOCH_SECRET:e24:EPHEMERAL_SECRET:SECRET": 384
+        }
+      },
+      "empty_handles": 62,
+      "family_count": 86,
+      "family_purity": 0.9797956733905692,
+      "family_to_handle": {
+        "APPEND_LOG:SIGNATURE_LOG": 68,
+        "EPOCH_SECRET:e0:EPHEMERAL_SECRET:SECRET": 78,
+        "EPOCH_SECRET:e0:KEM_ARTIFACT:SECRET": 93,
+        "EPOCH_SECRET:e10:EPHEMERAL_SECRET:SECRET": 117,
+        "EPOCH_SECRET:e10:KEM_ARTIFACT:SECRET": 45,
+        "EPOCH_SECRET:e11:EPHEMERAL_SECRET:SECRET": 21,
+        "EPOCH_SECRET:e11:KEM_ARTIFACT:SECRET": 77,
+        "EPOCH_SECRET:e12:EPHEMERAL_SECRET:SECRET": 10,
+        "EPOCH_SECRET:e12:KEM_ARTIFACT:SECRET": 90,
+        "EPOCH_SECRET:e13:EPHEMERAL_SECRET:SECRET": 42,
+        "EPOCH_SECRET:e13:KEM_ARTIFACT:SECRET": 114,
+        "EPOCH_SECRET:e14:EPHEMERAL_SECRET:SECRET": 72,
+        "EPOCH_SECRET:e14:KEM_ARTIFACT:SECRET": 67,
+        "EPOCH_SECRET:e15:EPHEMERAL_SECRET:SECRET": 110,
+        "EPOCH_SECRET:e15:KEM_ARTIFACT:SECRET": 97,
+        "EPOCH_SECRET:e16:EPHEMERAL_SECRET:SECRET": 2,
+        "EPOCH_SECRET:e16:KEM_ARTIFACT:SECRET": 32,
+        "EPOCH_SECRET:e17:EPHEMERAL_SECRET:SECRET": 105,
+        "EPOCH_SECRET:e17:KEM_ARTIFACT:SECRET": 10,
+        "EPOCH_SECRET:e18:EPHEMERAL_SECRET:SECRET": 126,
+        "EPOCH_SECRET:e18:KEM_ARTIFACT:SECRET": 74,
+        "EPOCH_SECRET:e19:EPHEMERAL_SECRET:SECRET": 74,
+        "EPOCH_SECRET:e19:KEM_ARTIFACT:SECRET": 70,
+        "EPOCH_SECRET:e1:EPHEMERAL_SECRET:SECRET": 47,
+        "EPOCH_SECRET:e1:KEM_ARTIFACT:SECRET": 64,
+        "EPOCH_SECRET:e20:EPHEMERAL_SECRET:SECRET": 56,
+        "EPOCH_SECRET:e20:KEM_ARTIFACT:SECRET": 17,
+        "EPOCH_SECRET:e21:EPHEMERAL_SECRET:SECRET": 69,
+        "EPOCH_SECRET:e21:KEM_ARTIFACT:SECRET": 97,
+        "EPOCH_SECRET:e22:EPHEMERAL_SECRET:SECRET": 82,
+        "EPOCH_SECRET:e22:KEM_ARTIFACT:SECRET": 26,
+        "EPOCH_SECRET:e23:EPHEMERAL_SECRET:SECRET": 37,
+        "EPOCH_SECRET:e23:KEM_ARTIFACT:SECRET": 71,
+        "EPOCH_SECRET:e24:EPHEMERAL_SECRET:SECRET": 97,
+        "EPOCH_SECRET:e24:KEM_ARTIFACT:SECRET": 124,
+        "EPOCH_SECRET:e25:EPHEMERAL_SECRET:SECRET": 78,
+        "EPOCH_SECRET:e25:KEM_ARTIFACT:SECRET": 120,
+        "EPOCH_SECRET:e26:EPHEMERAL_SECRET:SECRET": 18,
+        "EPOCH_SECRET:e26:KEM_ARTIFACT:SECRET": 32,
+        "EPOCH_SECRET:e27:EPHEMERAL_SECRET:SECRET": 76,
+        "EPOCH_SECRET:e27:KEM_ARTIFACT:SECRET": 127,
+        "EPOCH_SECRET:e28:EPHEMERAL_SECRET:SECRET": 102,
+        "EPOCH_SECRET:e28:KEM_ARTIFACT:SECRET": 1,
+        "EPOCH_SECRET:e29:EPHEMERAL_SECRET:SECRET": 39,
+        "EPOCH_SECRET:e29:KEM_ARTIFACT:SECRET": 62,
+        "EPOCH_SECRET:e2:EPHEMERAL_SECRET:SECRET": 118,
+        "EPOCH_SECRET:e2:KEM_ARTIFACT:SECRET": 89,
+        "EPOCH_SECRET:e30:EPHEMERAL_SECRET:SECRET": 33,
+        "EPOCH_SECRET:e30:KEM_ARTIFACT:SECRET": 77,
+        "EPOCH_SECRET:e31:EPHEMERAL_SECRET:SECRET": 95,
+        "EPOCH_SECRET:e31:KEM_ARTIFACT:SECRET": 7,
+        "EPOCH_SECRET:e32:EPHEMERAL_SECRET:SECRET": 65,
+        "EPOCH_SECRET:e32:KEM_ARTIFACT:SECRET": 113,
+        "EPOCH_SECRET:e33:EPHEMERAL_SECRET:SECRET": 26,
+        "EPOCH_SECRET:e33:KEM_ARTIFACT:SECRET": 121,
+        "EPOCH_SECRET:e34:EPHEMERAL_SECRET:SECRET": 105,
+        "EPOCH_SECRET:e34:KEM_ARTIFACT:SECRET": 46,
+        "EPOCH_SECRET:e35:EPHEMERAL_SECRET:SECRET": 72,
+        "EPOCH_SECRET:e35:KEM_ARTIFACT:SECRET": 51,
+        "EPOCH_SECRET:e36:EPHEMERAL_SECRET:SECRET": 82,
+        "EPOCH_SECRET:e36:KEM_ARTIFACT:SECRET": 25,
+        "EPOCH_SECRET:e37:EPHEMERAL_SECRET:SECRET": 103,
+        "EPOCH_SECRET:e37:KEM_ARTIFACT:SECRET": 34,
+        "EPOCH_SECRET:e38:EPHEMERAL_SECRET:SECRET": 66,
+        "EPOCH_SECRET:e38:KEM_ARTIFACT:SECRET": 86,
+        "EPOCH_SECRET:e39:EPHEMERAL_SECRET:SECRET": 90,
+        "EPOCH_SECRET:e39:KEM_ARTIFACT:SECRET": 71,
+        "EPOCH_SECRET:e3:EPHEMERAL_SECRET:SECRET": 12,
+        "EPOCH_SECRET:e3:KEM_ARTIFACT:SECRET": 125,
+        "EPOCH_SECRET:e4:EPHEMERAL_SECRET:SECRET": 83,
+        "EPOCH_SECRET:e4:KEM_ARTIFACT:SECRET": 0,
+        "EPOCH_SECRET:e5:EPHEMERAL_SECRET:SECRET": 80,
+        "EPOCH_SECRET:e5:KEM_ARTIFACT:SECRET": 95,
+        "EPOCH_SECRET:e6:EPHEMERAL_SECRET:SECRET": 109,
+        "EPOCH_SECRET:e6:KEM_ARTIFACT:SECRET": 92,
+        "EPOCH_SECRET:e7:EPHEMERAL_SECRET:SECRET": 79,
+        "EPOCH_SECRET:e7:KEM_ARTIFACT:SECRET": 60,
+        "EPOCH_SECRET:e8:EPHEMERAL_SECRET:SECRET": 118,
+        "EPOCH_SECRET:e8:KEM_ARTIFACT:SECRET": 44,
+        "EPOCH_SECRET:e9:EPHEMERAL_SECRET:SECRET": 68,
+        "EPOCH_SECRET:e9:KEM_ARTIFACT:SECRET": 115,
+        "PAYLOAD": 122,
+        "ROTATION:r0:CERT_METADATA": 42,
+        "ROTATION:r1:CERT_METADATA": 125,
+        "ROTATION:r2:CERT_METADATA": 77,
+        "ROTATION:r3:CERT_METADATA": 32
+      },
+      "handle_summary": {
+        "0": {
+          "blocks": 981,
+          "dominant_family": "EPOCH_SECRET:e4:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 981,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 981,
+          "families": 1
+        },
+        "1": {
+          "blocks": 1051,
+          "dominant_family": "EPOCH_SECRET:e28:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1051,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 1051,
+          "families": 1
+        },
+        "10": {
+          "blocks": 1532,
+          "dominant_family": "EPOCH_SECRET:e17:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1122,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 1122,
+          "families": 2
+        },
+        "102": {
+          "blocks": 431,
+          "dominant_family": "EPOCH_SECRET:e28:EPHEMERAL_SECRET:SECRET",
+          "dominant_family_blocks": 431,
+          "dominant_intent": "EPHEMERAL_SECRET",
+          "dominant_intent_blocks": 431,
+          "families": 1
+        },
+        "103": {
+          "blocks": 411,
+          "dominant_family": "EPOCH_SECRET:e37:EPHEMERAL_SECRET:SECRET",
+          "dominant_family_blocks": 411,
+          "dominant_intent": "EPHEMERAL_SECRET",
+          "dominant_intent_blocks": 411,
+          "families": 1
+        },
+        "105": {
+          "blocks": 837,
+          "dominant_family": "EPOCH_SECRET:e17:EPHEMERAL_SECRET:SECRET",
+          "dominant_family_blocks": 423,
+          "dominant_intent": "EPHEMERAL_SECRET",
+          "dominant_intent_blocks": 837,
+          "families": 2
+        },
+        "109": {
+          "blocks": 416,
+          "dominant_family": "EPOCH_SECRET:e6:EPHEMERAL_SECRET:SECRET",
+          "dominant_family_blocks": 416,
+          "dominant_intent": "EPHEMERAL_SECRET",
+          "dominant_intent_blocks": 416,
+          "families": 1
+        },
+        "110": {
+          "blocks": 413,
+          "dominant_family": "EPOCH_SECRET:e15:EPHEMERAL_SECRET:SECRET",
+          "dominant_family_blocks": 413,
+          "dominant_intent": "EPHEMERAL_SECRET",
+          "dominant_intent_blocks": 413,
+          "families": 1
+        },
+        "113": {
+          "blocks": 1074,
+          "dominant_family": "EPOCH_SECRET:e32:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1074,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 1074,
+          "families": 1
+        },
+        "114": {
+          "blocks": 1019,
+          "dominant_family": "EPOCH_SECRET:e13:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1019,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 1019,
+          "families": 1
+        },
+        "115": {
+          "blocks": 1016,
+          "dominant_family": "EPOCH_SECRET:e9:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1016,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 1016,
+          "families": 1
+        },
+        "117": {
+          "blocks": 412,
+          "dominant_family": "EPOCH_SECRET:e10:EPHEMERAL_SECRET:SECRET",
+          "dominant_family_blocks": 412,
+          "dominant_intent": "EPHEMERAL_SECRET",
+          "dominant_intent_blocks": 412,
+          "families": 1
+        },
+        "118": {
+          "blocks": 863,
+          "dominant_family": "EPOCH_SECRET:e2:EPHEMERAL_SECRET:SECRET",
+          "dominant_family_blocks": 432,
+          "dominant_intent": "EPHEMERAL_SECRET",
+          "dominant_intent_blocks": 863,
+          "families": 2
+        },
+        "12": {
+          "blocks": 423,
+          "dominant_family": "EPOCH_SECRET:e3:EPHEMERAL_SECRET:SECRET",
+          "dominant_family_blocks": 423,
+          "dominant_intent": "EPHEMERAL_SECRET",
+          "dominant_intent_blocks": 423,
+          "families": 1
+        },
+        "120": {
+          "blocks": 1079,
+          "dominant_family": "EPOCH_SECRET:e25:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1079,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 1079,
+          "families": 1
+        },
+        "121": {
+          "blocks": 1093,
+          "dominant_family": "EPOCH_SECRET:e33:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1093,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 1093,
+          "families": 1
+        },
+        "122": {
+          "blocks": 506434,
+          "dominant_family": "PAYLOAD",
+          "dominant_family_blocks": 506434,
+          "dominant_intent": "PAYLOAD",
+          "dominant_intent_blocks": 506434,
+          "families": 1
+        },
+        "124": {
+          "blocks": 1135,
+          "dominant_family": "EPOCH_SECRET:e24:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1135,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 1135,
+          "families": 1
+        },
+        "125": {
+          "blocks": 8640,
+          "dominant_family": "ROTATION:r1:CERT_METADATA",
+          "dominant_family_blocks": 7554,
+          "dominant_intent": "CERT_METADATA",
+          "dominant_intent_blocks": 7554,
+          "families": 2
+        },
+        "126": {
+          "blocks": 398,
+          "dominant_family": "EPOCH_SECRET:e18:EPHEMERAL_SECRET:SECRET",
+          "dominant_family_blocks": 398,
+          "dominant_intent": "EPHEMERAL_SECRET",
+          "dominant_intent_blocks": 398,
+          "families": 1
+        },
+        "127": {
+          "blocks": 1042,
+          "dominant_family": "EPOCH_SECRET:e27:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1042,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 1042,
+          "families": 1
+        },
+        "17": {
+          "blocks": 1035,
+          "dominant_family": "EPOCH_SECRET:e20:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1035,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 1035,
+          "families": 1
+        },
+        "18": {
+          "blocks": 458,
+          "dominant_family": "EPOCH_SECRET:e26:EPHEMERAL_SECRET:SECRET",
+          "dominant_family_blocks": 458,
+          "dominant_intent": "EPHEMERAL_SECRET",
+          "dominant_intent_blocks": 458,
+          "families": 1
+        },
+        "2": {
+          "blocks": 414,
+          "dominant_family": "EPOCH_SECRET:e16:EPHEMERAL_SECRET:SECRET",
+          "dominant_family_blocks": 414,
+          "dominant_intent": "EPHEMERAL_SECRET",
+          "dominant_intent_blocks": 414,
+          "families": 1
+        },
+        "21": {
+          "blocks": 423,
+          "dominant_family": "EPOCH_SECRET:e11:EPHEMERAL_SECRET:SECRET",
+          "dominant_family_blocks": 423,
+          "dominant_intent": "EPHEMERAL_SECRET",
+          "dominant_intent_blocks": 423,
+          "families": 1
+        },
+        "25": {
+          "blocks": 1011,
+          "dominant_family": "EPOCH_SECRET:e36:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1011,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 1011,
+          "families": 1
+        },
+        "26": {
+          "blocks": 1462,
+          "dominant_family": "EPOCH_SECRET:e22:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1023,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 1023,
+          "families": 2
+        },
+        "32": {
+          "blocks": 4656,
+          "dominant_family": "ROTATION:r3:CERT_METADATA",
+          "dominant_family_blocks": 2612,
+          "dominant_intent": "CERT_METADATA",
+          "dominant_intent_blocks": 2612,
+          "families": 3
+        },
+        "33": {
+          "blocks": 455,
+          "dominant_family": "EPOCH_SECRET:e30:EPHEMERAL_SECRET:SECRET",
+          "dominant_family_blocks": 455,
+          "dominant_intent": "EPHEMERAL_SECRET",
+          "dominant_intent_blocks": 455,
+          "families": 1
+        },
+        "34": {
+          "blocks": 1069,
+          "dominant_family": "EPOCH_SECRET:e37:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1069,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 1069,
+          "families": 1
+        },
+        "37": {
+          "blocks": 417,
+          "dominant_family": "EPOCH_SECRET:e23:EPHEMERAL_SECRET:SECRET",
+          "dominant_family_blocks": 417,
+          "dominant_intent": "EPHEMERAL_SECRET",
+          "dominant_intent_blocks": 417,
+          "families": 1
+        },
+        "39": {
+          "blocks": 404,
+          "dominant_family": "EPOCH_SECRET:e29:EPHEMERAL_SECRET:SECRET",
+          "dominant_family_blocks": 404,
+          "dominant_intent": "EPHEMERAL_SECRET",
+          "dominant_intent_blocks": 404,
+          "families": 1
+        },
+        "42": {
+          "blocks": 7894,
+          "dominant_family": "ROTATION:r0:CERT_METADATA",
+          "dominant_family_blocks": 7446,
+          "dominant_intent": "CERT_METADATA",
+          "dominant_intent_blocks": 7446,
+          "families": 2
+        },
+        "44": {
+          "blocks": 969,
+          "dominant_family": "EPOCH_SECRET:e8:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 969,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 969,
+          "families": 1
+        },
+        "45": {
+          "blocks": 1016,
+          "dominant_family": "EPOCH_SECRET:e10:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1016,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 1016,
+          "families": 1
+        },
+        "46": {
+          "blocks": 1008,
+          "dominant_family": "EPOCH_SECRET:e34:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1008,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 1008,
+          "families": 1
+        },
+        "47": {
+          "blocks": 398,
+          "dominant_family": "EPOCH_SECRET:e1:EPHEMERAL_SECRET:SECRET",
+          "dominant_family_blocks": 398,
+          "dominant_intent": "EPHEMERAL_SECRET",
+          "dominant_intent_blocks": 398,
+          "families": 1
+        },
+        "51": {
+          "blocks": 1016,
+          "dominant_family": "EPOCH_SECRET:e35:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1016,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 1016,
+          "families": 1
+        },
+        "56": {
+          "blocks": 458,
+          "dominant_family": "EPOCH_SECRET:e20:EPHEMERAL_SECRET:SECRET",
+          "dominant_family_blocks": 458,
+          "dominant_intent": "EPHEMERAL_SECRET",
+          "dominant_intent_blocks": 458,
+          "families": 1
+        },
+        "60": {
+          "blocks": 1036,
+          "dominant_family": "EPOCH_SECRET:e7:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1036,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 1036,
+          "families": 1
+        },
+        "62": {
+          "blocks": 1025,
+          "dominant_family": "EPOCH_SECRET:e29:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1025,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 1025,
+          "families": 1
+        },
+        "64": {
+          "blocks": 1116,
+          "dominant_family": "EPOCH_SECRET:e1:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1116,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 1116,
+          "families": 1
+        },
+        "65": {
+          "blocks": 433,
+          "dominant_family": "EPOCH_SECRET:e32:EPHEMERAL_SECRET:SECRET",
+          "dominant_family_blocks": 433,
+          "dominant_intent": "EPHEMERAL_SECRET",
+          "dominant_intent_blocks": 433,
+          "families": 1
+        },
+        "66": {
+          "blocks": 413,
+          "dominant_family": "EPOCH_SECRET:e38:EPHEMERAL_SECRET:SECRET",
+          "dominant_family_blocks": 413,
+          "dominant_intent": "EPHEMERAL_SECRET",
+          "dominant_intent_blocks": 413,
+          "families": 1
+        },
+        "67": {
+          "blocks": 1050,
+          "dominant_family": "EPOCH_SECRET:e14:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1050,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 1050,
+          "families": 1
+        },
+        "68": {
+          "blocks": 23667,
+          "dominant_family": "APPEND_LOG:SIGNATURE_LOG",
+          "dominant_family_blocks": 23254,
+          "dominant_intent": "SIGNATURE_LOG",
+          "dominant_intent_blocks": 23254,
+          "families": 2
+        },
+        "69": {
+          "blocks": 425,
+          "dominant_family": "EPOCH_SECRET:e21:EPHEMERAL_SECRET:SECRET",
+          "dominant_family_blocks": 425,
+          "dominant_intent": "EPHEMERAL_SECRET",
+          "dominant_intent_blocks": 425,
+          "families": 1
+        },
+        "7": {
+          "blocks": 1053,
+          "dominant_family": "EPOCH_SECRET:e31:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1053,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 1053,
+          "families": 1
+        },
+        "70": {
+          "blocks": 993,
+          "dominant_family": "EPOCH_SECRET:e19:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 993,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 993,
+          "families": 1
+        },
+        "71": {
+          "blocks": 2124,
+          "dominant_family": "EPOCH_SECRET:e39:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1127,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 2124,
+          "families": 2
+        },
+        "72": {
+          "blocks": 802,
+          "dominant_family": "EPOCH_SECRET:e35:EPHEMERAL_SECRET:SECRET",
+          "dominant_family_blocks": 426,
+          "dominant_intent": "EPHEMERAL_SECRET",
+          "dominant_intent_blocks": 802,
+          "families": 2
+        },
+        "74": {
+          "blocks": 1465,
+          "dominant_family": "EPOCH_SECRET:e18:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1043,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 1043,
+          "families": 2
+        },
+        "76": {
+          "blocks": 430,
+          "dominant_family": "EPOCH_SECRET:e27:EPHEMERAL_SECRET:SECRET",
+          "dominant_family_blocks": 430,
+          "dominant_intent": "EPHEMERAL_SECRET",
+          "dominant_intent_blocks": 430,
+          "families": 1
+        },
+        "77": {
+          "blocks": 9615,
+          "dominant_family": "ROTATION:r2:CERT_METADATA",
+          "dominant_family_blocks": 7663,
+          "dominant_intent": "CERT_METADATA",
+          "dominant_intent_blocks": 7663,
+          "families": 3
+        },
+        "78": {
+          "blocks": 797,
+          "dominant_family": "EPOCH_SECRET:e25:EPHEMERAL_SECRET:SECRET",
+          "dominant_family_blocks": 417,
+          "dominant_intent": "EPHEMERAL_SECRET",
+          "dominant_intent_blocks": 797,
+          "families": 2
+        },
+        "79": {
+          "blocks": 438,
+          "dominant_family": "EPOCH_SECRET:e7:EPHEMERAL_SECRET:SECRET",
+          "dominant_family_blocks": 438,
+          "dominant_intent": "EPHEMERAL_SECRET",
+          "dominant_intent_blocks": 438,
+          "families": 1
+        },
+        "80": {
+          "blocks": 421,
+          "dominant_family": "EPOCH_SECRET:e5:EPHEMERAL_SECRET:SECRET",
+          "dominant_family_blocks": 421,
+          "dominant_intent": "EPHEMERAL_SECRET",
+          "dominant_intent_blocks": 421,
+          "families": 1
+        },
+        "82": {
+          "blocks": 819,
+          "dominant_family": "EPOCH_SECRET:e36:EPHEMERAL_SECRET:SECRET",
+          "dominant_family_blocks": 421,
+          "dominant_intent": "EPHEMERAL_SECRET",
+          "dominant_intent_blocks": 819,
+          "families": 2
+        },
+        "83": {
+          "blocks": 377,
+          "dominant_family": "EPOCH_SECRET:e4:EPHEMERAL_SECRET:SECRET",
+          "dominant_family_blocks": 377,
+          "dominant_intent": "EPHEMERAL_SECRET",
+          "dominant_intent_blocks": 377,
+          "families": 1
+        },
+        "86": {
+          "blocks": 1007,
+          "dominant_family": "EPOCH_SECRET:e38:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1007,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 1007,
+          "families": 1
+        },
+        "89": {
+          "blocks": 1026,
+          "dominant_family": "EPOCH_SECRET:e2:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1026,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 1026,
+          "families": 1
+        },
+        "90": {
+          "blocks": 1426,
+          "dominant_family": "EPOCH_SECRET:e12:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1030,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 1030,
+          "families": 2
+        },
+        "92": {
+          "blocks": 1109,
+          "dominant_family": "EPOCH_SECRET:e6:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1109,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 1109,
+          "families": 1
+        },
+        "93": {
+          "blocks": 1045,
+          "dominant_family": "EPOCH_SECRET:e0:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 1045,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 1045,
+          "families": 1
+        },
+        "95": {
+          "blocks": 1393,
+          "dominant_family": "EPOCH_SECRET:e5:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 980,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 980,
+          "families": 2
+        },
+        "97": {
+          "blocks": 2368,
+          "dominant_family": "EPOCH_SECRET:e21:KEM_ARTIFACT:SECRET",
+          "dominant_family_blocks": 999,
+          "dominant_intent": "KEM_ARTIFACT",
+          "dominant_intent_blocks": 1984,
+          "families": 3
+        }
+      },
+      "handles": 128,
+      "intent_purity": 0.9862885232640067,
+      "max_families_per_handle": 3,
+      "min_epoch_fill_blocks": 1,
+      "occupied_handles": 66,
+      "total_blocks": 613136,
+      "trace": "artifacts/traces/pqc-mixed.jsonl",
+      "writes": 80000
+    }
+  ],
+  "trace": "artifacts/traces/pqc-mixed.jsonl"
+}

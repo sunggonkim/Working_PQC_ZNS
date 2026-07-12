@@ -169,6 +169,16 @@ The residual fallback frontier shows why strict exposure mode cannot be the defa
 \label{fig:open-zone-robustness}
 \end{figure}
 
+\noindent\textbf{FDP handle-pressure model.}
+To make the FDP deployment story concrete, we map the same QUASAR zone families from a mixed PQC trace onto a fixed number of FDP-style placement handles.  This is a trace-driven handle model, not a physical FDP device result.  The trace creates 86 QUASAR families.  With only 8 handles, every occupied handle collides and family purity is 0.888; with 64 handles, family purity rises to 0.961 and intent purity to 0.982, with 1.76 families per occupied handle on average.  At 128 handles, family purity reaches 0.980.  Figure~\ref{fig:fdp-handle-pressure} therefore supports FDP as a deployment carrier, but also shows why admission, hashing, and epoch binning remain part of the design when handle count is scarce.
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=\columnwidth]{../artifacts/figures/fast-style/fig8-fdp-handle-pressure.pdf}
+\caption{Trace-driven FDP placement-handle pressure.  More placement handles preserve QUASAR family and intent purity, but small handle counts collide many death cohorts into the same handle.  This is the FDP analogue of the open-zone budget problem, not a physical FDP performance result.}
+\label{fig:fdp-handle-pressure}
+\end{figure}
+
 \noindent\textbf{Prototype overhead.}
 \system adds semantic reset work, but its decision path is cheap.  In the actual-\zns overhead suite, the hybrid issues 318 more semantic reset operations than \dogi-style.  Zonefs-helper throughput is lower than \dogi-style by this accounting, but helper latency includes user-space append/truncate overhead.  In the C-level placement-decision benchmark, \dogi-style feature extraction plus a small MLP costs 2,397.8 ns/write, \system hint routing costs 16.8 ns/write, and the hybrid costs 1,178.8 ns/write.
 
@@ -187,4 +197,4 @@ The xNVMe probe provides a lower-overhead command-path sanity check: 4,096 4KiB 
 The physical device advertises crypto-erase and block-erase sanitize support.  We executed crypto-erase sanitize and observed successful completion in the sanitize log.  This supports a deployment path where \system triggers hardware erase semantics at epoch boundaries.  The default result remains more conservative: \system reduces stale-secret exposure by aligning secret lifetime with reset eligibility, while physical erasure requires explicit sanitize or equivalent hardware support.  We do not use sanitize timing to claim foreground service latency: sanitize policy, batching, and SLO integration are deployment choices beyond the same-path placement comparison.
 
 \noindent\textbf{Reproducibility.}
-The artifact manifest records 37 evidence artifacts, their roles, abbreviated hashes, and regeneration commands.  Validation finds zero hash mismatches, and the local acceptance report passes 41 of 41 gates.  These checks make the scoped evidence auditable.
+The artifact manifest records 39 evidence artifacts, their roles, abbreviated hashes, and regeneration commands.  Validation finds zero hash mismatches, and the local acceptance report passes 41 of 41 gates.  These checks make the scoped evidence auditable.

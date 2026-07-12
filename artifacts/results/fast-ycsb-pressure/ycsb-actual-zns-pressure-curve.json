@@ -1,0 +1,524 @@
+{
+  "failed_rows": 0,
+  "interpretation": "p2000 is an easy WAF point but still exposes semantic reset failure; p4000/p6000/p8000/p10000 add GC pressure while preserving the stale-secret gap. The larger p10000 YCSB rows show the realistic DOGI-axis failure mode: moderate GC/WAF pressure plus large stale-secret exposure, not universal WAF explosion.",
+  "row_count": 9,
+  "rows": [
+    {
+      "artifact": "artifacts/results/fast-ycsb-pressure/packed-physical-zonefs-ycsb-pqc2000-z512-helper.json",
+      "baseline_semantic_failures": {
+        "dogi-history": {
+          "gc_blocks": 0,
+          "secret_waiting_end": 0,
+          "semantic_resets": 0,
+          "stale_secret_blocks": 35472,
+          "waf": 1.0
+        },
+        "fifo": {
+          "gc_blocks": 0,
+          "secret_waiting_end": 0,
+          "semantic_resets": 0,
+          "stale_secret_blocks": 35472,
+          "waf": 1.0
+        },
+        "midas-style": {
+          "gc_blocks": 0,
+          "secret_waiting_end": 0,
+          "semantic_resets": 0,
+          "stale_secret_blocks": 35472,
+          "waf": 1.0
+        },
+        "sepbit-style": {
+          "gc_blocks": 0,
+          "secret_waiting_end": 0,
+          "semantic_resets": 0,
+          "stale_secret_blocks": 35472,
+          "waf": 1.0
+        }
+      },
+      "dogi_gc_blocks": 0,
+      "dogi_max_live_physical_zones": 6,
+      "dogi_secret_waiting_end": 0,
+      "dogi_semantic_resets": 0,
+      "dogi_stale_secret_blocks": 35472,
+      "dogi_waf": 1.0,
+      "failed_rows": 0,
+      "gc_reduction": null,
+      "hybrid_gc_blocks": 0,
+      "hybrid_max_live_physical_zones": 5,
+      "hybrid_secret_waiting_end": 0,
+      "hybrid_semantic_resets": 28,
+      "hybrid_stale_secret_blocks": 0,
+      "hybrid_waf": 1.0,
+      "logical_zones": 512,
+      "pqc_level": 2000,
+      "row_count": 12,
+      "semantic_gap": true,
+      "waf_pressure": false,
+      "waf_reduction": 0.0,
+      "wall_time_s": 94.281856085,
+      "workloads": [
+        "ycsb-a-pqc2000",
+        "ycsb-f-pqc2000"
+      ]
+    },
+    {
+      "artifact": "artifacts/results/fast-ycsb-pressure/packed-physical-zonefs-ycsb-a-pqc4000-z560-helper.json",
+      "baseline_semantic_failures": {
+        "dogi-history": {
+          "gc_blocks": 15316,
+          "secret_waiting_end": 16944,
+          "semantic_resets": 0,
+          "stale_secret_blocks": 46266,
+          "waf": 1.045357087859368
+        },
+        "fifo": {
+          "gc_blocks": 27370,
+          "secret_waiting_end": 26624,
+          "semantic_resets": 0,
+          "stale_secret_blocks": 40488,
+          "waf": 1.0810540281216314
+        },
+        "midas-style": {
+          "gc_blocks": 3121,
+          "secret_waiting_end": 4387,
+          "semantic_resets": 0,
+          "stale_secret_blocks": 63159,
+          "waf": 1.009242587569149
+        },
+        "sepbit-style": {
+          "gc_blocks": 2608,
+          "secret_waiting_end": 772,
+          "semantic_resets": 0,
+          "stale_secret_blocks": 65571,
+          "waf": 1.007723379807863
+        }
+      },
+      "dogi_gc_blocks": 15316,
+      "dogi_max_live_physical_zones": 8,
+      "dogi_secret_waiting_end": 16944,
+      "dogi_semantic_resets": 0,
+      "dogi_stale_secret_blocks": 46266,
+      "dogi_waf": 1.045357087859368,
+      "failed_rows": 0,
+      "gc_reduction": 1.0,
+      "hybrid_gc_blocks": 0,
+      "hybrid_max_live_physical_zones": 6,
+      "hybrid_secret_waiting_end": 0,
+      "hybrid_semantic_resets": 28,
+      "hybrid_stale_secret_blocks": 0,
+      "hybrid_waf": 1.0,
+      "logical_zones": 560,
+      "pqc_level": 4000,
+      "row_count": 6,
+      "semantic_gap": true,
+      "waf_pressure": true,
+      "waf_reduction": 0.043389085305049355,
+      "wall_time_s": 106.256165085,
+      "workloads": [
+        "ycsb-a-pqc4000"
+      ]
+    },
+    {
+      "artifact": "artifacts/results/fast-ycsb-pressure/packed-physical-zonefs-ycsb-f-pqc4000-z733-helper.json",
+      "baseline_semantic_failures": {
+        "dogi-history": {
+          "gc_blocks": 0,
+          "secret_waiting_end": 0,
+          "semantic_resets": 0,
+          "stale_secret_blocks": 74274,
+          "waf": 1.0
+        },
+        "fifo": {
+          "gc_blocks": 239,
+          "secret_waiting_end": 512,
+          "semantic_resets": 0,
+          "stale_secret_blocks": 73732,
+          "waf": 1.0007249102203242
+        },
+        "midas-style": {
+          "gc_blocks": 0,
+          "secret_waiting_end": 0,
+          "semantic_resets": 0,
+          "stale_secret_blocks": 74274,
+          "waf": 1.0
+        },
+        "sepbit-style": {
+          "gc_blocks": 0,
+          "secret_waiting_end": 0,
+          "semantic_resets": 0,
+          "stale_secret_blocks": 74274,
+          "waf": 1.0
+        }
+      },
+      "dogi_gc_blocks": 0,
+      "dogi_max_live_physical_zones": 8,
+      "dogi_secret_waiting_end": 0,
+      "dogi_semantic_resets": 0,
+      "dogi_stale_secret_blocks": 74274,
+      "dogi_waf": 1.0,
+      "failed_rows": 0,
+      "gc_reduction": null,
+      "hybrid_gc_blocks": 0,
+      "hybrid_max_live_physical_zones": 6,
+      "hybrid_secret_waiting_end": 0,
+      "hybrid_semantic_resets": 28,
+      "hybrid_stale_secret_blocks": 0,
+      "hybrid_waf": 1.0,
+      "logical_zones": 733,
+      "pqc_level": 4000,
+      "row_count": 6,
+      "semantic_gap": true,
+      "waf_pressure": false,
+      "waf_reduction": 0.0,
+      "wall_time_s": 97.100367138,
+      "workloads": [
+        "ycsb-f-pqc4000"
+      ]
+    },
+    {
+      "artifact": "artifacts/results/fast-ycsb-pressure/packed-physical-zonefs-ycsb-a-pqc6000-z712-helper.json",
+      "baseline_semantic_failures": {
+        "dogi-history": {
+          "gc_blocks": 15308,
+          "secret_waiting_end": 22291,
+          "semantic_resets": 0,
+          "stale_secret_blocks": 76950,
+          "waf": 1.0375701618108681
+        },
+        "fifo": {
+          "gc_blocks": 26297,
+          "secret_waiting_end": 28672,
+          "semantic_resets": 0,
+          "stale_secret_blocks": 70210,
+          "waf": 1.0645402760086489
+        },
+        "midas-style": {
+          "gc_blocks": 2662,
+          "secret_waiting_end": 3453,
+          "semantic_resets": 0,
+          "stale_secret_blocks": 98395,
+          "waf": 1.0065333009367998
+        },
+        "sepbit-style": {
+          "gc_blocks": 1643,
+          "secret_waiting_end": 308,
+          "semantic_resets": 0,
+          "stale_secret_blocks": 100770,
+          "waf": 1.0040323867164396
+        }
+      },
+      "dogi_gc_blocks": 15308,
+      "dogi_max_live_physical_zones": 7,
+      "dogi_secret_waiting_end": 22291,
+      "dogi_semantic_resets": 0,
+      "dogi_stale_secret_blocks": 76950,
+      "dogi_waf": 1.0375701618108681,
+      "failed_rows": 0,
+      "gc_reduction": 1.0,
+      "hybrid_gc_blocks": 0,
+      "hybrid_max_live_physical_zones": 6,
+      "hybrid_secret_waiting_end": 0,
+      "hybrid_semantic_resets": 28,
+      "hybrid_stale_secret_blocks": 0,
+      "hybrid_waf": 1.0,
+      "logical_zones": 712,
+      "pqc_level": 6000,
+      "row_count": 6,
+      "semantic_gap": true,
+      "waf_pressure": true,
+      "waf_reduction": 0.036209755439860616,
+      "wall_time_s": 124.102412133,
+      "workloads": [
+        "ycsb-a-pqc6000"
+      ]
+    },
+    {
+      "artifact": "artifacts/results/fast-ycsb-pressure/packed-physical-zonefs-ycsb-f-pqc6000-z733-helper.json",
+      "baseline_semantic_failures": {
+        "dogi-history": {
+          "gc_blocks": 4166,
+          "secret_waiting_end": 14935,
+          "semantic_resets": 0,
+          "stale_secret_blocks": 96050,
+          "waf": 1.0105298543867232
+        },
+        "fifo": {
+          "gc_blocks": 12310,
+          "secret_waiting_end": 23552,
+          "semantic_resets": 0,
+          "stale_secret_blocks": 87275,
+          "waf": 1.031114380100951
+        },
+        "midas-style": {
+          "gc_blocks": 156,
+          "secret_waiting_end": 199,
+          "semantic_resets": 0,
+          "stale_secret_blocks": 110745,
+          "waf": 1.0003943008363727
+        },
+        "sepbit-style": {
+          "gc_blocks": 2476,
+          "secret_waiting_end": 3667,
+          "semantic_resets": 0,
+          "stale_secret_blocks": 104079,
+          "waf": 1.0062582619926852
+        }
+      },
+      "dogi_gc_blocks": 4166,
+      "dogi_max_live_physical_zones": 8,
+      "dogi_secret_waiting_end": 14935,
+      "dogi_semantic_resets": 0,
+      "dogi_stale_secret_blocks": 96050,
+      "dogi_waf": 1.0105298543867232,
+      "failed_rows": 0,
+      "gc_reduction": 1.0,
+      "hybrid_gc_blocks": 0,
+      "hybrid_max_live_physical_zones": 6,
+      "hybrid_secret_waiting_end": 0,
+      "hybrid_semantic_resets": 28,
+      "hybrid_stale_secret_blocks": 0,
+      "hybrid_waf": 1.0,
+      "logical_zones": 733,
+      "pqc_level": 6000,
+      "row_count": 6,
+      "semantic_gap": true,
+      "waf_pressure": true,
+      "waf_reduction": 0.010420131914968099,
+      "wall_time_s": 115.407125223,
+      "workloads": [
+        "ycsb-f-pqc6000"
+      ]
+    },
+    {
+      "artifact": "artifacts/results/fast-ycsb-pressure/packed-physical-zonefs-ycsb-a-pqc8000-z863-helper.json",
+      "baseline_semantic_failures": {
+        "dogi-history": {
+          "gc_blocks": 13462,
+          "secret_waiting_end": 26251,
+          "semantic_resets": 0,
+          "stale_secret_blocks": 110018,
+          "waf": 1.0282174305830667
+        },
+        "fifo": {
+          "gc_blocks": 23672,
+          "secret_waiting_end": 29696,
+          "semantic_resets": 0,
+          "stale_secret_blocks": 102724,
+          "waf": 1.0496184086140508
+        },
+        "midas-style": {
+          "gc_blocks": 1611,
+          "secret_waiting_end": 1186,
+          "semantic_resets": 0,
+          "stale_secret_blocks": 134789,
+          "waf": 1.0033767850742328
+        },
+        "sepbit-style": {
+          "gc_blocks": 1186,
+          "secret_waiting_end": 148,
+          "semantic_resets": 0,
+          "stale_secret_blocks": 135454,
+          "waf": 1.002485951022992
+        }
+      },
+      "dogi_gc_blocks": 13462,
+      "dogi_max_live_physical_zones": 8,
+      "dogi_secret_waiting_end": 26251,
+      "dogi_semantic_resets": 0,
+      "dogi_stale_secret_blocks": 110018,
+      "dogi_waf": 1.0282174305830667,
+      "failed_rows": 0,
+      "gc_reduction": 1.0,
+      "hybrid_gc_blocks": 0,
+      "hybrid_max_live_physical_zones": 6,
+      "hybrid_secret_waiting_end": 0,
+      "hybrid_semantic_resets": 28,
+      "hybrid_stale_secret_blocks": 0,
+      "hybrid_waf": 1.0,
+      "logical_zones": 863,
+      "pqc_level": 8000,
+      "row_count": 6,
+      "semantic_gap": true,
+      "waf_pressure": true,
+      "waf_reduction": 0.027443057998993034,
+      "wall_time_s": 139.506559813,
+      "workloads": [
+        "ycsb-a-pqc8000"
+      ]
+    },
+    {
+      "artifact": "artifacts/results/fast-ycsb-pressure/packed-physical-zonefs-ycsb-f-pqc8000-z733-helper.json",
+      "baseline_semantic_failures": {
+        "dogi-history": {
+          "gc_blocks": 24289,
+          "secret_waiting_end": 52036,
+          "semantic_resets": 0,
+          "stale_secret_blocks": 100847,
+          "waf": 1.0528106695424917
+        },
+        "fifo": {
+          "gc_blocks": 34875,
+          "secret_waiting_end": 56832,
+          "semantic_resets": 0,
+          "stale_secret_blocks": 92959,
+          "waf": 1.0758274157147019
+        },
+        "midas-style": {
+          "gc_blocks": 8868,
+          "secret_waiting_end": 25726,
+          "semantic_resets": 0,
+          "stale_secret_blocks": 128224,
+          "waf": 1.0192813626539923
+        },
+        "sepbit-style": {
+          "gc_blocks": 16760,
+          "secret_waiting_end": 35292,
+          "semantic_resets": 0,
+          "stale_secret_blocks": 114520,
+          "waf": 1.0364406447993808
+        }
+      },
+      "dogi_gc_blocks": 24289,
+      "dogi_max_live_physical_zones": 8,
+      "dogi_secret_waiting_end": 52036,
+      "dogi_semantic_resets": 0,
+      "dogi_stale_secret_blocks": 100847,
+      "dogi_waf": 1.0528106695424917,
+      "failed_rows": 0,
+      "gc_reduction": 1.0,
+      "hybrid_gc_blocks": 0,
+      "hybrid_max_live_physical_zones": 6,
+      "hybrid_secret_waiting_end": 0,
+      "hybrid_semantic_resets": 28,
+      "hybrid_stale_secret_blocks": 0,
+      "hybrid_waf": 1.0,
+      "logical_zones": 733,
+      "pqc_level": 8000,
+      "row_count": 6,
+      "semantic_gap": true,
+      "waf_pressure": true,
+      "waf_reduction": 0.05016160176780982,
+      "wall_time_s": 134.766313024,
+      "workloads": [
+        "ycsb-f-pqc8000"
+      ]
+    },
+    {
+      "artifact": "artifacts/results/fast-ycsb-pressure/packed-physical-zonefs-ycsb-a-pqc10000-z1024-helper.json",
+      "baseline_semantic_failures": {
+        "dogi-history": {
+          "gc_blocks": 3357,
+          "secret_waiting_end": 9490,
+          "semantic_resets": 0,
+          "stale_secret_blocks": 150221,
+          "waf": 1.0065625238250697
+        },
+        "fifo": {
+          "gc_blocks": 11770,
+          "secret_waiting_end": 19456,
+          "semantic_resets": 0,
+          "stale_secret_blocks": 141424,
+          "waf": 1.0230089083768457
+        },
+        "midas-style": {
+          "gc_blocks": 16,
+          "secret_waiting_end": 20,
+          "semantic_resets": 0,
+          "stale_secret_blocks": 158884,
+          "waf": 1.0000312780402745
+        },
+        "sepbit-style": {
+          "gc_blocks": 107,
+          "secret_waiting_end": 26,
+          "semantic_resets": 0,
+          "stale_secret_blocks": 158845,
+          "waf": 1.000209171894335
+        }
+      },
+      "dogi_gc_blocks": 3357,
+      "dogi_max_live_physical_zones": 8,
+      "dogi_secret_waiting_end": 9490,
+      "dogi_semantic_resets": 0,
+      "dogi_stale_secret_blocks": 150221,
+      "dogi_waf": 1.0065625238250697,
+      "failed_rows": 0,
+      "gc_reduction": 1.0,
+      "hybrid_gc_blocks": 0,
+      "hybrid_max_live_physical_zones": 6,
+      "hybrid_secret_waiting_end": 0,
+      "hybrid_semantic_resets": 26,
+      "hybrid_stale_secret_blocks": 0,
+      "hybrid_waf": 1.0,
+      "logical_zones": 1024,
+      "pqc_level": 10000,
+      "row_count": 6,
+      "semantic_gap": true,
+      "waf_pressure": true,
+      "waf_reduction": 0.006519737889834473,
+      "wall_time_s": 145.208133714,
+      "workloads": [
+        "ycsb-a-pqc10000"
+      ]
+    },
+    {
+      "artifact": "artifacts/results/fast-ycsb-pressure/packed-physical-zonefs-ycsb-f-pqc10000-z900-helper.json",
+      "baseline_semantic_failures": {
+        "dogi-history": {
+          "gc_blocks": 13741,
+          "secret_waiting_end": 33094,
+          "semantic_resets": 0,
+          "stale_secret_blocks": 144901,
+          "waf": 1.027909461309415
+        },
+        "fifo": {
+          "gc_blocks": 23150,
+          "secret_waiting_end": 34816,
+          "semantic_resets": 0,
+          "stale_secret_blocks": 133533,
+          "waf": 1.0470201607825456
+        },
+        "midas-style": {
+          "gc_blocks": 1228,
+          "secret_waiting_end": 1036,
+          "semantic_resets": 0,
+          "stale_secret_blocks": 172228,
+          "waf": 1.0024942011853548
+        },
+        "sepbit-style": {
+          "gc_blocks": 6845,
+          "secret_waiting_end": 12690,
+          "semantic_resets": 0,
+          "stale_secret_blocks": 159007,
+          "waf": 1.0139029373890507
+        }
+      },
+      "dogi_gc_blocks": 13741,
+      "dogi_max_live_physical_zones": 8,
+      "dogi_secret_waiting_end": 33094,
+      "dogi_semantic_resets": 0,
+      "dogi_stale_secret_blocks": 144901,
+      "dogi_waf": 1.027909461309415,
+      "failed_rows": 0,
+      "gc_reduction": 1.0,
+      "hybrid_gc_blocks": 0,
+      "hybrid_max_live_physical_zones": 6,
+      "hybrid_secret_waiting_end": 0,
+      "hybrid_semantic_resets": 26,
+      "hybrid_stale_secret_blocks": 0,
+      "hybrid_waf": 1.0,
+      "logical_zones": 900,
+      "pqc_level": 10000,
+      "row_count": 6,
+      "semantic_gap": true,
+      "waf_pressure": true,
+      "waf_reduction": 0.0271516727493317,
+      "wall_time_s": 143.23232692,
+      "workloads": [
+        "ycsb-f-pqc10000"
+      ]
+    }
+  ],
+  "scope": "actual ZNS YCSB easy-to-pressure curve",
+  "semantic_gap_rows": 9,
+  "waf_pressure_rows": 7
+}

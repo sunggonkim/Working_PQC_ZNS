@@ -12,7 +12,7 @@ This file records how the QUASAR draft follows the local writing guide and the p
 | DOGI paper structure | Define storage-placement baselines and workload families before evaluation claims, then group results into large evaluation families rather than fragmented micro-sections. | `2.Background.tex`, `6.Evaluation.tex`. |
 | DOGI/FAST workload fairness | Preserve DOGI-friendly locality before adding PQC lifecycle stress. | `3.Motivation.tex`; `6.Evaluation.tex` Evaluation Setup and PQC Lifecycle Pressure blocks. |
 | DOGI NoDaP role | Use an oracle only as an upper bound that exposes the missing lifetime signal, then turn the gap into design requirements. | `3.Motivation.tex`, `4.Design.tex`, `6.Evaluation.tex`. |
-| Bottom-review interface attack | Explain why ZNS is measured and how FDP would carry the same signal. | `2.Background.tex`, `4.Design.tex`, `7.RelatedWork.tex`, `8.Discussion.tex`. |
+| Bottom-review interface attack | Explain why ZNS is measured and test how FDP would carry the same signal under handle pressure. | `2.Background.tex`, `4.Design.tex`, `6.Evaluation.tex`, `7.RelatedWork.tex`, `8.Discussion.tex`. |
 | Bottom-review OS plumbing attack | Make the 32-byte hint path concrete instead of assuming POSIX carries it. | `4.Design.tex` Table `hint-delivery`, `5.Implementation.tex`. |
 | Bottom-review security attack | Scope stored PQC state and separate reset eligibility from NIST-grade sanitization. | `2.Background.tex`, `7.RelatedWork.tex`, `8.Discussion.tex`. |
 | ScaleQsim/AURORA Design | Start Design with architecture and procedure, then explain mechanisms. | `4.Design.tex`. |
@@ -62,6 +62,7 @@ The previous papers were used as a paragraph-role template.  The prose is origin
 | Oracle/bound before claim. | Epoch upper bound is explicit, scoped, and not counted as QUASAR. |
 | Component analysis. | Component ablation quantifies lifecycle hints, DOGI payload fallback, adaptive admission/binning, and residual fallback. |
 | External baseline sanity. | Exact DOGI/MiDAS/SepBIT artifacts are separated from same-path replay. |
+| FDP deployment pressure. | Trace-driven FDP mapping reports family/intent purity and families per placement handle across 8--128 handles. |
 | Breakdown/overhead. | C-level decision cost and xNVMe command-path probe. |
 | Correctness/security boundary. | Sanitize capability and explicit reset-vs-erase scope. |
 
@@ -75,6 +76,7 @@ The draft follows paragraph roles and section order from the previous papers.  I
 - Do not claim zone reset alone physically erases NAND.
 - Do not claim every TLS session key must be persisted; QUASAR targets deployments that already write bounded PQC lifecycle state.
 - Do not imply FDP is irrelevant; QUASAR is the lifecycle signal and ZNS/FDP are possible carriers.
+- Do not imply the FDP result is hardware performance; it is a trace-driven handle-pressure model.
 - Do not describe the 32-byte hint as if POSIX `write()` already transports it.
 - Do not mix exact external DOGI/MiDAS/SepBIT unit systems with same-path actual-ZNS replay.
 - Use easy p2000 rows as semantic-exposure evidence, not headline WAF evidence.
