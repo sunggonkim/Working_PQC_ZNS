@@ -39,7 +39,7 @@
 \maketitle
 
 \begin{abstract}
-Post-quantum services such as TLS terminators, KMS deployments, and audit systems write not only payload and logs, but also KEM artifacts, session secrets, key-wrap records, certificate metadata, and signatures whose lifetimes follow sessions, key epochs, rotations, and erase policy.
+Post-quantum services such as TLS terminators, KMS deployments, and audit systems write not only payload and logs, but also KEM artifacts, session-derived recovery records, key-wrap records, certificate metadata, and signatures whose lifetimes follow sessions, key epochs, rotations, and erase policy.
 Zoned Namespace SSDs expose append and reset primitives that can exploit lifetime structure, but \dogi, \midas, and \sepbit infer lifetime from LBA locality, frequency, and previous invalidations, which do not encode the protocol event that kills a post-quantum secret.
 This paper presents \system, a cryptographic intent-aware placement architecture that adds a 32-byte lifecycle hint to the write path, preserves history-based placement for ordinary payload, and packs short-lived post-quantum objects by death cohort so epoch close can reset eligible secret-bearing zones.
 On an actual WD ZN540-class \zns SSD, a same-path replay over six DOGI-style workload axes completes 72 policy rows with no failures; \dogi-style placement leaves 99,834 stale secret blocks, while \system-\dogi hybrid leaves zero and reduces GC by 83.0\%, and FAST-style Sysbench plus dynamic Exchange-, Varmail-, and Alibaba-like pressure traces show 92.3--99.9\% GC reduction while preserving zero stale-secret exposure.

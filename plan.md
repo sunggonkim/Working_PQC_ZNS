@@ -389,6 +389,9 @@ The paper must keep these invariants through the final editing pass:
 10. Strict zero-wait mode has explicit residual-copy cost.
 11. Low-pressure WAF rows are negative controls or exposure evidence.
 12. Single-device and zonefs limitations are stated.
+13. ZNS is the measured substrate, but FDP is a valid deployment carrier for the same lifecycle signal.
+14. POSIX `write()` does not carry `quasar_hint` by itself; the paper must name concrete attachment points.
+15. QUASAR targets persisted PQC lifecycle state, not universal raw TLS session-key persistence.
 
 ## 8. Final Pre-Submission Checklist
 
@@ -426,7 +429,36 @@ This is the line the paper should hold.
 - DOGI FAST '26: https://www.usenix.org/conference/fast26/presentation/kim-jeeyun
 - DOGI paper PDF: https://www.usenix.org/system/files/fast26-kim-jeeyun.pdf
 - NIST FIPS 203 ML-KEM: https://csrc.nist.gov/pubs/fips/203/final
+- NIST SP 800-88 Rev. 2 Media Sanitization: https://csrc.nist.gov/pubs/sp/800/88/r2/final
 - NVM Express FDP overview: https://nvmexpress.org/wp-content/uploads/FMS-2023-Flexible-Data-Placement-FDP-Overview.pdf
 - Samsung FDP white paper: https://download.semiconductor.samsung.com/resources/white-paper/getting-started-with-fdp-v4.pdf
 - xNVMe FDP tutorial: https://xnvme.io/tutorial/fdp/index.html
 - Samsung PM1763 official page: https://semiconductor.samsung.com/ssd/enterprise-ssd/pm1763/
+
+## 11. Bottom Review Checkpoints
+
+The pasted FAST-style review is now consolidated into reviewer-facing checkpoints. The raw review text is intentionally removed from this file so `plan.md` remains an implementation and experiment guide, not a comment dump.
+
+| Review Attack | Concrete Checkpoint | Paper Action | Status |
+| --- | --- | --- | --- |
+| "Why ZNS only? FDP can carry lifetime hints." | Explain QUASAR as a lifecycle-placement policy that can target native ZNS first and FDP later. | Add Background/Discussion text mapping `intent`, `epoch_id`, `cohort_id`, and `security_class` to FDP placement/RUH-style handles, with ZNS retained as the measured substrate because it exposes reset and migration accounting. | reflected |
+| "ZoneFS is not production SPDK latency." | Separate actual-ZNS replay accounting, xNVMe command-path sanity, and future SPDK poll-mode work. | Keep zonefs helper path caveat in Implementation/Evaluation/Discussion; state xNVMe is a lower-overhead bound, not full SPDK. | reflected with caveat |
+| "Zone reset is not NIST-grade physical erase." | Do not equate reset with NAND sanitization. | Cite NIST SP 800-88 Rev. 2 and NVMe sanitize; define default claim as reset eligibility and stale-exposure reduction. Strong physical erase requires sanitize/crypto-erase support and deployment scheduling. | reflected |
+| "Why would PQC secrets hit SSD at all?" | Scope threat model to deployments that already persist bounded PQC lifecycle state. | Background/Introduction now name KMS envelopes, key-wrap records, audit/compliance logs, crash-recovery/session-derived state, and constrained spill paths. The paper does not require every TLS session key to be synchronously persisted. | reflected |
+| "The 32-byte hint path is hand-wavy." | Give concrete delivery paths and enforcement points. | Design/Implementation include user-space request context, SPDK/xNVMe-style request metadata, xattr/ioctl file/extent metadata, io_uring request metadata, and FDP placement handles. | reflected |
+| "Untrusted tenants can abuse secret hints." | State who can issue high-priority hints and what happens to untrusted ones. | Design/Discussion use privileged policy/TLS/KMS/logging emitters, opaque cohort IDs, per-tenant quotas, admission limits, and overflow for missing provenance. | reflected |
+| "Trace replay ignores application/OS dynamics." | Do not sell trace replay as full end-to-end app proof. | Implementation/Evaluation/Discussion label Sysbench/MySQL as an execution/readiness gate and keep full YCSB/JDBC, RocksDB/MySQL block traces, and SPDK as future strengthening. | reflected with open experiment |
+| "DOGI-style may be a weakened reimplementation." | Keep same-path and exact-public baselines separate. | Evaluation and audits explain same-path style-compatible baselines are for apples-to-apples replay; exact public DOGI/MiDAS/SepBIT runs are sanity evidence, not unit-mixed WAF numbers. | reflected |
+| "Death cohort is not a brand-new storage philosophy." | Tone down novelty and position as PQC-specific cross-layer co-design. | Introduction/Discussion avoid universal placement claims; contribution is exposing PQC protocol lifetime to host-guided placement, not inventing semantic storage hints from scratch. | reflected |
+
+### New Work Items From The Review
+
+These are the remaining experiments that would move the paper from credible to much harder to reject:
+
+- [ ] **SPDK or true xNVMe async replay**: repeat representative pressure rows with a poll-mode or async kernel-bypass path and report p99 append/reset latency.
+- [ ] **Real DB block traces**: capture MySQL/Sysbench or RocksDB/YCSB block traces with PQC side writes instead of only using execution gates plus generated DOGI-shaped carriers.
+- [ ] **FDP prototype or emulator path**: map QUASAR families to FDP placement handles and compare the same trace under handle-count pressure.
+- [ ] **Device-diversity run**: repeat reset/append/security-capability checks on at least one additional ZNS or FDP-capable device.
+- [ ] **Sanitize scheduling benchmark**: only if the paper wants a stronger physical-erasure claim, measure the service impact of batching sanitize/crypto-erase at epoch boundaries.
+
+Do not claim these are completed until the corresponding artifacts exist.

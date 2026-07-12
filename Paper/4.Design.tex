@@ -53,6 +53,30 @@ The fields are lifecycle labels, not cryptographic secrets.  \texttt{intent} sep
 \noindent\textbf{Trust boundary.}
 \system assumes that high-priority lifecycle hints are emitted by trusted components such as the TLS terminator, KMS, logging service, or a privileged policy layer.  Untrusted tenants do not directly grant themselves exact secret-zone priority.  A deployment can enforce per-tenant exact-family quotas, tenant-local cohort namespaces, and admission limits before a hint reaches the allocator.  If provenance is missing or confidence is low, the write is routed to overflow and becomes a performance/exposure tradeoff rather than a correctness risk.
 
+\subsection{Hint Delivery and Enforcement}
+
+The hint path is explicit about what is implemented and what is a deployment route.  The prototype attaches \texttt{quasar\_hint} in the replay record and user-space request context.  A production stack can carry the same 32-byte label through a kernel-bypass request context, a file/extent metadata path, or an FDP placement handle.  Standard POSIX \texttt{write()} does not magically carry this metadata; one of the following attachment points is required.
+
+\begin{table}[t]
+\centering
+\caption{Concrete hint delivery paths and trust enforcement points.  Only trusted policy components can assign exact secret-zone priority; untrusted or unverifiable labels go to overflow.}
+\label{tab:hint-delivery}
+\footnotesize
+\begin{tabularx}{\columnwidth}{lYY}
+\toprule
+\textbf{Path} & \textbf{Carrier} & \textbf{Status and enforcement} \\
+\midrule
+Replay / user-space \zns & Request context beside each write. & Implemented in the trace and physical replay path. \\
+SPDK / xNVMe-style & Per-command request metadata. & Kernel-bypass deployment route; policy layer validates provenance before submission. \\
+File/extent path & \texttt{xattr} or \texttt{ioctl} on files/extents. & Suitable for KMS records, logs, and certificate metadata. \\
+\texttt{io\_uring} path & Submission metadata or fixed-buffer side table. & Kernel route for asynchronous TLS/KMS writers. \\
+FDP path & Placement handle from lifecycle family hash. & Maps exact families to scarce handles; bin or overflow when handles are exhausted. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The enforcement rule is the same for all paths: storage does not try to infer whether a tenant is honest from raw \texttt{epoch\_id}.  A trusted service or policy layer authenticates the writer, applies quotas and family budgets, and emits a bounded hint.  The allocator treats missing provenance as low confidence and routes the write to overflow.
+
 \subsection{Zone Families}
 
 \system allocates writes into a small set of zone families:
@@ -144,4 +168,4 @@ This rule makes wrong hints a performance problem rather than a correctness prob
 
 \subsection{Deployment Modes}
 
-The deployable design is not a single universal knob.  The default mode is \system-\dogi hybrid: history-based placement for payload and death-cohort placement for PQC secrets.  Tenant-isolation mode uses tenant-local bins when reset-time tenant mixing is unacceptable.  Strict-residual mode copies delayed-expiry stragglers to force zero final secret waiting.  Overflow mode handles missing or low-confidence hints.  These modes make the cost visible instead of pretending that perfect epoch alignment is free.
+The deployable design is not a single universal knob.  The default mode is \system-\dogi hybrid: history-based placement for payload and death-cohort placement for PQC secrets.  Tenant-isolation mode uses tenant-local bins when reset-time tenant mixing is unacceptable.  Strict-residual mode copies delayed-expiry stragglers to force zero final secret waiting.  Overflow mode handles missing or low-confidence hints.  FDP mode maps \texttt{hash(intent, epoch/cohort, security, tenant)} to placement handles and reuses the same admission, binning, and overflow policy when handles are scarce.  These modes make the cost visible instead of pretending that perfect epoch alignment is free.

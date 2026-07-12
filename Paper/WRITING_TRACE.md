@@ -12,6 +12,9 @@ This file records how the QUASAR draft follows the local writing guide and the p
 | DOGI paper structure | Define storage-placement baselines and workload families before evaluation claims, then group results into large evaluation families rather than fragmented micro-sections. | `2.Background.tex`, `6.Evaluation.tex`. |
 | DOGI/FAST workload fairness | Preserve DOGI-friendly locality before adding PQC lifecycle stress. | `3.Motivation.tex`; `6.Evaluation.tex` Evaluation Setup and PQC Lifecycle Pressure blocks. |
 | DOGI NoDaP role | Use an oracle only as an upper bound that exposes the missing lifetime signal, then turn the gap into design requirements. | `3.Motivation.tex`, `4.Design.tex`, `6.Evaluation.tex`. |
+| Bottom-review interface attack | Explain why ZNS is measured and how FDP would carry the same signal. | `2.Background.tex`, `4.Design.tex`, `7.RelatedWork.tex`, `8.Discussion.tex`. |
+| Bottom-review OS plumbing attack | Make the 32-byte hint path concrete instead of assuming POSIX carries it. | `4.Design.tex` Table `hint-delivery`, `5.Implementation.tex`. |
+| Bottom-review security attack | Scope stored PQC state and separate reset eligibility from NIST-grade sanitization. | `2.Background.tex`, `7.RelatedWork.tex`, `8.Discussion.tex`. |
 | ScaleQsim/AURORA Design | Start Design with architecture and procedure, then explain mechanisms. | `4.Design.tex`. |
 | AURORA Evaluation | State setup, baselines, exclusions, and feasibility before results. | `6.Evaluation.tex`. |
 | HowToWritePaper paragraph grammar | Claim first, concrete object, number/procedure, cause, bridge. | Each `\textbf{}` result block inside the five Evaluation subsections. |
@@ -40,10 +43,12 @@ The previous papers were used as a paragraph-role template.  The prose is origin
 | --- | --- |
 | Overall architecture before details. | `4.Design.tex`, Overview and Figure 1. |
 | State abstraction first. | Hint schema and zone family abstraction. |
+| Concrete hint plumbing. | Hint delivery and enforcement table covers replay/user-space, SPDK/xNVMe, xattr/ioctl, io_uring, and FDP paths. |
 | Requirement-to-mechanism mapping. | `4.Design.tex` maps protocol lifetime, placement budget, and reset safety to mechanisms and evaluation checks. |
 | Procedure with decision rules. | Allocation rule and conservative epoch reclaim listings. |
 | Invariant and fallback. | Epoch manager reset safety, overflow, residual migration. |
 | Deployment modes. | Default hybrid, tenant isolation, strict residual, overflow. |
+| Interface modes. | Native ZNS for measured append/reset accounting; FDP placement handles as deployment extension. |
 
 ### Evaluation
 
@@ -68,6 +73,9 @@ The draft follows paragraph roles and section order from the previous papers.  I
 
 - Do not claim QUASAR always beats DOGI on WAF.
 - Do not claim zone reset alone physically erases NAND.
+- Do not claim every TLS session key must be persisted; QUASAR targets deployments that already write bounded PQC lifecycle state.
+- Do not imply FDP is irrelevant; QUASAR is the lifecycle signal and ZNS/FDP are possible carriers.
+- Do not describe the 32-byte hint as if POSIX `write()` already transports it.
 - Do not mix exact external DOGI/MiDAS/SepBIT unit systems with same-path actual-ZNS replay.
 - Use easy p2000 rows as semantic-exposure evidence, not headline WAF evidence.
 - Use the initial real-FIO iolog gate as pipeline/exposure evidence only until real YCSB/Sysbench traces exist.

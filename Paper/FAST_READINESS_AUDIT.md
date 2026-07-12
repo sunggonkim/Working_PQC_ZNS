@@ -19,13 +19,16 @@ fallback modes.
 | Avoid toy PQC-only claims. | Workload-hardness matrix separates fairness, negative controls, pressure, claim-gate rows, and hostile robustness. | Satisfied. |
 | Keep DOGI fair. | Non-PQC controls preserve DOGI/hybrid history-placement behavior; hybrid keeps DOGI-style payload placement. | Satisfied. |
 | Use physical ZNS evidence. | WD ZN540-class actual-ZNS zonefs replay, physical pressure suites, xNVMe latency probe, and sanitize command-path validation. | Satisfied with zonefs/xNVMe caveat. |
+| Address ZNS-vs-FDP interface risk. | Background and Discussion now frame QUASAR as lifecycle-placement policy: native ZNS is evaluated for observability, FDP maps the same family signal to placement handles. | Satisfied for paper narrative; no FDP hardware result. |
+| Give concrete hint plumbing. | Design has a hint-delivery table covering replay/user-space, SPDK/xNVMe-style request metadata, xattr/ioctl, io_uring, and FDP placement handles. | Satisfied for design; kernel implementation remains future work. |
+| Scope stored-secret threat model. | Background clarifies QUASAR targets persisted PQC lifecycle state such as KMS envelopes, key-wrap records, audit logs, recovery records, and spill paths, not universal TLS session-key persistence. | Satisfied. |
 | Include exact public baselines. | Exact DOGI, MiDAS, and SepBIT sanity runs are included but not unit-mixed with same-path replay. | Satisfied with caveat. |
 | Include component ablation. | Evaluation explains lifecycle hints, DOGI payload fallback, admission, and residual migration. | Satisfied. |
 | Include robustness/sensitivity. | Missing hints, wrong epochs, tenant pressure, stragglers, residual strict mode, and open-zone pressure are covered. | Satisfied. |
 | Include space-amplification defense. | Component Ablation now reports an Exchange p2000 WAF/space sensitivity: QUASAR pays a small lifetime-utilization cost but keeps closed-zone fill high and stale secrets at zero. | Satisfied for scoped claim. |
 | Include variability evidence. | A three-seed DOGI-family ratio sweep reports 54 comparisons and shows the break-even behavior: low PQC ratios are exposure evidence, while 20% overlays produce WAF/GC gains. | Satisfied for scoped claim. |
 | Define security metric. | `stale_secret_blocks` and stale-secret block-seconds are defined; E4 exposure timeline is cited. | Satisfied. |
-| Avoid physical erase overclaim. | Paper says zone reset alone is not physical NAND erasure and separates sanitize/crypto-erase evidence. | Satisfied. |
+| Avoid physical erase overclaim. | Paper says zone reset alone is not physical NAND erasure, cites NIST SP 800-88 Rev. 2, and separates reset eligibility from sanitize/crypto-erase evidence. | Satisfied. |
 | Reproducibility. | `acceptance_check.py` reports 41/41 gates; current tests pass; PDFs build cleanly. | Satisfied. |
 | Final `HowToWritePaper.md` audit. | `LINE_BY_LINE_FAST_AUDIT.md` now checks the guide's pre-submission questions, DOGI figure-role translation, and the design-choice rule directly. Figure 5 uses subfloats; Figures 6--7 are compact one-column figures, with no embedded numeric labels. | Satisfied. |
 
@@ -34,7 +37,7 @@ fallback modes.
 | Check | Result |
 | --- | --- |
 | `make all` | Passed. |
-| `Paper/0.Main.pdf` | Single FAST/USENIX-format main PDF; 13 pages, letter. |
+| `Paper/0.Main.pdf` | Single FAST/USENIX-format main PDF; 14 pages, letter. |
 | LaTeX unresolved references/citations/errors grep | Clean. |
 | `python3 -m unittest discover -s code -p 'test*.py'` | 117 tests passed. |
 | `python3 code/sim/acceptance_check.py --out artifacts/results/acceptance-report.json` | 41/41 gates passed. |
@@ -48,6 +51,8 @@ fallback modes.
 | Table-heavy Evaluation | The paper still carries exact measured matrices in tables, but the main reviewer attacks now have figure paths: pressure, component attribution, open-zone sensitivity, and overhead. | Intentional auditability tradeoff. |
 | Full production SPDK path | Zonefs helper replay validates actual-ZNS append/reset behavior, but not final production p99 latency. | Explicitly scoped; xNVMe probe partially addresses command path. |
 | Real YCSB/JDBC block traces | Would strengthen external validity beyond DOGI-shaped YCSB pressure generation. | Optional strengthening for the scoped claim; not represented as completed. |
+| FDP implementation | The paper now explains FDP mapping, but there is no real FDP device or emulator result. | Future strengthening, not a current claim. |
+| End-to-end app p99 | Sysbench/MySQL is an execution gate, not full QUASAR-integrated DB block tracing. | Explicitly scoped. |
 | More device diversity | One WD ZN540-class device plus emulator/exact-baseline artifacts is not a wear-leveling study. | Explicit limitation. |
 | Final prose pass | Evaluation was consolidated into five FAST-style subsections with `\textbf{}` run-in leads while preserving the evidence and claim boundaries. | Checked for current build. |
 | Final figure/caption inspection | Current visual pass checked Figure 5 plus the compact one-column Figure 6--7 layout after label removal. Repeat only if figures move or new plots are added. | Checked for current build. |
@@ -62,7 +67,10 @@ fallback modes.
 | "Is this cherry-picked?" | The paper includes a three-seed ratio sweep over DOGI-style families and states that 5% PQC overlays can be WAF-negative while 20% overlays show positive WAF/GC gains. |
 | "Did QUASAR buy WAF by wasting zones?" | Open-zone/config sensitivity shows exact cohort placement can exceed the device limit, binning fits the budget, and strict cleanup has explicit WAF cost. |
 | "Hints are unrealistic or abusable." | The paper defines a trust boundary, privileged hint emitters, opaque cohort IDs, per-tenant quotas, and overflow fallback. |
+| "How does the 32-byte hint cross the stack?" | The paper gives concrete attachment points and states that POSIX write alone does not carry the hint. |
+| "Why not FDP instead of ZNS?" | The paper maps QUASAR families to FDP handles and explains why ZNS is used first for measurable append/reset accounting. |
 | "Zone reset is not secure erase." | The paper says this directly and claims reset eligibility/exposure reduction by default; sanitize/crypto-erase is a separate device capability path. |
+| "Why are these PQC artifacts stored?" | The paper scopes to deployments that already persist bounded lifecycle state and does not require universal TLS key persistence. |
 | "Strict exposure costs too much." | The paper shows residual migration can be expensive and treats strict zero-wait as an opt-in mode. |
 | "The device evidence is narrow." | The paper scopes the physical claim to one WD ZN540-class device and avoids device-internal wear claims. |
 
