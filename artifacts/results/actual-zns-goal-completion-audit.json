@@ -1,7 +1,7 @@
 {
   "blocking_count": 0,
   "completion_boundary": "The current artifacts support the scoped paper claim, but the broader user goal remains active because Reviewer-2 production blockers remain open.",
-  "fast_r2_production_blocker_count": 6,
+  "fast_r2_production_blocker_count": 5,
   "fast_r2_production_blockers": [
     {
       "evidence": [
@@ -44,15 +44,6 @@
     },
     {
       "evidence": [
-        "Sysbench/MySQL is currently an execution/readiness gate",
-        "DOGI-shaped YCSB/Sysbench carriers are generated pressure traces"
-      ],
-      "name": "real_application_block_traces",
-      "required_to_close": "Capture MySQL/Sysbench, RocksDB/YCSB, KMS, or audit-service block traces with PQC lifecycle side writes.",
-      "status": "open"
-    },
-    {
-      "evidence": [
         "physical measurements are scoped to one WD ZN540-class ZNS SSD",
         "device-specific reset/sanitize/FDP behavior is not generalized"
       ],
@@ -62,14 +53,13 @@
     }
   ],
   "full_goal_complete": false,
-  "full_goal_remaining_count": 6,
-  "main_takeaway": "The scoped actual-ZNS comparison is ready: same-path physical replay, workload hardness, pressure, external exact baselines, overhead, security boundaries, and reproducibility are all covered. However, this is not production-grade FAST evidence yet: full public-DOGI parity, SPDK/ZenFS latency, physical FDP/emulator replay, per-cohort erase scope, real app block traces, and device diversity remain open.",
+  "full_goal_remaining_count": 5,
+  "main_takeaway": "The scoped actual-ZNS comparison is ready: same-path physical replay, workload hardness, pressure, external exact baselines, overhead, security boundaries, and reproducibility are all covered. However, this is not production-grade FAST evidence yet: full public-DOGI end-to-end parity, SPDK/ZenFS tail latency, physical FDP or faithful-emulator replay, per-cohort physical erase scope, device diversity remain open.",
   "optional_strengthening": [
     "full_public_dogi_end_to_end_parity: Run DOGI and QUASAR through the same app/ZenFS/SPDK or equivalent stack with identical trace units.",
     "spdk_or_zenfs_tail_latency: Implement SPDK/ZenFS or true async xNVMe replay and report p95/p99 append/reset service latency.",
     "physical_fdp_or_faithful_emulator_replay: Run the QUASAR family-to-handle policy on FDP hardware or a faithful FDP emulator.",
     "per_cohort_physical_erase_scope: Demonstrate a dedicated namespace/media pool, per-cohort key isolation, or hardware per-zone erase semantics whose blast radius matches the cohort.",
-    "real_application_block_traces: Capture MySQL/Sysbench, RocksDB/YCSB, KMS, or audit-service block traces with PQC lifecycle side writes.",
     "device_diversity: Repeat append/reset/security/FDP evidence on at least one additional ZNS or FDP-capable device."
   ],
   "requirements": [
@@ -169,7 +159,7 @@
     },
     {
       "evidence": [
-        "acceptance=42/42",
+        "acceptance=43/43",
         "hash mismatches=0",
         "summary pipeline passed=True",
         "summary pipeline steps=20"
@@ -177,6 +167,23 @@
       "next_action": "Use run_actual_zns_summary_pipeline.py after changing any derived artifact.",
       "remaining": "Raw long-running physical replays still require device availability and time.",
       "requirement": "Make the generated actual-ZNS comparison reproducible and hash-checked.",
+      "status": "satisfied"
+    },
+    {
+      "evidence": [
+        "artifact=real-app-sysbench-pqc-block-trace",
+        "device=/dev/sdc2",
+        "sysbench_elapsed_s=8.026212453842163",
+        "blkparse_events=194570",
+        "blkparse_write_events=155360",
+        "pqc_sessions=64",
+        "pqc_records=192",
+        "all_kem_ok=True",
+        "all_sig_ok=True"
+      ],
+      "next_action": "Use the captured sysbench+PQC trace as external-validity evidence; do not treat it as a ZNS placement result.",
+      "remaining": "None for the real-application block-trace gap. This still does not prove SPDK/ZenFS tail latency or public-DOGI end-to-end parity.",
+      "requirement": "Capture real application block traces while PQC lifecycle side writes are persisted.",
       "status": "satisfied"
     },
     {

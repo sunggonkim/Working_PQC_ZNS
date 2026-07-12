@@ -1204,6 +1204,7 @@ def gate_reproducibility_manifest(manifest: dict) -> Gate:
         "deployment_selector",
         "fdp_handle_pressure",
         "fdp_handle_pressure_figure",
+        "real_app_sysbench_pqc_block_trace",
         "unified_comparison",
         "claim_matrix",
         "external_readiness",
@@ -1234,6 +1235,39 @@ def gate_reproducibility_manifest(manifest: dict) -> Gate:
     )
 
 
+def gate_real_app_block_trace(real_app: dict) -> Gate:
+    blktrace = real_app.get("blktrace", {})
+    pqc = real_app.get("pqc_side_writer", {})
+    sysbench = real_app.get("sysbench", {})
+    passed = (
+        real_app.get("artifact") == "real-app-sysbench-pqc-block-trace"
+        and "real sysbench fileio" in real_app.get("claim", "")
+        and sysbench.get("elapsed_s", 0.0) > 0.0
+        and blktrace.get("event_lines", 0) >= 10_000
+        and blktrace.get("write_events", 0) > 0
+        and pqc.get("sessions_completed", 0) >= 32
+        and pqc.get("records", 0) >= 96
+        and pqc.get("all_kem_ok") is True
+        and pqc.get("all_sig_ok") is True
+        and "does not close SPDK/ZenFS" in real_app.get("claim_boundary", "")
+    )
+    return Gate(
+        "real_app_sysbench_pqc_block_trace_captured",
+        passed,
+        {
+            "artifact": real_app.get("artifact"),
+            "device": real_app.get("device"),
+            "sysbench_elapsed_s": sysbench.get("elapsed_s"),
+            "blkparse_event_lines": blktrace.get("event_lines"),
+            "blkparse_write_events": blktrace.get("write_events"),
+            "pqc_sessions_completed": pqc.get("sessions_completed"),
+            "pqc_records": pqc.get("records"),
+            "all_kem_ok": pqc.get("all_kem_ok"),
+            "all_sig_ok": pqc.get("all_sig_ok"),
+        },
+    )
+
+
 def gate_reproducibility_validation(validation: dict) -> Gate:
     passed = (
         validation.get("passed", False)
@@ -1258,29 +1292,32 @@ def gate_reproducibility_validation(validation: dict) -> Gate:
 def gate_goal_completion_audit(goal_audit: dict) -> Gate:
     blockers = goal_audit.get("fast_r2_production_blockers", [])
     blocker_names = {row.get("name") for row in blockers}
-    required = {
+    required_remaining = {
         "full_public_dogi_end_to_end_parity",
         "spdk_or_zenfs_tail_latency",
         "physical_fdp_or_faithful_emulator_replay",
         "per_cohort_physical_erase_scope",
-        "real_application_block_traces",
         "device_diversity",
     }
+    allowed = required_remaining | {"real_application_block_traces"}
     passed = (
         goal_audit.get("scoped_claim_ready") is True
         and goal_audit.get("full_goal_complete") is False
-        and goal_audit.get("fast_r2_production_blocker_count", 0) >= len(required)
-        and required.issubset(blocker_names)
+        and goal_audit.get("fast_r2_production_blocker_count", 0) == len(blockers)
+        and len(blockers) >= len(required_remaining)
+        and required_remaining.issubset(blocker_names)
+        and blocker_names.issubset(allowed)
         and "Reviewer-2 production blockers" in goal_audit.get("completion_boundary", "")
     )
     return Gate(
-        "goal_completion_audit_keeps_fast_r2_blockers_open",
+        "goal_completion_audit_keeps_remaining_fast_r2_blockers_open",
         passed,
         {
             "scoped_claim_ready": goal_audit.get("scoped_claim_ready"),
             "full_goal_complete": goal_audit.get("full_goal_complete"),
             "fast_r2_production_blocker_count": goal_audit.get("fast_r2_production_blocker_count"),
             "blocker_names": sorted(name for name in blocker_names if name),
+            "required_remaining": sorted(required_remaining),
         },
     )
 
@@ -1657,6 +1694,7 @@ def run_checks(args: argparse.Namespace) -> dict:
     workload_hardness = load_json(args.workload_hardness)
     deployment_selector = load_json(args.deployment_selector)
     reproducibility_manifest = load_json(args.reproducibility_manifest)
+    real_app_block_trace = load_json(args.real_app_block_trace)
     reproducibility_validation = load_json(args.reproducibility_validation)
     goal_completion_audit = load_json(args.goal_completion_audit)
     gates = [
@@ -1700,6 +1738,7 @@ def run_checks(args: argparse.Namespace) -> dict:
         gate_workload_hardness_matrix(workload_hardness),
         gate_deployment_policy_selector(deployment_selector),
         gate_reproducibility_manifest(reproducibility_manifest),
+        gate_real_app_block_trace(real_app_block_trace),
         gate_reproducibility_validation(reproducibility_validation),
         gate_goal_completion_audit(goal_completion_audit),
     ]
@@ -1778,6 +1817,7 @@ def main() -> int:
     parser.add_argument("--workload-hardness", type=Path, default=Path("artifacts/results/workload-hardness-matrix.json"))
     parser.add_argument("--deployment-selector", type=Path, default=Path("artifacts/results/quasar-deployment-policy-selector.json"))
     parser.add_argument("--reproducibility-manifest", type=Path, default=Path("artifacts/results/quasar-reproducibility-manifest.json"))
+    parser.add_argument("--real-app-block-trace", type=Path, default=Path("artifacts/results/real-app-block-trace/sysbench-pqc/summary.json"))
     parser.add_argument("--reproducibility-validation", type=Path, default=Path("artifacts/results/quasar-reproducibility-validation.json"))
     parser.add_argument("--goal-completion-audit", type=Path, default=Path("artifacts/results/actual-zns-goal-completion-audit.json"))
     parser.add_argument("--figures-dir", type=Path, default=Path("artifacts/figures"))

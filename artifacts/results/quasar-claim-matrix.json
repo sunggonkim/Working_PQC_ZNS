@@ -2,9 +2,9 @@
   "by_status": {
     "qualified": 1,
     "supported": 9,
-    "supported-boundary": 2
+    "supported-boundary": 3
   },
-  "claim_count": 12,
+  "claim_count": 13,
   "claims": [
     {
       "caveat": "This is a semantic/exposure claim; WAF may remain near 1.0 on easy traces.",
@@ -70,8 +70,8 @@
       "claim": "The actual-ZNS comparison is reproducible from an artifact manifest.",
       "evidence": [
         "manifest passed=True",
-        "manifest artifacts=40",
-        "manifest commands=12",
+        "manifest artifacts=43",
+        "manifest commands=13",
         "hash validation mismatches=0"
       ],
       "paper_wording": "The paper artifact set records hashes, roles, claims, and regeneration commands for the actual-ZNS comparison, pressure curves, overhead, selector, figures, and acceptance reports; a validation pass confirms the current files still match those hashes.",
@@ -136,10 +136,27 @@
       "status": "supported-boundary"
     },
     {
-      "caveat": "Lower-overhead xNVMe/SPDK replay remains optional strengthening.",
+      "caveat": "This closes the real-application trace realism gap, but it is not SPDK/ZenFS latency, public DOGI parity, or a ZNS placement result.",
+      "claim": "A real application block trace with PQC lifecycle side writes is captured.",
+      "evidence": [
+        "artifact=real-app-sysbench-pqc-block-trace",
+        "device=/dev/sdc2",
+        "sysbench_elapsed_s=8.026212453842163",
+        "blkparse_events=194570",
+        "blkparse_write_events=155360",
+        "pqc_sessions=64",
+        "pqc_records=192",
+        "all_kem_ok=True",
+        "all_sig_ok=True"
+      ],
+      "paper_wording": "The artifact set includes a sysbench fileio block trace captured with blktrace while a liboqs PQC KMS/audit side writer persists lifecycle records.",
+      "status": "supported-boundary"
+    },
+    {
+      "caveat": "Production-grade SPDK/ZenFS replay remains a Reviewer-2 blocker for the broader goal.",
       "claim": "The current artifact set is paper-ready for the scoped system claim.",
       "evidence": [
-        "acceptance=42/42",
+        "acceptance=43/43",
         "external readiness paper_ready=True"
       ],
       "paper_wording": "The scoped claim is ready: PQC death-cohort hints improve ZNS placement/reset scheduling under clean hints, pressure, and measured fallback modes.",

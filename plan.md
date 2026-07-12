@@ -59,9 +59,10 @@ PQC lifecycle objects while preserving history-based placement for payload.
 | FDP trace-driven handle-pressure model | done as deployment model | `artifacts/results/pqc-mixed-fdp-mapping.json`, `Paper/6.Evaluation.tex` |
 | Sanitize/crypto-erase command path | done only for destructive command-path validation | physical security artifacts, `Paper/6.Evaluation.tex` |
 | Reproducibility manifest and acceptance gates | done | `acceptance-report.json`, reproducibility manifest/validation |
-| FAST R2 production-blocker audit | done and intentionally open | `artifacts/results/actual-zns-goal-completion-audit.json`: scoped claim ready, full goal incomplete, 6 production blockers |
+| FAST R2 production-blocker audit | done and intentionally open | `artifacts/results/actual-zns-goal-completion-audit.json`: scoped claim ready, full goal incomplete, 5 production blockers |
+| Real application block trace with PQC side writes | done | `artifacts/results/real-app-block-trace/sysbench-pqc/summary.json`: sysbench fileio plus liboqs KMS/audit side writer captured with blktrace |
 | HowToWritePaper final audit matrix | done | `Paper/LINE_BY_LINE_FAST_AUDIT.md` |
-| Build and tests | done | single-main `make all`, 122 Python tests, 42/42 acceptance gates |
+| Build and tests | done | single-main `make all`, 126 Python tests, 43/43 acceptance gates |
 
 Current readiness:
 
@@ -70,7 +71,7 @@ Scoped FAST-style claim: supported.
 Universal WAF claim: not supported and not allowed.
 Production SPDK claim: not supported and not allowed.
 Physical erase by reset-only or shared-namespace sanitize claim: not supported and not allowed.
-Production-grade FAST R2 claim: not complete; six blockers remain open by audit.
+Production-grade FAST R2 claim: not complete; five blockers remain open by audit.
 ```
 
 ## 3. FAST Reviewer Checkpoint Register
@@ -232,7 +233,7 @@ latency claim.
 | Checkpoint | Required Answer | Evidence | Paper Location | Status |
 | --- | --- | --- | --- | --- |
 | Can reviewers audit artifacts? | Manifest lists artifacts, roles, hashes, and regeneration commands. | reproducibility manifest/validation | Evaluation Reproducibility | closed |
-| Are tests current? | Python unit tests pass; acceptance checker passes 42/42. | test and acceptance outputs | audit docs | closed |
+| Are tests current? | Python unit tests pass; acceptance checker passes 43/43. | test and acceptance outputs | audit docs | closed |
 | Does the PDF build cleanly? | Single-main `make all` passes; unresolved refs/citations/errors grep clean. | Paper build log | audit docs | closed |
 | Are raw external runs documented? | External readiness file records exact baselines and caveats. | `external-readiness.md` | Evaluation | closed |
 
@@ -322,7 +323,7 @@ submission.
 | Experiment | Why It Would Help | Current Treatment |
 | --- | --- | --- |
 | Full SPDK/poll-mode replay | Stronger production latency and host-stack realism | explicit limitation |
-| Real YCSB/JDBC block trace capture | Stronger external validity than generated DOGI-shaped YCSB pressure | open FAST-risk reducer |
+| Real YCSB/JDBC block trace capture | Stronger external validity than generated DOGI-shaped YCSB pressure | sysbench fileio + liboqs PQC side-write blktrace done; YCSB/JDBC/RocksDB traces remain optional strengthening |
 | More physical ZNS/FDP devices | Avoid single-device concern and test device-specific reset/sanitize behavior | explicit limitation |
 | Physical FDP device or faithful emulator replay | Turn the current FDP handle model into a device-level result | open FAST-risk reducer |
 | Repeated physical pressure runs | Stronger run-to-run stability beyond the three-seed simulator sweep | open FAST-risk reducer |
@@ -419,7 +420,7 @@ Required before freezing the paper:
 - [x] Security section separates reset eligibility from sanitize/crypto-erase.
 - [x] ZNS-vs-FDP boundary is explicit: ZNS is measured, FDP is modeled, physical FDP is open.
 - [x] Overhead section separates decision overhead from zonefs helper overhead.
-- [x] Reproducibility section cites manifest, validation, and acceptance gates.
+- [x] Reproducibility section cites manifest, validation, acceptance gates, and the open production blockers.
 - [x] `HowToWritePaper.md` final audit matrix is checked item by item.
 - [x] Build and tests pass.
 - [x] Final figure-label/caption polish on current PDF build.
@@ -464,7 +465,7 @@ implementation and experiment guide, not a comment dump.
 | R4 | "Why would PQC secrets hit SSD at all?" | Scope to deployments that already persist bounded PQC lifecycle state, not universal TLS session-key persistence. | `1.Introduction.tex`, `2.Background.tex`, `8.Discussion.tex` | reflected | service-specific KMS/audit/recovery trace would strengthen |
 | R5 | "The 32-byte hint path is hand-wavy." | Name concrete attachment points and enforcement policy. | `4.Design.tex` hint-delivery table, `5.Implementation.tex`, `Paper/WRITING_TRACE.md` | reflected | kernel/SPDK request-path prototype |
 | R6 | "Untrusted tenants can abuse secret hints." | Restrict high-priority hints to trusted emitters; use opaque cohorts, quotas, admission, and overflow. | `4.Design.tex`, `8.Discussion.tex`, robustness artifacts | reflected | production policy implementation |
-| R7 | "Trace replay ignores app/OS dynamics." | Do not sell replay as full end-to-end proof; keep live DB/block-trace work as a risk reducer. | `5.Implementation.tex`, `6.Evaluation.tex`, `8.Discussion.tex`, Section 5.2 above | reflected with open experiment | real YCSB/JDBC or RocksDB/MySQL block traces |
+| R7 | "Trace replay ignores app/OS dynamics." | Do not sell replay as full end-to-end proof; capture at least one real application block trace with PQC lifecycle side writes. | `5.Implementation.tex`, `6.Evaluation.tex`, `8.Discussion.tex`, Section 5.2 above, `real-app-block-trace/sysbench-pqc` artifact | sysbench fileio + PQC side-write blktrace done | YCSB/JDBC or RocksDB/MySQL traces remain optional strengthening |
 | R8 | "DOGI-style may be a weakened reimplementation." | Keep same-path and exact-public baselines separate; audit public-DOGI parity explicitly. | `6.Evaluation.tex`, `external-readiness.md`, `dogi-public-parity-audit.md`, audit docs | reflected + audited | same app/ZenFS/SPDK path for DOGI and QUASAR |
 | R9 | "Death cohort is not a brand-new storage philosophy." | Position novelty as PQC-specific cross-layer co-design, not universal semantic-storage invention. | Abstract, Introduction, Discussion, Related Work | reflected | none for scoped claim |
 

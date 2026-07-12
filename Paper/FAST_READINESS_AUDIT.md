@@ -31,8 +31,8 @@ the measured workloads and fallback modes.
 | Include variability evidence. | A three-seed DOGI-family ratio sweep reports 54 comparisons and shows the break-even behavior: low PQC ratios are exposure evidence, while 20% overlays produce WAF/GC gains. | Satisfied for scoped claim. |
 | Define security metric. | `stale_secret_blocks` and stale-secret block-seconds are defined; E4 exposure timeline is cited. | Satisfied. |
 | Avoid physical erase overclaim. | Paper says zone reset alone is not physical NAND erasure, cites NIST SP 800-88 Rev. 2, and now states shared-namespace sanitize is destructive device/namespace-scoped command-path evidence, not per-zone epoch cleanup. | Tightened; strong erase requires matching erase scope. |
-| Reproducibility. | `acceptance_check.py` reports 42/42 gates; current tests pass; PDFs build cleanly. | Satisfied. |
-| Avoid false completion. | `actual-zns-goal-completion-audit.json` reports `scoped_claim_ready=true`, `full_goal_complete=false`, and six FAST R2 production blockers. | Satisfied as an anti-overclaim gate. |
+| Reproducibility. | `acceptance_check.py` reports 43/43 gates; current tests pass; PDFs build cleanly. | Satisfied. |
+| Avoid false completion. | `actual-zns-goal-completion-audit.json` reports `scoped_claim_ready=true`, `full_goal_complete=false`, and the remaining FAST R2 production blockers. | Satisfied as an anti-overclaim gate. |
 | Final `HowToWritePaper.md` audit. | `LINE_BY_LINE_FAST_AUDIT.md` now checks the guide's pre-submission questions, DOGI figure-role translation, and the design-choice rule directly. Figure 5 uses subfloats; the later sensitivity, FDP, and overhead figures are compact one-column figures with no embedded numeric labels. | Satisfied. |
 
 ## Current Format And Test Evidence
@@ -43,8 +43,8 @@ the measured workloads and fallback modes.
 | `Paper/0.Main.pdf` | Single FAST/USENIX-format main PDF; 14 pages, letter. |
 | LaTeX unresolved references/citations/errors grep | Clean. |
 | `python3 -m unittest discover -s code -p 'test*.py'` | 122 tests passed in the latest run. |
-| `python3 code/sim/acceptance_check.py --out artifacts/results/acceptance-report.json` | 42/42 gates passed. |
-| `python3 code/sim/report_goal_completion_audit.py` | Scoped claim ready, full goal incomplete, six FAST R2 production blockers recorded. |
+| `python3 code/sim/acceptance_check.py --out artifacts/results/acceptance-report.json` | 43/43 gates passed. |
+| `python3 code/sim/report_goal_completion_audit.py` | Scoped claim ready, full goal incomplete, remaining FAST R2 production blockers recorded. |
 | `git diff --check` | Clean for edited paper/plan files. |
 
 ## What Is Still Not "Perfect"
@@ -54,9 +54,9 @@ the measured workloads and fallback modes.
 | Figure polish | FAST reviewers read plots before prose. Motivation has a one-column semantic-gap diagnostic; Evaluation now has component ablation, open-zone/config sensitivity, FDP handle pressure, and prototype overhead figures. Numeric graph labels were removed to avoid table/figure duplication. | Checked after current rebuild. |
 | Table-heavy Evaluation | The paper still carries exact measured matrices in tables, but the main reviewer attacks now have figure paths: pressure, component attribution, open-zone sensitivity, and overhead. | Intentional auditability tradeoff. |
 | Full production SPDK path | Zonefs helper replay validates actual-ZNS append/reset behavior, but not final production p99 latency. | Required before claiming production-grade FAST latency; requires SPDK/ZenFS or equivalent app-level path. |
-| Real YCSB/JDBC block traces | Would strengthen external validity beyond DOGI-shaped YCSB pressure generation. | Optional strengthening for the scoped claim; not represented as completed. |
+| Real application block trace | A sysbench fileio run was captured with `blktrace` while a liboqs KMS/audit side writer persisted PQC lifecycle records. | Completed for sysbench+PQC side writes; YCSB/JDBC or RocksDB traces remain optional strengthening. |
 | FDP implementation | The paper now has a trace-driven FDP placement-handle model and figure, but there is no real FDP device result. | Required before positioning FDP as solved; physical FDP/emulator replay remains open. |
-| End-to-end app p99 | Sysbench/MySQL is an execution gate, not full QUASAR-integrated DB block tracing. | Explicitly scoped. |
+| End-to-end app p99 | The sysbench+PQC block trace is trace-realism evidence, not full QUASAR-integrated SPDK/ZenFS tail latency. | Explicitly scoped. |
 | More device diversity | One WD ZN540-class device plus emulator/exact-baseline artifacts is not a wear-leveling study. | Explicit limitation. |
 | Final prose pass | Evaluation was consolidated into five FAST-style subsections with `\textbf{}` run-in leads while preserving the evidence and claim boundaries. | Checked for current build. |
 | Final figure/caption inspection | Current pass includes the newly added compact FDP handle-pressure figure plus the open-zone and prototype figures. | Checked after current rebuild. |

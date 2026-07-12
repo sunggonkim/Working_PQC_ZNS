@@ -21,6 +21,17 @@ class ClaimMatrixTests(unittest.TestCase):
                     "semantic_reset_delta": 4,
                 },
             },
+            "real_app_block_trace": {
+                "artifact": "real-app-sysbench-pqc-block-trace",
+                "device": "/dev/sdc2",
+                "sysbench_elapsed_s": 8.0,
+                "blkparse_event_lines": 100_000,
+                "blkparse_write_events": 70_000,
+                "pqc_sessions_completed": 64,
+                "pqc_records": 192,
+                "all_kem_ok": True,
+                "all_sig_ok": True,
+            },
             "security_capability": {
                 "sanicap_hex": "0x3",
                 "sanitize_supported": True,
@@ -86,12 +97,13 @@ class ClaimMatrixTests(unittest.TestCase):
         summary = claim_matrix.summarize(claims)
         text = claim_matrix.markdown(summary)
 
-        self.assertEqual(summary["claim_count"], 12)
+        self.assertEqual(summary["claim_count"], 13)
         self.assertIn("supported-boundary", summary["by_status"])
         self.assertIn("Forbidden Overclaims", text)
         self.assertIn("Zone reset alone", text)
         self.assertIn("YCSB baseline-complete rows=7", text)
         self.assertIn("FDP can carry", text)
+        self.assertIn("real application block trace", text)
 
 
 if __name__ == "__main__":

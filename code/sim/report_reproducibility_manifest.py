@@ -207,6 +207,24 @@ ARTIFACTS = [
         "claim": "FDP handle pressure is reported as deployment modeling, not physical FDP performance",
     },
     {
+        "id": "real_app_sysbench_pqc_block_trace",
+        "path": "artifacts/results/real-app-block-trace/sysbench-pqc/summary.json",
+        "role": "real sysbench fileio block trace captured while liboqs PQC lifecycle side writes are persisted",
+        "claim": "the real-application block-trace blocker is closed for sysbench plus PQC side writes",
+    },
+    {
+        "id": "real_app_sysbench_pqc_blkparse_sample",
+        "path": "artifacts/results/real-app-block-trace/sysbench-pqc/blkparse-sample.txt",
+        "role": "sample of the blkparse output from the sysbench plus PQC capture",
+        "claim": "block trace evidence includes auditable blkparse event lines without storing the full raw trace in the manifest",
+    },
+    {
+        "id": "real_app_sysbench_pqc_capture_source",
+        "path": "code/tracegen/capture_real_app_block_trace.py",
+        "role": "source for capturing sysbench fileio block traces with concurrent PQC lifecycle side writes",
+        "claim": "real application block-trace capture is backed by an inspectable in-tree tool",
+    },
+    {
         "id": "unified_comparison",
         "path": "artifacts/results/unified-baseline-comparison.json",
         "role": "single JSON summary separating same-path, pressure, exact external, and boundary evidence",
@@ -277,6 +295,10 @@ COMMANDS = [
     {
         "step": "fdp_mapping",
         "command": "python3 code/quasar/fdp_mapping.py --trace artifacts/traces/pqc-mixed.jsonl --handles 8 16 32 64 128 --out artifacts/results/pqc-mixed-fdp-mapping.json --markdown-out artifacts/results/pqc-mixed-fdp-mapping.md",
+    },
+    {
+        "step": "real_app_block_trace",
+        "command": "sudo python3 code/tracegen/capture_real_app_block_trace.py --duration 8 --sysbench-total-size 64M --sysbench-file-num 8 --sysbench-threads 4 --pqc-sessions 64 --pqc-sleep-ms 5",
     },
     {
         "step": "fast_style_figures",

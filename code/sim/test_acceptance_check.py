@@ -432,13 +432,12 @@ class AcceptanceCheckTests(unittest.TestCase):
 
         self.assertTrue(all(gate.passed for gate in gates))
 
-    def test_goal_completion_audit_gate_requires_open_fast_r2_blockers(self) -> None:
+    def test_goal_completion_audit_gate_requires_remaining_fast_r2_blockers(self) -> None:
         blockers = [
             {"name": "full_public_dogi_end_to_end_parity"},
             {"name": "spdk_or_zenfs_tail_latency"},
             {"name": "physical_fdp_or_faithful_emulator_replay"},
             {"name": "per_cohort_physical_erase_scope"},
-            {"name": "real_application_block_traces"},
             {"name": "device_diversity"},
         ]
         goal_audit = {
@@ -451,9 +450,40 @@ class AcceptanceCheckTests(unittest.TestCase):
 
         self.assertTrue(accept.gate_goal_completion_audit(goal_audit).passed)
 
+        with_real_app_still_open = dict(goal_audit)
+        with_real_app_still_open["fast_r2_production_blockers"] = blockers + [
+            {"name": "real_application_block_traces"}
+        ]
+        with_real_app_still_open["fast_r2_production_blocker_count"] = len(
+            with_real_app_still_open["fast_r2_production_blockers"]
+        )
+        self.assertTrue(accept.gate_goal_completion_audit(with_real_app_still_open).passed)
+
         unsafe = dict(goal_audit)
         unsafe["full_goal_complete"] = True
         self.assertFalse(accept.gate_goal_completion_audit(unsafe).passed)
+
+    def test_real_app_block_trace_gate(self) -> None:
+        real_app = {
+            "artifact": "real-app-sysbench-pqc-block-trace",
+            "claim": "real sysbench fileio block trace captured while PQC lifecycle side writes were persisted",
+            "claim_boundary": "Closes the real-application block-trace blocker; does not close SPDK/ZenFS latency.",
+            "device": "/dev/sdc2",
+            "sysbench": {"elapsed_s": 8.0},
+            "blktrace": {"event_lines": 100_000, "write_events": 70_000},
+            "pqc_side_writer": {
+                "sessions_completed": 64,
+                "records": 192,
+                "all_kem_ok": True,
+                "all_sig_ok": True,
+            },
+        }
+
+        self.assertTrue(accept.gate_real_app_block_trace(real_app).passed)
+
+        weak = dict(real_app)
+        weak["blktrace"] = {"event_lines": 10, "write_events": 5}
+        self.assertFalse(accept.gate_real_app_block_trace(weak).passed)
 
 
 if __name__ == "__main__":

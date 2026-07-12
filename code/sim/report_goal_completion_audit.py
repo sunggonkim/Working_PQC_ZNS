@@ -50,6 +50,23 @@ def xnvme_latency_validated(xnvme: dict[str, Any]) -> bool:
     )
 
 
+def real_app_block_trace_validated(real_app: dict[str, Any]) -> bool:
+    blktrace = real_app.get("blktrace", {})
+    pqc = real_app.get("pqc_side_writer", {})
+    sysbench = real_app.get("sysbench", {})
+    return bool(
+        real_app.get("artifact") == "real-app-sysbench-pqc-block-trace"
+        and blktrace.get("event_lines", 0) >= 10_000
+        and blktrace.get("write_events", 0) > 0
+        and pqc.get("sessions_completed", 0) >= 32
+        and pqc.get("records", 0) >= 96
+        and pqc.get("all_kem_ok") is True
+        and pqc.get("all_sig_ok") is True
+        and sysbench.get("elapsed_s", 0.0) > 0.0
+        and "real sysbench fileio" in real_app.get("claim", "")
+    )
+
+
 def production_blocker(name: str, evidence: list[str], required_to_close: str) -> dict[str, Any]:
     return {
         "name": name,
@@ -59,9 +76,20 @@ def production_blocker(name: str, evidence: list[str], required_to_close: str) -
     }
 
 
+BLOCKER_LABELS = {
+    "full_public_dogi_end_to_end_parity": "full public-DOGI end-to-end parity",
+    "spdk_or_zenfs_tail_latency": "SPDK/ZenFS tail latency",
+    "physical_fdp_or_faithful_emulator_replay": "physical FDP or faithful-emulator replay",
+    "per_cohort_physical_erase_scope": "per-cohort physical erase scope",
+    "real_application_block_traces": "real application block traces",
+    "device_diversity": "device diversity",
+}
+
+
 def fast_r2_production_blockers(
     unified: dict[str, Any],
     readiness: dict[str, Any],
+    real_app_block_trace: dict[str, Any],
 ) -> list[dict[str, Any]]:
     """List fatal Reviewer-2 blockers for a production-grade FAST claim.
 
@@ -119,14 +147,6 @@ def fast_r2_production_blockers(
             ),
         ),
         production_blocker(
-            "real_application_block_traces",
-            [
-                "Sysbench/MySQL is currently an execution/readiness gate",
-                "DOGI-shaped YCSB/Sysbench carriers are generated pressure traces",
-            ],
-            "Capture MySQL/Sysbench, RocksDB/YCSB, KMS, or audit-service block traces with PQC lifecycle side writes.",
-        ),
-        production_blocker(
             "device_diversity",
             [
                 "physical measurements are scoped to one WD ZN540-class ZNS SSD",
@@ -135,6 +155,18 @@ def fast_r2_production_blockers(
             "Repeat append/reset/security/FDP evidence on at least one additional ZNS or FDP-capable device.",
         ),
     ]
+    if not real_app_block_trace_validated(real_app_block_trace):
+        blockers.insert(
+            -1,
+            production_blocker(
+                "real_application_block_traces",
+                [
+                    "Sysbench/MySQL is currently an execution/readiness gate",
+                    "DOGI-shaped YCSB/Sysbench carriers are generated pressure traces",
+                ],
+                "Capture MySQL/Sysbench, RocksDB/YCSB, KMS, or audit-service block traces with PQC lifecycle side writes.",
+            ),
+        )
     return blockers
 
 
@@ -144,6 +176,7 @@ def build_audit(
     acceptance: dict[str, Any],
     validation: dict[str, Any],
     pipeline_manifest: dict[str, Any],
+    real_app_block_trace: dict[str, Any],
 ) -> dict[str, Any]:
     same = unified["same_path_physical_zns"]
     ycsb = unified["ycsb_pressure_curve"]
@@ -329,6 +362,28 @@ def build_audit(
             "Use run_actual_zns_summary_pipeline.py after changing any derived artifact.",
         ),
         item(
+            "Capture real application block traces while PQC lifecycle side writes are persisted.",
+            "satisfied" if real_app_block_trace_validated(real_app_block_trace) else "missing",
+            [
+                f"artifact={real_app_block_trace.get('artifact')}",
+                f"device={real_app_block_trace.get('device')}",
+                f"sysbench_elapsed_s={real_app_block_trace.get('sysbench', {}).get('elapsed_s')}",
+                f"blkparse_events={real_app_block_trace.get('blktrace', {}).get('event_lines')}",
+                f"blkparse_write_events={real_app_block_trace.get('blktrace', {}).get('write_events')}",
+                f"pqc_sessions={real_app_block_trace.get('pqc_side_writer', {}).get('sessions_completed')}",
+                f"pqc_records={real_app_block_trace.get('pqc_side_writer', {}).get('records')}",
+                f"all_kem_ok={real_app_block_trace.get('pqc_side_writer', {}).get('all_kem_ok')}",
+                f"all_sig_ok={real_app_block_trace.get('pqc_side_writer', {}).get('all_sig_ok')}",
+            ],
+            (
+                "None for the real-application block-trace gap. This still does not prove SPDK/ZenFS "
+                "tail latency or public-DOGI end-to-end parity."
+            )
+            if real_app_block_trace_validated(real_app_block_trace)
+            else "Need a captured MySQL/Sysbench, RocksDB/YCSB, KMS, or audit-service block trace with PQC side writes.",
+            "Use the captured sysbench+PQC trace as external-validity evidence; do not treat it as a ZNS placement result.",
+        ),
+        item(
             "Show external/system readiness has no current paper blockers for the scoped claim.",
             "satisfied" if readiness.get("paper_ready_external") and not readiness.get("blockers") else "missing",
             [
@@ -342,12 +397,14 @@ def build_audit(
     ]
 
     blocking = [row for row in requirements if row["status"] in {"missing", "weak"}]
-    production_blockers = fast_r2_production_blockers(unified, readiness)
+    production_blockers = fast_r2_production_blockers(unified, readiness, real_app_block_trace)
     optional_strengthening = [
         f"{row['name']}: {row['required_to_close']}" for row in production_blockers
     ]
     scoped_claim_ready = not blocking
     full_goal_complete = scoped_claim_ready and not production_blockers
+    blocker_names = [row["name"] for row in production_blockers]
+    blocker_phrase = ", ".join(BLOCKER_LABELS.get(name, name.replace("_", " ")) for name in blocker_names)
     return {
         "scope": "completion audit for actual-ZNS DOGI/SepBIT/MiDAS/FIFO vs QUASAR comparison",
         "scoped_claim_ready": scoped_claim_ready,
@@ -367,9 +424,8 @@ def build_audit(
         "main_takeaway": (
             "The scoped actual-ZNS comparison is ready: same-path physical replay, workload hardness, pressure, "
             "external exact baselines, overhead, security boundaries, and reproducibility are all covered. "
-            "However, this is not production-grade FAST evidence yet: full public-DOGI parity, SPDK/ZenFS latency, "
-            "physical FDP/emulator replay, per-cohort erase scope, real app block traces, and device diversity "
-            "remain open."
+            "However, this is not production-grade FAST evidence yet: "
+            f"{blocker_phrase} remain open."
         )
         if not blocking
         else "Some requirements still need stronger evidence before the scoped claim is ready.",
@@ -432,6 +488,11 @@ def main() -> int:
         type=Path,
         default=Path("artifacts/results/actual-zns-summary-pipeline-manifest.json"),
     )
+    parser.add_argument(
+        "--real-app-block-trace",
+        type=Path,
+        default=Path("artifacts/results/real-app-block-trace/sysbench-pqc/summary.json"),
+    )
     parser.add_argument("--out", type=Path, default=Path("artifacts/results/actual-zns-goal-completion-audit.json"))
     parser.add_argument("--markdown-out", type=Path, default=Path("artifacts/results/actual-zns-goal-completion-audit.md"))
     args = parser.parse_args()
@@ -442,6 +503,7 @@ def main() -> int:
         load_json(args.acceptance),
         load_json(args.validation),
         load_json(args.pipeline_manifest),
+        load_json(args.real_app_block_trace) if args.real_app_block_trace.exists() else {},
     )
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8")

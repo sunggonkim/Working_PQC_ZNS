@@ -1,0 +1,348 @@
+{
+  "artifact": "real-app-sysbench-pqc-block-trace",
+  "blktrace": {
+    "action_counts": {
+      "A": 23074,
+      "C": 34294,
+      "D": 33138,
+      "G": 25696,
+      "I": 19988,
+      "M": 3135,
+      "P": 10165,
+      "Q": 28782,
+      "R": 6084,
+      "U": 10156,
+      "UT": 9,
+      "X": 49
+    },
+    "blkparse_path": "artifacts/results/real-app-block-trace/sysbench-pqc/blkparse.txt",
+    "blkparse_sample_path": "artifacts/results/real-app-block-trace/sysbench-pqc/blkparse-sample.txt",
+    "blkparse_sha256": "654cea612d9f4f9f46984fd416e4157c5fd1dda55d6ec4271799e3c4a8154eac",
+    "blktrace_stderr": "",
+    "blktrace_stdout": "=== sdc2 ===\n  CPU  0:                 3284 events,      154 KiB data\n  CPU  1:                 3041 events,      143 KiB data\n  CPU  2:                    0 events,        0 KiB data\n  CPU  3:                    0 events,        0 KiB data\n  CPU  4:                   37 events,        2 KiB data\n  CPU  5:                    0 events,        0 KiB data\n  CPU  6:                    0 events,        0 KiB data\n  CPU  7:                 4636 events,      218 KiB data\n  CPU  8:                 1339 events,       63 KiB data\n  CPU  9:                    0 events,        0 KiB data\n  CPU 10:                32564 events,     1527 KiB data\n  CPU 11:                33299 events,     1561 KiB data\n  CPU 12:                  680 events,       32 KiB data\n  CPU 13:                    0 events,        0 KiB data\n  CPU 14:                 4182 events,      197 KiB data\n  CPU 15:                 5361 events,      252 KiB data\n  CPU 16:                 2523 events,      119 KiB data\n  CPU 17:                 2941 events,      138 KiB data\n  CPU 18:                 3653 events,      172 KiB data\n  CPU 19:                 8883 events,      417 KiB data\n  CPU 20:                32462 events,     1522 KiB data\n  CPU 21:                 2619 events,      123 KiB data\n  CPU 22:                 1421 events,       67 KiB data\n  CPU 23:                 3206 events,      151 KiB data\n  CPU 24:                17920 events,      841 KiB data\n  CPU 25:                  879 events,       42 KiB data\n  CPU 26:                11799 events,      554 KiB data\n  CPU 27:                 9008 events,      423 KiB data\n  CPU 28:                    0 events,        0 KiB data\n  CPU 29:                    0 events,        0 KiB data\n  CPU 30:                  255 events,       12 KiB data\n  CPU 31:                    0 events,        0 KiB data\n  CPU 32:                    0 events,        0 KiB data\n  CPU 33:                    0 events,        0 KiB data\n  CPU 34:                    0 events,        0 KiB data\n  CPU 35:                    0 events,        0 KiB data\n  CPU 36:                 2589 events,      122 KiB data\n  CPU 37:                 4606 events,      216 KiB data\n  CPU 38:                 3167 events,      149 KiB data\n  CPU 39:                 2655 events,      125 KiB data\n  CPU 40:                  726 events,       35 KiB data\n  CPU 41:                 2107 events,       99 KiB data\n  CPU 42:                 1433 events,       68 KiB data\n  CPU 43:                  765 events,       36 KiB data\n  CPU 44:                   33 events,        2 KiB data\n  CPU 45:                    0 events,        0 KiB data\n  CPU 46:                    0 events,        0 KiB data\n  CPU 47:                    0 events,        0 KiB data\n  Total:                204073 events (dropped 0),     9567 KiB data\n",
+    "discard_events": 0,
+    "event_lines": 194570,
+    "flush_events": 34878,
+    "raw_dir": "artifacts/results/real-app-block-trace/sysbench-pqc/raw",
+    "raw_files": [
+      {
+        "bytes": 157648,
+        "path": "artifacts/results/real-app-block-trace/sysbench-pqc/raw/sysbench-pqc.blktrace.0",
+        "sha256": "ba61ebd9207baf6c5e13693a424565da1540779490da5cb9379154aa86fcd88c"
+      },
+      {
+        "bytes": 145976,
+        "path": "artifacts/results/real-app-block-trace/sysbench-pqc/raw/sysbench-pqc.blktrace.1",
+        "sha256": "c32893504f40b6e4368563b57fa3895fbdd6caa7666d1306f87dee1794ee4d8f"
+      },
+      {
+        "bytes": 1563096,
+        "path": "artifacts/results/real-app-block-trace/sysbench-pqc/raw/sysbench-pqc.blktrace.10",
+        "sha256": "22e66837fc42e366b5082ddbc06730c6c3e457b51e825bf87b21f7aa0c4626ec"
+      },
+      {
+        "bytes": 1598360,
+        "path": "artifacts/results/real-app-block-trace/sysbench-pqc/raw/sysbench-pqc.blktrace.11",
+        "sha256": "cddd062251ceea23fcd36701308eb5bed0226fa349c9d8d3a3266175aa9c30c4"
+      },
+      {
+        "bytes": 32648,
+        "path": "artifacts/results/real-app-block-trace/sysbench-pqc/raw/sysbench-pqc.blktrace.12",
+        "sha256": "0e3b4af7d5ed7f712392b342ed6d79846fe008ec0364e982e364dece76111ff4"
+      },
+      {
+        "bytes": 0,
+        "path": "artifacts/results/real-app-block-trace/sysbench-pqc/raw/sysbench-pqc.blktrace.13",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "bytes": 200744,
+        "path": "artifacts/results/real-app-block-trace/sysbench-pqc/raw/sysbench-pqc.blktrace.14",
+        "sha256": "895646f5880d17a222aebad3f9b500a0e344153504e513116f521c4df7983b8b"
+      },
+      {
+        "bytes": 257344,
+        "path": "artifacts/results/real-app-block-trace/sysbench-pqc/raw/sysbench-pqc.blktrace.15",
+        "sha256": "4a465919c29ec2fb92aaa16d78ad4f17ea66ded69ec10f0105e56c0907655195"
+      },
+      {
+        "bytes": 121112,
+        "path": "artifacts/results/real-app-block-trace/sysbench-pqc/raw/sysbench-pqc.blktrace.16",
+        "sha256": "f8d120e3f4509d4cc161a9e0a3eda4d744e322f605a17d3cdd2ea9c258997a8b"
+      },
+      {
+        "bytes": 141176,
+        "path": "artifacts/results/real-app-block-trace/sysbench-pqc/raw/sysbench-pqc.blktrace.17",
+        "sha256": "e255c0551765c930d75a674e2a88f6539518034c36a1a0a04c55de351ec7c9d1"
+      },
+      {
+        "bytes": 175376,
+        "path": "artifacts/results/real-app-block-trace/sysbench-pqc/raw/sysbench-pqc.blktrace.18",
+        "sha256": "616bd659aab60161afc551922f12b884bca094d23b6b33608af9c6e42ec1d300"
+      },
+      {
+        "bytes": 426392,
+        "path": "artifacts/results/real-app-block-trace/sysbench-pqc/raw/sysbench-pqc.blktrace.19",
+        "sha256": "f6a11a76d8826eaca1c32ab69c1fe66bb445eb245fc316354ed492cf09c82719"
+      },
+      {
+        "bytes": 0,
+        "path": "artifacts/results/real-app-block-trace/sysbench-pqc/raw/sysbench-pqc.blktrace.2",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "bytes": 1558184,
+        "path": "artifacts/results/real-app-block-trace/sysbench-pqc/raw/sysbench-pqc.blktrace.20",
+        "sha256": "965a2aaad03f7ee71f28aa7c0893a335cd7730bd5759883620803c8cb41e7d3c"
+      },
+      {
+        "bytes": 125752,
+        "path": "artifacts/results/real-app-block-trace/sysbench-pqc/raw/sysbench-pqc.blktrace.21",
+        "sha256": "65c1ae6845a29815ac7bfa0f76579ada46fc8b237a7c8e2ef8fc31e3df941766"
+      },
+      {
+        "bytes": 68208,
+        "path": "artifacts/results/real-app-block-trace/sysbench-pqc/raw/sysbench-pqc.blktrace.22",
+        "sha256": "692a1c4a8f094702343870587391435215eabf8ce03595aca7ecd11450b5344a"
+      },
+      {
+        "bytes": 153928,
+        "path": "artifacts/results/real-app-block-trace/sysbench-pqc/raw/sysbench-pqc.blktrace.23",
+        "sha256": "481e0a8733035614d28d9c2dfbabd647285894c8b6095ac8bfd4632a902f25ae"
+      },
+      {
+        "bytes": 860200,
+        "path": "artifacts/results/real-app-block-trace/sysbench-pqc/raw/sysbench-pqc.blktrace.24",
+        "sha256": "67a588fed14e1053703bc35fd8c9dc55a4eee62395f40d668e63e83c5e2fc274"
+      },
+      {
+        "bytes": 42208,
+        "path": "artifacts/results/real-app-block-trace/sysbench-pqc/raw/sysbench-pqc.blktrace.25",
+        "sha256": "2945033d079c3476bae00ea6cee7976bf7e91a11f62529b47adcf09188379430"
+      },
+      {
+        "bytes": 566392,
+        "path": "artifacts/results/real-app-block-trace/sysbench-pqc/raw/sysbench-pqc.blktrace.26",
+        "sha256": "eaca43c5f4a81e4690b510e635a2d8d3476231aea9a9326358863aabe4df30ff"
+      },
+      {
+        "bytes": 432408,
+        "path": "artifacts/results/real-app-block-trace/sysbench-pqc/raw/sysbench-pqc.blktrace.27",
+        "sha256": "787003387fa131471c0ef58f4681dc89b2d5f139484b925939f18b940da114af"
+      },
+      {
+        "bytes": 0,
+        "path": "artifacts/results/real-app-block-trace/sysbench-pqc/raw/sysbench-pqc.blktrace.28",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "bytes": 0,
+        "path": "artifacts/results/real-app-block-trace/sysbench-pqc/raw/sysbench-pqc.blktrace.29",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "bytes": 0,
+        "path": "artifacts/results/real-app-block-trace/sysbench-pqc/raw/sysbench-pqc.blktrace.3",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "bytes": 12248,
+        "path": "artifacts/results/real-app-block-trace/sysbench-pqc/raw/sysbench-pqc.blktrace.30",
+        "sha256": "2d54838ff1883a842241834305ce18f1a6cbb0adb3ef67ec7b27e9a09545e491"
+      },
+      {
+        "bytes": 0,
+        "path": "artifacts/results/real-app-block-trace/sysbench-pqc/raw/sysbench-pqc.blktrace.31",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "bytes": 0,
+        "path": "artifacts/results/real-app-block-trace/sysbench-pqc/raw/sysbench-pqc.blktrace.32",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "bytes": 0,
+        "path": "artifacts/results/real-app-block-trace/sysbench-pqc/raw/sysbench-pqc.blktrace.33",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "bytes": 0,
+        "path": "artifacts/results/real-app-block-trace/sysbench-pqc/raw/sysbench-pqc.blktrace.34",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "bytes": 0,
+        "path": "artifacts/results/real-app-block-trace/sysbench-pqc/raw/sysbench-pqc.blktrace.35",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "bytes": 124312,
+        "path": "artifacts/results/real-app-block-trace/sysbench-pqc/raw/sysbench-pqc.blktrace.36",
+        "sha256": "684573af94608e6ffe66afcff15b8ef67384d45ac9c66e532db28a5743861ac4"
+      },
+      {
+        "bytes": 221088,
+        "path": "artifacts/results/real-app-block-trace/sysbench-pqc/raw/sysbench-pqc.blktrace.37",
+        "sha256": "f9aa9bfd27dbd5f8177eb90216e24a059baf06b5189b5b2c458c8d7be1f5f2bc"
+      },
+      {
+        "bytes": 152040,
+        "path": "artifacts/results/real-app-block-trace/sysbench-pqc/raw/sysbench-pqc.blktrace.38",
+        "sha256": "bc43d3b2cb758c9eb4a3f7dafe578c87d3956dc05b13ca45f41f949ccaa521c0"
+      },
+      {
+        "bytes": 127464,
+        "path": "artifacts/results/real-app-block-trace/sysbench-pqc/raw/sysbench-pqc.blktrace.39",
+        "sha256": "3c304f71488d843f4158dda67c36ca53de1f3a745a93cf088671b28200c64093"
+      },
+      {
+        "bytes": 1792,
+        "path": "artifacts/results/real-app-block-trace/sysbench-pqc/raw/sysbench-pqc.blktrace.4",
+        "sha256": "621584ee010d414032a1f80beaaa499941e8ff5db5fa2e7923cc9c95dd1f1378"
+      },
+      {
+        "bytes": 34856,
+        "path": "artifacts/results/real-app-block-trace/sysbench-pqc/raw/sysbench-pqc.blktrace.40",
+        "sha256": "113c70a8c6c6b4c4a7d8248580df6c44208c584d40c18ba686060a775e2efb02"
+      },
+      {
+        "bytes": 101136,
+        "path": "artifacts/results/real-app-block-trace/sysbench-pqc/raw/sysbench-pqc.blktrace.41",
+        "sha256": "f3aad2c6b3d9ee04bf86f373cdd8b56ac1f6a89e1d7cecd698cc35c9493710bf"
+      },
+      {
+        "bytes": 68808,
+        "path": "artifacts/results/real-app-block-trace/sysbench-pqc/raw/sysbench-pqc.blktrace.42",
+        "sha256": "53c46d89ae0882a9d5aabb6202886378a66968ba945c64df12fffed98d3bfe94"
+      },
+      {
+        "bytes": 36760,
+        "path": "artifacts/results/real-app-block-trace/sysbench-pqc/raw/sysbench-pqc.blktrace.43",
+        "sha256": "ff65e4606133ac7ef63ee9cea1aea6d9ae4dae4ae169db80cd776f4c258e51f3"
+      },
+      {
+        "bytes": 1592,
+        "path": "artifacts/results/real-app-block-trace/sysbench-pqc/raw/sysbench-pqc.blktrace.44",
+        "sha256": "ea9c5ec3421cb0a13b4b43faf6f3121c975dd224e34529f36715b07d41bb8d91"
+      },
+      {
+        "bytes": 0,
+        "path": "artifacts/results/real-app-block-trace/sysbench-pqc/raw/sysbench-pqc.blktrace.45",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "bytes": 0,
+        "path": "artifacts/results/real-app-block-trace/sysbench-pqc/raw/sysbench-pqc.blktrace.46",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "bytes": 0,
+        "path": "artifacts/results/real-app-block-trace/sysbench-pqc/raw/sysbench-pqc.blktrace.47",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "bytes": 0,
+        "path": "artifacts/results/real-app-block-trace/sysbench-pqc/raw/sysbench-pqc.blktrace.5",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "bytes": 0,
+        "path": "artifacts/results/real-app-block-trace/sysbench-pqc/raw/sysbench-pqc.blktrace.6",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "bytes": 222544,
+        "path": "artifacts/results/real-app-block-trace/sysbench-pqc/raw/sysbench-pqc.blktrace.7",
+        "sha256": "48bd0c386db32c4b448d5669b2b8f21d013e8008cad04effd1f104c50e24b12b"
+      },
+      {
+        "bytes": 64280,
+        "path": "artifacts/results/real-app-block-trace/sysbench-pqc/raw/sysbench-pqc.blktrace.8",
+        "sha256": "2a5155be86a9c8ee876e4bd19d469c2f4475d3cd3dea34c897ca8ee3566816bf"
+      },
+      {
+        "bytes": 0,
+        "path": "artifacts/results/real-app-block-trace/sysbench-pqc/raw/sysbench-pqc.blktrace.9",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "read_events": 14,
+    "rwbs_counts": {
+      "FN": 18866,
+      "FWFSM": 4596,
+      "FWS": 11416,
+      "N": 20330,
+      "RA": 14,
+      "W": 341,
+      "WS": 113496,
+      "WSM": 25511
+    },
+    "write_events": 155360
+  },
+  "claim": "real sysbench fileio block trace captured while PQC lifecycle side writes were persisted",
+  "claim_boundary": "Closes the real-application block-trace blocker for sysbench+PQC side writes; does not close SPDK/ZenFS latency, public DOGI parity, physical FDP, erase scope, or device diversity.",
+  "device": "/dev/sdc2",
+  "duration_s": 8,
+  "mount": {
+    "fstype": "ext4",
+    "source": "/dev/sdc2",
+    "target": "/"
+  },
+  "pqc_side_writer": {
+    "all_kem_ok": true,
+    "all_sig_ok": true,
+    "audit_log": "artifacts/runtime/real-app-block-trace/sysbench-pqc/pqc-kms-audit.jsonl",
+    "bytes_written": 26658,
+    "elapsed_s": 1.0509748458862305,
+    "kem": "ML-KEM-768",
+    "kem_ok_sessions": 64,
+    "records": 192,
+    "records_per_s": 182.68753124923435,
+    "sessions_completed": 64,
+    "sessions_requested": 64,
+    "sig": "ML-DSA-65",
+    "sig_ok_sessions": 64
+  },
+  "sysbench": {
+    "cleanup_command": [
+      "sysbench",
+      "fileio",
+      "--file-total-size=64M",
+      "--file-num=8",
+      "--file-block-size=4096",
+      "cleanup"
+    ],
+    "cleanup_stdout": "sysbench 1.1.0-de18a03 (using bundled LuaJIT 2.1.0-beta3)\n\nRemoving test files...\n",
+    "command": [
+      "sysbench",
+      "fileio",
+      "--file-total-size=64M",
+      "--file-num=8",
+      "--file-block-size=4096",
+      "--threads=4",
+      "--time=8",
+      "--file-test-mode=rndrw",
+      "--file-io-mode=sync",
+      "--file-fsync-freq=32",
+      "run"
+    ],
+    "elapsed_s": 8.026212453842163,
+    "ended_at": 1783831022.8045194,
+    "fsyncs_reported": null,
+    "prepare_command": [
+      "sysbench",
+      "fileio",
+      "--file-total-size=64M",
+      "--file-num=8",
+      "--file-block-size=4096",
+      "prepare"
+    ],
+    "read_ops_reported": null,
+    "started_at": 1783831014.778307,
+    "stderr": "",
+    "stdout": "sysbench 1.1.0-de18a03 (using bundled LuaJIT 2.1.0-beta3)\n\nRunning the test with following options:\nNumber of threads: 4\nInitializing random number generator from current time\n\n\nExtra file open flags: (none)\n8 files, 8MiB each\n64MiB total file size\nBlock size 4KiB\nNumber of IO requests: 0\nRead/Write ratio for combined random IO test: 1.50\nPeriodic FSYNC enabled, calling fsync() each 32 requests.\nCalling fsync() at the end of test, Enabled.\nUsing synchronous I/O mode\nDoing random r/w test\nInitializing worker threads...\n\nThreads started!\n\n\nThroughput:\n         read:  IOPS=3127.40 12.22 MiB/s (12.81 MB/s)\n         write: IOPS=2084.89 8.14 MiB/s (8.54 MB/s)\n         fsync: IOPS=1288.23\n\nLatency (ms):\n         min:                                  0.00\n         avg:                                  0.61\n         max:                                 17.92\n         95th percentile:                      3.82\n         sum:                              31956.83\n\n",
+    "write_ops_reported": null
+  },
+  "sysbench_mode": "rndrw",
+  "trace_started_at": 1783831013.327129
+}

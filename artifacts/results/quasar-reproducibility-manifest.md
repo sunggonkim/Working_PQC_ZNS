@@ -2,7 +2,7 @@
 
 - Scope: reproducibility manifest for actual-ZNS baseline-vs-QUASAR comparison
 - Passed: `True`
-- Artifacts: `40`
+- Artifacts: `43`
 - Missing or empty: `[]`
 
 ## Artifacts
@@ -41,11 +41,14 @@
 | `deployment_selector` | `artifacts/results/quasar-deployment-policy-selector.json` | 3363 | `5effb3c19a59` | deployable policy selector for default, tenant-isolation, strict-residual, and fallback modes | QUASAR improvement is an explicit mode selector, not one universal knob |
 | `fdp_handle_pressure` | `artifacts/results/pqc-mixed-fdp-mapping.json` | 91046 | `2c5d3ef64630` | trace-driven QUASAR-to-FDP placement-handle pressure model | FDP can carry QUASAR lifecycle families, but scarce handles collide death cohorts |
 | `fdp_handle_pressure_figure` | `artifacts/figures/fast-style/fig8-fdp-handle-pressure.pdf` | 13196 | `7ca6986bd95b` | paper Figure 8 for FDP handle-count purity and collision pressure | FDP handle pressure is reported as deployment modeling, not physical FDP performance |
-| `unified_comparison` | `artifacts/results/unified-baseline-comparison.json` | 183910 | `636ea8cd2352` | single JSON summary separating same-path, pressure, exact external, and boundary evidence | paper-ready comparison summary |
-| `claim_matrix` | `artifacts/results/quasar-claim-matrix.json` | 8563 | `e5583189769c` | claim-to-evidence guardrail | supported, qualified, and boundary claims are separated |
-| `external_readiness` | `artifacts/results/external-readiness.json` | 34923 | `d179c3da3805` | conservative readiness report for external/system evidence | no current blockers or pending paper-grade evidence gaps for scoped claim |
-| `goal_completion_audit` | `artifacts/results/actual-zns-goal-completion-audit.json` | 10213 | `a3d1104afcb8` | requirement-by-requirement audit of the actual-ZNS comparison goal | scoped claim is ready while FAST R2 production blockers keep the broader goal open |
-| `acceptance` | `artifacts/results/acceptance-report.json` | 39512 | `7ba766ef1253` | local acceptance gate summary | all reproducibility and evidence gates pass |
+| `real_app_sysbench_pqc_block_trace` | `artifacts/results/real-app-block-trace/sysbench-pqc/summary.json` | 17668 | `3fc13b42ee25` | real sysbench fileio block trace captured while liboqs PQC lifecycle side writes are persisted | the real-application block-trace blocker is closed for sysbench plus PQC side writes |
+| `real_app_sysbench_pqc_blkparse_sample` | `artifacts/results/real-app-block-trace/sysbench-pqc/blkparse-sample.txt` | 15108 | `bc5cbaae52a1` | sample of the blkparse output from the sysbench plus PQC capture | block trace evidence includes auditable blkparse event lines without storing the full raw trace in the manifest |
+| `real_app_sysbench_pqc_capture_source` | `code/tracegen/capture_real_app_block_trace.py` | 15612 | `d9dcc006eb7d` | source for capturing sysbench fileio block traces with concurrent PQC lifecycle side writes | real application block-trace capture is backed by an inspectable in-tree tool |
+| `unified_comparison` | `artifacts/results/unified-baseline-comparison.json` | 187072 | `7fc8c8117ca2` | single JSON summary separating same-path, pressure, exact external, and boundary evidence | paper-ready comparison summary |
+| `claim_matrix` | `artifacts/results/quasar-claim-matrix.json` | 9393 | `a4466f3957ac` | claim-to-evidence guardrail | supported, qualified, and boundary claims are separated |
+| `external_readiness` | `artifacts/results/external-readiness.json` | 34923 | `2c13c1223bd8` | conservative readiness report for external/system evidence | no current blockers or pending paper-grade evidence gaps for scoped claim |
+| `goal_completion_audit` | `artifacts/results/actual-zns-goal-completion-audit.json` | 10468 | `f5ccf2b22785` | requirement-by-requirement audit of the actual-ZNS comparison goal | scoped claim is ready while FAST R2 production blockers keep the broader goal open |
+| `acceptance` | `artifacts/results/acceptance-report.json` | 40200 | `8a26dea6a5d0` | local acceptance gate summary | all reproducibility and evidence gates pass |
 | `ycsb_pressure_figure` | `artifacts/figures/actual-zns/ycsb-pressure-waf-stale.png` | 100733 | `98973b42e75f` | paper figure for actual-ZNS YCSB WAF/stale-secret curve | visualizes negative control and pressure rows |
 | `overhead_figure` | `artifacts/figures/actual-zns/overhead-accounting.png` | 64105 | `d7a58350fd01` | paper figure for actual-ZNS overhead accounting | visualizes throughput, CPU, and semantic reset cost |
 | `workload_hardness_figure` | `artifacts/figures/actual-zns/workload-hardness.png` | 55961 | `e49e3cced335` | paper figure for workload hardness tiers | visualizes fairness, pressure, and hostile coverage |
@@ -59,6 +62,7 @@
 | `deployment_selector` | `python3 code/sim/report_deployment_policy_selector.py` |
 | `actual_zns_figures` | `python3 code/sim/plot_actual_zns_comparison.py` |
 | `fdp_mapping` | `python3 code/quasar/fdp_mapping.py --trace artifacts/traces/pqc-mixed.jsonl --handles 8 16 32 64 128 --out artifacts/results/pqc-mixed-fdp-mapping.json --markdown-out artifacts/results/pqc-mixed-fdp-mapping.md` |
+| `real_app_block_trace` | `sudo python3 code/tracegen/capture_real_app_block_trace.py --duration 8 --sysbench-total-size 64M --sysbench-file-num 8 --sysbench-threads 4 --pqc-sessions 64 --pqc-sleep-ms 5` |
 | `fast_style_figures` | `python3 code/sim/plot_fast_style_quasar_figures.py` |
 | `unified_report` | `python3 code/sim/report_unified_comparison.py` |
 | `claim_matrix` | `python3 code/sim/report_claim_matrix.py && python3 code/sim/report_unified_comparison.py` |
@@ -73,17 +77,17 @@
 {
   "acceptance": {
     "passed": true,
-    "passed_gates": 42,
-    "total_gates": 42
+    "passed_gates": 43,
+    "total_gates": 43
   },
   "actual_zns_overhead": {},
   "claim_matrix": {
     "by_status": {
       "qualified": 1,
       "supported": 9,
-      "supported-boundary": 2
+      "supported-boundary": 3
     },
-    "claim_count": 12
+    "claim_count": 13
   },
   "deployment_selector": {
     "passed": true,
@@ -113,6 +117,7 @@
   "goal_completion_audit": {},
   "physical_zns_sanitize_execution": {},
   "physical_zns_security_capability": {},
+  "real_app_sysbench_pqc_block_trace": {},
   "same_path_actual_zns_fairness": {},
   "sysbench_actual_zns_pressure": {},
   "unified_comparison": {},

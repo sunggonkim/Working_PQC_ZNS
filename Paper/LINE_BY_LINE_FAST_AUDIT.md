@@ -81,7 +81,7 @@ These are not solved by better plotting and must stay visible:
 
 | Risk | Why It Matters | Current Defense | Stronger Future Evidence |
 | --- | --- | --- | --- |
-| Real workload realism | Generated DOGI-shaped overlays may still look synthetic. | Six DOGI axes, YCSB, Sysbench, dynamic service pressure, real liboqs/OpenSSL traces. | Real YCSB/JDBC block traces captured from a live DB stack. |
+| Real workload realism | Generated DOGI-shaped overlays may still look synthetic. | Six DOGI axes, YCSB, Sysbench, dynamic service pressure, real liboqs/OpenSSL traces, and a sysbench fileio `blktrace` capture with PQC side writes. | YCSB/JDBC or RocksDB traces captured from a live DB stack would further strengthen external validity. |
 | Native DOGI equivalence | Same-path DOGI-style placement is not the full public DOGI stack. | Exact public DOGI/MiDAS/SepBIT runs are separated as sanity evidence; the public-DOGI parity audit records five direct checks and the remaining full-parity gaps. | Same app/ZenFS/SPDK path for DOGI and QUASAR. |
 | Production path | Zonefs replay is not SPDK poll-mode. | xNVMe append probe plus explicit zonefs caveat. | Full SPDK replay with p99 service latency. |
 | Device generality | One ZN540-class device may not represent all ZNS/FDP devices. | Device capabilities and limitations are named. | Additional ZNS/FDP devices and reset/sanitize variance. |
@@ -140,7 +140,7 @@ mapping:
 
 | Risk | Why A Reviewer May Attack | Current Defense | Remaining Strengthening |
 | --- | --- | --- | --- |
-| "Toy workload" | Clean PQC traces can be too easy. | Workload-hardness gate, DOGI six-axis, pressure rows, negative controls, dynamic pressure. | Real YCSB/JDBC block traces would strengthen external validity. |
+| "Toy workload" | Clean PQC traces can be too easy. | Workload-hardness gate, DOGI six-axis, pressure rows, negative controls, dynamic pressure, and sysbench fileio block trace with PQC side writes. | YCSB/JDBC or RocksDB traces would further strengthen external validity. |
 | "DOGI strawman" | Style-compatible DOGI may diverge from public DOGI. | Same-path baselines are used for apples-to-apples replay; exact public DOGI/MiDAS/SepBIT are separate sanity runs; the public-DOGI parity audit makes the boundary explicit. | Same app/ZenFS/SPDK path for DOGI and QUASAR. |
 | "WAF gain too small" | Some rows show WAF near 1.0. | Paper states easy rows are exposure evidence; WAF/GC wins are pressure-dependent. | Keep headline metric bundle: WAF/GC, stale secrets, resets, overhead. |
 | "Cherry-picked pressure point" | A single seed or ratio could make the result look cleaner than it is. | Three-seed ratio sweep shows 0% parity, 5% WAF-negative exposure rows, and 20% WAF/GC gains. | More physical repeated runs would further strengthen final submission evidence. |

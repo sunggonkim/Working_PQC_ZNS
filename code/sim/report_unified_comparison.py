@@ -179,6 +179,28 @@ def summarize_xnvme_zns_latency(data: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def summarize_real_app_block_trace(data: dict[str, Any]) -> dict[str, Any]:
+    blktrace = data.get("blktrace", {})
+    pqc = data.get("pqc_side_writer", {})
+    sysbench = data.get("sysbench", {})
+    return {
+        "artifact": data.get("artifact"),
+        "claim": data.get("claim"),
+        "device": data.get("device"),
+        "mount": data.get("mount", {}),
+        "sysbench_elapsed_s": sysbench.get("elapsed_s"),
+        "sysbench_mode": data.get("sysbench_mode"),
+        "blkparse_event_lines": blktrace.get("event_lines"),
+        "blkparse_write_events": blktrace.get("write_events"),
+        "blkparse_read_events": blktrace.get("read_events"),
+        "pqc_sessions_completed": pqc.get("sessions_completed"),
+        "pqc_records": pqc.get("records"),
+        "all_kem_ok": pqc.get("all_kem_ok"),
+        "all_sig_ok": pqc.get("all_sig_ok"),
+        "claim_boundary": data.get("claim_boundary"),
+    }
+
+
 def summarize_security_capability(data: dict[str, Any]) -> dict[str, Any]:
     return {
         "device_model": data.get("device_model"),
@@ -432,6 +454,7 @@ def markdown(summary: dict[str, Any]) -> str:
     ycsb_pressure_curve = summary["ycsb_pressure_curve"]
     actual_zns_overhead = summary["actual_zns_overhead"]
     xnvme_zns_latency = summary["xnvme_zns_latency"]
+    real_app_block_trace = summary["real_app_block_trace"]
     security_capability = summary["security_capability"]
     claim_matrix = summary["claim_matrix"]
     workload_hardness = summary["workload_hardness"]
@@ -464,6 +487,7 @@ def markdown(summary: dict[str, Any]) -> str:
         "- The residual controller converts that sweep into deployable choices: low-overhead, balanced, and strict-zero-wait profiles choose different residual copy budgets from the measured frontier.",
         "- The YCSB-F straggler baseline replay runs FIFO/SepBIT/MiDAS/DOGI on the same actual-ZNS hard condition and confirms they issue no semantic resets.",
         "- Actual-ZNS overhead is now reported separately: hybrid pays semantic reset work, while C-level policy-decision cost remains below DOGI-style MLP inference.",
+        "- A real sysbench fileio block trace with concurrent liboqs PQC KMS/audit side writes closes the application-trace realism gap without claiming SPDK/ZenFS latency.",
         "- Security semantics are bounded explicitly: current evidence proves reset eligibility and exposure reduction, not NAND physical erasure without sanitize validation.",
         "- Claim matrix is generated as a writing guardrail: supported, qualified, and boundary claims are separated from forbidden overclaims.",
         "- Workload hardness matrix is generated as a benchmark guardrail: negative controls, pressure workloads, headline claim eligibility, and QUASAR-hostile workloads are separated.",
@@ -771,6 +795,18 @@ def markdown(summary: dict[str, Any]) -> str:
             f"| Throughput MiB/s | {fmt_float(xnvme_zns_latency.get('throughput_mib_s'), 2)} |",
             "",
             "This is the lower-overhead native command-path sanity check missing from the zonefs-helper overhead panel.",
+            "",
+            "## Real Application Block Trace",
+            "",
+            f"- Artifact: `{real_app_block_trace.get('artifact')}`",
+            f"- Device: `{real_app_block_trace.get('device')}`",
+            f"- Sysbench mode: `{real_app_block_trace.get('sysbench_mode')}`",
+            f"- Sysbench elapsed: `{fmt_float(real_app_block_trace.get('sysbench_elapsed_s'), 3)}` s",
+            f"- Blkparse events: `{fmt_int(real_app_block_trace.get('blkparse_event_lines'))}`",
+            f"- Blkparse write events: `{fmt_int(real_app_block_trace.get('blkparse_write_events'))}`",
+            f"- PQC sessions: `{fmt_int(real_app_block_trace.get('pqc_sessions_completed'))}`",
+            f"- PQC records: `{fmt_int(real_app_block_trace.get('pqc_records'))}`",
+            f"- Boundary: {real_app_block_trace.get('claim_boundary')}",
             "",
             "## Security Claim Boundary",
             "",
@@ -1326,6 +1362,11 @@ def main() -> int:
         default=Path("artifacts/results/xnvme-zns-latency/summary.json"),
     )
     parser.add_argument(
+        "--real-app-block-trace",
+        type=Path,
+        default=Path("artifacts/results/real-app-block-trace/sysbench-pqc/summary.json"),
+    )
+    parser.add_argument(
         "--security-capability",
         type=Path,
         default=Path("artifacts/results/physical-zns-security-capability.json"),
@@ -1428,6 +1469,7 @@ def main() -> int:
         "ycsb_pressure_curve": summarize_ycsb_pressure_curve(load_json(args.ycsb_pressure_curve)),
         "actual_zns_overhead": summarize_actual_zns_overhead(load_json(args.actual_zns_overhead)),
         "xnvme_zns_latency": summarize_xnvme_zns_latency(load_json(args.xnvme_zns_latency)),
+        "real_app_block_trace": summarize_real_app_block_trace(load_json(args.real_app_block_trace)),
         "security_capability": summarize_security_capability(load_json(args.security_capability)),
         "claim_matrix": summarize_claim_matrix(load_json(args.claim_matrix)),
         "workload_hardness": summarize_workload_hardness(load_json(args.workload_hardness)),

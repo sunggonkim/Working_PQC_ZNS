@@ -4,7 +4,7 @@
     "acceptance": {
       "next": "Keep this green after adding external replay and exact baseline artifacts.",
       "status": "passed",
-      "summary": "42/42 local simulator/reproducibility gates passed."
+      "summary": "43/43 local simulator/reproducibility gates passed."
     },
     "actual_zns_overhead": {
       "evidence": {
@@ -40,9 +40,9 @@
         "by_status": {
           "qualified": 1,
           "supported": 9,
-          "supported-boundary": 2
+          "supported-boundary": 3
         },
-        "claim_count": 12
+        "claim_count": 13
       },
       "next": "Use this as the paper writing guardrail.",
       "status": "done-claim-matrix",
@@ -332,8 +332,8 @@
     },
     "reproducibility_manifest": {
       "evidence": {
-        "artifact_count": 40,
-        "command_count": 12,
+        "artifact_count": 43,
+        "command_count": 13,
         "missing_or_empty": []
       },
       "next": "Use this as the artifact index when writing or rerunning the paper experiments.",
@@ -342,7 +342,7 @@
     },
     "reproducibility_validation": {
       "evidence": {
-        "artifact_count": 40,
+        "artifact_count": 43,
         "mismatch_count": 0
       },
       "next": "Regenerate the manifest whenever any indexed artifact is intentionally updated.",

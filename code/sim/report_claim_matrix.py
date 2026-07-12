@@ -49,6 +49,7 @@ def build_claims(
     fast_db = unified["fast_db_pressure"]
     residual = unified["residual_fallback_sweep"]
     overhead = unified["actual_zns_overhead"]
+    real_app = unified.get("real_app_block_trace", {})
     security = unified["security_capability"]
     exact = unified["exact_external_baselines"]
     hardness = unified["workload_hardness"]
@@ -236,6 +237,26 @@ def build_claims(
             "This is a trace-driven handle-pressure model, not a physical FDP device performance result.",
         ),
         make_claim(
+            "A real application block trace with PQC lifecycle side writes is captured.",
+            "supported-boundary",
+            [
+                f"artifact={real_app.get('artifact')}",
+                f"device={real_app.get('device')}",
+                f"sysbench_elapsed_s={real_app.get('sysbench_elapsed_s')}",
+                f"blkparse_events={real_app.get('blkparse_event_lines')}",
+                f"blkparse_write_events={real_app.get('blkparse_write_events')}",
+                f"pqc_sessions={real_app.get('pqc_sessions_completed')}",
+                f"pqc_records={real_app.get('pqc_records')}",
+                f"all_kem_ok={real_app.get('all_kem_ok')}",
+                f"all_sig_ok={real_app.get('all_sig_ok')}",
+            ],
+            (
+                "The artifact set includes a sysbench fileio block trace captured with blktrace while a liboqs "
+                "PQC KMS/audit side writer persists lifecycle records."
+            ),
+            "This closes the real-application trace realism gap, but it is not SPDK/ZenFS latency, public DOGI parity, or a ZNS placement result.",
+        ),
+        make_claim(
             "The current artifact set is paper-ready for the scoped system claim.",
             "supported",
             [
@@ -246,7 +267,7 @@ def build_claims(
                 "The scoped claim is ready: PQC death-cohort hints improve ZNS placement/reset scheduling under "
                 "clean hints, pressure, and measured fallback modes."
             ),
-                "Lower-overhead xNVMe/SPDK replay remains optional strengthening.",
+            "Production-grade SPDK/ZenFS replay remains a Reviewer-2 blocker for the broader goal.",
         ),
     ]
     return claims

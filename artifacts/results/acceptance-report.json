@@ -1014,9 +1014,9 @@
         "by_status": {
           "qualified": 1,
           "supported": 9,
-          "supported-boundary": 2
+          "supported-boundary": 3
         },
-        "claim_count": 12
+        "claim_count": 13
       },
       "name": "claim_matrix_maps_supported_qualified_and_boundary_claims",
       "passed": true
@@ -1204,8 +1204,8 @@
     },
     {
       "evidence": {
-        "artifact_count": 40,
-        "command_count": 12,
+        "artifact_count": 43,
+        "command_count": 13,
         "missing_or_empty": [],
         "missing_required": []
       },
@@ -1214,7 +1214,22 @@
     },
     {
       "evidence": {
-        "artifact_count": 40,
+        "all_kem_ok": true,
+        "all_sig_ok": true,
+        "artifact": "real-app-sysbench-pqc-block-trace",
+        "blkparse_event_lines": 194570,
+        "blkparse_write_events": 155360,
+        "device": "/dev/sdc2",
+        "pqc_records": 192,
+        "pqc_sessions_completed": 64,
+        "sysbench_elapsed_s": 8.026212453842163
+      },
+      "name": "real_app_sysbench_pqc_block_trace_captured",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "artifact_count": 43,
         "mismatch_count": 0,
         "mismatches": []
       },
@@ -1228,18 +1243,24 @@
           "full_public_dogi_end_to_end_parity",
           "per_cohort_physical_erase_scope",
           "physical_fdp_or_faithful_emulator_replay",
-          "real_application_block_traces",
           "spdk_or_zenfs_tail_latency"
         ],
-        "fast_r2_production_blocker_count": 6,
+        "fast_r2_production_blocker_count": 5,
         "full_goal_complete": false,
+        "required_remaining": [
+          "device_diversity",
+          "full_public_dogi_end_to_end_parity",
+          "per_cohort_physical_erase_scope",
+          "physical_fdp_or_faithful_emulator_replay",
+          "spdk_or_zenfs_tail_latency"
+        ],
         "scoped_claim_ready": true
       },
-      "name": "goal_completion_audit_keeps_fast_r2_blockers_open",
+      "name": "goal_completion_audit_keeps_remaining_fast_r2_blockers_open",
       "passed": true
     }
   ],
   "passed": true,
-  "passed_gates": 42,
-  "total_gates": 42
+  "passed_gates": 43,
+  "total_gates": 43
 }

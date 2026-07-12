@@ -16,6 +16,7 @@ This report separates evidence by compatibility of units and stack.
 - The residual controller converts that sweep into deployable choices: low-overhead, balanced, and strict-zero-wait profiles choose different residual copy budgets from the measured frontier.
 - The YCSB-F straggler baseline replay runs FIFO/SepBIT/MiDAS/DOGI on the same actual-ZNS hard condition and confirms they issue no semantic resets.
 - Actual-ZNS overhead is now reported separately: hybrid pays semantic reset work, while C-level policy-decision cost remains below DOGI-style MLP inference.
+- A real sysbench fileio block trace with concurrent liboqs PQC KMS/audit side writes closes the application-trace realism gap without claiming SPDK/ZenFS latency.
 - Security semantics are bounded explicitly: current evidence proves reset eligibility and exposure reduction, not NAND physical erasure without sanitize validation.
 - Claim matrix is generated as a writing guardrail: supported, qualified, and boundary claims are separated from forbidden overclaims.
 - Workload hardness matrix is generated as a benchmark guardrail: negative controls, pressure workloads, headline claim eligibility, and QUASAR-hostile workloads are separated.
@@ -28,8 +29,8 @@ This report separates evidence by compatibility of units and stack.
 
 - Scope: reproducibility manifest for actual-ZNS baseline-vs-QUASAR comparison
 - Passed: `True`
-- Artifacts: `40`
-- Commands: `12`
+- Artifacts: `43`
+- Commands: `13`
 - Missing or empty: `[]`
 - Hash validation passed: `True`
 - Hash mismatches: `0`
@@ -211,6 +212,18 @@ Use this as overhead accounting, not as a final production latency claim, becaus
 
 This is the lower-overhead native command-path sanity check missing from the zonefs-helper overhead panel.
 
+## Real Application Block Trace
+
+- Artifact: `real-app-sysbench-pqc-block-trace`
+- Device: `/dev/sdc2`
+- Sysbench mode: `rndrw`
+- Sysbench elapsed: `8.026` s
+- Blkparse events: `194,570`
+- Blkparse write events: `155,360`
+- PQC sessions: `64`
+- PQC records: `192`
+- Boundary: Closes the real-application block-trace blocker for sysbench+PQC side writes; does not close SPDK/ZenFS latency, public DOGI parity, physical FDP, erase scope, or device diversity.
+
 ## Security Claim Boundary
 
 - Device: `WZS4C8T1TDSP303` firmware `R6Z10009`
@@ -228,8 +241,8 @@ QUASAR proves reset eligibility and stale-secret exposure reduction, and this de
 
 ## Claim Matrix
 
-- Claims: `12`
-- Status counts: `{'qualified': 1, 'supported': 9, 'supported-boundary': 2}`
+- Claims: `13`
+- Status counts: `{'qualified': 1, 'supported': 9, 'supported-boundary': 3}`
 
 | Claim | Status | Caveat |
 | --- | --- | --- |
@@ -244,7 +257,8 @@ QUASAR proves reset eligibility and stale-secret exposure reduction, and this de
 | Zone reset alone is not physical erase; sanitize is validated only as a destructive device/namespace-scoped path. | `supported-boundary` | QUASAR proves reset eligibility and stale-secret exposure reduction, and this device's NVMe crypto-erase sanitize command path has been executed and validated as a destructive device/namespace-scoped operation. Zone reset alone is still not a physical erase proof, and sanitize must not be treated as a per-zone or per-epoch command on a shared namespace. A strong physical erase deployment requires a dedicated namespace/media pool, per-cohort encryption-key isolation, or future per-zone erase semantics whose blast radius matches the cohort being destroyed. |
 | Exact external baselines are included but have non-identical unit systems. | `qualified` | Do not mix exact-baseline internal units with QUASAR native ZNS throughput as if they were identical. |
 | FDP can carry QUASAR's lifecycle signal, but scarce placement handles create collision pressure. | `supported-boundary` | This is a trace-driven handle-pressure model, not a physical FDP device performance result. |
-| The current artifact set is paper-ready for the scoped system claim. | `supported` | Lower-overhead xNVMe/SPDK replay remains optional strengthening. |
+| A real application block trace with PQC lifecycle side writes is captured. | `supported-boundary` | This closes the real-application trace realism gap, but it is not SPDK/ZenFS latency, public DOGI parity, or a ZNS placement result. |
+| The current artifact set is paper-ready for the scoped system claim. | `supported` | Production-grade SPDK/ZenFS replay remains a Reviewer-2 blocker for the broader goal. |
 
 Forbidden overclaims: QUASAR always wins on WAF; zone reset alone proves physical erase; shared-namespace sanitize is per-zone epoch cleanup; helper-based zonefs latency is production p99; exact external baseline units are directly interchangeable with packed ZNS replay.
 
