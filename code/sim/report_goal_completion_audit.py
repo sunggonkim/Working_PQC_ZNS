@@ -50,6 +50,94 @@ def xnvme_latency_validated(xnvme: dict[str, Any]) -> bool:
     )
 
 
+def production_blocker(name: str, evidence: list[str], required_to_close: str) -> dict[str, Any]:
+    return {
+        "name": name,
+        "status": "open",
+        "evidence": evidence,
+        "required_to_close": required_to_close,
+    }
+
+
+def fast_r2_production_blockers(
+    unified: dict[str, Any],
+    readiness: dict[str, Any],
+) -> list[dict[str, Any]]:
+    """List fatal Reviewer-2 blockers for a production-grade FAST claim.
+
+    These blockers are stricter than the scoped paper claim.  They prevent the
+    audit from declaring the broader goal complete just because same-path ZNS
+    replay, xNVMe probing, and sanitize command-path evidence exist.
+    """
+
+    components = readiness.get("components", {})
+    dogi_parity = components.get("dogi_public_parity", {})
+    zns_fdp = components.get("zns_fdp_replay", {})
+    security = unified.get("security_capability", {})
+    exact = unified.get("exact_external_baselines", {})
+    fdp_modeled = any(
+        claim.get("claim", "").startswith("FDP can carry")
+        for claim in unified.get("claim_matrix", {}).get("claims", [])
+    )
+    blockers = [
+        production_blocker(
+            "full_public_dogi_end_to_end_parity",
+            [
+                f"dogi_public_parity_status={dogi_parity.get('status')}",
+                "same-path DOGI-style is apples-to-apples replay, not the public DOGI stack",
+                f"public DOGI original-LBA WAF={exact.get('dogi_physical_original_lba_pressure', {}).get('waf')}",
+            ],
+            "Run DOGI and QUASAR through the same app/ZenFS/SPDK or equivalent stack with identical trace units.",
+        ),
+        production_blocker(
+            "spdk_or_zenfs_tail_latency",
+            [
+                f"zns_component_status={zns_fdp.get('status')}",
+                f"xnvme_probe_present={bool(unified.get('xnvme_zns_latency', {}).get('completed'))}",
+                "zonefs helper replay is accounting evidence, not poll-mode p99 latency",
+            ],
+            "Implement SPDK/ZenFS or true async xNVMe replay and report p95/p99 append/reset service latency.",
+        ),
+        production_blocker(
+            "physical_fdp_or_faithful_emulator_replay",
+            [
+                f"fdp_trace_model_present={fdp_modeled}",
+                "current FDP evidence is handle-collision/purity modeling only",
+            ],
+            "Run the QUASAR family-to-handle policy on FDP hardware or a faithful FDP emulator.",
+        ),
+        production_blocker(
+            "per_cohort_physical_erase_scope",
+            [
+                f"sanitize_execution_validated={security.get('sanitize_execution_validated')}",
+                f"crypto_erase_executed={security.get('crypto_erase_executed')}",
+                "shared-namespace sanitize is destructive and not a per-zone/per-epoch cleanup primitive",
+            ],
+            (
+                "Demonstrate a dedicated namespace/media pool, per-cohort key isolation, "
+                "or hardware per-zone erase semantics whose blast radius matches the cohort."
+            ),
+        ),
+        production_blocker(
+            "real_application_block_traces",
+            [
+                "Sysbench/MySQL is currently an execution/readiness gate",
+                "DOGI-shaped YCSB/Sysbench carriers are generated pressure traces",
+            ],
+            "Capture MySQL/Sysbench, RocksDB/YCSB, KMS, or audit-service block traces with PQC lifecycle side writes.",
+        ),
+        production_blocker(
+            "device_diversity",
+            [
+                "physical measurements are scoped to one WD ZN540-class ZNS SSD",
+                "device-specific reset/sanitize/FDP behavior is not generalized",
+            ],
+            "Repeat append/reset/security/FDP evidence on at least one additional ZNS or FDP-capable device.",
+        ),
+    ]
+    return blockers
+
+
 def build_audit(
     unified: dict[str, Any],
     readiness: dict[str, Any],
@@ -254,34 +342,34 @@ def build_audit(
     ]
 
     blocking = [row for row in requirements if row["status"] in {"missing", "weak"}]
-    optional_strengthening = []
-    if not xnvme_latency_validated(xnvme):
-        optional_strengthening.append("Lower-overhead xNVMe/SPDK replay for production-style p99 latency.")
-    if not sanitize_validated(security):
-        optional_strengthening.append(
-            "Device sanitize/crypto-erase execution to upgrade exposure-window evidence to physical erase evidence."
-        )
+    production_blockers = fast_r2_production_blockers(unified, readiness)
+    optional_strengthening = [
+        f"{row['name']}: {row['required_to_close']}" for row in production_blockers
+    ]
     scoped_claim_ready = not blocking
-    full_goal_complete = scoped_claim_ready and not optional_strengthening
+    full_goal_complete = scoped_claim_ready and not production_blockers
     return {
         "scope": "completion audit for actual-ZNS DOGI/SepBIT/MiDAS/FIFO vs QUASAR comparison",
         "scoped_claim_ready": scoped_claim_ready,
         "full_goal_complete": full_goal_complete,
         "blocking_count": len(blocking),
-        "full_goal_remaining_count": len(optional_strengthening),
+        "fast_r2_production_blocker_count": len(production_blockers),
+        "full_goal_remaining_count": len(production_blockers),
         "requirements": requirements,
+        "fast_r2_production_blockers": production_blockers,
         "optional_strengthening": optional_strengthening,
         "completion_boundary": (
             "The current artifacts support the scoped paper claim, but the broader user goal remains active "
-            "until optional full-strengthening items are either completed or explicitly declared out of scope."
+            "because Reviewer-2 production blockers remain open."
         )
         if not full_goal_complete
         else "The scoped paper claim and broader full goal are both complete.",
         "main_takeaway": (
             "The scoped actual-ZNS comparison is ready: same-path physical replay, workload hardness, pressure, "
             "external exact baselines, overhead, security boundaries, and reproducibility are all covered. "
-            "Remaining work is optional strengthening, not a blocker for the current scoped claim, but it still "
-            "prevents calling the broader full goal complete."
+            "However, this is not production-grade FAST evidence yet: full public-DOGI parity, SPDK/ZenFS latency, "
+            "physical FDP/emulator replay, per-cohort erase scope, real app block traces, and device diversity "
+            "remain open."
         )
         if not blocking
         else "Some requirements still need stronger evidence before the scoped claim is ready.",
@@ -296,7 +384,7 @@ def markdown(summary: dict[str, Any]) -> str:
         f"- Scoped claim ready: `{summary['scoped_claim_ready']}`",
         f"- Full goal complete: `{summary['full_goal_complete']}`",
         f"- Blocking gaps: `{summary['blocking_count']}`",
-        f"- Full-goal remaining items: `{summary['full_goal_remaining_count']}`",
+        f"- FAST R2 production blockers: `{summary['fast_r2_production_blocker_count']}`",
         "",
         summary["main_takeaway"],
         "",
@@ -316,7 +404,19 @@ def markdown(summary: dict[str, Any]) -> str:
                 next_action=row["next_action"],
             )
         )
-    lines.extend(["", "## Optional Strengthening", ""])
+    lines.extend(["", "## FAST R2 Production Blockers", ""])
+    lines.append("| Blocker | Evidence | Required To Close |")
+    lines.append("| --- | --- | --- |")
+    for row in summary["fast_r2_production_blockers"]:
+        evidence = "<br>".join(f"- {item}" for item in row["evidence"])
+        lines.append(
+            "| {name} | {evidence} | {required} |".format(
+                name=row["name"],
+                evidence=evidence,
+                required=row["required_to_close"],
+            )
+        )
+    lines.extend(["", "## Compatibility Alias: Full-Goal Remaining Items", ""])
     lines.extend(f"- {item}" for item in summary["optional_strengthening"])
     return "\n".join(lines) + "\n"
 

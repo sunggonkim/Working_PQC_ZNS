@@ -139,7 +139,7 @@
       "caveat": "Lower-overhead xNVMe/SPDK replay remains optional strengthening.",
       "claim": "The current artifact set is paper-ready for the scoped system claim.",
       "evidence": [
-        "acceptance=41/41",
+        "acceptance=42/42",
         "external readiness paper_ready=True"
       ],
       "paper_wording": "The scoped claim is ready: PQC death-cohort hints improve ZNS placement/reset scheduling under clean hints, pressure, and measured fallback modes.",

@@ -31,7 +31,8 @@ the measured workloads and fallback modes.
 | Include variability evidence. | A three-seed DOGI-family ratio sweep reports 54 comparisons and shows the break-even behavior: low PQC ratios are exposure evidence, while 20% overlays produce WAF/GC gains. | Satisfied for scoped claim. |
 | Define security metric. | `stale_secret_blocks` and stale-secret block-seconds are defined; E4 exposure timeline is cited. | Satisfied. |
 | Avoid physical erase overclaim. | Paper says zone reset alone is not physical NAND erasure, cites NIST SP 800-88 Rev. 2, and now states shared-namespace sanitize is destructive device/namespace-scoped command-path evidence, not per-zone epoch cleanup. | Tightened; strong erase requires matching erase scope. |
-| Reproducibility. | `acceptance_check.py` reports 41/41 gates; current tests pass; PDFs build cleanly. | Satisfied. |
+| Reproducibility. | `acceptance_check.py` reports 42/42 gates; current tests pass; PDFs build cleanly. | Satisfied. |
+| Avoid false completion. | `actual-zns-goal-completion-audit.json` reports `scoped_claim_ready=true`, `full_goal_complete=false`, and six FAST R2 production blockers. | Satisfied as an anti-overclaim gate. |
 | Final `HowToWritePaper.md` audit. | `LINE_BY_LINE_FAST_AUDIT.md` now checks the guide's pre-submission questions, DOGI figure-role translation, and the design-choice rule directly. Figure 5 uses subfloats; the later sensitivity, FDP, and overhead figures are compact one-column figures with no embedded numeric labels. | Satisfied. |
 
 ## Current Format And Test Evidence
@@ -41,8 +42,9 @@ the measured workloads and fallback modes.
 | `make all` | Passed. |
 | `Paper/0.Main.pdf` | Single FAST/USENIX-format main PDF; 14 pages, letter. |
 | LaTeX unresolved references/citations/errors grep | Clean. |
-| `python3 -m unittest discover -s code -p 'test*.py'` | 121 tests passed in the latest run. |
-| `python3 code/sim/acceptance_check.py --out artifacts/results/acceptance-report.json` | 41/41 gates passed. |
+| `python3 -m unittest discover -s code -p 'test*.py'` | 122 tests passed in the latest run. |
+| `python3 code/sim/acceptance_check.py --out artifacts/results/acceptance-report.json` | 42/42 gates passed. |
+| `python3 code/sim/report_goal_completion_audit.py` | Scoped claim ready, full goal incomplete, six FAST R2 production blockers recorded. |
 | `git diff --check` | Clean for edited paper/plan files. |
 
 ## What Is Still Not "Perfect"

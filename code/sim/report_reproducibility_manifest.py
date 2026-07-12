@@ -228,7 +228,7 @@ ARTIFACTS = [
         "id": "goal_completion_audit",
         "path": "artifacts/results/actual-zns-goal-completion-audit.json",
         "role": "requirement-by-requirement audit of the actual-ZNS comparison goal",
-        "claim": "scoped claim is ready while optional strengthening work is separated",
+        "claim": "scoped claim is ready while FAST R2 production blockers keep the broader goal open",
     },
     {
         "id": "acceptance",

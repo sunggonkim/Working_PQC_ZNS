@@ -1220,9 +1220,26 @@
       },
       "name": "reproducibility_manifest_hashes_match_current_artifacts",
       "passed": true
+    },
+    {
+      "evidence": {
+        "blocker_names": [
+          "device_diversity",
+          "full_public_dogi_end_to_end_parity",
+          "per_cohort_physical_erase_scope",
+          "physical_fdp_or_faithful_emulator_replay",
+          "real_application_block_traces",
+          "spdk_or_zenfs_tail_latency"
+        ],
+        "fast_r2_production_blocker_count": 6,
+        "full_goal_complete": false,
+        "scoped_claim_ready": true
+      },
+      "name": "goal_completion_audit_keeps_fast_r2_blockers_open",
+      "passed": true
     }
   ],
   "passed": true,
-  "passed_gates": 41,
-  "total_gates": 41
+  "passed_gates": 42,
+  "total_gates": 42
 }

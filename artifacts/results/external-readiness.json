@@ -4,7 +4,7 @@
     "acceptance": {
       "next": "Keep this green after adding external replay and exact baseline artifacts.",
       "status": "passed",
-      "summary": "41/41 local simulator/reproducibility gates passed."
+      "summary": "42/42 local simulator/reproducibility gates passed."
     },
     "actual_zns_overhead": {
       "evidence": {

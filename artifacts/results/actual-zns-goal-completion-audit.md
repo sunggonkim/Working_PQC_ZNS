@@ -1,0 +1,43 @@
+# Actual-ZNS Goal Completion Audit
+
+- Scope: completion audit for actual-ZNS DOGI/SepBIT/MiDAS/FIFO vs QUASAR comparison
+- Scoped claim ready: `True`
+- Full goal complete: `False`
+- Blocking gaps: `0`
+- FAST R2 production blockers: `6`
+
+The scoped actual-ZNS comparison is ready: same-path physical replay, workload hardness, pressure, external exact baselines, overhead, security boundaries, and reproducibility are all covered. However, this is not production-grade FAST evidence yet: full public-DOGI parity, SPDK/ZenFS latency, physical FDP/emulator replay, per-cohort erase scope, real app block traces, and device diversity remain open.
+
+The current artifacts support the scoped paper claim, but the broader user goal remains active because Reviewer-2 production blockers remain open.
+
+| Requirement | Status | Evidence | Remaining | Next Action |
+| --- | --- | --- | --- | --- |
+| Run the main comparison on a real ZNS path with FIFO/SepBIT/MiDAS/DOGI-style baselines and QUASAR. | `satisfied` | - same-path actual-ZNS rows=72 failed=0<br>- policies=['dogi-history', 'fifo', 'midas-style', 'quasar', 'quasar-dogi-hybrid', 'sepbit-style']<br>- hybrid resets=98<br>- DOGI stale secrets=99834<br>- hybrid stale secrets=0 | Exact external DOGI/MiDAS/SepBIT units are still separate from this same-path packed replay. | Keep this as the apples-to-apples physical ZNS comparison; do not mix units with exact external runs. |
+| Show the workload is not an easy QUASAR-only construction. | `satisfied` | - hardness=9/9<br>- tiers={'claim-gate': {'passed': 1, 'total': 1}, 'fairness': {'passed': 1, 'total': 1}, 'hostile-robustness': {'passed': 3, 'total': 3}, 'negative-control': {'passed': 2, 'total': 2}, 'pressure': {'passed': 2, 'total': 2}}<br>- main-claim gate=True<br>- eligible YCSB pressure rows=7<br>- YCSB baseline-complete rows=9<br>- DB pressure eligible=True<br>- eligible dynamic rows=3<br>- dynamic baseline-complete rows=3 | None for the current scoped claim. | Use the DOGI-favorable p0 control and YCSB p2000 negative control in the paper narrative. |
+| Demonstrate pressure cases where WAF/GC separation appears, not only stale-secret separation. | `satisfied` | - YCSB pressure rows=7/9<br>- YCSB semantic-gap rows=9/9<br>- Sysbench GC reduction=0.9458955223880597<br>- Sysbench stale secrets removed=38438 | None for the current scoped claim; larger p10000 actual-ZNS YCSB pressure points have been added. | Add more min-free-zone sweeps only if reviewers demand a smoother hardware curve. |
+| Include exact external DOGI/MiDAS/SepBIT evidence without pretending the units are identical. | `qualified` | - DOGI exact compact WAF=2.4006662646819312<br>- DOGI exact Alibaba p8000 suite=3/3, best=CostBenefit WAF=2.803532778684755<br>- DOGI exact original-LBA Alibaba p8000 WAF=3.2117427602002238<br>- MiDAS exact WAF=1.01<br>- SepBIT exact WA=2.399521 | None for the current scoped claim; exact units remain separate from QUASAR same-path packed replay. | Keep compact-LBA and original-LBA exact external numbers in a separate table from same-path packed ZNS replay. |
+| Improve QUASAR if the evidence shows a better deployable mode. | `satisfied` | - selector modes=4/4<br>- default policy=quasar-dogi-hybrid<br>- hardness passed=True | Adaptive modes are available but should not be default unless a workload triggers them. | Use QUASAR-DOGI hybrid by default; enable tenant-isolation or strict-residual modes explicitly. |
+| Account for overhead rather than only placement quality. | `satisfied` | - overhead rows=84 failed=0<br>- hybrid/DOGI C-policy median ratio=0.4916268591108631<br>- semantic reset delta=318<br>- xNVMe completed=True<br>- xNVMe append_count=4096<br>- xNVMe append_p99_ns=26064<br>- xNVMe mounted_after=True | SPDK poll-mode is still not measured, but the lower-overhead raw xNVMe/Linux NVMe ioctl command path is validated. | Use zonefs-helper overhead as full-suite accounting and xNVMe as native command-path p99 evidence. |
+| Keep security claims bounded to reset eligibility unless sanitize is executed. | `satisfied-sanitize-validated` | - device=WZS4C8T1TDSP303<br>- SANICAP=0x60000003<br>- sanitize_supported=True<br>- sanitize_log_status=(1) Most Recent Sanitize Command Completed Successfully.<br>- crypto_erase_executed=True<br>- sanitize_execution_validated=True | None for the destructive command-path proof; shared-namespace sanitize is not a per-zone/per-epoch physical erase primitive. A strong erase deployment still requires a dedicated namespace/media pool, per-cohort key isolation, or hardware erase semantics whose blast radius matches the cohort. | State exposure-window reduction by default; claim physical erasure only for deployments whose erase command scope is isolated to the cohort being destroyed. |
+| Make the generated actual-ZNS comparison reproducible and hash-checked. | `satisfied` | - acceptance=42/42<br>- hash mismatches=0<br>- summary pipeline passed=True<br>- summary pipeline steps=20 | Raw long-running physical replays still require device availability and time. | Use run_actual_zns_summary_pipeline.py after changing any derived artifact. |
+| Show external/system readiness has no current paper blockers for the scoped claim. | `satisfied` | - paper_ready_external=True<br>- blockers=[]<br>- pending=[] | External readiness is scoped to the current claim, not an absolute proof of every possible device/firmware stack. | Keep exact-baseline and same-path caveats visible. |
+
+## FAST R2 Production Blockers
+
+| Blocker | Evidence | Required To Close |
+| --- | --- | --- |
+| full_public_dogi_end_to_end_parity | - dogi_public_parity_status=done-dogi-public-parity-audit<br>- same-path DOGI-style is apples-to-apples replay, not the public DOGI stack<br>- public DOGI original-LBA WAF=3.2117427602002238 | Run DOGI and QUASAR through the same app/ZenFS/SPDK or equivalent stack with identical trace units. |
+| spdk_or_zenfs_tail_latency | - zns_component_status=done-physical-zonefs-write-pressure-plus-policy-and-packed-replay<br>- xnvme_probe_present=True<br>- zonefs helper replay is accounting evidence, not poll-mode p99 latency | Implement SPDK/ZenFS or true async xNVMe replay and report p95/p99 append/reset service latency. |
+| physical_fdp_or_faithful_emulator_replay | - fdp_trace_model_present=True<br>- current FDP evidence is handle-collision/purity modeling only | Run the QUASAR family-to-handle policy on FDP hardware or a faithful FDP emulator. |
+| per_cohort_physical_erase_scope | - sanitize_execution_validated=True<br>- crypto_erase_executed=True<br>- shared-namespace sanitize is destructive and not a per-zone/per-epoch cleanup primitive | Demonstrate a dedicated namespace/media pool, per-cohort key isolation, or hardware per-zone erase semantics whose blast radius matches the cohort. |
+| real_application_block_traces | - Sysbench/MySQL is currently an execution/readiness gate<br>- DOGI-shaped YCSB/Sysbench carriers are generated pressure traces | Capture MySQL/Sysbench, RocksDB/YCSB, KMS, or audit-service block traces with PQC lifecycle side writes. |
+| device_diversity | - physical measurements are scoped to one WD ZN540-class ZNS SSD<br>- device-specific reset/sanitize/FDP behavior is not generalized | Repeat append/reset/security/FDP evidence on at least one additional ZNS or FDP-capable device. |
+
+## Compatibility Alias: Full-Goal Remaining Items
+
+- full_public_dogi_end_to_end_parity: Run DOGI and QUASAR through the same app/ZenFS/SPDK or equivalent stack with identical trace units.
+- spdk_or_zenfs_tail_latency: Implement SPDK/ZenFS or true async xNVMe replay and report p95/p99 append/reset service latency.
+- physical_fdp_or_faithful_emulator_replay: Run the QUASAR family-to-handle policy on FDP hardware or a faithful FDP emulator.
+- per_cohort_physical_erase_scope: Demonstrate a dedicated namespace/media pool, per-cohort key isolation, or hardware per-zone erase semantics whose blast radius matches the cohort.
+- real_application_block_traces: Capture MySQL/Sysbench, RocksDB/YCSB, KMS, or audit-service block traces with PQC lifecycle side writes.
+- device_diversity: Repeat append/reset/security/FDP evidence on at least one additional ZNS or FDP-capable device.

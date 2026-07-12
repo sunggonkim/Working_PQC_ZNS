@@ -1207,6 +1207,7 @@ def gate_reproducibility_manifest(manifest: dict) -> Gate:
         "unified_comparison",
         "claim_matrix",
         "external_readiness",
+        "goal_completion_audit",
         "acceptance",
     }
     artifact_ids = {item.get("id") for item in manifest.get("artifacts", [])}
@@ -1250,6 +1251,36 @@ def gate_reproducibility_validation(validation: dict) -> Gate:
                 {"id": row.get("id"), "path": row.get("path")}
                 for row in validation.get("mismatches", [])
             ],
+        },
+    )
+
+
+def gate_goal_completion_audit(goal_audit: dict) -> Gate:
+    blockers = goal_audit.get("fast_r2_production_blockers", [])
+    blocker_names = {row.get("name") for row in blockers}
+    required = {
+        "full_public_dogi_end_to_end_parity",
+        "spdk_or_zenfs_tail_latency",
+        "physical_fdp_or_faithful_emulator_replay",
+        "per_cohort_physical_erase_scope",
+        "real_application_block_traces",
+        "device_diversity",
+    }
+    passed = (
+        goal_audit.get("scoped_claim_ready") is True
+        and goal_audit.get("full_goal_complete") is False
+        and goal_audit.get("fast_r2_production_blocker_count", 0) >= len(required)
+        and required.issubset(blocker_names)
+        and "Reviewer-2 production blockers" in goal_audit.get("completion_boundary", "")
+    )
+    return Gate(
+        "goal_completion_audit_keeps_fast_r2_blockers_open",
+        passed,
+        {
+            "scoped_claim_ready": goal_audit.get("scoped_claim_ready"),
+            "full_goal_complete": goal_audit.get("full_goal_complete"),
+            "fast_r2_production_blocker_count": goal_audit.get("fast_r2_production_blocker_count"),
+            "blocker_names": sorted(name for name in blocker_names if name),
         },
     )
 
@@ -1627,6 +1658,7 @@ def run_checks(args: argparse.Namespace) -> dict:
     deployment_selector = load_json(args.deployment_selector)
     reproducibility_manifest = load_json(args.reproducibility_manifest)
     reproducibility_validation = load_json(args.reproducibility_validation)
+    goal_completion_audit = load_json(args.goal_completion_audit)
     gates = [
         gate_quasar_beats_dogi(e1_rows, args.min_workloads),
         gate_waf_and_utilization(e1_rows),
@@ -1669,6 +1701,7 @@ def run_checks(args: argparse.Namespace) -> dict:
         gate_deployment_policy_selector(deployment_selector),
         gate_reproducibility_manifest(reproducibility_manifest),
         gate_reproducibility_validation(reproducibility_validation),
+        gate_goal_completion_audit(goal_completion_audit),
     ]
     return {
         "passed": all(gate.passed for gate in gates),
@@ -1746,6 +1779,7 @@ def main() -> int:
     parser.add_argument("--deployment-selector", type=Path, default=Path("artifacts/results/quasar-deployment-policy-selector.json"))
     parser.add_argument("--reproducibility-manifest", type=Path, default=Path("artifacts/results/quasar-reproducibility-manifest.json"))
     parser.add_argument("--reproducibility-validation", type=Path, default=Path("artifacts/results/quasar-reproducibility-validation.json"))
+    parser.add_argument("--goal-completion-audit", type=Path, default=Path("artifacts/results/actual-zns-goal-completion-audit.json"))
     parser.add_argument("--figures-dir", type=Path, default=Path("artifacts/figures"))
     parser.add_argument("--min-workloads", type=int, default=3)
     parser.add_argument("--bad-hint-waf-threshold", type=float, default=1.05)

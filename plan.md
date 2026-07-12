@@ -59,8 +59,9 @@ PQC lifecycle objects while preserving history-based placement for payload.
 | FDP trace-driven handle-pressure model | done as deployment model | `artifacts/results/pqc-mixed-fdp-mapping.json`, `Paper/6.Evaluation.tex` |
 | Sanitize/crypto-erase command path | done only for destructive command-path validation | physical security artifacts, `Paper/6.Evaluation.tex` |
 | Reproducibility manifest and acceptance gates | done | `acceptance-report.json`, reproducibility manifest/validation |
+| FAST R2 production-blocker audit | done and intentionally open | `artifacts/results/actual-zns-goal-completion-audit.json`: scoped claim ready, full goal incomplete, 6 production blockers |
 | HowToWritePaper final audit matrix | done | `Paper/LINE_BY_LINE_FAST_AUDIT.md` |
-| Build and tests | done | single-main `make all`, 121 Python tests, 41/41 acceptance gates |
+| Build and tests | done | single-main `make all`, 122 Python tests, 42/42 acceptance gates |
 
 Current readiness:
 
@@ -69,6 +70,7 @@ Scoped FAST-style claim: supported.
 Universal WAF claim: not supported and not allowed.
 Production SPDK claim: not supported and not allowed.
 Physical erase by reset-only or shared-namespace sanitize claim: not supported and not allowed.
+Production-grade FAST R2 claim: not complete; six blockers remain open by audit.
 ```
 
 ## 3. FAST Reviewer Checkpoint Register
@@ -230,7 +232,7 @@ latency claim.
 | Checkpoint | Required Answer | Evidence | Paper Location | Status |
 | --- | --- | --- | --- | --- |
 | Can reviewers audit artifacts? | Manifest lists artifacts, roles, hashes, and regeneration commands. | reproducibility manifest/validation | Evaluation Reproducibility | closed |
-| Are tests current? | Python unit tests pass; acceptance checker passes 41/41. | test and acceptance outputs | audit docs | closed |
+| Are tests current? | Python unit tests pass; acceptance checker passes 42/42. | test and acceptance outputs | audit docs | closed |
 | Does the PDF build cleanly? | Single-main `make all` passes; unresolved refs/citations/errors grep clean. | Paper build log | audit docs | closed |
 | Are raw external runs documented? | External readiness file records exact baselines and caveats. | `external-readiness.md` | Evaluation | closed |
 

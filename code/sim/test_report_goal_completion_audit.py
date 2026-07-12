@@ -92,9 +92,14 @@ class GoalCompletionAuditTests(unittest.TestCase):
         self.assertTrue(summary["scoped_claim_ready"])
         self.assertFalse(summary["full_goal_complete"])
         self.assertEqual(summary["blocking_count"], 0)
+        self.assertEqual(summary["fast_r2_production_blocker_count"], 6)
         self.assertGreater(summary["full_goal_remaining_count"], 0)
-        self.assertIn("optional strengthening", summary["main_takeaway"].lower())
+        self.assertIn("not production-grade fast evidence", summary["main_takeaway"].lower())
         self.assertIn("broader user goal remains active", summary["completion_boundary"])
+        self.assertIn("Reviewer-2 production blockers", summary["completion_boundary"])
+        blockers = {row["name"] for row in summary["fast_r2_production_blockers"]}
+        self.assertIn("spdk_or_zenfs_tail_latency", blockers)
+        self.assertIn("per_cohort_physical_erase_scope", blockers)
         self.assertNotIn("Full original-LBA", " ".join(summary["optional_strengthening"]))
 
     def test_missing_same_path_policy_blocks_claim(self) -> None:

@@ -432,6 +432,29 @@ class AcceptanceCheckTests(unittest.TestCase):
 
         self.assertTrue(all(gate.passed for gate in gates))
 
+    def test_goal_completion_audit_gate_requires_open_fast_r2_blockers(self) -> None:
+        blockers = [
+            {"name": "full_public_dogi_end_to_end_parity"},
+            {"name": "spdk_or_zenfs_tail_latency"},
+            {"name": "physical_fdp_or_faithful_emulator_replay"},
+            {"name": "per_cohort_physical_erase_scope"},
+            {"name": "real_application_block_traces"},
+            {"name": "device_diversity"},
+        ]
+        goal_audit = {
+            "scoped_claim_ready": True,
+            "full_goal_complete": False,
+            "fast_r2_production_blocker_count": len(blockers),
+            "fast_r2_production_blockers": blockers,
+            "completion_boundary": "broader user goal remains active because Reviewer-2 production blockers remain open.",
+        }
+
+        self.assertTrue(accept.gate_goal_completion_audit(goal_audit).passed)
+
+        unsafe = dict(goal_audit)
+        unsafe["full_goal_complete"] = True
+        self.assertFalse(accept.gate_goal_completion_audit(unsafe).passed)
+
 
 if __name__ == "__main__":
     unittest.main()

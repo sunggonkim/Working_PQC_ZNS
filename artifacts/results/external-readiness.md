@@ -6,7 +6,7 @@
 
 | Component | Status | Summary | Next Step |
 | --- | --- | --- | --- |
-| acceptance | `passed` | 41/41 local simulator/reproducibility gates passed. | Keep this green after adding external replay and exact baseline artifacts. |
+| acceptance | `passed` | 42/42 local simulator/reproducibility gates passed. | Keep this green after adding external replay and exact baseline artifacts. |
 | openssl_oqsprovider | `done-local-tls-socket` | OpenSSL s_server/s_client with oqsprovider completed 60 TLS 1.3 handshakes using group mlkem768. | Use this as the local TLS socket trace; add real service logs only if deployment realism is required. |
 | zns_fdp_replay | `done-physical-zonefs-write-pressure-plus-policy-and-packed-replay` | Physical ZNS SSD detected; DOGI-shaped PQC2000 policy write-pressure suite completed with 511.40 GiB of zonefs append traffic, direct policy-operation zonefs replay completed for PQC/liboqs traces, physical-capacity DOGI-shaped policy-operation replay completed, and packed logical-to-physical zonefs replay completed. | Use this as physical write-pressure and packed placement evidence; add xNVMe/SPDK only if lower-overhead replay is needed. |
 | dogi_exact | `done-nullblk-plus-physical-full-compact-plus-dynamic-pressure-plus-original-lba` | External DOGI prototype completed on null_blk/ZenFS and on a six-workload compact-LBA physical ZNS PQC2000 suite. It also completed DOGI/Greedy/CostBenefit on an Alibaba-like p8000 compact physical ZNS pressure trace. The Alibaba-like p8000 original-LBA span also completed on the public DOGI stack. | Use this as exact DOGI physical pressure evidence; compact and original-LBA units remain separate from packed QUASAR replay. |

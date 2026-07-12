@@ -41,11 +41,11 @@
 | `deployment_selector` | `artifacts/results/quasar-deployment-policy-selector.json` | 3363 | `5effb3c19a59` | deployable policy selector for default, tenant-isolation, strict-residual, and fallback modes | QUASAR improvement is an explicit mode selector, not one universal knob |
 | `fdp_handle_pressure` | `artifacts/results/pqc-mixed-fdp-mapping.json` | 91046 | `2c5d3ef64630` | trace-driven QUASAR-to-FDP placement-handle pressure model | FDP can carry QUASAR lifecycle families, but scarce handles collide death cohorts |
 | `fdp_handle_pressure_figure` | `artifacts/figures/fast-style/fig8-fdp-handle-pressure.pdf` | 13196 | `7ca6986bd95b` | paper Figure 8 for FDP handle-count purity and collision pressure | FDP handle pressure is reported as deployment modeling, not physical FDP performance |
-| `unified_comparison` | `artifacts/results/unified-baseline-comparison.json` | 183895 | `d71230e55d5f` | single JSON summary separating same-path, pressure, exact external, and boundary evidence | paper-ready comparison summary |
-| `claim_matrix` | `artifacts/results/quasar-claim-matrix.json` | 8563 | `6c4b3c7bb0eb` | claim-to-evidence guardrail | supported, qualified, and boundary claims are separated |
-| `external_readiness` | `artifacts/results/external-readiness.json` | 34923 | `92237e3bc91f` | conservative readiness report for external/system evidence | no current blockers or pending paper-grade evidence gaps for scoped claim |
-| `goal_completion_audit` | `artifacts/results/actual-zns-goal-completion-audit.json` | 6632 | `04de8a9ae724` | requirement-by-requirement audit of the actual-ZNS comparison goal | scoped claim is ready while optional strengthening work is separated |
-| `acceptance` | `artifacts/results/acceptance-report.json` | 38966 | `e1dc7c56ce34` | local acceptance gate summary | all reproducibility and evidence gates pass |
+| `unified_comparison` | `artifacts/results/unified-baseline-comparison.json` | 183910 | `636ea8cd2352` | single JSON summary separating same-path, pressure, exact external, and boundary evidence | paper-ready comparison summary |
+| `claim_matrix` | `artifacts/results/quasar-claim-matrix.json` | 8563 | `e5583189769c` | claim-to-evidence guardrail | supported, qualified, and boundary claims are separated |
+| `external_readiness` | `artifacts/results/external-readiness.json` | 34923 | `d179c3da3805` | conservative readiness report for external/system evidence | no current blockers or pending paper-grade evidence gaps for scoped claim |
+| `goal_completion_audit` | `artifacts/results/actual-zns-goal-completion-audit.json` | 10213 | `a3d1104afcb8` | requirement-by-requirement audit of the actual-ZNS comparison goal | scoped claim is ready while FAST R2 production blockers keep the broader goal open |
+| `acceptance` | `artifacts/results/acceptance-report.json` | 39512 | `7ba766ef1253` | local acceptance gate summary | all reproducibility and evidence gates pass |
 | `ycsb_pressure_figure` | `artifacts/figures/actual-zns/ycsb-pressure-waf-stale.png` | 100733 | `98973b42e75f` | paper figure for actual-ZNS YCSB WAF/stale-secret curve | visualizes negative control and pressure rows |
 | `overhead_figure` | `artifacts/figures/actual-zns/overhead-accounting.png` | 64105 | `d7a58350fd01` | paper figure for actual-ZNS overhead accounting | visualizes throughput, CPU, and semantic reset cost |
 | `workload_hardness_figure` | `artifacts/figures/actual-zns/workload-hardness.png` | 55961 | `e49e3cced335` | paper figure for workload hardness tiers | visualizes fairness, pressure, and hostile coverage |
@@ -73,8 +73,8 @@
 {
   "acceptance": {
     "passed": true,
-    "passed_gates": 41,
-    "total_gates": 41
+    "passed_gates": 42,
+    "total_gates": 42
   },
   "actual_zns_overhead": {},
   "claim_matrix": {
