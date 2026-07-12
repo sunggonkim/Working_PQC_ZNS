@@ -17,7 +17,8 @@ This report separates evidence by compatibility of units and stack.
 - The YCSB-F straggler baseline replay runs FIFO/SepBIT/MiDAS/DOGI on the same actual-ZNS hard condition and confirms they issue no semantic resets.
 - Actual-ZNS overhead is now reported separately: hybrid pays semantic reset work, while C-level policy-decision cost remains below DOGI-style MLP inference.
 - A real sysbench fileio block trace with concurrent liboqs PQC KMS/audit side writes closes the application-trace realism gap without claiming SPDK/ZenFS latency.
-- Security semantics are bounded explicitly: current evidence proves reset eligibility and exposure reduction, not NAND physical erasure without sanitize validation.
+- Per-cohort key isolation closes the erase-scope/blast-radius gap for crypto-erase deployments without treating shared-namespace sanitize as an epoch cleanup primitive.
+- Security semantics are bounded explicitly: current evidence proves reset eligibility and cohort-scoped crypto-erase feasibility, not that zone reset physically erases NAND.
 - Claim matrix is generated as a writing guardrail: supported, qualified, and boundary claims are separated from forbidden overclaims.
 - Workload hardness matrix is generated as a benchmark guardrail: negative controls, pressure workloads, headline claim eligibility, and QUASAR-hostile workloads are separated.
 - Deployment policy selector is generated as an implementation guardrail: default hybrid, tenant isolation, residual migration, and overflow fallback are explicit modes.
@@ -29,8 +30,8 @@ This report separates evidence by compatibility of units and stack.
 
 - Scope: reproducibility manifest for actual-ZNS baseline-vs-QUASAR comparison
 - Passed: `True`
-- Artifacts: `43`
-- Commands: `13`
+- Artifacts: `46`
+- Commands: `14`
 - Missing or empty: `[]`
 - Hash validation passed: `True`
 - Hash mismatches: `0`
@@ -230,6 +231,12 @@ This is the lower-overhead native command-path sanity check missing from the zon
 - SANICAP: `0x60000003`
 - Sanitize supported: `True`
 - Sanitize log status: `(1) Most Recent Sanitize Command Completed Successfully.`
+- Per-cohort crypto-erase artifact: `per-cohort-key-isolated-crypto-erase`
+- Destroyed cohort: `epoch-4`
+- Target records inaccessible: `True`
+- Unrelated records preserved: `True`
+- Wrong-key rejection: `32/32`
+- Shared-namespace sanitize called by key-erase artifact: `False`
 
 | Operation | Advertised |
 | --- | --- |
@@ -239,10 +246,12 @@ This is the lower-overhead native command-path sanity check missing from the zon
 
 QUASAR proves reset eligibility and stale-secret exposure reduction, and this device's NVMe crypto-erase sanitize command path has been executed and validated as a destructive device/namespace-scoped operation. Zone reset alone is still not a physical erase proof, and sanitize must not be treated as a per-zone or per-epoch command on a shared namespace. A strong physical erase deployment requires a dedicated namespace/media pool, per-cohort encryption-key isolation, or future per-zone erase semantics whose blast radius matches the cohort being destroyed.
 
+This is a cohort-scoped crypto-erase deployment path, not proof that zone reset physically erases NAND. It closes the erase blast-radius issue by moving the destructive primitive from device-wide sanitize to per-cohort encryption-key destruction; chip-off physical remanence still depends on the secrecy and destruction of the cohort DEK.
+
 ## Claim Matrix
 
-- Claims: `13`
-- Status counts: `{'qualified': 1, 'supported': 9, 'supported-boundary': 3}`
+- Claims: `14`
+- Status counts: `{'qualified': 1, 'supported': 9, 'supported-boundary': 4}`
 
 | Claim | Status | Caveat |
 | --- | --- | --- |
@@ -255,6 +264,7 @@ QUASAR proves reset eligibility and stale-secret exposure reduction, and this de
 | Residual migration is a deployable strict-exposure mode with explicit cost. | `supported` | Strict mode is not the default for every workload. |
 | Hybrid has explicit reset overhead but lower policy-decision CPU cost than DOGI-style MLP. | `supported` | Actual-ZNS latency uses zonefs helper appends/truncates, so use as overhead accounting, not final production p99. |
 | Zone reset alone is not physical erase; sanitize is validated only as a destructive device/namespace-scoped path. | `supported-boundary` | QUASAR proves reset eligibility and stale-secret exposure reduction, and this device's NVMe crypto-erase sanitize command path has been executed and validated as a destructive device/namespace-scoped operation. Zone reset alone is still not a physical erase proof, and sanitize must not be treated as a per-zone or per-epoch command on a shared namespace. A strong physical erase deployment requires a dedicated namespace/media pool, per-cohort encryption-key isolation, or future per-zone erase semantics whose blast radius matches the cohort being destroyed. |
+| Per-cohort key isolation provides a cohort-scoped crypto-erase deployment path. | `supported-boundary` | This is crypto-erase by per-cohort key destruction, not proof that zone reset physically erases NAND or that every SSD exposes per-zone erase semantics. |
 | Exact external baselines are included but have non-identical unit systems. | `qualified` | Do not mix exact-baseline internal units with QUASAR native ZNS throughput as if they were identical. |
 | FDP can carry QUASAR's lifecycle signal, but scarce placement handles create collision pressure. | `supported-boundary` | This is a trace-driven handle-pressure model, not a physical FDP device performance result. |
 | A real application block trace with PQC lifecycle side writes is captured. | `supported-boundary` | This closes the real-application trace realism gap, but it is not SPDK/ZenFS latency, public DOGI parity, or a ZNS placement result. |

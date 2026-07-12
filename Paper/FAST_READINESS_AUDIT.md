@@ -30,8 +30,8 @@ the measured workloads and fallback modes.
 | Include space-amplification defense. | Component Ablation now reports an Exchange p2000 WAF/space sensitivity: QUASAR pays a small lifetime-utilization cost but keeps closed-zone fill high and stale secrets at zero. | Satisfied for scoped claim. |
 | Include variability evidence. | A three-seed DOGI-family ratio sweep reports 54 comparisons and shows the break-even behavior: low PQC ratios are exposure evidence, while 20% overlays produce WAF/GC gains. | Satisfied for scoped claim. |
 | Define security metric. | `stale_secret_blocks` and stale-secret block-seconds are defined; E4 exposure timeline is cited. | Satisfied. |
-| Avoid physical erase overclaim. | Paper says zone reset alone is not physical NAND erasure, cites NIST SP 800-88 Rev. 2, and now states shared-namespace sanitize is destructive device/namespace-scoped command-path evidence, not per-zone epoch cleanup. | Tightened; strong erase requires matching erase scope. |
-| Reproducibility. | `acceptance_check.py` reports 43/43 gates; current tests pass; PDFs build cleanly. | Satisfied. |
+| Avoid physical erase overclaim. | Paper says zone reset alone is not physical NAND erasure, cites NIST SP 800-88 Rev. 2, states shared-namespace sanitize is destructive device/namespace-scoped command-path evidence, and adds per-cohort DEK destruction as cohort-scoped crypto-erase evidence. | Tightened; hardware physical erase still requires matching hardware scope. |
+| Reproducibility. | `acceptance_check.py` reports 44/44 gates; current tests pass; PDFs build cleanly. | Satisfied. |
 | Avoid false completion. | `actual-zns-goal-completion-audit.json` reports `scoped_claim_ready=true`, `full_goal_complete=false`, and the remaining FAST R2 production blockers. | Satisfied as an anti-overclaim gate. |
 | Final `HowToWritePaper.md` audit. | `LINE_BY_LINE_FAST_AUDIT.md` now checks the guide's pre-submission questions, DOGI figure-role translation, and the design-choice rule directly. Figure 5 uses subfloats; the later sensitivity, FDP, and overhead figures are compact one-column figures with no embedded numeric labels. | Satisfied. |
 
@@ -42,9 +42,9 @@ the measured workloads and fallback modes.
 | `make all` | Passed. |
 | `Paper/0.Main.pdf` | Single FAST/USENIX-format main PDF; 14 pages, letter. |
 | LaTeX unresolved references/citations/errors grep | Clean. |
-| `python3 -m unittest discover -s code -p 'test*.py'` | 122 tests passed in the latest run. |
-| `python3 code/sim/acceptance_check.py --out artifacts/results/acceptance-report.json` | 43/43 gates passed. |
-| `python3 code/sim/report_goal_completion_audit.py` | Scoped claim ready, full goal incomplete, remaining FAST R2 production blockers recorded. |
+| `python3 -m unittest discover -s code -p 'test*.py'` | 130 tests passed in the latest run. |
+| `python3 code/sim/acceptance_check.py --out artifacts/results/acceptance-report.json` | 44/44 gates passed. |
+| `python3 code/sim/report_goal_completion_audit.py` | Scoped claim ready, full goal incomplete, 4 remaining FAST R2 production blockers recorded. |
 | `git diff --check` | Clean for edited paper/plan files. |
 
 ## What Is Still Not "Perfect"
@@ -73,7 +73,7 @@ the measured workloads and fallback modes.
 | "Hints are unrealistic or abusable." | The paper defines a trust boundary, privileged hint emitters, opaque cohort IDs, per-tenant quotas, and overflow fallback. |
 | "How does the 32-byte hint cross the stack?" | The paper gives concrete attachment points and states that POSIX write alone does not carry the hint. |
 | "Why not FDP instead of ZNS?" | The paper maps QUASAR families to FDP handles, reports handle-count collision/purity pressure, and explains why ZNS is used first for measurable append/reset accounting. |
-| "Zone reset is not secure erase." | The paper says this directly and claims reset eligibility/exposure reduction by default; sanitize/crypto-erase is destructive device/namespace-scoped command-path evidence, not per-zone epoch cleanup on shared media. |
+| "Zone reset is not secure erase." | The paper says this directly and claims reset eligibility/exposure reduction by default; sanitize/crypto-erase is destructive device/namespace-scoped command-path evidence, not per-zone epoch cleanup on shared media; per-cohort DEK destruction is the supported cohort-scoped crypto-erase path. |
 | "Why are these PQC artifacts stored?" | The paper scopes to deployments that already persist bounded lifecycle state and does not require universal TLS key persistence. |
 | "Strict exposure costs too much." | The paper shows residual migration can be expensive and treats strict zero-wait as an opt-in mode. |
 | "The device evidence is narrow." | The paper scopes the physical claim to one WD ZN540-class device and avoids device-internal wear claims. |

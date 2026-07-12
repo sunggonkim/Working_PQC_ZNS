@@ -1093,10 +1093,16 @@ def gate_claim_matrix(claim_matrix: dict) -> Gate:
         and "per-zone physical erase" in claim.get("paper_wording", "")
         for claim in claims
     )
+    has_per_cohort_key_boundary = any(
+        "Per-cohort key isolation" in claim.get("claim", "")
+        and "not proof that zone reset physically" in claim.get("caveat", "")
+        for claim in claims
+    )
     passed = (
         claim_matrix.get("claim_count", 0) >= 8
         and by_status.get("supported", 0) >= 6
         and has_sanitize_blast_radius_boundary
+        and has_per_cohort_key_boundary
         and by_status.get("qualified", 0) >= 1
         and any("WAF" in claim.get("caveat", "") for claim in claims)
         and any("shared namespace" in claim.get("caveat", "") for claim in claims)
@@ -1108,6 +1114,7 @@ def gate_claim_matrix(claim_matrix: dict) -> Gate:
         {
             "claim_count": claim_matrix.get("claim_count"),
             "by_status": by_status,
+            "has_per_cohort_key_boundary": has_per_cohort_key_boundary,
         },
     )
 
@@ -1205,6 +1212,9 @@ def gate_reproducibility_manifest(manifest: dict) -> Gate:
         "fdp_handle_pressure",
         "fdp_handle_pressure_figure",
         "real_app_sysbench_pqc_block_trace",
+        "per_cohort_key_erase_summary",
+        "per_cohort_key_erase_markdown",
+        "per_cohort_key_erase_source",
         "unified_comparison",
         "claim_matrix",
         "external_readiness",
@@ -1268,6 +1278,45 @@ def gate_real_app_block_trace(real_app: dict) -> Gate:
     )
 
 
+def gate_per_cohort_key_erase(key_erase: dict) -> Gate:
+    wrong_key = key_erase.get("wrong_key_rejection", {})
+    claim_boundary = key_erase.get("claim_boundary", "")
+    passed = (
+        key_erase.get("artifact") == "per-cohort-key-isolated-crypto-erase"
+        and key_erase.get("records", 0) >= 128
+        and key_erase.get("target_records", 0) > 0
+        and key_erase.get("target_records_inaccessible_after_destroy") is True
+        and key_erase.get("unrelated_records", 0) > 0
+        and key_erase.get("unrelated_cohorts_preserved") is True
+        and wrong_key.get("attempted", 0) == key_erase.get("target_records", -1)
+        and wrong_key.get("all_rejected") is True
+        and key_erase.get("sanitize_called") is False
+        and key_erase.get("zone_reset_physical_erase_claimed") is False
+        and "per-cohort encryption-key destruction" in claim_boundary
+        and "not proof that zone reset physically erases NAND" in claim_boundary
+    )
+    return Gate(
+        "per_cohort_key_isolated_crypto_erase_scope_validated",
+        passed,
+        {
+            "artifact": key_erase.get("artifact"),
+            "records": key_erase.get("records"),
+            "cohorts": key_erase.get("cohorts"),
+            "destroyed_cohort": key_erase.get("destroyed_cohort"),
+            "target_records": key_erase.get("target_records"),
+            "target_records_inaccessible_after_destroy": key_erase.get(
+                "target_records_inaccessible_after_destroy"
+            ),
+            "unrelated_records": key_erase.get("unrelated_records"),
+            "unrelated_cohorts_preserved": key_erase.get("unrelated_cohorts_preserved"),
+            "wrong_key_rejection": wrong_key,
+            "sanitize_called": key_erase.get("sanitize_called"),
+            "zone_reset_physical_erase_claimed": key_erase.get("zone_reset_physical_erase_claimed"),
+            "blast_radius": key_erase.get("blast_radius"),
+        },
+    )
+
+
 def gate_reproducibility_validation(validation: dict) -> Gate:
     passed = (
         validation.get("passed", False)
@@ -1296,10 +1345,9 @@ def gate_goal_completion_audit(goal_audit: dict) -> Gate:
         "full_public_dogi_end_to_end_parity",
         "spdk_or_zenfs_tail_latency",
         "physical_fdp_or_faithful_emulator_replay",
-        "per_cohort_physical_erase_scope",
         "device_diversity",
     }
-    allowed = required_remaining | {"real_application_block_traces"}
+    allowed = required_remaining | {"real_application_block_traces", "per_cohort_physical_erase_scope"}
     passed = (
         goal_audit.get("scoped_claim_ready") is True
         and goal_audit.get("full_goal_complete") is False
@@ -1695,6 +1743,7 @@ def run_checks(args: argparse.Namespace) -> dict:
     deployment_selector = load_json(args.deployment_selector)
     reproducibility_manifest = load_json(args.reproducibility_manifest)
     real_app_block_trace = load_json(args.real_app_block_trace)
+    per_cohort_key_erase = load_json(args.per_cohort_key_erase)
     reproducibility_validation = load_json(args.reproducibility_validation)
     goal_completion_audit = load_json(args.goal_completion_audit)
     gates = [
@@ -1739,6 +1788,7 @@ def run_checks(args: argparse.Namespace) -> dict:
         gate_deployment_policy_selector(deployment_selector),
         gate_reproducibility_manifest(reproducibility_manifest),
         gate_real_app_block_trace(real_app_block_trace),
+        gate_per_cohort_key_erase(per_cohort_key_erase),
         gate_reproducibility_validation(reproducibility_validation),
         gate_goal_completion_audit(goal_completion_audit),
     ]
@@ -1818,6 +1868,7 @@ def main() -> int:
     parser.add_argument("--deployment-selector", type=Path, default=Path("artifacts/results/quasar-deployment-policy-selector.json"))
     parser.add_argument("--reproducibility-manifest", type=Path, default=Path("artifacts/results/quasar-reproducibility-manifest.json"))
     parser.add_argument("--real-app-block-trace", type=Path, default=Path("artifacts/results/real-app-block-trace/sysbench-pqc/summary.json"))
+    parser.add_argument("--per-cohort-key-erase", type=Path, default=Path("artifacts/results/per-cohort-key-erase/summary.json"))
     parser.add_argument("--reproducibility-validation", type=Path, default=Path("artifacts/results/quasar-reproducibility-validation.json"))
     parser.add_argument("--goal-completion-audit", type=Path, default=Path("artifacts/results/actual-zns-goal-completion-audit.json"))
     parser.add_argument("--figures-dir", type=Path, default=Path("artifacts/figures"))

@@ -183,6 +183,24 @@ ARTIFACTS = [
         ),
     },
     {
+        "id": "per_cohort_key_erase_summary",
+        "path": "artifacts/results/per-cohort-key-erase/summary.json",
+        "role": "per-cohort DEK destruction artifact proving cohort-scoped crypto-erase blast radius",
+        "claim": "destroying one cohort key makes that cohort inaccessible while preserving unrelated cohorts without shared-namespace sanitize",
+    },
+    {
+        "id": "per_cohort_key_erase_markdown",
+        "path": "artifacts/results/per-cohort-key-erase/summary.md",
+        "role": "human-readable summary for the per-cohort key-isolated crypto-erase artifact",
+        "claim": "states the strong-erase boundary without claiming zone reset physically erases NAND",
+    },
+    {
+        "id": "per_cohort_key_erase_source",
+        "path": "code/quasar/per_cohort_key_erase.py",
+        "role": "source for the per-cohort key-isolated crypto-erase artifact",
+        "claim": "security-scope evidence is backed by an inspectable in-tree tool",
+    },
+    {
         "id": "workload_hardness",
         "path": "artifacts/results/workload-hardness-matrix.json",
         "role": "benchmark guardrail for fairness, negative-control, pressure, and hostile tiers",
@@ -299,6 +317,10 @@ COMMANDS = [
     {
         "step": "real_app_block_trace",
         "command": "sudo python3 code/tracegen/capture_real_app_block_trace.py --duration 8 --sysbench-total-size 64M --sysbench-file-num 8 --sysbench-threads 4 --pqc-sessions 64 --pqc-sleep-ms 5",
+    },
+    {
+        "step": "per_cohort_key_erase",
+        "command": "python3 code/quasar/per_cohort_key_erase.py --cohorts 8 --records-per-cohort 32 --payload-bytes 4096 --tenants 4 --destroy-cohort epoch-4",
     },
     {
         "step": "fast_style_figures",

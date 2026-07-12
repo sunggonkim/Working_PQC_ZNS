@@ -385,6 +385,25 @@ class AcceptanceCheckTests(unittest.TestCase):
                 }
             ]
         }
+        per_cohort_key_erase = {
+            "artifact": "per-cohort-key-isolated-crypto-erase",
+            "records": 256,
+            "cohorts": 8,
+            "destroyed_cohort": "epoch-4",
+            "target_records": 32,
+            "target_records_inaccessible_after_destroy": True,
+            "unrelated_records": 224,
+            "unrelated_cohorts_preserved": True,
+            "wrong_key_rejection": {"attempted": 32, "rejected": 32, "all_rejected": True},
+            "sanitize_called": False,
+            "zone_reset_physical_erase_claimed": False,
+            "blast_radius": "single death cohort key domain",
+            "claim_boundary": (
+                "This is a cohort-scoped crypto-erase deployment path, not proof that zone reset "
+                "physically erases NAND. It closes the erase blast-radius issue by moving the "
+                "destructive primitive from device-wide sanitize to per-cohort encryption-key destruction."
+            ),
+        }
 
         with tempfile.TemporaryDirectory() as tmp:
             figures = Path(tmp)
@@ -428,6 +447,7 @@ class AcceptanceCheckTests(unittest.TestCase):
                 accept.gate_c_policy_overhead(c_policy_overhead),
                 accept.gate_crash_recovery_cost(crash_model),
                 accept.gate_fdp_mapping(fdp_mapping),
+                accept.gate_per_cohort_key_erase(per_cohort_key_erase),
             ]
 
         self.assertTrue(all(gate.passed for gate in gates))
@@ -437,7 +457,6 @@ class AcceptanceCheckTests(unittest.TestCase):
             {"name": "full_public_dogi_end_to_end_parity"},
             {"name": "spdk_or_zenfs_tail_latency"},
             {"name": "physical_fdp_or_faithful_emulator_replay"},
-            {"name": "per_cohort_physical_erase_scope"},
             {"name": "device_diversity"},
         ]
         goal_audit = {
@@ -458,6 +477,15 @@ class AcceptanceCheckTests(unittest.TestCase):
             with_real_app_still_open["fast_r2_production_blockers"]
         )
         self.assertTrue(accept.gate_goal_completion_audit(with_real_app_still_open).passed)
+
+        with_per_cohort_still_open = dict(goal_audit)
+        with_per_cohort_still_open["fast_r2_production_blockers"] = blockers + [
+            {"name": "per_cohort_physical_erase_scope"}
+        ]
+        with_per_cohort_still_open["fast_r2_production_blocker_count"] = len(
+            with_per_cohort_still_open["fast_r2_production_blockers"]
+        )
+        self.assertTrue(accept.gate_goal_completion_audit(with_per_cohort_still_open).passed)
 
         unsafe = dict(goal_audit)
         unsafe["full_goal_complete"] = True
@@ -484,6 +512,33 @@ class AcceptanceCheckTests(unittest.TestCase):
         weak = dict(real_app)
         weak["blktrace"] = {"event_lines": 10, "write_events": 5}
         self.assertFalse(accept.gate_real_app_block_trace(weak).passed)
+
+    def test_per_cohort_key_erase_gate(self) -> None:
+        key_erase = {
+            "artifact": "per-cohort-key-isolated-crypto-erase",
+            "records": 256,
+            "cohorts": 8,
+            "destroyed_cohort": "epoch-4",
+            "target_records": 32,
+            "target_records_inaccessible_after_destroy": True,
+            "unrelated_records": 224,
+            "unrelated_cohorts_preserved": True,
+            "wrong_key_rejection": {"attempted": 32, "rejected": 32, "all_rejected": True},
+            "sanitize_called": False,
+            "zone_reset_physical_erase_claimed": False,
+            "blast_radius": "single death cohort key domain",
+            "claim_boundary": (
+                "This is a cohort-scoped crypto-erase deployment path, not proof that zone reset "
+                "physically erases NAND. It closes the erase blast-radius issue by moving the "
+                "destructive primitive from device-wide sanitize to per-cohort encryption-key destruction."
+            ),
+        }
+
+        self.assertTrue(accept.gate_per_cohort_key_erase(key_erase).passed)
+
+        unsafe = dict(key_erase)
+        unsafe["sanitize_called"] = True
+        self.assertFalse(accept.gate_per_cohort_key_erase(unsafe).passed)
 
 
 if __name__ == "__main__":

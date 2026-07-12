@@ -1014,9 +1014,10 @@
         "by_status": {
           "qualified": 1,
           "supported": 9,
-          "supported-boundary": 3
+          "supported-boundary": 4
         },
-        "claim_count": 13
+        "claim_count": 14,
+        "has_per_cohort_key_boundary": true
       },
       "name": "claim_matrix_maps_supported_qualified_and_boundary_claims",
       "passed": true
@@ -1204,8 +1205,8 @@
     },
     {
       "evidence": {
-        "artifact_count": 43,
-        "command_count": 13,
+        "artifact_count": 46,
+        "command_count": 14,
         "missing_or_empty": [],
         "missing_required": []
       },
@@ -1229,7 +1230,29 @@
     },
     {
       "evidence": {
-        "artifact_count": 43,
+        "artifact": "per-cohort-key-isolated-crypto-erase",
+        "blast_radius": "single death cohort key domain",
+        "cohorts": 8,
+        "destroyed_cohort": "epoch-4",
+        "records": 256,
+        "sanitize_called": false,
+        "target_records": 32,
+        "target_records_inaccessible_after_destroy": true,
+        "unrelated_cohorts_preserved": true,
+        "unrelated_records": 224,
+        "wrong_key_rejection": {
+          "all_rejected": true,
+          "attempted": 32,
+          "rejected": 32
+        },
+        "zone_reset_physical_erase_claimed": false
+      },
+      "name": "per_cohort_key_isolated_crypto_erase_scope_validated",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "artifact_count": 46,
         "mismatch_count": 0,
         "mismatches": []
       },
@@ -1241,16 +1264,14 @@
         "blocker_names": [
           "device_diversity",
           "full_public_dogi_end_to_end_parity",
-          "per_cohort_physical_erase_scope",
           "physical_fdp_or_faithful_emulator_replay",
           "spdk_or_zenfs_tail_latency"
         ],
-        "fast_r2_production_blocker_count": 5,
+        "fast_r2_production_blocker_count": 4,
         "full_goal_complete": false,
         "required_remaining": [
           "device_diversity",
           "full_public_dogi_end_to_end_parity",
-          "per_cohort_physical_erase_scope",
           "physical_fdp_or_faithful_emulator_replay",
           "spdk_or_zenfs_tail_latency"
         ],
@@ -1261,6 +1282,6 @@
     }
   ],
   "passed": true,
-  "passed_gates": 43,
-  "total_gates": 43
+  "passed_gates": 44,
+  "total_gates": 44
 }

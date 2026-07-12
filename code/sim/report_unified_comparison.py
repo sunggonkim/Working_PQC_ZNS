@@ -201,6 +201,31 @@ def summarize_real_app_block_trace(data: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def summarize_per_cohort_key_erase(data: dict[str, Any]) -> dict[str, Any]:
+    wrong_key = data.get("wrong_key_rejection", {})
+    return {
+        "artifact": data.get("artifact"),
+        "cohorts": data.get("cohorts"),
+        "records": data.get("records"),
+        "destroyed_cohort": data.get("destroyed_cohort"),
+        "target_records": data.get("target_records"),
+        "target_records_inaccessible_after_destroy": data.get(
+            "target_records_inaccessible_after_destroy"
+        ),
+        "unrelated_records": data.get("unrelated_records"),
+        "unrelated_cohorts_preserved": data.get("unrelated_cohorts_preserved"),
+        "wrong_key_attempted": wrong_key.get("attempted"),
+        "wrong_key_rejected": wrong_key.get("rejected"),
+        "wrong_key_all_rejected": wrong_key.get("all_rejected"),
+        "sanitize_called": data.get("sanitize_called"),
+        "zone_reset_physical_erase_claimed": data.get("zone_reset_physical_erase_claimed"),
+        "blast_radius": data.get("blast_radius"),
+        "store_sha256": data.get("store_sha256"),
+        "claim": data.get("claim"),
+        "claim_boundary": data.get("claim_boundary"),
+    }
+
+
 def summarize_security_capability(data: dict[str, Any]) -> dict[str, Any]:
     return {
         "device_model": data.get("device_model"),
@@ -455,6 +480,7 @@ def markdown(summary: dict[str, Any]) -> str:
     actual_zns_overhead = summary["actual_zns_overhead"]
     xnvme_zns_latency = summary["xnvme_zns_latency"]
     real_app_block_trace = summary["real_app_block_trace"]
+    per_cohort_key_erase = summary["per_cohort_key_erase"]
     security_capability = summary["security_capability"]
     claim_matrix = summary["claim_matrix"]
     workload_hardness = summary["workload_hardness"]
@@ -488,7 +514,8 @@ def markdown(summary: dict[str, Any]) -> str:
         "- The YCSB-F straggler baseline replay runs FIFO/SepBIT/MiDAS/DOGI on the same actual-ZNS hard condition and confirms they issue no semantic resets.",
         "- Actual-ZNS overhead is now reported separately: hybrid pays semantic reset work, while C-level policy-decision cost remains below DOGI-style MLP inference.",
         "- A real sysbench fileio block trace with concurrent liboqs PQC KMS/audit side writes closes the application-trace realism gap without claiming SPDK/ZenFS latency.",
-        "- Security semantics are bounded explicitly: current evidence proves reset eligibility and exposure reduction, not NAND physical erasure without sanitize validation.",
+        "- Per-cohort key isolation closes the erase-scope/blast-radius gap for crypto-erase deployments without treating shared-namespace sanitize as an epoch cleanup primitive.",
+        "- Security semantics are bounded explicitly: current evidence proves reset eligibility and cohort-scoped crypto-erase feasibility, not that zone reset physically erases NAND.",
         "- Claim matrix is generated as a writing guardrail: supported, qualified, and boundary claims are separated from forbidden overclaims.",
         "- Workload hardness matrix is generated as a benchmark guardrail: negative controls, pressure workloads, headline claim eligibility, and QUASAR-hostile workloads are separated.",
         "- Deployment policy selector is generated as an implementation guardrail: default hybrid, tenant isolation, residual migration, and overflow fallback are explicit modes.",
@@ -814,6 +841,12 @@ def markdown(summary: dict[str, Any]) -> str:
             f"- SANICAP: `{security_capability['sanicap_hex']}`",
             f"- Sanitize supported: `{security_capability['sanitize_supported']}`",
             f"- Sanitize log status: `{security_capability['sanitize_log_status']}`",
+            f"- Per-cohort crypto-erase artifact: `{per_cohort_key_erase.get('artifact')}`",
+            f"- Destroyed cohort: `{per_cohort_key_erase.get('destroyed_cohort')}`",
+            f"- Target records inaccessible: `{per_cohort_key_erase.get('target_records_inaccessible_after_destroy')}`",
+            f"- Unrelated records preserved: `{per_cohort_key_erase.get('unrelated_cohorts_preserved')}`",
+            f"- Wrong-key rejection: `{fmt_int(per_cohort_key_erase.get('wrong_key_rejected'))}/{fmt_int(per_cohort_key_erase.get('wrong_key_attempted'))}`",
+            f"- Shared-namespace sanitize called by key-erase artifact: `{per_cohort_key_erase.get('sanitize_called')}`",
             "",
             "| Operation | Advertised |",
             "| --- | --- |",
@@ -822,6 +855,8 @@ def markdown(summary: dict[str, Any]) -> str:
             f"| Overwrite sanitize | `{security_capability['sanitize_operations_supported'].get('overwrite')}` |",
             "",
             security_capability["claim_boundary"],
+            "",
+            per_cohort_key_erase.get("claim_boundary"),
             "",
             "## Claim Matrix",
             "",
@@ -1367,6 +1402,11 @@ def main() -> int:
         default=Path("artifacts/results/real-app-block-trace/sysbench-pqc/summary.json"),
     )
     parser.add_argument(
+        "--per-cohort-key-erase",
+        type=Path,
+        default=Path("artifacts/results/per-cohort-key-erase/summary.json"),
+    )
+    parser.add_argument(
         "--security-capability",
         type=Path,
         default=Path("artifacts/results/physical-zns-security-capability.json"),
@@ -1470,6 +1510,7 @@ def main() -> int:
         "actual_zns_overhead": summarize_actual_zns_overhead(load_json(args.actual_zns_overhead)),
         "xnvme_zns_latency": summarize_xnvme_zns_latency(load_json(args.xnvme_zns_latency)),
         "real_app_block_trace": summarize_real_app_block_trace(load_json(args.real_app_block_trace)),
+        "per_cohort_key_erase": summarize_per_cohort_key_erase(load_json(args.per_cohort_key_erase)),
         "security_capability": summarize_security_capability(load_json(args.security_capability)),
         "claim_matrix": summarize_claim_matrix(load_json(args.claim_matrix)),
         "workload_hardness": summarize_workload_hardness(load_json(args.workload_hardness)),

@@ -32,6 +32,16 @@ class ClaimMatrixTests(unittest.TestCase):
                 "all_kem_ok": True,
                 "all_sig_ok": True,
             },
+            "per_cohort_key_erase": {
+                "artifact": "per-cohort-key-isolated-crypto-erase",
+                "records": 256,
+                "destroyed_cohort": "epoch-4",
+                "target_records_inaccessible_after_destroy": True,
+                "unrelated_cohorts_preserved": True,
+                "wrong_key_rejected": 32,
+                "wrong_key_attempted": 32,
+                "sanitize_called": False,
+            },
             "security_capability": {
                 "sanicap_hex": "0x3",
                 "sanitize_supported": True,
@@ -97,13 +107,14 @@ class ClaimMatrixTests(unittest.TestCase):
         summary = claim_matrix.summarize(claims)
         text = claim_matrix.markdown(summary)
 
-        self.assertEqual(summary["claim_count"], 13)
+        self.assertEqual(summary["claim_count"], 14)
         self.assertIn("supported-boundary", summary["by_status"])
         self.assertIn("Forbidden Overclaims", text)
         self.assertIn("Zone reset alone", text)
         self.assertIn("YCSB baseline-complete rows=7", text)
         self.assertIn("FDP can carry", text)
         self.assertIn("real application block trace", text)
+        self.assertIn("Per-cohort key isolation", text)
 
 
 if __name__ == "__main__":

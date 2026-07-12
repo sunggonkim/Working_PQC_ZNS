@@ -67,6 +67,22 @@ def real_app_block_trace_validated(real_app: dict[str, Any]) -> bool:
     )
 
 
+def per_cohort_key_erase_validated(key_erase: dict[str, Any]) -> bool:
+    wrong_key = key_erase.get("wrong_key_rejection", {})
+    return bool(
+        key_erase.get("artifact") == "per-cohort-key-isolated-crypto-erase"
+        and key_erase.get("records", 0) >= 128
+        and key_erase.get("target_records", 0) > 0
+        and key_erase.get("target_records_inaccessible_after_destroy") is True
+        and key_erase.get("unrelated_records", 0) > 0
+        and key_erase.get("unrelated_cohorts_preserved") is True
+        and key_erase.get("sanitize_called") is False
+        and key_erase.get("zone_reset_physical_erase_claimed") is False
+        and wrong_key.get("all_rejected") is True
+        and "per-cohort encryption-key destruction" in key_erase.get("claim_boundary", "")
+    )
+
+
 def production_blocker(name: str, evidence: list[str], required_to_close: str) -> dict[str, Any]:
     return {
         "name": name,
@@ -90,6 +106,7 @@ def fast_r2_production_blockers(
     unified: dict[str, Any],
     readiness: dict[str, Any],
     real_app_block_trace: dict[str, Any],
+    per_cohort_key_erase: dict[str, Any],
 ) -> list[dict[str, Any]]:
     """List fatal Reviewer-2 blockers for a production-grade FAST claim.
 
@@ -135,18 +152,6 @@ def fast_r2_production_blockers(
             "Run the QUASAR family-to-handle policy on FDP hardware or a faithful FDP emulator.",
         ),
         production_blocker(
-            "per_cohort_physical_erase_scope",
-            [
-                f"sanitize_execution_validated={security.get('sanitize_execution_validated')}",
-                f"crypto_erase_executed={security.get('crypto_erase_executed')}",
-                "shared-namespace sanitize is destructive and not a per-zone/per-epoch cleanup primitive",
-            ],
-            (
-                "Demonstrate a dedicated namespace/media pool, per-cohort key isolation, "
-                "or hardware per-zone erase semantics whose blast radius matches the cohort."
-            ),
-        ),
-        production_blocker(
             "device_diversity",
             [
                 "physical measurements are scoped to one WD ZN540-class ZNS SSD",
@@ -155,6 +160,22 @@ def fast_r2_production_blockers(
             "Repeat append/reset/security/FDP evidence on at least one additional ZNS or FDP-capable device.",
         ),
     ]
+    if not per_cohort_key_erase_validated(per_cohort_key_erase):
+        blockers.insert(
+            -1,
+            production_blocker(
+                "per_cohort_physical_erase_scope",
+                [
+                    f"sanitize_execution_validated={security.get('sanitize_execution_validated')}",
+                    f"crypto_erase_executed={security.get('crypto_erase_executed')}",
+                    "shared-namespace sanitize is destructive and not a per-zone/per-epoch cleanup primitive",
+                ],
+                (
+                    "Demonstrate a dedicated namespace/media pool, per-cohort key isolation, "
+                    "or hardware per-zone erase semantics whose blast radius matches the cohort."
+                ),
+            ),
+        )
     if not real_app_block_trace_validated(real_app_block_trace):
         blockers.insert(
             -1,
@@ -177,6 +198,7 @@ def build_audit(
     validation: dict[str, Any],
     pipeline_manifest: dict[str, Any],
     real_app_block_trace: dict[str, Any],
+    per_cohort_key_erase: dict[str, Any],
 ) -> dict[str, Any]:
     same = unified["same_path_physical_zns"]
     ycsb = unified["ycsb_pressure_curve"]
@@ -344,6 +366,31 @@ def build_audit(
             ),
         ),
         item(
+            "Demonstrate a cohort-scoped erase blast radius without shared-namespace sanitize.",
+            "satisfied" if per_cohort_key_erase_validated(per_cohort_key_erase) else "missing",
+            [
+                f"artifact={per_cohort_key_erase.get('artifact')}",
+                f"records={per_cohort_key_erase.get('records')}",
+                f"destroyed_cohort={per_cohort_key_erase.get('destroyed_cohort')}",
+                f"target_records={per_cohort_key_erase.get('target_records')}",
+                "target_records_inaccessible_after_destroy="
+                f"{per_cohort_key_erase.get('target_records_inaccessible_after_destroy')}",
+                f"unrelated_records={per_cohort_key_erase.get('unrelated_records')}",
+                f"unrelated_cohorts_preserved={per_cohort_key_erase.get('unrelated_cohorts_preserved')}",
+                f"wrong_key_all_rejected={per_cohort_key_erase.get('wrong_key_rejection', {}).get('all_rejected')}",
+                f"sanitize_called={per_cohort_key_erase.get('sanitize_called')}",
+                "zone_reset_physical_erase_claimed="
+                f"{per_cohort_key_erase.get('zone_reset_physical_erase_claimed')}",
+            ],
+            (
+                "None for the erase-scope/blast-radius gap. This remains crypto-erase by per-cohort key "
+                "destruction, not proof that zone reset physically erases NAND."
+            )
+            if per_cohort_key_erase_validated(per_cohort_key_erase)
+            else "Need a dedicated namespace/media pool, per-cohort key isolation, or hardware per-zone erase semantics.",
+            "Use per-cohort key isolation as the deployable strong-erase scope; do not call shared-namespace sanitize per epoch.",
+        ),
+        item(
             "Make the generated actual-ZNS comparison reproducible and hash-checked.",
             "satisfied"
             if acceptance.get("passed")
@@ -397,7 +444,12 @@ def build_audit(
     ]
 
     blocking = [row for row in requirements if row["status"] in {"missing", "weak"}]
-    production_blockers = fast_r2_production_blockers(unified, readiness, real_app_block_trace)
+    production_blockers = fast_r2_production_blockers(
+        unified,
+        readiness,
+        real_app_block_trace,
+        per_cohort_key_erase,
+    )
     optional_strengthening = [
         f"{row['name']}: {row['required_to_close']}" for row in production_blockers
     ]
@@ -493,6 +545,11 @@ def main() -> int:
         type=Path,
         default=Path("artifacts/results/real-app-block-trace/sysbench-pqc/summary.json"),
     )
+    parser.add_argument(
+        "--per-cohort-key-erase",
+        type=Path,
+        default=Path("artifacts/results/per-cohort-key-erase/summary.json"),
+    )
     parser.add_argument("--out", type=Path, default=Path("artifacts/results/actual-zns-goal-completion-audit.json"))
     parser.add_argument("--markdown-out", type=Path, default=Path("artifacts/results/actual-zns-goal-completion-audit.md"))
     args = parser.parse_args()
@@ -504,6 +561,7 @@ def main() -> int:
         load_json(args.validation),
         load_json(args.pipeline_manifest),
         load_json(args.real_app_block_trace) if args.real_app_block_trace.exists() else {},
+        load_json(args.per_cohort_key_erase) if args.per_cohort_key_erase.exists() else {},
     )
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8")

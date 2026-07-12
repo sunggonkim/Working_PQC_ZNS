@@ -57,6 +57,7 @@ DEFAULT_INPUTS = {
     "physical_robustness": Path("artifacts/results/physical-robustness-ycsb-a-pqc4000/summary.json"),
     "residual_fallback_sweep": Path("artifacts/results/residual-fallback-sweep/summary.json"),
     "security_capability": Path("artifacts/results/physical-zns-security-capability.json"),
+    "per_cohort_key_erase": Path("artifacts/results/per-cohort-key-erase/summary.json"),
     "claim_matrix": Path("artifacts/results/quasar-claim-matrix.json"),
     "workload_hardness": Path("artifacts/results/workload-hardness-matrix.json"),
     "deployment_selector": Path("artifacts/results/quasar-deployment-policy-selector.json"),
@@ -972,6 +973,48 @@ def security_capability_status(data: dict[str, Any] | None) -> dict[str, Any]:
     }
 
 
+def per_cohort_key_erase_status(data: dict[str, Any] | None) -> dict[str, Any]:
+    if data is None:
+        return {
+            "status": "missing",
+            "summary": "Per-cohort key-isolated crypto-erase artifact is missing.",
+            "next": "Run code/quasar/per_cohort_key_erase.py.",
+        }
+    wrong_key = data.get("wrong_key_rejection", {})
+    passed = (
+        data.get("artifact") == "per-cohort-key-isolated-crypto-erase"
+        and data.get("target_records_inaccessible_after_destroy") is True
+        and data.get("unrelated_cohorts_preserved") is True
+        and wrong_key.get("all_rejected") is True
+        and data.get("sanitize_called") is False
+        and data.get("zone_reset_physical_erase_claimed") is False
+    )
+    if passed:
+        return {
+            "status": "done-cohort-scoped-crypto-erase",
+            "summary": (
+                "Per-cohort DEK destruction makes the target cohort inaccessible while preserving "
+                "unrelated cohorts, without invoking shared-namespace sanitize."
+            ),
+            "evidence": {
+                "records": data.get("records"),
+                "destroyed_cohort": data.get("destroyed_cohort"),
+                "target_records": data.get("target_records"),
+                "unrelated_records": data.get("unrelated_records"),
+                "wrong_key_rejected": wrong_key.get("rejected"),
+                "wrong_key_attempted": wrong_key.get("attempted"),
+                "sanitize_called": data.get("sanitize_called"),
+                "zone_reset_physical_erase_claimed": data.get("zone_reset_physical_erase_claimed"),
+            },
+            "next": "Use this as cohort-scoped crypto-erase evidence; hardware physical erase remains separately scoped.",
+        }
+    return {
+        "status": "partial-cohort-scoped-crypto-erase",
+        "summary": "Per-cohort key erase artifact exists but does not satisfy the crypto-erase scope checks.",
+        "next": "Inspect artifacts/results/per-cohort-key-erase/summary.md and rerun the artifact.",
+    }
+
+
 def claim_matrix_status(data: dict[str, Any] | None) -> dict[str, Any]:
     if data is None:
         return {
@@ -985,10 +1028,16 @@ def claim_matrix_status(data: dict[str, Any] | None) -> dict[str, Any]:
         and "per-zone physical erase" in claim.get("paper_wording", "")
         for claim in data.get("claims", [])
     )
+    has_per_cohort_boundary = any(
+        "Per-cohort key isolation" in claim.get("claim", "")
+        and "not proof that zone reset physically" in claim.get("caveat", "")
+        for claim in data.get("claims", [])
+    )
     if (
         data.get("claim_count", 0) >= 8
         and by_status.get("supported", 0) >= 6
         and has_security_boundary
+        and has_per_cohort_boundary
         and by_status.get("qualified", 0) >= 1
     ):
         return {
@@ -997,6 +1046,7 @@ def claim_matrix_status(data: dict[str, Any] | None) -> dict[str, Any]:
             "evidence": {
                 "claim_count": data.get("claim_count"),
                 "by_status": by_status,
+                "has_per_cohort_boundary": has_per_cohort_boundary,
             },
             "next": "Use this as the paper writing guardrail.",
         }
@@ -1505,6 +1555,7 @@ def build_report(inputs: dict[str, Path]) -> dict[str, Any]:
         "physical_robustness": physical_robustness_status(loaded["physical_robustness"]),
         "residual_fallback": residual_fallback_status(loaded["residual_fallback_sweep"]),
         "security_capability": security_capability_status(loaded["security_capability"]),
+        "per_cohort_key_erase": per_cohort_key_erase_status(loaded["per_cohort_key_erase"]),
         "claim_matrix": claim_matrix_status(loaded["claim_matrix"]),
         "workload_hardness": workload_hardness_status(loaded["workload_hardness"]),
         "deployment_selector": deployment_selector_status(loaded["deployment_selector"]),

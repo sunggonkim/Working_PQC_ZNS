@@ -2,9 +2,9 @@
   "by_status": {
     "qualified": 1,
     "supported": 9,
-    "supported-boundary": 3
+    "supported-boundary": 4
   },
-  "claim_count": 13,
+  "claim_count": 14,
   "claims": [
     {
       "caveat": "This is a semantic/exposure claim; WAF may remain near 1.0 on easy traces.",
@@ -70,8 +70,8 @@
       "claim": "The actual-ZNS comparison is reproducible from an artifact manifest.",
       "evidence": [
         "manifest passed=True",
-        "manifest artifacts=43",
-        "manifest commands=13",
+        "manifest artifacts=46",
+        "manifest commands=14",
         "hash validation mismatches=0"
       ],
       "paper_wording": "The paper artifact set records hashes, roles, claims, and regeneration commands for the actual-ZNS comparison, pressure curves, overhead, selector, figures, and acceptance reports; a validation pass confirms the current files still match those hashes.",
@@ -109,6 +109,21 @@
         "sanitize_execution_validated=True"
       ],
       "paper_wording": "QUASAR proves reset eligibility and stale-secret exposure reduction. On the evaluated device, NVMe crypto-erase sanitize completed successfully as a destructive device/namespace-scoped operation. It validates command support, not per-zone physical erase. Physical-erasure claims require dedicated namespaces/media pools, per-cohort key isolation, or hardware semantics whose blast radius matches the cohort.",
+      "status": "supported-boundary"
+    },
+    {
+      "caveat": "This is crypto-erase by per-cohort key destruction, not proof that zone reset physically erases NAND or that every SSD exposes per-zone erase semantics.",
+      "claim": "Per-cohort key isolation provides a cohort-scoped crypto-erase deployment path.",
+      "evidence": [
+        "artifact=per-cohort-key-isolated-crypto-erase",
+        "records=256",
+        "destroyed cohort=epoch-4",
+        "target inaccessible=True",
+        "unrelated preserved=True",
+        "wrong-key rejected=32/32",
+        "sanitize called=False"
+      ],
+      "paper_wording": "A per-cohort DEK artifact shows that destroying one epoch/cohort key makes only that cohort cryptographically inaccessible while unrelated cohorts remain decryptable, avoiding the blast radius of shared-namespace sanitize.",
       "status": "supported-boundary"
     },
     {
@@ -156,7 +171,7 @@
       "caveat": "Production-grade SPDK/ZenFS replay remains a Reviewer-2 blocker for the broader goal.",
       "claim": "The current artifact set is paper-ready for the scoped system claim.",
       "evidence": [
-        "acceptance=43/43",
+        "acceptance=44/44",
         "external readiness paper_ready=True"
       ],
       "paper_wording": "The scoped claim is ready: PQC death-cohort hints improve ZNS placement/reset scheduling under clean hints, pressure, and measured fallback modes.",

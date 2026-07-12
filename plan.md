@@ -58,11 +58,12 @@ PQC lifecycle objects while preserving history-based placement for payload.
 | xNVMe command-path latency probe | done as lower-overhead probe | `artifacts/results/xnvme-zns-latency/summary.md`, `Paper/6.Evaluation.tex` |
 | FDP trace-driven handle-pressure model | done as deployment model | `artifacts/results/pqc-mixed-fdp-mapping.json`, `Paper/6.Evaluation.tex` |
 | Sanitize/crypto-erase command path | done only for destructive command-path validation | physical security artifacts, `Paper/6.Evaluation.tex` |
+| Per-cohort key-isolated crypto erase | done as cohort-scoped erase-scope evidence | `artifacts/results/per-cohort-key-erase/summary.json`: 32 destroyed-cohort records inaccessible, 224 unrelated records preserved, no sanitize call |
 | Reproducibility manifest and acceptance gates | done | `acceptance-report.json`, reproducibility manifest/validation |
-| FAST R2 production-blocker audit | done and intentionally open | `artifacts/results/actual-zns-goal-completion-audit.json`: scoped claim ready, full goal incomplete, 5 production blockers |
+| FAST R2 production-blocker audit | done and intentionally open | `artifacts/results/actual-zns-goal-completion-audit.json`: scoped claim ready, full goal incomplete, 4 production blockers |
 | Real application block trace with PQC side writes | done | `artifacts/results/real-app-block-trace/sysbench-pqc/summary.json`: sysbench fileio plus liboqs KMS/audit side writer captured with blktrace |
 | HowToWritePaper final audit matrix | done | `Paper/LINE_BY_LINE_FAST_AUDIT.md` |
-| Build and tests | done | single-main `make all`, 126 Python tests, 43/43 acceptance gates |
+| Build and tests | done | single-main `make all`, 130 Python tests, 44/44 acceptance gates |
 
 Current readiness:
 
@@ -71,7 +72,7 @@ Scoped FAST-style claim: supported.
 Universal WAF claim: not supported and not allowed.
 Production SPDK claim: not supported and not allowed.
 Physical erase by reset-only or shared-namespace sanitize claim: not supported and not allowed.
-Production-grade FAST R2 claim: not complete; five blockers remain open by audit.
+Production-grade FAST R2 claim: not complete; four blockers remain open by audit.
 ```
 
 ## 3. FAST Reviewer Checkpoint Register
@@ -154,18 +155,20 @@ They do not claim device-internal wear optimality or production SPDK latency.
 | --- | --- | --- | --- | --- |
 | What is `stale_secret_blocks`? | Expired secret-class logical blocks in a family not yet safely reset eligible. | exposure artifacts | Evaluation Metrics | closed |
 | Is exposure time-based? | E4 block-second evidence is cited; broad physical tables use final/representative counts for auditability. | E4 exposure timeline | Evaluation Metrics | closed with explanation |
-| Does zone reset physically erase NAND? | Not by itself. Strong erasure requires an erase scope that matches the target cohort. | security capability and sanitize artifacts | Security Boundary | closed |
+| Does zone reset physically erase NAND? | Not by itself. Strong erasure requires an erase scope that matches the target cohort. | security capability, sanitize, and per-cohort key-isolation artifacts | Security Boundary | closed |
 | Is sanitize cost hidden? | No strong erase latency claim is made. The paper treats sanitize as destructive device/namespace-scoped command-path evidence, not per-zone epoch cleanup. | sanitize execution artifacts | Security Boundary, Discussion | closed with caveat |
+| Is there a cohort-scoped erase deployment path? | Yes for crypto erase: per-cohort DEK destruction makes the target cohort inaccessible while preserving unrelated cohorts without shared-namespace sanitize. | `per-cohort-key-erase/summary.json` | Security Boundary, Discussion | closed for crypto-erase scope |
 | Can wrong hints lose data? | No. Epoch reset requires epoch-manager proof or durable close record. | bad-hint and crash/recovery model | Design Invariant, Robustness | closed |
 
 Required wording:
 
 ```text
 QUASAR reduces stale-secret exposure by aligning secret lifetime with reset
-eligibility. Strong physical erasure requires a dedicated namespace/media pool,
-per-cohort key isolation, or future per-zone erase semantics whose blast radius
-matches the cohort. Shared-namespace NVMe sanitize must not be described as
-per-zone epoch cleanup.
+eligibility. Strong physical erasure requires an erase primitive whose blast
+radius matches the cohort. QUASAR demonstrates one deployable crypto-erase path:
+per-cohort key destruction makes the cohort cryptographically inaccessible while
+preserving unrelated cohorts. Shared-namespace NVMe sanitize must not be
+described as per-zone epoch cleanup.
 ```
 
 Forbidden wording:
@@ -233,7 +236,7 @@ latency claim.
 | Checkpoint | Required Answer | Evidence | Paper Location | Status |
 | --- | --- | --- | --- | --- |
 | Can reviewers audit artifacts? | Manifest lists artifacts, roles, hashes, and regeneration commands. | reproducibility manifest/validation | Evaluation Reproducibility | closed |
-| Are tests current? | Python unit tests pass; acceptance checker passes 43/43. | test and acceptance outputs | audit docs | closed |
+| Are tests current? | Python unit tests pass; acceptance checker passes 44/44. | test and acceptance outputs | audit docs | closed |
 | Does the PDF build cleanly? | Single-main `make all` passes; unresolved refs/citations/errors grep clean. | Paper build log | audit docs | closed |
 | Are raw external runs documented? | External readiness file records exact baselines and caveats. | `external-readiness.md` | Evaluation | closed |
 
@@ -313,6 +316,7 @@ Every checkpoint above must be visible in the paper. Current mapping:
 | xNVMe probe | Lower-overhead command-path sanity | Probe results reported as bound | done |
 | FDP handle-pressure model | Address ZNS-only review without overclaiming hardware FDP | Family and intent purity reported under 8--128 placement handles | done as model |
 | Sanitize capability | Avoid erase overclaim | Capability/command path validated | done |
+| Per-cohort key-isolated crypto erase | Close shared-namespace sanitize blast-radius objection for a deployable crypto-erase path | 256 encrypted records; destroying `epoch-4` makes 32 target records inaccessible, preserves 224 unrelated records, rejects 32/32 wrong-key attempts, and calls no sanitize | done |
 
 ### 5.2 Remaining FAST-Risk Experiments
 
@@ -328,7 +332,7 @@ submission.
 | Physical FDP device or faithful emulator replay | Turn the current FDP handle model into a device-level result | open FAST-risk reducer |
 | Repeated physical pressure runs | Stronger run-to-run stability beyond the three-seed simulator sweep | open FAST-risk reducer |
 | Final WAF-vs-utilization figure | Replace some tables with easier visual reviewer path; current figure-label polish is already done | done |
-| Dedicated-namespace/key-isolated erase benchmark | Stronger secure erase SLO story without treating shared-namespace sanitize as per-zone erase | only needed for stronger erase claim |
+| Dedicated-namespace or hardware per-zone erase benchmark | Stronger physical-erasure SLO story beyond per-cohort crypto-erase key destruction | only needed for a hardware physical-erase claim |
 
 ### 5.3 FAST Figure Rewrite Checkpoints
 
@@ -399,7 +403,7 @@ The paper must keep these invariants through the final editing pass:
 5. Same-path replay is the apples-to-apples baseline.
 6. Exact public baselines are sanity evidence with caveats.
 7. Zone reset is reset eligibility, not guaranteed physical erasure.
-8. Sanitize/crypto-erase is a separate device capability path.
+8. Sanitize/crypto-erase is a separate device capability path; per-cohort key destruction is the supported cohort-scoped crypto-erase path.
 9. Bad hints cannot authorize unsafe reset.
 10. Strict zero-wait mode has explicit residual-copy cost.
 11. Low-pressure WAF rows are negative controls or exposure evidence.
@@ -461,7 +465,7 @@ implementation and experiment guide, not a comment dump.
 | --- | --- | --- | --- | --- | --- |
 | R1 | "Why ZNS only? FDP can carry lifetime hints." | Treat QUASAR as a lifecycle-placement policy, with native ZNS as the measured substrate and FDP as another carrier. | `2.Background.tex`, `4.Design.tex`, `6.Evaluation.tex`, `8.Discussion.tex`, `fig:fdp-handle-pressure` | reflected + trace-modeled | physical FDP device/emulator replay |
 | R2 | "ZoneFS is not production SPDK latency." | Separate actual-ZNS replay accounting, xNVMe command-path sanity, and future SPDK poll-mode work. | `5.Implementation.tex`, `6.Evaluation.tex`, `8.Discussion.tex`, `fig:prototype-overhead` | reflected with caveat | full SPDK or true async xNVMe replay |
-| R3 | "Zone reset is not NIST-grade physical erase." | Claim reset eligibility and exposure reduction by default; require matching erase scope for physical erasure. | `1.Introduction.tex`, `2.Background.tex`, `5.Implementation.tex`, `6.Evaluation.tex`, `7.RelatedWork.tex`, `8.Discussion.tex` | reflected + tightened | dedicated namespace/media pool, per-cohort key isolation, or future per-zone erase semantics |
+| R3 | "Zone reset is not NIST-grade physical erase." | Claim reset eligibility and exposure reduction by default; require matching erase scope for physical erasure. | `1.Introduction.tex`, `2.Background.tex`, `5.Implementation.tex`, `6.Evaluation.tex`, `7.RelatedWork.tex`, `8.Discussion.tex`, `per-cohort-key-erase` artifact | reflected + crypto-erase scope validated | hardware per-zone or dedicated-namespace physical erase remains optional strengthening |
 | R4 | "Why would PQC secrets hit SSD at all?" | Scope to deployments that already persist bounded PQC lifecycle state, not universal TLS session-key persistence. | `1.Introduction.tex`, `2.Background.tex`, `8.Discussion.tex` | reflected | service-specific KMS/audit/recovery trace would strengthen |
 | R5 | "The 32-byte hint path is hand-wavy." | Name concrete attachment points and enforcement policy. | `4.Design.tex` hint-delivery table, `5.Implementation.tex`, `Paper/WRITING_TRACE.md` | reflected | kernel/SPDK request-path prototype |
 | R6 | "Untrusted tenants can abuse secret hints." | Restrict high-priority hints to trusted emitters; use opaque cohorts, quotas, admission, and overflow. | `4.Design.tex`, `8.Discussion.tex`, robustness artifacts | reflected | production policy implementation |

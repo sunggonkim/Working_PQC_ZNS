@@ -50,6 +50,7 @@ def build_claims(
     residual = unified["residual_fallback_sweep"]
     overhead = unified["actual_zns_overhead"]
     real_app = unified.get("real_app_block_trace", {})
+    per_cohort_key_erase = unified.get("per_cohort_key_erase", {})
     security = unified["security_capability"]
     exact = unified["exact_external_baselines"]
     hardness = unified["workload_hardness"]
@@ -205,6 +206,28 @@ def build_claims(
                 "a separate erase path whose blast radius matches the target cohort."
             ),
             security["claim_boundary"],
+        ),
+        make_claim(
+            "Per-cohort key isolation provides a cohort-scoped crypto-erase deployment path.",
+            "supported-boundary",
+            [
+                f"artifact={per_cohort_key_erase.get('artifact')}",
+                f"records={per_cohort_key_erase.get('records')}",
+                f"destroyed cohort={per_cohort_key_erase.get('destroyed_cohort')}",
+                f"target inaccessible={per_cohort_key_erase.get('target_records_inaccessible_after_destroy')}",
+                f"unrelated preserved={per_cohort_key_erase.get('unrelated_cohorts_preserved')}",
+                f"wrong-key rejected={per_cohort_key_erase.get('wrong_key_rejected')}/{per_cohort_key_erase.get('wrong_key_attempted')}",
+                f"sanitize called={per_cohort_key_erase.get('sanitize_called')}",
+            ],
+            (
+                "A per-cohort DEK artifact shows that destroying one epoch/cohort key makes only that "
+                "cohort cryptographically inaccessible while unrelated cohorts remain decryptable, avoiding "
+                "the blast radius of shared-namespace sanitize."
+            ),
+            (
+                "This is crypto-erase by per-cohort key destruction, not proof that zone reset physically "
+                "erases NAND or that every SSD exposes per-zone erase semantics."
+            ),
         ),
         make_claim(
             "Exact external baselines are included but have non-identical unit systems.",

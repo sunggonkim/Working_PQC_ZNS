@@ -1,7 +1,7 @@
 {
   "blocking_count": 0,
   "completion_boundary": "The current artifacts support the scoped paper claim, but the broader user goal remains active because Reviewer-2 production blockers remain open.",
-  "fast_r2_production_blocker_count": 5,
+  "fast_r2_production_blocker_count": 4,
   "fast_r2_production_blockers": [
     {
       "evidence": [
@@ -34,16 +34,6 @@
     },
     {
       "evidence": [
-        "sanitize_execution_validated=True",
-        "crypto_erase_executed=True",
-        "shared-namespace sanitize is destructive and not a per-zone/per-epoch cleanup primitive"
-      ],
-      "name": "per_cohort_physical_erase_scope",
-      "required_to_close": "Demonstrate a dedicated namespace/media pool, per-cohort key isolation, or hardware per-zone erase semantics whose blast radius matches the cohort.",
-      "status": "open"
-    },
-    {
-      "evidence": [
         "physical measurements are scoped to one WD ZN540-class ZNS SSD",
         "device-specific reset/sanitize/FDP behavior is not generalized"
       ],
@@ -53,13 +43,12 @@
     }
   ],
   "full_goal_complete": false,
-  "full_goal_remaining_count": 5,
-  "main_takeaway": "The scoped actual-ZNS comparison is ready: same-path physical replay, workload hardness, pressure, external exact baselines, overhead, security boundaries, and reproducibility are all covered. However, this is not production-grade FAST evidence yet: full public-DOGI end-to-end parity, SPDK/ZenFS tail latency, physical FDP or faithful-emulator replay, per-cohort physical erase scope, device diversity remain open.",
+  "full_goal_remaining_count": 4,
+  "main_takeaway": "The scoped actual-ZNS comparison is ready: same-path physical replay, workload hardness, pressure, external exact baselines, overhead, security boundaries, and reproducibility are all covered. However, this is not production-grade FAST evidence yet: full public-DOGI end-to-end parity, SPDK/ZenFS tail latency, physical FDP or faithful-emulator replay, device diversity remain open.",
   "optional_strengthening": [
     "full_public_dogi_end_to_end_parity: Run DOGI and QUASAR through the same app/ZenFS/SPDK or equivalent stack with identical trace units.",
     "spdk_or_zenfs_tail_latency: Implement SPDK/ZenFS or true async xNVMe replay and report p95/p99 append/reset service latency.",
     "physical_fdp_or_faithful_emulator_replay: Run the QUASAR family-to-handle policy on FDP hardware or a faithful FDP emulator.",
-    "per_cohort_physical_erase_scope: Demonstrate a dedicated namespace/media pool, per-cohort key isolation, or hardware per-zone erase semantics whose blast radius matches the cohort.",
     "device_diversity: Repeat append/reset/security/FDP evidence on at least one additional ZNS or FDP-capable device."
   ],
   "requirements": [
@@ -159,10 +148,28 @@
     },
     {
       "evidence": [
-        "acceptance=43/43",
+        "artifact=per-cohort-key-isolated-crypto-erase",
+        "records=256",
+        "destroyed_cohort=epoch-4",
+        "target_records=32",
+        "target_records_inaccessible_after_destroy=True",
+        "unrelated_records=224",
+        "unrelated_cohorts_preserved=True",
+        "wrong_key_all_rejected=True",
+        "sanitize_called=False",
+        "zone_reset_physical_erase_claimed=False"
+      ],
+      "next_action": "Use per-cohort key isolation as the deployable strong-erase scope; do not call shared-namespace sanitize per epoch.",
+      "remaining": "None for the erase-scope/blast-radius gap. This remains crypto-erase by per-cohort key destruction, not proof that zone reset physically erases NAND.",
+      "requirement": "Demonstrate a cohort-scoped erase blast radius without shared-namespace sanitize.",
+      "status": "satisfied"
+    },
+    {
+      "evidence": [
+        "acceptance=44/44",
         "hash mismatches=0",
         "summary pipeline passed=True",
-        "summary pipeline steps=20"
+        "summary pipeline steps=21"
       ],
       "next_action": "Use run_actual_zns_summary_pipeline.py after changing any derived artifact.",
       "remaining": "Raw long-running physical replays still require device availability and time.",

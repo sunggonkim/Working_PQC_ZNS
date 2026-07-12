@@ -318,9 +318,9 @@
     "by_status": {
       "qualified": 1,
       "supported": 9,
-      "supported-boundary": 3
+      "supported-boundary": 4
     },
-    "claim_count": 13,
+    "claim_count": 14,
     "claims": [
       {
         "caveat": "This is a semantic/exposure claim; WAF may remain near 1.0 on easy traces.",
@@ -386,8 +386,8 @@
         "claim": "The actual-ZNS comparison is reproducible from an artifact manifest.",
         "evidence": [
           "manifest passed=True",
-          "manifest artifacts=43",
-          "manifest commands=13",
+          "manifest artifacts=46",
+          "manifest commands=14",
           "hash validation mismatches=0"
         ],
         "paper_wording": "The paper artifact set records hashes, roles, claims, and regeneration commands for the actual-ZNS comparison, pressure curves, overhead, selector, figures, and acceptance reports; a validation pass confirms the current files still match those hashes.",
@@ -425,6 +425,21 @@
           "sanitize_execution_validated=True"
         ],
         "paper_wording": "QUASAR proves reset eligibility and stale-secret exposure reduction. On the evaluated device, NVMe crypto-erase sanitize completed successfully as a destructive device/namespace-scoped operation. It validates command support, not per-zone physical erase. Physical-erasure claims require dedicated namespaces/media pools, per-cohort key isolation, or hardware semantics whose blast radius matches the cohort.",
+        "status": "supported-boundary"
+      },
+      {
+        "caveat": "This is crypto-erase by per-cohort key destruction, not proof that zone reset physically erases NAND or that every SSD exposes per-zone erase semantics.",
+        "claim": "Per-cohort key isolation provides a cohort-scoped crypto-erase deployment path.",
+        "evidence": [
+          "artifact=per-cohort-key-isolated-crypto-erase",
+          "records=256",
+          "destroyed cohort=epoch-4",
+          "target inaccessible=True",
+          "unrelated preserved=True",
+          "wrong-key rejected=32/32",
+          "sanitize called=False"
+        ],
+        "paper_wording": "A per-cohort DEK artifact shows that destroying one epoch/cohort key makes only that cohort cryptographically inaccessible while unrelated cohorts remain decryptable, avoiding the blast radius of shared-namespace sanitize.",
         "status": "supported-boundary"
       },
       {
@@ -472,7 +487,7 @@
         "caveat": "Production-grade SPDK/ZenFS replay remains a Reviewer-2 blocker for the broader goal.",
         "claim": "The current artifact set is paper-ready for the scoped system claim.",
         "evidence": [
-          "acceptance=43/43",
+          "acceptance=44/44",
           "external readiness paper_ready=True"
         ],
         "paper_wording": "The scoped claim is ready: PQC death-cohort hints improve ZNS placement/reset scheduling under clean hints, pressure, and measured fallback modes.",
@@ -1775,6 +1790,25 @@
       }
     }
   },
+  "per_cohort_key_erase": {
+    "artifact": "per-cohort-key-isolated-crypto-erase",
+    "blast_radius": "single death cohort key domain",
+    "claim": "Per-cohort DEK destruction makes the destroyed cohort cryptographically inaccessible while preserving other cohorts, avoiding shared-namespace sanitize blast radius.",
+    "claim_boundary": "This is a cohort-scoped crypto-erase deployment path, not proof that zone reset physically erases NAND. It closes the erase blast-radius issue by moving the destructive primitive from device-wide sanitize to per-cohort encryption-key destruction; chip-off physical remanence still depends on the secrecy and destruction of the cohort DEK.",
+    "cohorts": 8,
+    "destroyed_cohort": "epoch-4",
+    "records": 256,
+    "sanitize_called": false,
+    "store_sha256": "f6c20f66ddf1231ff799a1dda8d45241bf6d8a907a93b7b107c3ee426aa87bcf",
+    "target_records": 32,
+    "target_records_inaccessible_after_destroy": true,
+    "unrelated_cohorts_preserved": true,
+    "unrelated_records": 224,
+    "wrong_key_all_rejected": true,
+    "wrong_key_attempted": 32,
+    "wrong_key_rejected": 32,
+    "zone_reset_physical_erase_claimed": false
+  },
   "physical_robustness": {
     "clean": {
       "dogi": {
@@ -1963,7 +1997,7 @@
     "sysbench_mode": "rndrw"
   },
   "reproducibility_manifest": {
-    "artifact_count": 43,
+    "artifact_count": 46,
     "artifacts": [
       {
         "bytes": 310144,
@@ -2218,6 +2252,33 @@
         "sha256": "cf7cb2992ced22e8c9c0855d1afc7d8177fb1e81d89597222a5703f59e3a5a3c"
       },
       {
+        "bytes": 3845,
+        "claim": "destroying one cohort key makes that cohort inaccessible while preserving unrelated cohorts without shared-namespace sanitize",
+        "exists": true,
+        "id": "per_cohort_key_erase_summary",
+        "path": "artifacts/results/per-cohort-key-erase/summary.json",
+        "role": "per-cohort DEK destruction artifact proving cohort-scoped crypto-erase blast radius",
+        "sha256": "e61d1814ab1cf99fafa55cc196712851f3fc4e0a2bc19c836650ddabcf69fad7"
+      },
+      {
+        "bytes": 779,
+        "claim": "states the strong-erase boundary without claiming zone reset physically erases NAND",
+        "exists": true,
+        "id": "per_cohort_key_erase_markdown",
+        "path": "artifacts/results/per-cohort-key-erase/summary.md",
+        "role": "human-readable summary for the per-cohort key-isolated crypto-erase artifact",
+        "sha256": "6a681f0b6220108d2829e9c3603a4b7bde5dff7e7798571ae13c5755e01dfeac"
+      },
+      {
+        "bytes": 11140,
+        "claim": "security-scope evidence is backed by an inspectable in-tree tool",
+        "exists": true,
+        "id": "per_cohort_key_erase_source",
+        "path": "code/quasar/per_cohort_key_erase.py",
+        "role": "source for the per-cohort key-isolated crypto-erase artifact",
+        "sha256": "4190f8d031c4252244b06e33772a674d2eedfab5c947348ec4c25519888325cb"
+      },
+      {
         "bytes": 13129,
         "claim": "evaluation does not rely on an overly easy PQC-only trace",
         "exists": true,
@@ -2281,22 +2342,22 @@
         "sha256": "d9dcc006eb7d066ca67226ea6131c14631a2f80275afc4e9f205c297a9268f34"
       },
       {
-        "bytes": 187072,
+        "bytes": 190527,
         "claim": "paper-ready comparison summary",
         "exists": true,
         "id": "unified_comparison",
         "path": "artifacts/results/unified-baseline-comparison.json",
         "role": "single JSON summary separating same-path, pressure, exact external, and boundary evidence",
-        "sha256": "f5563cc6a436820353b48e5b674af9b0ff9f34be0680e82a7aca1334e1b7e752"
+        "sha256": "64b1a084ed06e1919cbdb07602ce6b332450f4b0236d837c53ef1c072c4ecb79"
       },
       {
-        "bytes": 9393,
+        "bytes": 10247,
         "claim": "supported, qualified, and boundary claims are separated",
         "exists": true,
         "id": "claim_matrix",
         "path": "artifacts/results/quasar-claim-matrix.json",
         "role": "claim-to-evidence guardrail",
-        "sha256": "a4466f3957ac60ca68677b76f69b7903684d4eff01cf3c3e669dfae1fd08e2c4"
+        "sha256": "5e90cef500570e264c75115a00148ded88f07d34c22678b1bfd320b95f63b6c3"
       },
       {
         "bytes": 34923,
@@ -2305,25 +2366,25 @@
         "id": "external_readiness",
         "path": "artifacts/results/external-readiness.json",
         "role": "conservative readiness report for external/system evidence",
-        "sha256": "d4ea1629c31e5ad392b5e668185a5ce0f902001bf0c75dd53582e5069d7a5253"
+        "sha256": "3d5b2ff4f11d6481cf9963ee4db0559a722ef1553514d13a0361f3745571c7a1"
       },
       {
-        "bytes": 10468,
+        "bytes": 10664,
         "claim": "scoped claim is ready while FAST R2 production blockers keep the broader goal open",
         "exists": true,
         "id": "goal_completion_audit",
         "path": "artifacts/results/actual-zns-goal-completion-audit.json",
         "role": "requirement-by-requirement audit of the actual-ZNS comparison goal",
-        "sha256": "f5ccf2b22785dac525eb1f26139ed4b197ee87306f8993439c3664a2e2d78166"
+        "sha256": "227c2353b2b34b3e5945c91bba824f5c39c340ce75e7de0fd076a07d4a2deed7"
       },
       {
-        "bytes": 40200,
+        "bytes": 40872,
         "claim": "all reproducibility and evidence gates pass",
         "exists": true,
         "id": "acceptance",
         "path": "artifacts/results/acceptance-report.json",
         "role": "local acceptance gate summary",
-        "sha256": "8a26dea6a5d0e0f3dde24384af1c3c91fc39cdaa395d6e80fefcde43130cda0b"
+        "sha256": "43f188124ed79578195814de4feec4c7974ad60080d09c287c027e109de2bc45"
       },
       {
         "bytes": 100733,
@@ -2353,13 +2414,13 @@
         "sha256": "e49e3cced335fe6241065282a468edf16b0aaedb55590fcefda18677337b2ed4"
       }
     ],
-    "command_count": 13,
+    "command_count": 14,
     "missing_or_empty": [],
     "passed": true,
     "scope": "reproducibility manifest for actual-ZNS baseline-vs-QUASAR comparison"
   },
   "reproducibility_validation": {
-    "artifact_count": 43,
+    "artifact_count": 46,
     "mismatch_count": 0,
     "mismatches": [],
     "passed": true,
