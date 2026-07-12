@@ -348,7 +348,7 @@ def zns_status(
                     "p99_append_latency_ns": physical_replay.get("latency", {}).get("p99_ns"),
                     "reset_issued": physical_replay.get("reset_issued"),
                 },
-                "next": "Run paper-scale replay only after defining a physical zone reset/sanitize policy.",
+                "next": "Run paper-scale replay only after defining host-visible reset accounting and a separate erase-scope policy.",
             }
         append_ok = bool(append_probe and append_probe.get("write_succeeded"))
         if append_ok:
@@ -900,8 +900,9 @@ def security_capability_status(data: dict[str, Any] | None) -> dict[str, Any]:
             "status": "done-sanitize-validated",
             "summary": (
                 "Physical ZNS security capability is recorded and the NVMe crypto-erase sanitize "
-                "command path completed successfully. Zone reset alone remains a reclaim/exposure "
-                "primitive unless paired with explicit sanitize or equivalent hardware crypto-erase."
+                "command path completed successfully as a destructive device/namespace-scoped path. "
+                "Zone reset alone remains a reclaim/exposure primitive, and sanitize must not be "
+                "presented as a per-zone or per-epoch erase operation on a shared namespace."
             ),
             "evidence": {
                 "device_model": data.get("device_model"),
@@ -914,14 +915,15 @@ def security_capability_status(data: dict[str, Any] | None) -> dict[str, Any]:
                 "crypto_erase_executed": data.get("crypto_erase_executed"),
                 "sanitize_execution_validated": data.get("sanitize_execution_validated"),
             },
-            "next": "Use this as device command-path evidence; do not claim zone reset alone physically erases NAND.",
+            "next": "Use this as device command-path evidence only; do not claim zone reset or shared-namespace sanitize is per-zone NAND erasure.",
         }
     if data.get("sanitize_supported") and data.get("claim_boundary"):
         return {
             "status": "done-claim-boundary",
             "summary": (
                 "Physical ZNS security capability is recorded; sanitize capability is advertised, "
-                "but the paper claim is bounded to reset eligibility unless sanitize/crypto-erase is executed and validated."
+                "but the paper claim is bounded to reset eligibility unless the erase blast radius "
+                "matches the target cohort."
             ),
             "evidence": {
                 "device_model": data.get("device_model"),
@@ -931,7 +933,7 @@ def security_capability_status(data: dict[str, Any] | None) -> dict[str, Any]:
                 "overwrite": ops.get("overwrite"),
                 "sanitize_log_status": data.get("sanitize_log_status"),
             },
-            "next": "Use this wording boundary in the paper; do not claim NAND physical erasure from zone reset alone.",
+            "next": "Use this wording boundary in the paper; do not claim NAND physical erasure from zone reset or shared-namespace sanitize.",
         }
     return {
         "status": "partial-claim-boundary",
@@ -948,14 +950,15 @@ def claim_matrix_status(data: dict[str, Any] | None) -> dict[str, Any]:
             "next": "Run code/sim/report_claim_matrix.py.",
         }
     by_status = data.get("by_status", {})
-    has_boundary_or_validated_sanitize = by_status.get("supported-boundary", 0) >= 1 or any(
-        "crypto-erase" in claim.get("paper_wording", "") and "completed successfully" in claim.get("paper_wording", "")
+    has_security_boundary = any(
+        "device/namespace-scoped" in claim.get("paper_wording", "")
+        and "per-zone physical erase" in claim.get("paper_wording", "")
         for claim in data.get("claims", [])
     )
     if (
         data.get("claim_count", 0) >= 8
         and by_status.get("supported", 0) >= 6
-        and has_boundary_or_validated_sanitize
+        and has_security_boundary
         and by_status.get("qualified", 0) >= 1
     ):
         return {

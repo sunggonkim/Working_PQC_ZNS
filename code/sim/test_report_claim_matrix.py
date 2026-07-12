@@ -25,7 +25,10 @@ class ClaimMatrixTests(unittest.TestCase):
                 "sanicap_hex": "0x3",
                 "sanitize_supported": True,
                 "sanitize_log_status": "never sanitized",
-                "claim_boundary": "reset eligibility and physical erase boundary",
+                "claim_boundary": (
+                    "reset eligibility and stale-secret exposure reduction; sanitize is a "
+                    "device/namespace-scoped destructive operation, not per-zone cleanup on a shared namespace"
+                ),
             },
             "workload_hardness": {
                 "passed_entries": 9,

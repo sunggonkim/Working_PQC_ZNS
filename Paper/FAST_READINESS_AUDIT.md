@@ -2,13 +2,15 @@
 
 ## Verdict
 
-The draft is not perfect, but it is now a credible FAST-shaped systems paper
-for the scoped claim it actually makes. It should not claim that QUASAR is a
-universal WAF optimizer, a physical-erase mechanism by itself, or a production
-SPDK implementation. It can claim that protocol-lifetime hints expose a PQC
-death-cohort signal that storage-history placement cannot observe, and that the
-actual-ZNS evidence supports that claim under the measured workloads and
-fallback modes.
+The draft has a FAST-shaped scoped claim, but it is not yet a full
+production-grade FAST submission.  Reviewer-2 style objections remain serious:
+same-path DOGI-style baselines are not a substitute for end-to-end public DOGI
+parity, zonefs/xNVMe is not SPDK/ZenFS, FDP is modeled rather than implemented,
+and NVMe sanitize must not be presented as per-zone physical erasure.  The
+defensible claim is narrower: protocol-lifetime hints expose a PQC death-cohort
+signal that storage-history placement cannot observe, and the actual-ZNS
+evidence supports reset eligibility and stale-secret exposure reduction under
+the measured workloads and fallback modes.
 
 ## Current Evidence State
 
@@ -18,7 +20,7 @@ fallback modes.
 | Match DOGI/FAST argument mechanics. | The paper has an epoch upper bound, DOGI-style workload axes, same-path baselines, exact public baseline sanity runs, component ablation, overhead, and physical replay. | Satisfied for scoped claim. |
 | Avoid toy PQC-only claims. | Workload-hardness matrix separates fairness, negative controls, pressure, claim-gate rows, and hostile robustness. | Satisfied. |
 | Keep DOGI fair. | Non-PQC controls preserve DOGI/hybrid history-placement behavior; hybrid keeps DOGI-style payload placement. | Satisfied. |
-| Use physical ZNS evidence. | WD ZN540-class actual-ZNS zonefs replay, physical pressure suites, xNVMe latency probe, and sanitize command-path validation. | Satisfied with zonefs/xNVMe caveat. |
+| Use physical ZNS evidence. | WD ZN540-class actual-ZNS zonefs replay, physical pressure suites, xNVMe latency probe, and destructive sanitize command-path validation. | Satisfied only for scoped actual-ZNS accounting; not production SPDK latency. |
 | Address ZNS-vs-FDP interface risk. | Background and Discussion frame QUASAR as lifecycle-placement policy; Evaluation now includes a trace-driven FDP handle-pressure model showing family/intent purity across 8--128 handles. | Satisfied as a deployment model; no physical FDP hardware result. |
 | Give concrete hint plumbing. | Design has a hint-delivery table covering replay/user-space, SPDK/xNVMe-style request metadata, xattr/ioctl, io_uring, and FDP placement handles. | Satisfied for design; kernel implementation remains future work. |
 | Scope stored-secret threat model. | Background clarifies QUASAR targets persisted PQC lifecycle state such as KMS envelopes, key-wrap records, audit logs, recovery records, and spill paths, not universal TLS session-key persistence. | Satisfied. |
@@ -28,7 +30,7 @@ fallback modes.
 | Include space-amplification defense. | Component Ablation now reports an Exchange p2000 WAF/space sensitivity: QUASAR pays a small lifetime-utilization cost but keeps closed-zone fill high and stale secrets at zero. | Satisfied for scoped claim. |
 | Include variability evidence. | A three-seed DOGI-family ratio sweep reports 54 comparisons and shows the break-even behavior: low PQC ratios are exposure evidence, while 20% overlays produce WAF/GC gains. | Satisfied for scoped claim. |
 | Define security metric. | `stale_secret_blocks` and stale-secret block-seconds are defined; E4 exposure timeline is cited. | Satisfied. |
-| Avoid physical erase overclaim. | Paper says zone reset alone is not physical NAND erasure, cites NIST SP 800-88 Rev. 2, and separates reset eligibility from sanitize/crypto-erase evidence. | Satisfied. |
+| Avoid physical erase overclaim. | Paper says zone reset alone is not physical NAND erasure, cites NIST SP 800-88 Rev. 2, and now states shared-namespace sanitize is destructive device/namespace-scoped command-path evidence, not per-zone epoch cleanup. | Tightened; strong erase requires matching erase scope. |
 | Reproducibility. | `acceptance_check.py` reports 41/41 gates; current tests pass; PDFs build cleanly. | Satisfied. |
 | Final `HowToWritePaper.md` audit. | `LINE_BY_LINE_FAST_AUDIT.md` now checks the guide's pre-submission questions, DOGI figure-role translation, and the design-choice rule directly. Figure 5 uses subfloats; Figures 6--7 are compact one-column figures, with no embedded numeric labels. | Satisfied. |
 
@@ -39,7 +41,7 @@ fallback modes.
 | `make all` | Passed. |
 | `Paper/0.Main.pdf` | Single FAST/USENIX-format main PDF; 14 pages, letter. |
 | LaTeX unresolved references/citations/errors grep | Clean. |
-| `python3 -m unittest discover -s code -p 'test*.py'` | 117 tests passed. |
+| `python3 -m unittest discover -s code -p 'test*.py'` | 118 tests passed in the latest run. |
 | `python3 code/sim/acceptance_check.py --out artifacts/results/acceptance-report.json` | 41/41 gates passed. |
 | `git diff --check` | Clean for edited paper/plan files. |
 
@@ -49,9 +51,9 @@ fallback modes.
 | --- | --- | --- |
 | Figure polish | FAST reviewers read plots before prose. Motivation has a one-column semantic-gap diagnostic; Evaluation now has component ablation, open-zone/config sensitivity, FDP handle pressure, and prototype overhead figures. Numeric graph labels were removed to avoid table/figure duplication. | Checked after current rebuild. |
 | Table-heavy Evaluation | The paper still carries exact measured matrices in tables, but the main reviewer attacks now have figure paths: pressure, component attribution, open-zone sensitivity, and overhead. | Intentional auditability tradeoff. |
-| Full production SPDK path | Zonefs helper replay validates actual-ZNS append/reset behavior, but not final production p99 latency. | Explicitly scoped; xNVMe probe partially addresses command path. |
+| Full production SPDK path | Zonefs helper replay validates actual-ZNS append/reset behavior, but not final production p99 latency. | Fatal-risk if the submission claims production latency; requires SPDK/ZenFS or equivalent app-level path. |
 | Real YCSB/JDBC block traces | Would strengthen external validity beyond DOGI-shaped YCSB pressure generation. | Optional strengthening for the scoped claim; not represented as completed. |
-| FDP implementation | The paper now has a trace-driven FDP placement-handle model and figure, but there is no real FDP device result. | Partially addressed; physical FDP remains future strengthening. |
+| FDP implementation | The paper now has a trace-driven FDP placement-handle model and figure, but there is no real FDP device result. | Fatal-risk if the submission positions FDP as solved; physical FDP/emulator replay remains open. |
 | End-to-end app p99 | Sysbench/MySQL is an execution gate, not full QUASAR-integrated DB block tracing. | Explicitly scoped. |
 | More device diversity | One WD ZN540-class device plus emulator/exact-baseline artifacts is not a wear-leveling study. | Explicit limitation. |
 | Final prose pass | Evaluation was consolidated into five FAST-style subsections with `\textbf{}` run-in leads while preserving the evidence and claim boundaries. | Checked for current build. |
@@ -69,7 +71,7 @@ fallback modes.
 | "Hints are unrealistic or abusable." | The paper defines a trust boundary, privileged hint emitters, opaque cohort IDs, per-tenant quotas, and overflow fallback. |
 | "How does the 32-byte hint cross the stack?" | The paper gives concrete attachment points and states that POSIX write alone does not carry the hint. |
 | "Why not FDP instead of ZNS?" | The paper maps QUASAR families to FDP handles, reports handle-count collision/purity pressure, and explains why ZNS is used first for measurable append/reset accounting. |
-| "Zone reset is not secure erase." | The paper says this directly and claims reset eligibility/exposure reduction by default; sanitize/crypto-erase is a separate device capability path. |
+| "Zone reset is not secure erase." | The paper says this directly and claims reset eligibility/exposure reduction by default; sanitize/crypto-erase is destructive device/namespace-scoped command-path evidence, not per-zone epoch cleanup on shared media. |
 | "Why are these PQC artifacts stored?" | The paper scopes to deployments that already persist bounded lifecycle state and does not require universal TLS key persistence. |
 | "Strict exposure costs too much." | The paper shows residual migration can be expensive and treats strict zero-wait as an opt-in mode. |
 | "The device evidence is narrow." | The paper scopes the physical claim to one WD ZN540-class device and avoids device-internal wear claims. |
@@ -95,11 +97,11 @@ matching the argument mechanics is the goal.
 
 ## Bottom Line
 
-This is no longer "too easy" or "just a simulator". The current draft has a
-defensible FAST-style spine and clean scoped claims. It is still not a magical
-guarantee of acceptance: full SPDK, real YCSB/JDBC block traces, physical FDP, and more device
-diversity would make it stronger. But the paper now answers the
-core FAST reviewer question directly:
+This is no longer "too easy" or "just a simulator" for the scoped death-cohort
+claim, but it is still not strong-accept ready.  A real submission should treat
+full SPDK/ZenFS-style replay, real YCSB/JDBC or RocksDB block traces, physical
+FDP/emulator replay, and additional devices as major risk reducers rather than
+cosmetic extras.  The current paper answers the scoped FAST reviewer question:
 
 ```text
 What signal is missing from current ZNS placement,

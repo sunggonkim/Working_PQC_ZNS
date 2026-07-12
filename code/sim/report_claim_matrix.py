@@ -181,11 +181,11 @@ def build_claims(
         ),
         make_claim(
             (
-                "Zone reset alone is not physical erase, but the device crypto-erase path is validated."
+                "Zone reset alone is not physical erase; sanitize is validated only as a destructive device/namespace-scoped path."
                 if sanitize_validated(security)
                 else "Zone reset evidence is not a physical NAND erase proof."
             ),
-            "supported" if sanitize_validated(security) else "supported-boundary",
+            "supported-boundary",
             [
                 f"SANICAP={security['sanicap_hex']}",
                 f"sanitize_supported={security['sanitize_supported']}",
@@ -195,11 +195,13 @@ def build_claims(
             ],
             (
                 "QUASAR proves reset eligibility and stale-secret exposure reduction. On the evaluated device, "
-                "NVMe crypto-erase sanitize completed successfully; physical-erasure claims still require "
-                "explicitly issuing sanitize or equivalent crypto-erase at epoch boundaries."
+                "NVMe crypto-erase sanitize completed successfully as a destructive device/namespace-scoped "
+                "operation. It validates command support, not per-zone physical erase. Physical-erasure "
+                "claims require dedicated namespaces/media pools, per-cohort key isolation, or hardware "
+                "semantics whose blast radius matches the cohort."
                 if sanitize_validated(security)
                 else "QUASAR proves reset eligibility and stale-secret exposure reduction. Strong physical erase requires "
-                "a separate sanitize or crypto-erase execution and validation experiment."
+                "a separate erase path whose blast radius matches the target cohort."
             ),
             security["claim_boundary"],
         ),

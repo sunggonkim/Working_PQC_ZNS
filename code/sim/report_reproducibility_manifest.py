@@ -171,7 +171,10 @@ ARTIFACTS = [
         "id": "physical_zns_sanitize_execution",
         "path": "artifacts/results/physical-zns-sanitize-exec/summary.json",
         "role": "destructive NVMe crypto-erase sanitize execution summary for the physical ZNS SSD",
-        "claim": "the device crypto-erase sanitize command path completed successfully and zonefs was restored",
+        "claim": (
+            "the device crypto-erase sanitize command path completed successfully, but this is "
+            "device/namespace-scoped evidence rather than a per-zone epoch erase primitive"
+        ),
     },
     {
         "id": "workload_hardness",

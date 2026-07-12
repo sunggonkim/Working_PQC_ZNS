@@ -224,12 +224,12 @@ This is the lower-overhead native command-path sanity check missing from the zon
 | Block erase sanitize | `True` |
 | Overwrite sanitize | `False` |
 
-QUASAR proves reset eligibility and stale-secret exposure reduction, and this device's NVMe crypto-erase sanitize command path has been executed and validated. Zone reset alone is still not a physical erase proof; a strong physical erase claim requires explicitly issuing sanitize or equivalent hardware crypto-erase semantics at the epoch boundary.
+QUASAR proves reset eligibility and stale-secret exposure reduction, and this device's NVMe crypto-erase sanitize command path has been executed and validated as a destructive device/namespace-scoped operation. Zone reset alone is still not a physical erase proof, and sanitize must not be treated as a per-zone or per-epoch command on a shared namespace. A strong physical erase deployment requires a dedicated namespace/media pool, per-cohort encryption-key isolation, or future per-zone erase semantics whose blast radius matches the cohort being destroyed.
 
 ## Claim Matrix
 
 - Claims: `12`
-- Status counts: `{'qualified': 1, 'supported': 10, 'supported-boundary': 1}`
+- Status counts: `{'qualified': 1, 'supported': 9, 'supported-boundary': 2}`
 
 | Claim | Status | Caveat |
 | --- | --- | --- |
@@ -241,12 +241,12 @@ QUASAR proves reset eligibility and stale-secret exposure reduction, and this de
 | The actual-ZNS comparison is reproducible from an artifact manifest. | `supported` | The manifest indexes current artifacts; long-running raw physical replays may still need explicit rerun time and device availability. |
 | Residual migration is a deployable strict-exposure mode with explicit cost. | `supported` | Strict mode is not the default for every workload. |
 | Hybrid has explicit reset overhead but lower policy-decision CPU cost than DOGI-style MLP. | `supported` | Actual-ZNS latency uses zonefs helper appends/truncates, so use as overhead accounting, not final production p99. |
-| Zone reset alone is not physical erase, but the device crypto-erase path is validated. | `supported` | QUASAR proves reset eligibility and stale-secret exposure reduction, and this device's NVMe crypto-erase sanitize command path has been executed and validated. Zone reset alone is still not a physical erase proof; a strong physical erase claim requires explicitly issuing sanitize or equivalent hardware crypto-erase semantics at the epoch boundary. |
+| Zone reset alone is not physical erase; sanitize is validated only as a destructive device/namespace-scoped path. | `supported-boundary` | QUASAR proves reset eligibility and stale-secret exposure reduction, and this device's NVMe crypto-erase sanitize command path has been executed and validated as a destructive device/namespace-scoped operation. Zone reset alone is still not a physical erase proof, and sanitize must not be treated as a per-zone or per-epoch command on a shared namespace. A strong physical erase deployment requires a dedicated namespace/media pool, per-cohort encryption-key isolation, or future per-zone erase semantics whose blast radius matches the cohort being destroyed. |
 | Exact external baselines are included but have non-identical unit systems. | `qualified` | Do not mix exact-baseline internal units with QUASAR native ZNS throughput as if they were identical. |
 | FDP can carry QUASAR's lifecycle signal, but scarce placement handles create collision pressure. | `supported-boundary` | This is a trace-driven handle-pressure model, not a physical FDP device performance result. |
 | The current artifact set is paper-ready for the scoped system claim. | `supported` | Lower-overhead xNVMe/SPDK replay remains optional strengthening. |
 
-Forbidden overclaims: QUASAR always wins on WAF; zone reset alone proves physical erase; helper-based zonefs latency is production p99; exact external baseline units are directly interchangeable with packed ZNS replay.
+Forbidden overclaims: QUASAR always wins on WAF; zone reset alone proves physical erase; shared-namespace sanitize is per-zone epoch cleanup; helper-based zonefs latency is production p99; exact external baseline units are directly interchangeable with packed ZNS replay.
 
 YCSB-F p8000 actual-ZNS hard-case ladder:
 

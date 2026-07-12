@@ -26,6 +26,7 @@ block layer 아래에서는 보이지 않는다. QUASAR는 작은 lifecycle hint
 - QUASAR가 모든 워크로드에서 항상 WAF를 크게 낮춘다.
 - QUASAR가 DOGI/MiDAS/SepBIT를 일반 워크로드에서 대체한다.
 - Zone reset 자체가 NAND physical erase를 항상 보장한다.
+- NVMe sanitize/crypto-erase를 shared namespace에서 per-zone 또는 per-epoch erase처럼 쓴다.
 - Pure PQC-only trace가 headline WAF evidence다.
 - Zonefs replay가 production SPDK/poll-mode latency를 증명한다.
 - External DOGI/MiDAS/SepBIT native run 숫자를 same-path ZNS replay 숫자와 같은 단위로 직접 비교한다.
@@ -55,10 +56,10 @@ PQC lifecycle objects while preserving history-based placement for payload.
 | Real PQC stack traces | done for local stack | liboqs, OpenSSL oqsprovider CLI/C-API/TLS socket artifacts |
 | C-level overhead microbenchmark | done | `artifacts/results/c-policy-overhead.md`, `Paper/6.Evaluation.tex` |
 | xNVMe command-path latency probe | done as lower-overhead probe | `artifacts/results/xnvme-zns-latency/summary.md`, `Paper/6.Evaluation.tex` |
-| Sanitize/crypto-erase command path | done for capability validation | physical security artifacts, `Paper/6.Evaluation.tex` |
+| Sanitize/crypto-erase command path | done only for destructive command-path validation | physical security artifacts, `Paper/6.Evaluation.tex` |
 | Reproducibility manifest and acceptance gates | done | `acceptance-report.json`, reproducibility manifest/validation |
 | HowToWritePaper final audit matrix | done | `Paper/LINE_BY_LINE_FAST_AUDIT.md` |
-| Build and tests | done | single-main `make all`, 117 Python tests, 41/41 acceptance gates |
+| Build and tests | done | single-main `make all`, 118 Python tests, 41/41 acceptance gates |
 
 Current readiness:
 
@@ -66,7 +67,7 @@ Current readiness:
 Scoped FAST-style claim: supported.
 Universal WAF claim: not supported and not allowed.
 Production SPDK claim: not supported and not allowed.
-Physical erase by reset-only claim: not supported and not allowed.
+Physical erase by reset-only or shared-namespace sanitize claim: not supported and not allowed.
 ```
 
 ## 3. FAST Reviewer Checkpoint Register
@@ -146,24 +147,27 @@ They do not claim device-internal wear optimality or production SPDK latency.
 
 | Checkpoint | Required Answer | Evidence | Paper Location | Status |
 | --- | --- | --- | --- | --- |
-| What is `stale_secret_blocks`? | Expired secret-class logical blocks in a family not yet safely reset/sanitize eligible. | exposure artifacts | Evaluation Metrics | closed |
+| What is `stale_secret_blocks`? | Expired secret-class logical blocks in a family not yet safely reset eligible. | exposure artifacts | Evaluation Metrics | closed |
 | Is exposure time-based? | E4 block-second evidence is cited; broad physical tables use final/representative counts for auditability. | E4 exposure timeline | Evaluation Metrics | closed with explanation |
-| Does zone reset physically erase NAND? | Not by itself. Strong erasure requires sanitize/crypto-erase support. | security capability and sanitize artifacts | Security Boundary | closed |
-| Is sanitize cost hidden? | Paper reports command-path validation and scopes SLO scheduling as deployment policy. | sanitize execution artifacts | Security Boundary, Discussion | closed with caveat |
+| Does zone reset physically erase NAND? | Not by itself. Strong erasure requires an erase scope that matches the target cohort. | security capability and sanitize artifacts | Security Boundary | closed |
+| Is sanitize cost hidden? | No strong erase latency claim is made. The paper treats sanitize as destructive device/namespace-scoped command-path evidence, not per-zone epoch cleanup. | sanitize execution artifacts | Security Boundary, Discussion | closed with caveat |
 | Can wrong hints lose data? | No. Epoch reset requires epoch-manager proof or durable close record. | bad-hint and crash/recovery model | Design Invariant, Robustness | closed |
 
 Required wording:
 
 ```text
 QUASAR reduces stale-secret exposure by aligning secret lifetime with reset
-eligibility. When the device provides sanitize or crypto-erase semantics, QUASAR
-can trigger those commands at epoch boundaries.
+eligibility. Strong physical erasure requires a dedicated namespace/media pool,
+per-cohort key isolation, or future per-zone erase semantics whose blast radius
+matches the cohort. Shared-namespace NVMe sanitize must not be described as
+per-zone epoch cleanup.
 ```
 
 Forbidden wording:
 
 ```text
 Zone reset always physically erases NAND cells.
+Shared-namespace NVMe sanitize can be issued at every epoch boundary.
 ```
 
 ### 3.6 Hint Trust, Tenant Abuse, And Privacy
@@ -315,7 +319,7 @@ These are valuable but not blockers for the scoped claim.
 | More physical ZNS/FDP devices | Avoid single-device concern and test device-specific reset/sanitize behavior | explicit limitation |
 | Repeated physical pressure runs | Stronger run-to-run stability beyond the three-seed simulator sweep | optional strengthening |
 | Final WAF-vs-utilization figure | Replace some tables with easier visual reviewer path; current figure-label polish is already done | done |
-| Per-epoch sanitize scheduling benchmark | Stronger secure erase SLO story | only needed for stronger erase claim |
+| Dedicated-namespace/key-isolated erase benchmark | Stronger secure erase SLO story without treating shared-namespace sanitize as per-zone erase | only needed for stronger erase claim |
 
 ### 5.3 FAST Figure Rewrite Checkpoints
 
@@ -360,7 +364,7 @@ Before claiming the graph story is done again:
 | GC blocks | Main performance pressure metric. | Do not hide that some rows have small GC gap. |
 | Stale secret blocks | Main semantic exposure metric across PQC overlays. | Do not equate it with physical erasure by itself. |
 | Stale block-seconds | Time-based exposure evidence. | Do not replace all physical tables with block-seconds if auditability suffers. |
-| Reset count | Shows QUASAR creates reset/sanitize opportunities. | Do not claim resets are free. |
+| Reset count | Shows QUASAR creates host-visible zone-reset opportunities. | Do not claim resets are free or physically sanitizing. |
 | Zone utilization | Defends against space amplification. | Do not optimize WAF alone. |
 | Live physical zones | Defends against active/open-zone budget attacks. | Do not ignore device limits. |
 | Decision latency | Shows hint routing overhead. | Do not claim zonefs replay p99 is production latency. |
@@ -443,7 +447,7 @@ The pasted FAST-style review is now consolidated into reviewer-facing checkpoint
 | --- | --- | --- | --- |
 | "Why ZNS only? FDP can carry lifetime hints." | Explain QUASAR as a lifecycle-placement policy that can target native ZNS first and FDP later. | Background/Discussion map `intent`, `epoch_id`, `cohort_id`, and `security_class` to FDP handles; Evaluation now includes a trace-driven FDP handle-pressure model over 8--128 handles. | reflected + modeled |
 | "ZoneFS is not production SPDK latency." | Separate actual-ZNS replay accounting, xNVMe command-path sanity, and future SPDK poll-mode work. | Keep zonefs helper path caveat in Implementation/Evaluation/Discussion; state xNVMe is a lower-overhead bound, not full SPDK. | reflected with caveat |
-| "Zone reset is not NIST-grade physical erase." | Do not equate reset with NAND sanitization. | Cite NIST SP 800-88 Rev. 2 and NVMe sanitize; define default claim as reset eligibility and stale-exposure reduction. Strong physical erase requires sanitize/crypto-erase support and deployment scheduling. | reflected |
+| "Zone reset is not NIST-grade physical erase." | Do not equate reset with NAND sanitization, and do not treat shared-namespace sanitize as per-zone epoch cleanup. | Cite NIST SP 800-88 Rev. 2 and NVMe sanitize; define default claim as reset eligibility and stale-exposure reduction. Strong physical erase requires dedicated namespace/media isolation, per-cohort key isolation, or future per-zone erase semantics. | reflected + tightened |
 | "Why would PQC secrets hit SSD at all?" | Scope threat model to deployments that already persist bounded PQC lifecycle state. | Background/Introduction now name KMS envelopes, key-wrap records, audit/compliance logs, crash-recovery/session-derived state, and constrained spill paths. The paper does not require every TLS session key to be synchronously persisted. | reflected |
 | "The 32-byte hint path is hand-wavy." | Give concrete delivery paths and enforcement points. | Design/Implementation include user-space request context, SPDK/xNVMe-style request metadata, xattr/ioctl file/extent metadata, io_uring request metadata, and FDP placement handles. | reflected |
 | "Untrusted tenants can abuse secret hints." | State who can issue high-priority hints and what happens to untrusted ones. | Design/Discussion use privileged policy/TLS/KMS/logging emitters, opaque cohort IDs, per-tenant quotas, admission limits, and overflow for missing provenance. | reflected |
@@ -460,6 +464,6 @@ These are the remaining experiments that would move the paper from credible to m
 - [x] **FDP trace-driven handle model**: map QUASAR families to FDP placement handles and compare the same trace under handle-count pressure. Artifact: `artifacts/results/pqc-mixed-fdp-mapping.json`; figure: `artifacts/figures/fast-style/fig8-fdp-handle-pressure.pdf`.
 - [ ] **Physical FDP device or emulator replay**: run the same handle policy on real FDP hardware or a faithful FDP emulator. This remains open; the current result is not a physical FDP measurement.
 - [ ] **Device-diversity run**: repeat reset/append/security-capability checks on at least one additional ZNS or FDP-capable device.
-- [ ] **Sanitize scheduling benchmark**: only if the paper wants a stronger physical-erasure claim, measure the service impact of batching sanitize/crypto-erase at epoch boundaries.
+- [ ] **Dedicated-namespace/key-isolated erase benchmark**: only if the paper wants a stronger physical-erasure claim, isolate one cohort in a disposable namespace/media pool or per-cohort encryption-key domain and measure destructive erase scheduling cost. Do not use shared-namespace sanitize as per-zone cleanup.
 
 Do not claim these are completed until the corresponding artifacts exist.

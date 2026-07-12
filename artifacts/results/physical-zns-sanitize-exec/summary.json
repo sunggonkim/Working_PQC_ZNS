@@ -31,6 +31,7 @@
     "time_over_write_no_dealloc": 4294967295
   },
   "command_rc": 0,
+  "claim_boundary": "This validates that the NVMe crypto-erase sanitize command path completed on the evaluated device. It is destructive device/namespace-scoped evidence, not a per-zone or per-epoch physical erase primitive for a shared namespace. QUASAR's default claim remains reset eligibility and stale-secret exposure reduction; stronger physical erase requires a dedicated namespace/media pool, per-cohort key isolation, or hardware erase semantics whose blast radius matches the cohort.",
   "device": "/dev/nvme0n1",
   "end_time": "2026-07-11T17:32:32+09:00",
   "mounted_after": true,

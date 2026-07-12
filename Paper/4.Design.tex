@@ -17,7 +17,7 @@
 \subfloat[Epoch reclaim and conservative fallback.]{
 \includegraphics[width=0.32\textwidth]{../artifacts/figures/paper/quasar-design-epoch-reclaim.pdf}
 }
-\caption{\system design overview.  Like DOGI's design figures, the figure separates the data path, placement organization, and reclaim rule.  The storage path receives lifecycle labels, not secret material.  Payload remains on a history-based fallback, while PQC secrets, rotation metadata, and uncertain writes are routed to separate zone families.  The epoch manager resets or sanitizes a family only after proving that all objects in the family are expired or migrated.}
+\caption{\system design overview.  Like DOGI's design figures, the figure separates the data path, placement organization, and reclaim rule.  The storage path receives lifecycle labels, not secret material.  Payload remains on a history-based fallback, while PQC secrets, rotation metadata, and uncertain writes are routed to separate zone families.  The epoch manager resets a family only after proving that all objects in the family are expired or migrated; physical erase is a separate deployment path whose scope must match the cohort.}
 \label{fig:architecture}
 \end{figure*}
 

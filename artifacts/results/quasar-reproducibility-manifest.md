@@ -34,17 +34,17 @@
 | `actual_zns_overhead` | `artifacts/results/actual-zns-overhead-summary.json` | 39597 | `c4f59381973a` | actual-ZNS helper-path overhead plus C policy CPU accounting | hybrid pays reset work but policy-decision CPU remains below DOGI-style MLP |
 | `xnvme_zns_latency` | `artifacts/results/xnvme-zns-latency/summary.json` | 809 | `cf22d6dac2de` | raw xNVMe/Linux NVMe ioctl ZNS append/reset latency probe | native xNVMe command-path p99 is measured without zonefs helper append overhead |
 | `xnvme_zns_latency_source` | `code/quasar/xnvme_zns_latency.c` | 5671 | `0fc74b8d7bb9` | source for the xNVMe native ZNS latency probe | xNVMe replay evidence is backed by an inspectable in-tree tool |
-| `physical_zns_security_capability` | `artifacts/results/physical-zns-security-capability.json` | 1083 | `ec57ce25b9bc` | physical ZNS sanitize/security capability and claim-boundary summary | the evaluated device supports sanitize and records whether crypto-erase execution was validated |
-| `physical_zns_sanitize_execution` | `artifacts/results/physical-zns-sanitize-exec/summary.json` | 1180 | `81f36dd378cd` | destructive NVMe crypto-erase sanitize execution summary for the physical ZNS SSD | the device crypto-erase sanitize command path completed successfully and zonefs was restored |
+| `physical_zns_security_capability` | `artifacts/results/physical-zns-security-capability.json` | 1294 | `74cf779d8c39` | physical ZNS sanitize/security capability and claim-boundary summary | the evaluated device supports sanitize and records whether crypto-erase execution was validated |
+| `physical_zns_sanitize_execution` | `artifacts/results/physical-zns-sanitize-exec/summary.json` | 1677 | `cf7cb2992ced` | destructive NVMe crypto-erase sanitize execution summary for the physical ZNS SSD | the device crypto-erase sanitize command path completed successfully, but this is device/namespace-scoped evidence rather than a per-zone epoch erase primitive |
 | `workload_hardness` | `artifacts/results/workload-hardness-matrix.json` | 13129 | `778373eaa330` | benchmark guardrail for fairness, negative-control, pressure, and hostile tiers | evaluation does not rely on an overly easy PQC-only trace |
 | `deployment_selector` | `artifacts/results/quasar-deployment-policy-selector.json` | 3363 | `5effb3c19a59` | deployable policy selector for default, tenant-isolation, strict-residual, and fallback modes | QUASAR improvement is an explicit mode selector, not one universal knob |
 | `fdp_handle_pressure` | `artifacts/results/pqc-mixed-fdp-mapping.json` | 91046 | `2c5d3ef64630` | trace-driven QUASAR-to-FDP placement-handle pressure model | FDP can carry QUASAR lifecycle families, but scarce handles collide death cohorts |
 | `fdp_handle_pressure_figure` | `artifacts/figures/fast-style/fig8-fdp-handle-pressure.pdf` | 13196 | `7ca6986bd95b` | paper Figure 8 for FDP handle-count purity and collision pressure | FDP handle pressure is reported as deployment modeling, not physical FDP performance |
-| `unified_comparison` | `artifacts/results/unified-baseline-comparison.json` | 182750 | `bce11cb4bd54` | single JSON summary separating same-path, pressure, exact external, and boundary evidence | paper-ready comparison summary |
-| `claim_matrix` | `artifacts/results/quasar-claim-matrix.json` | 8168 | `f29341185c85` | claim-to-evidence guardrail | supported, qualified, and boundary claims are separated |
-| `external_readiness` | `artifacts/results/external-readiness.json` | 33770 | `3e06aae19557` | conservative readiness report for external/system evidence | no current blockers or pending paper-grade evidence gaps for scoped claim |
-| `goal_completion_audit` | `artifacts/results/actual-zns-goal-completion-audit.json` | 6484 | `56054ce06ec5` | requirement-by-requirement audit of the actual-ZNS comparison goal | scoped claim is ready while optional strengthening work is separated |
-| `acceptance` | `artifacts/results/acceptance-report.json` | 38756 | `84a20e866e51` | local acceptance gate summary | all reproducibility and evidence gates pass |
+| `unified_comparison` | `artifacts/results/unified-baseline-comparison.json` | 183423 | `bc409663e60d` | single JSON summary separating same-path, pressure, exact external, and boundary evidence | paper-ready comparison summary |
+| `claim_matrix` | `artifacts/results/quasar-claim-matrix.json` | 8563 | `e3fcfc29c4c2` | claim-to-evidence guardrail | supported, qualified, and boundary claims are separated |
+| `external_readiness` | `artifacts/results/external-readiness.json` | 33908 | `04e21222a679` | conservative readiness report for external/system evidence | no current blockers or pending paper-grade evidence gaps for scoped claim |
+| `goal_completion_audit` | `artifacts/results/actual-zns-goal-completion-audit.json` | 6632 | `04de8a9ae724` | requirement-by-requirement audit of the actual-ZNS comparison goal | scoped claim is ready while optional strengthening work is separated |
+| `acceptance` | `artifacts/results/acceptance-report.json` | 38966 | `f49ac377b262` | local acceptance gate summary | all reproducibility and evidence gates pass |
 | `ycsb_pressure_figure` | `artifacts/figures/actual-zns/ycsb-pressure-waf-stale.png` | 100733 | `98973b42e75f` | paper figure for actual-ZNS YCSB WAF/stale-secret curve | visualizes negative control and pressure rows |
 | `overhead_figure` | `artifacts/figures/actual-zns/overhead-accounting.png` | 64105 | `d7a58350fd01` | paper figure for actual-ZNS overhead accounting | visualizes throughput, CPU, and semantic reset cost |
 | `workload_hardness_figure` | `artifacts/figures/actual-zns/workload-hardness.png` | 55961 | `e49e3cced335` | paper figure for workload hardness tiers | visualizes fairness, pressure, and hostile coverage |
@@ -79,8 +79,8 @@
   "claim_matrix": {
     "by_status": {
       "qualified": 1,
-      "supported": 10,
-      "supported-boundary": 1
+      "supported": 9,
+      "supported-boundary": 2
     },
     "claim_count": 12
   },

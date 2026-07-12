@@ -807,7 +807,7 @@ def markdown(summary: dict[str, Any]) -> str:
     lines.extend(
         [
             "",
-            "Forbidden overclaims: QUASAR always wins on WAF; zone reset alone proves physical erase; helper-based zonefs latency is production p99; exact external baseline units are directly interchangeable with packed ZNS replay.",
+            "Forbidden overclaims: QUASAR always wins on WAF; zone reset alone proves physical erase; shared-namespace sanitize is per-zone epoch cleanup; helper-based zonefs latency is production p99; exact external baseline units are directly interchangeable with packed ZNS replay.",
         ]
     )
     ycsb_f_physical = fast_ycsb["physical"].get("ycsb-f-pqc8000", {})

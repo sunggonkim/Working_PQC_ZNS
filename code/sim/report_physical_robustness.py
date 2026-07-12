@@ -193,7 +193,7 @@ def markdown(data: dict[str, Any]) -> str:
             "",
             "## Interpretation",
             "",
-            "- Clean hybrid removes stale secrets and issues semantic physical resets on the real ZNS device.",
+            "- Clean hybrid removes stale secrets and issues semantic zone resets on the real ZNS device.",
             "- Missing hints degrade security exposure: some secret data falls back to non-semantic placement.",
             "- Wrong epoch hints preserve stale-secret removal in this trace but increase reset activity.",
             "- Stragglers are the hardest case. Exact secret-group packing can exceed the device open-zone budget and trigger zonefs error handling.",

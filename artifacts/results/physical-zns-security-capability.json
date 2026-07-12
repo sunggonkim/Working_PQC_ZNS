@@ -1,5 +1,5 @@
 {
-  "claim_boundary": "QUASAR proves reset eligibility and stale-secret exposure reduction, and this device's NVMe crypto-erase sanitize command path has been executed and validated. Zone reset alone is still not a physical erase proof; a strong physical erase claim requires explicitly issuing sanitize or equivalent hardware crypto-erase semantics at the epoch boundary.",
+  "claim_boundary": "QUASAR proves reset eligibility and stale-secret exposure reduction, and this device's NVMe crypto-erase sanitize command path has been executed and validated as a destructive device/namespace-scoped operation. Zone reset alone is still not a physical erase proof, and sanitize must not be treated as a per-zone or per-epoch command on a shared namespace. A strong physical erase deployment requires a dedicated namespace/media pool, per-cohort encryption-key isolation, or future per-zone erase semantics whose blast radius matches the cohort being destroyed.",
   "crypto_erase_executed": true,
   "device_model": "WZS4C8T1TDSP303",
   "firmware": "R6Z10009",

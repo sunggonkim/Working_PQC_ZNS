@@ -173,7 +173,7 @@ def plot_architecture():
         ax,
         (3.93, 0.82),
         (8.45, 0.82),
-        "epoch close -> reset/sanitize if safe",
+        "epoch close -> reset if safe",
         rad=-0.08,
         text_offset=-0.02,
     )

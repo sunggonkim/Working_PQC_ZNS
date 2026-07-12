@@ -227,22 +227,22 @@
       "sha256": "0fc74b8d7bb942da3ebae56cb9c05ea7ffd359829afe24df83f612b9a824490d"
     },
     {
-      "bytes": 1083,
+      "bytes": 1294,
       "claim": "the evaluated device supports sanitize and records whether crypto-erase execution was validated",
       "exists": true,
       "id": "physical_zns_security_capability",
       "path": "artifacts/results/physical-zns-security-capability.json",
       "role": "physical ZNS sanitize/security capability and claim-boundary summary",
-      "sha256": "ec57ce25b9bcaed6986cb65b79d2e79dd5107b14213a36d2d62fe9933abfed82"
+      "sha256": "74cf779d8c39cdda435843360bf7e07e16234dfaaade2f624118b01351859ab0"
     },
     {
-      "bytes": 1180,
-      "claim": "the device crypto-erase sanitize command path completed successfully and zonefs was restored",
+      "bytes": 1677,
+      "claim": "the device crypto-erase sanitize command path completed successfully, but this is device/namespace-scoped evidence rather than a per-zone epoch erase primitive",
       "exists": true,
       "id": "physical_zns_sanitize_execution",
       "path": "artifacts/results/physical-zns-sanitize-exec/summary.json",
       "role": "destructive NVMe crypto-erase sanitize execution summary for the physical ZNS SSD",
-      "sha256": "81f36dd378cd8b02b3b8ad49ca4c0423db14c960c6567dcc0bbeb10bfbec7e23"
+      "sha256": "cf7cb2992ced22e8c9c0855d1afc7d8177fb1e81d89597222a5703f59e3a5a3c"
     },
     {
       "bytes": 13129,
@@ -281,49 +281,49 @@
       "sha256": "7ca6986bd95bfabf05f32390737c4578aa6d0ebfd7e9fa4bc8009c705be801dc"
     },
     {
-      "bytes": 182750,
+      "bytes": 183423,
       "claim": "paper-ready comparison summary",
       "exists": true,
       "id": "unified_comparison",
       "path": "artifacts/results/unified-baseline-comparison.json",
       "role": "single JSON summary separating same-path, pressure, exact external, and boundary evidence",
-      "sha256": "bce11cb4bd545c2127aa39f8557fb8d7a757824defc67bba08c9aea0ae92b62f"
+      "sha256": "bc409663e60d32bc75f23a1c8f513d0821b90594fb93c267bbb2a2ceabca00bb"
     },
     {
-      "bytes": 8168,
+      "bytes": 8563,
       "claim": "supported, qualified, and boundary claims are separated",
       "exists": true,
       "id": "claim_matrix",
       "path": "artifacts/results/quasar-claim-matrix.json",
       "role": "claim-to-evidence guardrail",
-      "sha256": "f29341185c852757b0f2aae9e0900d58f759f962a0856de89e55789d2a15d63c"
+      "sha256": "e3fcfc29c4c2e8cdd01bacfd0de078c3e25cc5c73e909a80665c198be2304031"
     },
     {
-      "bytes": 33770,
+      "bytes": 33908,
       "claim": "no current blockers or pending paper-grade evidence gaps for scoped claim",
       "exists": true,
       "id": "external_readiness",
       "path": "artifacts/results/external-readiness.json",
       "role": "conservative readiness report for external/system evidence",
-      "sha256": "3e06aae19557c5f93e8f20181cf6309a25b2565bcae0919b965ab40ac6034796"
+      "sha256": "04e21222a679e29b471c41ecabafade94b74d2a8c55fb3d276797340cb3dfbe0"
     },
     {
-      "bytes": 6484,
+      "bytes": 6632,
       "claim": "scoped claim is ready while optional strengthening work is separated",
       "exists": true,
       "id": "goal_completion_audit",
       "path": "artifacts/results/actual-zns-goal-completion-audit.json",
       "role": "requirement-by-requirement audit of the actual-ZNS comparison goal",
-      "sha256": "56054ce06ec5e8d9b7b1d1c549abe5b702581c6852694412617dde7fe083d453"
+      "sha256": "04de8a9ae724ef9672baba4877f699c7e75941a21f7d8275458cfd2d45ce41ca"
     },
     {
-      "bytes": 38756,
+      "bytes": 38966,
       "claim": "all reproducibility and evidence gates pass",
       "exists": true,
       "id": "acceptance",
       "path": "artifacts/results/acceptance-report.json",
       "role": "local acceptance gate summary",
-      "sha256": "84a20e866e515ccbe96498a2078678fdbf3e5d95540450ba7d0a902af470f344"
+      "sha256": "f49ac377b262f406343826999ae9bed9e83ff3bf107b46d56987e0d5346f2969"
     },
     {
       "bytes": 100733,
@@ -415,8 +415,8 @@
     "claim_matrix": {
       "by_status": {
         "qualified": 1,
-        "supported": 10,
-        "supported-boundary": 1
+        "supported": 9,
+        "supported-boundary": 2
       },
       "claim_count": 12
     },

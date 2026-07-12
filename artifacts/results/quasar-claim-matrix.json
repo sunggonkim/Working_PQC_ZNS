@@ -1,8 +1,8 @@
 {
   "by_status": {
     "qualified": 1,
-    "supported": 10,
-    "supported-boundary": 1
+    "supported": 9,
+    "supported-boundary": 2
   },
   "claim_count": 12,
   "claims": [
@@ -99,8 +99,8 @@
       "status": "supported"
     },
     {
-      "caveat": "QUASAR proves reset eligibility and stale-secret exposure reduction, and this device's NVMe crypto-erase sanitize command path has been executed and validated. Zone reset alone is still not a physical erase proof; a strong physical erase claim requires explicitly issuing sanitize or equivalent hardware crypto-erase semantics at the epoch boundary.",
-      "claim": "Zone reset alone is not physical erase, but the device crypto-erase path is validated.",
+      "caveat": "QUASAR proves reset eligibility and stale-secret exposure reduction, and this device's NVMe crypto-erase sanitize command path has been executed and validated as a destructive device/namespace-scoped operation. Zone reset alone is still not a physical erase proof, and sanitize must not be treated as a per-zone or per-epoch command on a shared namespace. A strong physical erase deployment requires a dedicated namespace/media pool, per-cohort encryption-key isolation, or future per-zone erase semantics whose blast radius matches the cohort being destroyed.",
+      "claim": "Zone reset alone is not physical erase; sanitize is validated only as a destructive device/namespace-scoped path.",
       "evidence": [
         "SANICAP=0x60000003",
         "sanitize_supported=True",
@@ -108,8 +108,8 @@
         "crypto_erase_executed=True",
         "sanitize_execution_validated=True"
       ],
-      "paper_wording": "QUASAR proves reset eligibility and stale-secret exposure reduction. On the evaluated device, NVMe crypto-erase sanitize completed successfully; physical-erasure claims still require explicitly issuing sanitize or equivalent crypto-erase at epoch boundaries.",
-      "status": "supported"
+      "paper_wording": "QUASAR proves reset eligibility and stale-secret exposure reduction. On the evaluated device, NVMe crypto-erase sanitize completed successfully as a destructive device/namespace-scoped operation. It validates command support, not per-zone physical erase. Physical-erasure claims require dedicated namespaces/media pools, per-cohort key isolation, or hardware semantics whose blast radius matches the cohort.",
+      "status": "supported-boundary"
     },
     {
       "caveat": "Do not mix exact-baseline internal units with QUASAR native ZNS throughput as if they were identical.",

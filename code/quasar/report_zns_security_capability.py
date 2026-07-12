@@ -35,15 +35,19 @@ def summarize(id_ctrl: dict[str, Any], sanitize_log: dict[str, Any], id_ns: dict
     if sanitize_execution_validated:
         claim_boundary = (
             "QUASAR proves reset eligibility and stale-secret exposure reduction, and this device's "
-            "NVMe crypto-erase sanitize command path has been executed and validated. Zone reset alone "
-            "is still not a physical erase proof; a strong physical erase claim requires explicitly "
-            "issuing sanitize or equivalent hardware crypto-erase semantics at the epoch boundary."
+            "NVMe crypto-erase sanitize command path has been executed and validated as a destructive "
+            "device/namespace-scoped operation. Zone reset alone is still not a physical erase proof, "
+            "and sanitize must not be treated as a per-zone or per-epoch command on a shared namespace. "
+            "A strong physical erase deployment requires a dedicated namespace/media pool, per-cohort "
+            "encryption-key isolation, or future per-zone erase semantics whose blast radius matches "
+            "the cohort being destroyed."
         )
     else:
         claim_boundary = (
             "QUASAR currently proves reset eligibility and stale-secret exposure reduction. "
-            "A strong physical erase claim requires executing and validating sanitize or "
-            "hardware crypto-erase semantics on the target device."
+            "A strong physical erase claim requires a device path whose erase blast radius matches "
+            "the target cohort, such as a dedicated namespace/media pool, per-cohort encryption-key "
+            "isolation, or future per-zone erase semantics."
         )
     return {
         "device_model": str(id_ctrl.get("mn", "")).strip(),
@@ -99,9 +103,8 @@ def markdown(summary: dict[str, Any]) -> str:
         (
             "QUASAR aligns expired PQC secret cohorts with immediate zone-reset eligibility. "
             "On the evaluated ZNS SSD, the NVMe crypto-erase sanitize command path completed "
-            "successfully; therefore, a deployment can pair epoch boundaries with explicit "
-            "sanitize or equivalent hardware crypto-erase operations when a physical-erasure "
-            "guarantee is required."
+            "successfully as a destructive device/namespace-scoped operation. This validates the "
+            "command path, but it is not a per-zone physical erase primitive for shared namespaces."
         ),
         "```",
     ]

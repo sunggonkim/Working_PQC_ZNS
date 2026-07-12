@@ -95,8 +95,8 @@
         "crypto_erase_executed=True",
         "sanitize_execution_validated=True"
       ],
-      "next_action": "State exposure-window reduction by default; claim physical erasure only for deployments that issue sanitize or equivalent crypto-erase commands.",
-      "remaining": "None for the device command-path proof; per-epoch physical erasure still requires explicit sanitize or equivalent hardware crypto-erase at epoch boundaries.",
+      "next_action": "State exposure-window reduction by default; claim physical erasure only for deployments whose erase command scope is isolated to the cohort being destroyed.",
+      "remaining": "None for the destructive command-path proof; shared-namespace sanitize is not a per-zone/per-epoch physical erase primitive. A strong erase deployment still requires a dedicated namespace/media pool, per-cohort key isolation, or hardware erase semantics whose blast radius matches the cohort.",
       "requirement": "Keep security claims bounded to reset eligibility unless sanitize is executed.",
       "status": "satisfied-sanitize-validated"
     },

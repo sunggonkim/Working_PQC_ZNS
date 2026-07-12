@@ -1062,7 +1062,9 @@ def gate_security_capability(security: dict) -> Gate:
         and ops.get("crypto_erase") is True
         and ops.get("block_erase") is True
         and "reset eligibility" in claim_boundary
-        and "physical erase" in claim_boundary
+        and "device/namespace-scoped" in claim_boundary
+        and "per-zone" in claim_boundary
+        and "shared namespace" in claim_boundary
     )
     return Gate(
         "physical_security_capability_and_erase_claim_boundary_recorded",
@@ -1086,17 +1088,18 @@ def gate_claim_matrix(claim_matrix: dict) -> Gate:
     by_status = claim_matrix.get("by_status", {})
     claims = claim_matrix.get("claims", [])
     forbidden_text = "\n".join(claim.get("caveat", "") + "\n" + claim.get("paper_wording", "") for claim in claims)
-    has_boundary_or_validated_sanitize = by_status.get("supported-boundary", 0) >= 1 or any(
-        "crypto-erase" in claim.get("paper_wording", "") and "completed successfully" in claim.get("paper_wording", "")
+    has_sanitize_blast_radius_boundary = any(
+        "device/namespace-scoped" in claim.get("paper_wording", "")
+        and "per-zone physical erase" in claim.get("paper_wording", "")
         for claim in claims
     )
     passed = (
         claim_matrix.get("claim_count", 0) >= 8
         and by_status.get("supported", 0) >= 6
-        and has_boundary_or_validated_sanitize
+        and has_sanitize_blast_radius_boundary
         and by_status.get("qualified", 0) >= 1
         and any("WAF" in claim.get("caveat", "") for claim in claims)
-        and any("physical erase" in claim.get("caveat", "") for claim in claims)
+        and any("shared namespace" in claim.get("caveat", "") for claim in claims)
         and "External DOGI/MiDAS/SepBIT" in forbidden_text
     )
     return Gate(

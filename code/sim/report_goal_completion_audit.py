@@ -210,14 +210,16 @@ def build_audit(
                 f"sanitize_execution_validated={security.get('sanitize_execution_validated')}",
             ],
             (
-                "None for the device command-path proof; per-epoch physical erasure still requires "
-                "explicit sanitize or equivalent hardware crypto-erase at epoch boundaries."
+                "None for the destructive command-path proof; shared-namespace sanitize is not a "
+                "per-zone/per-epoch physical erase primitive. A strong erase deployment still "
+                "requires a dedicated namespace/media pool, per-cohort key isolation, or hardware "
+                "erase semantics whose blast radius matches the cohort."
             )
             if sanitize_validated(security)
-            else "Physical erase proof still needs a sanitize/crypto-erase execution and validation experiment.",
+            else "Physical erase proof still needs an erase path whose blast radius matches the target cohort.",
             (
                 "State exposure-window reduction by default; claim physical erasure only for deployments "
-                "that issue sanitize or equivalent crypto-erase commands."
+                "whose erase command scope is isolated to the cohort being destroyed."
             ),
         ),
         item(

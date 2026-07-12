@@ -39,9 +39,10 @@
       "evidence": {
         "by_status": {
           "qualified": 1,
-          "supported": 10
+          "supported": 9,
+          "supported-boundary": 2
         },
-        "claim_count": 11
+        "claim_count": 12
       },
       "next": "Use this as the paper writing guardrail.",
       "status": "done-claim-matrix",
@@ -315,8 +316,8 @@
     },
     "reproducibility_manifest": {
       "evidence": {
-        "artifact_count": 37,
-        "command_count": 10,
+        "artifact_count": 39,
+        "command_count": 12,
         "missing_or_empty": []
       },
       "next": "Use this as the artifact index when writing or rerunning the paper experiments.",
@@ -325,7 +326,7 @@
     },
     "reproducibility_validation": {
       "evidence": {
-        "artifact_count": 37,
+        "artifact_count": 39,
         "mismatch_count": 0
       },
       "next": "Regenerate the manifest whenever any indexed artifact is intentionally updated.",
@@ -503,9 +504,9 @@
         "sanitize_execution_validated": true,
         "sanitize_log_status": "(1) Most Recent Sanitize Command Completed Successfully."
       },
-      "next": "Use this as device command-path evidence; do not claim zone reset alone physically erases NAND.",
+      "next": "Use this as device command-path evidence only; do not claim zone reset or shared-namespace sanitize is per-zone NAND erasure.",
       "status": "done-sanitize-validated",
-      "summary": "Physical ZNS security capability is recorded and the NVMe crypto-erase sanitize command path completed successfully. Zone reset alone remains a reclaim/exposure primitive unless paired with explicit sanitize or equivalent hardware crypto-erase."
+      "summary": "Physical ZNS security capability is recorded and the NVMe crypto-erase sanitize command path completed successfully as a destructive device/namespace-scoped path. Zone reset alone remains a reclaim/exposure primitive, and sanitize must not be presented as a per-zone or per-epoch erase operation on a shared namespace."
     },
     "sepbit_exact": {
       "evidence": {
