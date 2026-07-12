@@ -1198,6 +1198,7 @@ def gate_reproducibility_manifest(manifest: dict) -> Gate:
         "dynamic_alibaba_actual_zns_raw",
         "dogi_exact_alibaba_pressure",
         "dogi_exact_alibaba_suite",
+        "dogi_public_parity_audit",
         "actual_zns_overhead",
         "workload_hardness",
         "deployment_selector",

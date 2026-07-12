@@ -57,6 +57,21 @@ class ExternalReadinessTests(unittest.TestCase):
             "partial-workload-hardness-matrix",
         )
 
+    def test_dogi_public_parity_status_keeps_full_parity_boundary(self) -> None:
+        status = external_readiness.dogi_public_parity_status(
+            {
+                "audit_status": "substantial-direct-evidence-not-full-parity",
+                "fatal_if_overclaimed": True,
+                "passed_evidence": 5,
+                "remaining_parity_gaps": ["QUASAR is not implemented inside DOGI."],
+                "total_evidence": 5,
+            }
+        )
+
+        self.assertEqual(status["status"], "done-dogi-public-parity-audit")
+        self.assertTrue(status["evidence"]["fatal_if_overclaimed"])
+        self.assertIn("do not call same-path", status["next"])
+
     def test_report_marks_environment_blockers_and_completed_dogi(self) -> None:
         inputs = {name: Path("/does/not/exist") for name in external_readiness.DEFAULT_INPUTS}
         with tempfile.TemporaryDirectory() as tmp:

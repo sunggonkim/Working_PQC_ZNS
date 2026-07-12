@@ -24,9 +24,9 @@ Sources checked:
 | First evidence figures | Old YCSB plot made the WAF gap look small and visually weak. | Use `fig:intro-ycsb` as characterization, add `fig:motivation-semantic-gap` to show WAF/history blindness, then make `fig:ycsb-pressure` the first metric-bearing PQC pressure figure. | fixed; verified in PDF |
 | Workload breadth | Evidence was table-heavy and did not visually match DOGI-style breadth. | Use `fig:pressure-breadth`: Sysbench, Exchange, Varmail, Alibaba-like pressure rows with FIFO/SepBIT/MiDAS/DOGI/QUASAR. | fixed; verified in PDF |
 | Mechanism attribution | Ablation existed mostly as a table. | Use `fig:component-ablation`: staged subfloats for WAF, GC, and expired PQC secrets across history-only, lifecycle hints, and hybrid fallback. | fixed; verified in PDF |
-| Configuration sensitivity | Space/open-zone tradeoff and FDP handle pressure were scattered across prose and tables. | Use `fig:open-zone-robustness` for zone budget and `fig:fdp-handle-pressure` for FDP handle collision/purity. | fixed; verify after rebuild |
+| Configuration sensitivity | Space/open-zone tradeoff and FDP handle pressure were scattered across prose and tables. | Use `fig:open-zone-robustness` for zone budget and `fig:fdp-handle-pressure` for FDP handle collision/purity. | fixed; verify in final build |
 | Overhead | Overhead was prose plus numbers, not a FAST-style figure. | Use `fig:prototype-overhead`: actual-ZNS replay throughput plus C-level placement-decision cost. | fixed; verified in PDF |
-| Plot hygiene | Old plots repeated table numbers, used oversized pages, and mixed figure labels with the wrong data story. | Remove numeric labels from bars/points, keep Figure 5 as subfloats, and make Figures 6--7 compact one-column figures instead of `figure*`. | fixed; verified in PDF |
+| Plot hygiene | Old plots repeated table numbers, used oversized pages, and mixed figure labels with the wrong data story. | Remove numeric labels from bars/points, keep Figure 5 as subfloats, and make later sensitivity/FDP/overhead figures compact one-column figures instead of `figure*`. | fixed; verified in PDF |
 | Audit honesty | Old audit claimed `18/18` and “submission-grade” too early. | Remove score-as-victory language; keep remaining risks explicit. | fixed |
 | Prior-paper match | “Line-by-line” cannot mean copying DOGI's exact figures because QUASAR's claim is narrower. | Use role parity: failure, bound, design, workload breadth, ablation, overhead, robustness. | fixed with scope |
 
@@ -82,7 +82,7 @@ These are not solved by better plotting and must stay visible:
 | Risk | Why It Matters | Current Defense | Stronger Future Evidence |
 | --- | --- | --- | --- |
 | Real workload realism | Generated DOGI-shaped overlays may still look synthetic. | Six DOGI axes, YCSB, Sysbench, dynamic service pressure, real liboqs/OpenSSL traces. | Real YCSB/JDBC block traces captured from a live DB stack. |
-| Native DOGI equivalence | Same-path DOGI-style placement is not the full public DOGI stack. | Exact public DOGI/MiDAS/SepBIT runs are separated as sanity evidence. | More native DOGI adapter runs with trace conversion documentation. |
+| Native DOGI equivalence | Same-path DOGI-style placement is not the full public DOGI stack. | Exact public DOGI/MiDAS/SepBIT runs are separated as sanity evidence; the public-DOGI parity audit records five direct checks and the remaining full-parity gaps. | Same app/ZenFS/SPDK path for DOGI and QUASAR. |
 | Production path | Zonefs replay is not SPDK poll-mode. | xNVMe append probe plus explicit zonefs caveat. | Full SPDK replay with p99 service latency. |
 | Device generality | One ZN540-class device may not represent all ZNS/FDP devices. | Device capabilities and limitations are named. | Additional ZNS/FDP devices and reset/sanitize variance. |
 | FDP relevance | Reviewers may view native ZNS as too narrow when FDP exists. | Background, Related Work, Design, and Discussion map QUASAR lifecycle families to FDP handles; Evaluation reports trace-driven handle collision/purity pressure. | Physical FDP device or emulator replay. |
@@ -141,7 +141,7 @@ mapping:
 | Risk | Why A Reviewer May Attack | Current Defense | Remaining Strengthening |
 | --- | --- | --- | --- |
 | "Toy workload" | Clean PQC traces can be too easy. | Workload-hardness gate, DOGI six-axis, pressure rows, negative controls, dynamic pressure. | Real YCSB/JDBC block traces would strengthen external validity. |
-| "DOGI strawman" | Style-compatible DOGI may diverge from public DOGI. | Same-path baselines are used for apples-to-apples replay; exact public DOGI/MiDAS/SepBIT are separate sanity runs. | More adapter documentation and native run logs. |
+| "DOGI strawman" | Style-compatible DOGI may diverge from public DOGI. | Same-path baselines are used for apples-to-apples replay; exact public DOGI/MiDAS/SepBIT are separate sanity runs; the public-DOGI parity audit makes the boundary explicit. | Same app/ZenFS/SPDK path for DOGI and QUASAR. |
 | "WAF gain too small" | Some rows show WAF near 1.0. | Paper states easy rows are exposure evidence; WAF/GC wins are pressure-dependent. | Keep headline metric bundle: WAF/GC, stale secrets, resets, overhead. |
 | "Cherry-picked pressure point" | A single seed or ratio could make the result look cleaner than it is. | Three-seed ratio sweep shows 0% parity, 5% WAF-negative exposure rows, and 20% WAF/GC gains. | More physical repeated runs would further strengthen final submission evidence. |
 | "Space amplification" | Death-cohort zones can waste capacity. | Admission, binning, overflow, residual fallback, utilization reporting, and the Exchange p2000 WAF-vs-utilization figure. | More devices would strengthen generality. |

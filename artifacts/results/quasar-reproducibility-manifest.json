@@ -1,5 +1,5 @@
 {
-  "artifact_count": 39,
+  "artifact_count": 40,
   "artifacts": [
     {
       "bytes": 310144,
@@ -191,6 +191,15 @@
       "sha256": "dbfd67fcd4972ba37967189ce09e21d5c1ab1955c63f8671c51bc98bab55667c"
     },
     {
+      "bytes": 2880,
+      "claim": "substantial public DOGI evidence exists, but full end-to-end parity is not claimed",
+      "exists": true,
+      "id": "dogi_public_parity_audit",
+      "path": "artifacts/results/dogi-public-parity-audit.json",
+      "role": "reviewer-facing boundary between same-path DOGI-style replay and exact public DOGI evidence",
+      "sha256": "029396c0ff2f92f840c79c9322bba3cf61736afaa8b0b4ee6c06153e3f724b13"
+    },
+    {
       "bytes": 23117,
       "claim": "history baselines issue no semantic resets under delayed-expiry stragglers",
       "exists": true,
@@ -281,13 +290,13 @@
       "sha256": "7ca6986bd95bfabf05f32390737c4578aa6d0ebfd7e9fa4bc8009c705be801dc"
     },
     {
-      "bytes": 183423,
+      "bytes": 183895,
       "claim": "paper-ready comparison summary",
       "exists": true,
       "id": "unified_comparison",
       "path": "artifacts/results/unified-baseline-comparison.json",
       "role": "single JSON summary separating same-path, pressure, exact external, and boundary evidence",
-      "sha256": "bc409663e60d32bc75f23a1c8f513d0821b90594fb93c267bbb2a2ceabca00bb"
+      "sha256": "d71230e55d5f9d90da70aa45a6442e5ca0e1ef7af0acd92b8a343de5d2701bf4"
     },
     {
       "bytes": 8563,
@@ -296,16 +305,16 @@
       "id": "claim_matrix",
       "path": "artifacts/results/quasar-claim-matrix.json",
       "role": "claim-to-evidence guardrail",
-      "sha256": "e3fcfc29c4c2e8cdd01bacfd0de078c3e25cc5c73e909a80665c198be2304031"
+      "sha256": "6c4b3c7bb0ebdf6078bc2a602059b8e330d15ea6ff457b721ef46bebe86a20c3"
     },
     {
-      "bytes": 33908,
+      "bytes": 34923,
       "claim": "no current blockers or pending paper-grade evidence gaps for scoped claim",
       "exists": true,
       "id": "external_readiness",
       "path": "artifacts/results/external-readiness.json",
       "role": "conservative readiness report for external/system evidence",
-      "sha256": "04e21222a679e29b471c41ecabafade94b74d2a8c55fb3d276797340cb3dfbe0"
+      "sha256": "92237e3bc91fb8507a32d152c6f5baeb540b1b93455637da0215d61a8ad2116a"
     },
     {
       "bytes": 6632,
@@ -323,7 +332,7 @@
       "id": "acceptance",
       "path": "artifacts/results/acceptance-report.json",
       "role": "local acceptance gate summary",
-      "sha256": "f49ac377b262f406343826999ae9bed9e83ff3bf107b46d56987e0d5346f2969"
+      "sha256": "e1dc7c56ce344272d612ea1275a7d8f712361fe401ad566b6208aba22055763e"
     },
     {
       "bytes": 100733,
@@ -430,6 +439,11 @@
     "dogi_original_lba_adapter": {},
     "dogi_original_lba_completed_run": {},
     "dogi_original_lba_preflight": {},
+    "dogi_public_parity_audit": {
+      "audit_status": "substantial-direct-evidence-not-full-parity",
+      "passed_evidence": 5,
+      "total_evidence": 5
+    },
     "dynamic_alibaba_actual_zns_raw": {},
     "dynamic_exchange_actual_zns_pressure": {},
     "dynamic_exchange_actual_zns_raw": {},

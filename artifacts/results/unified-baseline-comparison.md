@@ -28,7 +28,7 @@ This report separates evidence by compatibility of units and stack.
 
 - Scope: reproducibility manifest for actual-ZNS baseline-vs-QUASAR comparison
 - Passed: `True`
-- Artifacts: `39`
+- Artifacts: `40`
 - Commands: `12`
 - Missing or empty: `[]`
 - Hash validation passed: `True`

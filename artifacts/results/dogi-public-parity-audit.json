@@ -1,0 +1,55 @@
+{
+  "audit_status": "substantial-direct-evidence-not-full-parity",
+  "evidence": [
+    {
+      "name": "nullblk_zenfs_dogi",
+      "passed": true,
+      "scope": "public DOGI prototype on null_blk/ZenFS",
+      "waf": 1.6808599999999998
+    },
+    {
+      "name": "six_workload_physical_compact",
+      "passed": true,
+      "scope": "public DOGI prototype on physical ZNS over six DOGI-shaped compact traces",
+      "waf": 2.4006662646819312
+    },
+    {
+      "name": "dynamic_pressure_dogi",
+      "passed": true,
+      "scope": "public DOGI prototype on Alibaba-like p8000 compact pressure trace",
+      "waf": 2.992549952156656
+    },
+    {
+      "name": "dynamic_pressure_selector_suite",
+      "passed": true,
+      "scope": "public DOGI prototype DOGI/Greedy/CostBenefit selector variants",
+      "waf": 2.803532778684755
+    },
+    {
+      "name": "original_lba_dynamic_dogi",
+      "passed": true,
+      "scope": "public DOGI prototype on original-LBA Alibaba-like p8000 span",
+      "waf": 3.2117427602002238
+    }
+  ],
+  "fatal_if_overclaimed": true,
+  "paper_rule": "Use same-path baselines for apples-to-apples QUASAR/FIFO/SepBIT/MiDAS/DOGI-style replay. Use exact public DOGI runs only as sanity evidence and never unit-mix their internal GiB counters with packed-ZNS replay WAF or latency.",
+  "passed_evidence": 5,
+  "remaining_parity_gaps": [
+    "QUASAR is not implemented inside the public DOGI/ZenFS stack.",
+    "The exact public DOGI counters and QUASAR packed-replay counters use different units and stack boundaries.",
+    "Compact-LBA DOGI runs are feasibility evidence; the original-LBA run exists for one hard dynamic trace only.",
+    "A full production comparison would need the same app/ZenFS/SPDK path for DOGI and QUASAR."
+  ],
+  "reviewer_answer": "The headline same-path DOGI-style baseline is not the public DOGI prototype. The paper therefore keeps exact public DOGI evidence separate: null_blk/ZenFS, six compact physical-ZNS workloads, a dynamic p8000 pressure run, selector variants, and an original-LBA p8000 run all complete. This is substantial direct evidence, but not full end-to-end parity with QUASAR's packed replay.",
+  "sources": {
+    "compact_suite": "artifacts/results/dogi-physical-zns-full-pqc2000-compact-lg2/summary.json",
+    "dynamic_dogi": "artifacts/results/dogi-exact/alibaba-pqc8000-dogi.json",
+    "dynamic_suite": "artifacts/results/dogi-exact/alibaba-pqc8000-suite.json",
+    "nullblk": "artifacts/results/dogi-nullblk-full-run.json",
+    "original_lba_adapter": "artifacts/results/fast-dynamic-pressure/alibaba-pqc8000-original-lba-dogi-adapter.json",
+    "original_lba_preflight": "artifacts/results/fast-dynamic-pressure/alibaba-pqc8000-original-lba-dogi-preflight-nvme0n1.json",
+    "original_lba_run": "artifacts/results/dogi-exact/alibaba-pqc8000-original-lba-dogi-cwd-app.json"
+  },
+  "total_evidence": 5
+}

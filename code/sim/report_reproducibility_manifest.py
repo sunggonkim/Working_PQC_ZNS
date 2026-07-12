@@ -138,6 +138,12 @@ ARTIFACTS = [
         "claim": "the original-LBA DOGI run completes when executed from the prototype app working directory, reporting WAF on the 42GiB Alibaba p8000 span",
     },
     {
+        "id": "dogi_public_parity_audit",
+        "path": "artifacts/results/dogi-public-parity-audit.json",
+        "role": "reviewer-facing boundary between same-path DOGI-style replay and exact public DOGI evidence",
+        "claim": "substantial public DOGI evidence exists, but full end-to-end parity is not claimed",
+    },
+    {
         "id": "ycsb_f_straggler_baselines",
         "path": "artifacts/results/fast-ycsb-pressure/packed-physical-zonefs-ycsb-f-pqc8000-straggler005-baselines-helper.json",
         "role": "actual-ZNS hard straggler replay for FIFO/SepBIT/MiDAS/DOGI baselines",
@@ -344,6 +350,9 @@ def summarize(root: Path) -> dict[str, Any]:
                         "by_status",
                         "passed_modes",
                         "total_modes",
+                        "audit_status",
+                        "passed_evidence",
+                        "total_evidence",
                     ]
                     if key in data
                 }

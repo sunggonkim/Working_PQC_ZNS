@@ -70,7 +70,7 @@
       "claim": "The actual-ZNS comparison is reproducible from an artifact manifest.",
       "evidence": [
         "manifest passed=True",
-        "manifest artifacts=39",
+        "manifest artifacts=40",
         "manifest commands=12",
         "hash validation mismatches=0"
       ],

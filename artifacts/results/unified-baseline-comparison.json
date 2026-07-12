@@ -386,7 +386,7 @@
         "claim": "The actual-ZNS comparison is reproducible from an artifact manifest.",
         "evidence": [
           "manifest passed=True",
-          "manifest artifacts=39",
+          "manifest artifacts=40",
           "manifest commands=12",
           "hash validation mismatches=0"
         ],
@@ -1926,7 +1926,7 @@
     }
   },
   "reproducibility_manifest": {
-    "artifact_count": 39,
+    "artifact_count": 40,
     "artifacts": [
       {
         "bytes": 310144,
@@ -2118,6 +2118,15 @@
         "sha256": "dbfd67fcd4972ba37967189ce09e21d5c1ab1955c63f8671c51bc98bab55667c"
       },
       {
+        "bytes": 2880,
+        "claim": "substantial public DOGI evidence exists, but full end-to-end parity is not claimed",
+        "exists": true,
+        "id": "dogi_public_parity_audit",
+        "path": "artifacts/results/dogi-public-parity-audit.json",
+        "role": "reviewer-facing boundary between same-path DOGI-style replay and exact public DOGI evidence",
+        "sha256": "029396c0ff2f92f840c79c9322bba3cf61736afaa8b0b4ee6c06153e3f724b13"
+      },
+      {
         "bytes": 23117,
         "claim": "history baselines issue no semantic resets under delayed-expiry stragglers",
         "exists": true,
@@ -2208,13 +2217,13 @@
         "sha256": "7ca6986bd95bfabf05f32390737c4578aa6d0ebfd7e9fa4bc8009c705be801dc"
       },
       {
-        "bytes": 183356,
+        "bytes": 183895,
         "claim": "paper-ready comparison summary",
         "exists": true,
         "id": "unified_comparison",
         "path": "artifacts/results/unified-baseline-comparison.json",
         "role": "single JSON summary separating same-path, pressure, exact external, and boundary evidence",
-        "sha256": "59a872e6c5f8f2a0777bd1da4abf969ee54e7a691781d76accd48365a8b407ca"
+        "sha256": "ef1eec9b8f9f937c46fead75b1c7062b52a3c56ea17261ce4d9867182081c7f3"
       },
       {
         "bytes": 8563,
@@ -2223,16 +2232,16 @@
         "id": "claim_matrix",
         "path": "artifacts/results/quasar-claim-matrix.json",
         "role": "claim-to-evidence guardrail",
-        "sha256": "e3fcfc29c4c2e8cdd01bacfd0de078c3e25cc5c73e909a80665c198be2304031"
+        "sha256": "6c4b3c7bb0ebdf6078bc2a602059b8e330d15ea6ff457b721ef46bebe86a20c3"
       },
       {
-        "bytes": 33908,
+        "bytes": 34923,
         "claim": "no current blockers or pending paper-grade evidence gaps for scoped claim",
         "exists": true,
         "id": "external_readiness",
         "path": "artifacts/results/external-readiness.json",
         "role": "conservative readiness report for external/system evidence",
-        "sha256": "04e21222a679e29b471c41ecabafade94b74d2a8c55fb3d276797340cb3dfbe0"
+        "sha256": "92237e3bc91fb8507a32d152c6f5baeb540b1b93455637da0215d61a8ad2116a"
       },
       {
         "bytes": 6632,
@@ -2250,7 +2259,7 @@
         "id": "acceptance",
         "path": "artifacts/results/acceptance-report.json",
         "role": "local acceptance gate summary",
-        "sha256": "f49ac377b262f406343826999ae9bed9e83ff3bf107b46d56987e0d5346f2969"
+        "sha256": "e1dc7c56ce344272d612ea1275a7d8f712361fe401ad566b6208aba22055763e"
       },
       {
         "bytes": 100733,
@@ -2286,7 +2295,7 @@
     "scope": "reproducibility manifest for actual-ZNS baseline-vs-QUASAR comparison"
   },
   "reproducibility_validation": {
-    "artifact_count": 39,
+    "artifact_count": 40,
     "mismatch_count": 0,
     "mismatches": [],
     "passed": true,

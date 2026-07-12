@@ -2,7 +2,7 @@
 
 - Scope: reproducibility manifest for actual-ZNS baseline-vs-QUASAR comparison
 - Passed: `True`
-- Artifacts: `39`
+- Artifacts: `40`
 - Missing or empty: `[]`
 
 ## Artifacts
@@ -30,6 +30,7 @@
 | `dogi_original_lba_adapter` | `artifacts/results/fast-dynamic-pressure/alibaba-pqc8000-original-lba-dogi-adapter.json` | 846 | `63938bb0eea1` | original-LBA DOGI adapter summary for Alibaba p8000 without compacting the LBA span | original-LBA DOGI replay requires a 42GiB logical span instead of the compact 2GiB span |
 | `dogi_original_lba_preflight` | `artifacts/results/fast-dynamic-pressure/alibaba-pqc8000-original-lba-dogi-preflight-nvme0n1.json` | 6141 | `9e35230c38ee` | preflight for the original-LBA DOGI run on the physical ZNS device | the original-LBA trace is syntactically runnable by the DOGI prototype and the device/tool chain is visible |
 | `dogi_original_lba_completed_run` | `artifacts/results/dogi-exact/alibaba-pqc8000-original-lba-dogi-cwd-app.json` | 527 | `dbfd67fcd497` | completed original-LBA public DOGI physical run summary | the original-LBA DOGI run completes when executed from the prototype app working directory, reporting WAF on the 42GiB Alibaba p8000 span |
+| `dogi_public_parity_audit` | `artifacts/results/dogi-public-parity-audit.json` | 2880 | `029396c0ff2f` | reviewer-facing boundary between same-path DOGI-style replay and exact public DOGI evidence | substantial public DOGI evidence exists, but full end-to-end parity is not claimed |
 | `ycsb_f_straggler_baselines` | `artifacts/results/fast-ycsb-pressure/packed-physical-zonefs-ycsb-f-pqc8000-straggler005-baselines-helper.json` | 23117 | `862b9ff20002` | actual-ZNS hard straggler replay for FIFO/SepBIT/MiDAS/DOGI baselines | history baselines issue no semantic resets under delayed-expiry stragglers |
 | `actual_zns_overhead` | `artifacts/results/actual-zns-overhead-summary.json` | 39597 | `c4f59381973a` | actual-ZNS helper-path overhead plus C policy CPU accounting | hybrid pays reset work but policy-decision CPU remains below DOGI-style MLP |
 | `xnvme_zns_latency` | `artifacts/results/xnvme-zns-latency/summary.json` | 809 | `cf22d6dac2de` | raw xNVMe/Linux NVMe ioctl ZNS append/reset latency probe | native xNVMe command-path p99 is measured without zonefs helper append overhead |
@@ -40,11 +41,11 @@
 | `deployment_selector` | `artifacts/results/quasar-deployment-policy-selector.json` | 3363 | `5effb3c19a59` | deployable policy selector for default, tenant-isolation, strict-residual, and fallback modes | QUASAR improvement is an explicit mode selector, not one universal knob |
 | `fdp_handle_pressure` | `artifacts/results/pqc-mixed-fdp-mapping.json` | 91046 | `2c5d3ef64630` | trace-driven QUASAR-to-FDP placement-handle pressure model | FDP can carry QUASAR lifecycle families, but scarce handles collide death cohorts |
 | `fdp_handle_pressure_figure` | `artifacts/figures/fast-style/fig8-fdp-handle-pressure.pdf` | 13196 | `7ca6986bd95b` | paper Figure 8 for FDP handle-count purity and collision pressure | FDP handle pressure is reported as deployment modeling, not physical FDP performance |
-| `unified_comparison` | `artifacts/results/unified-baseline-comparison.json` | 183423 | `bc409663e60d` | single JSON summary separating same-path, pressure, exact external, and boundary evidence | paper-ready comparison summary |
-| `claim_matrix` | `artifacts/results/quasar-claim-matrix.json` | 8563 | `e3fcfc29c4c2` | claim-to-evidence guardrail | supported, qualified, and boundary claims are separated |
-| `external_readiness` | `artifacts/results/external-readiness.json` | 33908 | `04e21222a679` | conservative readiness report for external/system evidence | no current blockers or pending paper-grade evidence gaps for scoped claim |
+| `unified_comparison` | `artifacts/results/unified-baseline-comparison.json` | 183895 | `d71230e55d5f` | single JSON summary separating same-path, pressure, exact external, and boundary evidence | paper-ready comparison summary |
+| `claim_matrix` | `artifacts/results/quasar-claim-matrix.json` | 8563 | `6c4b3c7bb0eb` | claim-to-evidence guardrail | supported, qualified, and boundary claims are separated |
+| `external_readiness` | `artifacts/results/external-readiness.json` | 34923 | `92237e3bc91f` | conservative readiness report for external/system evidence | no current blockers or pending paper-grade evidence gaps for scoped claim |
 | `goal_completion_audit` | `artifacts/results/actual-zns-goal-completion-audit.json` | 6632 | `04de8a9ae724` | requirement-by-requirement audit of the actual-ZNS comparison goal | scoped claim is ready while optional strengthening work is separated |
-| `acceptance` | `artifacts/results/acceptance-report.json` | 38966 | `f49ac377b262` | local acceptance gate summary | all reproducibility and evidence gates pass |
+| `acceptance` | `artifacts/results/acceptance-report.json` | 38966 | `e1dc7c56ce34` | local acceptance gate summary | all reproducibility and evidence gates pass |
 | `ycsb_pressure_figure` | `artifacts/figures/actual-zns/ycsb-pressure-waf-stale.png` | 100733 | `98973b42e75f` | paper figure for actual-ZNS YCSB WAF/stale-secret curve | visualizes negative control and pressure rows |
 | `overhead_figure` | `artifacts/figures/actual-zns/overhead-accounting.png` | 64105 | `d7a58350fd01` | paper figure for actual-ZNS overhead accounting | visualizes throughput, CPU, and semantic reset cost |
 | `workload_hardness_figure` | `artifacts/figures/actual-zns/workload-hardness.png` | 55961 | `e49e3cced335` | paper figure for workload hardness tiers | visualizes fairness, pressure, and hostile coverage |
@@ -94,6 +95,11 @@
   "dogi_original_lba_adapter": {},
   "dogi_original_lba_completed_run": {},
   "dogi_original_lba_preflight": {},
+  "dogi_public_parity_audit": {
+    "audit_status": "substantial-direct-evidence-not-full-parity",
+    "passed_evidence": 5,
+    "total_evidence": 5
+  },
   "dynamic_alibaba_actual_zns_raw": {},
   "dynamic_exchange_actual_zns_pressure": {},
   "dynamic_exchange_actual_zns_raw": {},

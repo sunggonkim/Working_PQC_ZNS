@@ -1204,7 +1204,7 @@
     },
     {
       "evidence": {
-        "artifact_count": 39,
+        "artifact_count": 40,
         "command_count": 12,
         "missing_or_empty": [],
         "missing_required": []
@@ -1214,7 +1214,7 @@
     },
     {
       "evidence": {
-        "artifact_count": 39,
+        "artifact_count": 40,
         "mismatch_count": 0,
         "mismatches": []
       },

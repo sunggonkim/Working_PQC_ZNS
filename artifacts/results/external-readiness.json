@@ -85,6 +85,22 @@
       "status": "done-nullblk-plus-physical-full-compact-plus-dynamic-pressure-plus-original-lba",
       "summary": "External DOGI prototype completed on null_blk/ZenFS and on a six-workload compact-LBA physical ZNS PQC2000 suite. It also completed DOGI/Greedy/CostBenefit on an Alibaba-like p8000 compact physical ZNS pressure trace. The Alibaba-like p8000 original-LBA span also completed on the public DOGI stack."
     },
+    "dogi_public_parity": {
+      "evidence": {
+        "fatal_if_overclaimed": true,
+        "passed_evidence": 5,
+        "remaining_parity_gaps": [
+          "QUASAR is not implemented inside the public DOGI/ZenFS stack.",
+          "The exact public DOGI counters and QUASAR packed-replay counters use different units and stack boundaries.",
+          "Compact-LBA DOGI runs are feasibility evidence; the original-LBA run exists for one hard dynamic trace only.",
+          "A full production comparison would need the same app/ZenFS/SPDK path for DOGI and QUASAR."
+        ],
+        "total_evidence": 5
+      },
+      "next": "Use this as a reviewer-facing boundary; do not call same-path DOGI-style exact public DOGI parity.",
+      "status": "done-dogi-public-parity-audit",
+      "summary": "Public DOGI parity audit records substantial direct evidence while explicitly forbidding full end-to-end parity overclaim."
+    },
     "fast_db_pressure": {
       "evidence": {
         "dogi_gc_blocks": 11256,
@@ -316,7 +332,7 @@
     },
     "reproducibility_manifest": {
       "evidence": {
-        "artifact_count": 39,
+        "artifact_count": 40,
         "command_count": 12,
         "missing_or_empty": []
       },
@@ -326,7 +342,7 @@
     },
     "reproducibility_validation": {
       "evidence": {
-        "artifact_count": 39,
+        "artifact_count": 40,
         "mismatch_count": 0
       },
       "next": "Regenerate the manifest whenever any indexed artifact is intentionally updated.",
@@ -736,6 +752,7 @@
     "dogi_physical_run": "artifacts/results/dogi-physical-zns-compact-exchange-clean-run.json",
     "dogi_physical_suite": "artifacts/results/dogi-physical-zns-full-pqc2000-compact-lg2/summary.json",
     "dogi_preflight": "artifacts/results/dogi-preflight.json",
+    "dogi_public_parity_audit": "artifacts/results/dogi-public-parity-audit.json",
     "dogi_run": "artifacts/results/dogi-nullblk-full-run.json",
     "fast_db_pressure": "artifacts/results/fast-db-pressure/sysbench-pressure-summary.json",
     "fast_ycsb_pressure": "artifacts/results/fast-ycsb-pressure/ycsb-pressure-summary.json",

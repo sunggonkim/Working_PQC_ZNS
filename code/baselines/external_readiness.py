@@ -38,6 +38,7 @@ DEFAULT_INPUTS = {
     "dogi_physical_pressure_run": Path("artifacts/results/dogi-exact/alibaba-pqc8000-dogi.json"),
     "dogi_physical_pressure_suite": Path("artifacts/results/dogi-exact/alibaba-pqc8000-suite.json"),
     "dogi_physical_original_lba_run": Path("artifacts/results/dogi-exact/alibaba-pqc8000-original-lba-dogi-cwd-app.json"),
+    "dogi_public_parity_audit": Path("artifacts/results/dogi-public-parity-audit.json"),
     "midas": Path("artifacts/results/midas-preflight.json"),
     "midas_run": Path("artifacts/results/midas-exact/pqc-pressure-1g.json"),
     "midas_repeat_run": Path("artifacts/results/midas-exact/exchange-pqc2000-repeat4-compact.json"),
@@ -526,6 +527,35 @@ def dogi_status(
         "status": "missing",
         "summary": "DOGI readiness has not been established.",
         "next": "Run fetch_dogi.py, dogi_trace_adapter.py, and dogi_preflight.py.",
+    }
+
+
+def dogi_public_parity_status(data: dict[str, Any] | None) -> dict[str, Any]:
+    if data is None:
+        return {
+            "status": "missing",
+            "summary": "Public DOGI parity audit is missing.",
+            "next": "Run code/baselines/dogi_parity_audit.py.",
+        }
+    if data.get("audit_status") == "substantial-direct-evidence-not-full-parity":
+        return {
+            "status": "done-dogi-public-parity-audit",
+            "summary": (
+                "Public DOGI parity audit records substantial direct evidence while explicitly "
+                "forbidding full end-to-end parity overclaim."
+            ),
+            "evidence": {
+                "passed_evidence": data.get("passed_evidence"),
+                "total_evidence": data.get("total_evidence"),
+                "fatal_if_overclaimed": data.get("fatal_if_overclaimed"),
+                "remaining_parity_gaps": data.get("remaining_parity_gaps"),
+            },
+            "next": "Use this as a reviewer-facing boundary; do not call same-path DOGI-style exact public DOGI parity.",
+        }
+    return {
+        "status": "partial-dogi-public-parity-audit",
+        "summary": "Public DOGI parity audit exists but does not show all required direct-evidence checks passing.",
+        "next": "Inspect artifacts/results/dogi-public-parity-audit.md and complete missing exact DOGI evidence.",
     }
 
 
@@ -1456,6 +1486,7 @@ def build_report(inputs: dict[str, Path]) -> dict[str, Any]:
             loaded["dogi_physical_pressure_suite"],
             loaded["dogi_physical_original_lba_run"],
         ),
+        "dogi_public_parity": dogi_public_parity_status(loaded["dogi_public_parity_audit"]),
         "midas_exact": midas_status(loaded["midas"], loaded["midas_run"], loaded["midas_repeat_run"]),
         "sepbit_exact": sepbit_status(
             loaded["sepbit_run"],

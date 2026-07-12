@@ -52,14 +52,15 @@ PQC lifecycle objects while preserving history-based placement for payload.
 | Dynamic service pressure | done | `artifacts/results/fast-dynamic-pressure/`, `Paper/6.Evaluation.tex` |
 | Bad/missing hints, tenants, stragglers, residual migration | done | robustness, residual, open-zone stress artifacts; `Paper/6.Evaluation.tex` |
 | Space-utilization sensitivity | done | `artifacts/results/dogi-paper-workloads-smoke/space-sensitivity-tight-open.md`, `Paper/6.Evaluation.tex` |
-| Exact public DOGI/MiDAS/SepBIT sanity runs | done with unit caveat | `artifacts/results/external-readiness.md`, `Paper/6.Evaluation.tex` |
+| Exact public DOGI/MiDAS/SepBIT sanity runs | done with unit caveat | `artifacts/results/external-readiness.md`, `artifacts/results/dogi-public-parity-audit.md`, `Paper/6.Evaluation.tex` |
 | Real PQC stack traces | done for local stack | liboqs, OpenSSL oqsprovider CLI/C-API/TLS socket artifacts |
 | C-level overhead microbenchmark | done | `artifacts/results/c-policy-overhead.md`, `Paper/6.Evaluation.tex` |
 | xNVMe command-path latency probe | done as lower-overhead probe | `artifacts/results/xnvme-zns-latency/summary.md`, `Paper/6.Evaluation.tex` |
+| FDP trace-driven handle-pressure model | done as deployment model | `artifacts/results/pqc-mixed-fdp-mapping.json`, `Paper/6.Evaluation.tex` |
 | Sanitize/crypto-erase command path | done only for destructive command-path validation | physical security artifacts, `Paper/6.Evaluation.tex` |
 | Reproducibility manifest and acceptance gates | done | `acceptance-report.json`, reproducibility manifest/validation |
 | HowToWritePaper final audit matrix | done | `Paper/LINE_BY_LINE_FAST_AUDIT.md` |
-| Build and tests | done | single-main `make all`, 118 Python tests, 41/41 acceptance gates |
+| Build and tests | done | single-main `make all`, 121 Python tests, 41/41 acceptance gates |
 
 Current readiness:
 
@@ -116,7 +117,7 @@ If a workload has no stale-secret exposure, it does not test the PQC thesis.
 | --- | --- | --- | --- | --- |
 | Are FIFO/SepBIT/MiDAS/DOGI/QUASAR compared on the same path? | Yes. Main tables use same trace and same actual-ZNS replay path. | physical replay summaries | Evaluation Methodology, tables | closed |
 | Are exact public baselines included? | Yes, but only as native sanity runs with unit caveats. | `external-readiness.md` | Exact Public Baseline Sanity Runs | closed with caveat |
-| Is DOGI a strawman? | Same-path DOGI-style gives apples-to-apples comparison; exact DOGI is separately executed. | exact DOGI artifacts | Evaluation | closed with caveat |
+| Is DOGI a strawman? | Same-path DOGI-style gives apples-to-apples comparison; exact DOGI is separately executed and audited, but full end-to-end parity is not claimed. | `dogi-public-parity-audit.md` and exact DOGI artifacts | Evaluation | substantial direct evidence, not full parity |
 | Are public baseline units mixed with QUASAR units? | No. Paper says they are not directly interchangeable. | claim matrix | Evaluation | closed |
 
 Required wording:
@@ -133,6 +134,7 @@ runs are sanity checks because their internal units and device models differ.
 | Is this just simulation? | No. Actual WD ZN540-class ZNS replay is used. | physical readiness and replay artifacts | Evaluation Methodology | closed |
 | Does zonefs overhead contaminate production latency? | Paper says yes and scopes zonefs latency as overhead accounting, not final p99. | xNVMe probe and zonefs results | Evaluation Overhead | closed with caveat |
 | Is full SPDK done? | No. It remains external-validity strengthening. | xNVMe lower-overhead probe exists | Discussion | qualified |
+| Is QUASAR native-ZNS-only? | No. ZNS is the measured substrate; FDP is modeled as another lifecycle-signal carrier. | FDP handle-pressure model over 8--128 handles | Background, Design, Evaluation, Discussion | reflected as model; physical FDP open |
 | Are active/open zone limits quantified? | Yes. Device-limited robustness uses 13-zone accounting and fallback modes. | physical robustness and deployment selector | Design, Evaluation Robustness | closed |
 | Are wear-leveling claims made? | No. Paper reports host-visible resets/utilization only. | reset/utilization artifacts | Discussion | closed with caveat |
 
@@ -306,18 +308,22 @@ Every checkpoint above must be visible in the paper. Current mapping:
 | Real liboqs/OpenSSL traces | Show real PQC stack feasibility | Trace events and verification exist | done |
 | Actual ZNS replay | Avoid simulator-only story | Device accepts append/reset schedule | done |
 | xNVMe probe | Lower-overhead command-path sanity | Probe results reported as bound | done |
+| FDP handle-pressure model | Address ZNS-only review without overclaiming hardware FDP | Family and intent purity reported under 8--128 placement handles | done as model |
 | Sanitize capability | Avoid erase overclaim | Capability/command path validated | done |
 
-### 5.2 Optional Strengthening Experiments
+### 5.2 Remaining FAST-Risk Experiments
 
-These are valuable but not blockers for the scoped claim.
+These are not needed for the current scoped death-cohort claim, but they remain
+major risk reducers before arguing that the work is a production-grade FAST
+submission.
 
 | Experiment | Why It Would Help | Current Treatment |
 | --- | --- | --- |
 | Full SPDK/poll-mode replay | Stronger production latency and host-stack realism | explicit limitation |
-| Real YCSB/JDBC block trace capture | Stronger external validity than generated DOGI-shaped YCSB pressure | optional strengthening |
+| Real YCSB/JDBC block trace capture | Stronger external validity than generated DOGI-shaped YCSB pressure | open FAST-risk reducer |
 | More physical ZNS/FDP devices | Avoid single-device concern and test device-specific reset/sanitize behavior | explicit limitation |
-| Repeated physical pressure runs | Stronger run-to-run stability beyond the three-seed simulator sweep | optional strengthening |
+| Physical FDP device or faithful emulator replay | Turn the current FDP handle model into a device-level result | open FAST-risk reducer |
+| Repeated physical pressure runs | Stronger run-to-run stability beyond the three-seed simulator sweep | open FAST-risk reducer |
 | Final WAF-vs-utilization figure | Replace some tables with easier visual reviewer path; current figure-label polish is already done | done |
 | Dedicated-namespace/key-isolated erase benchmark | Stronger secure erase SLO story without treating shared-namespace sanitize as per-zone erase | only needed for stronger erase claim |
 
@@ -335,6 +341,7 @@ sensitivity, overhead, and robustness.
 | Workload breadth | `fig:pressure-breadth` | Sysbench, Exchange, Varmail, and Alibaba-like pressure rows show the same PQC-specific stale-secret and GC gap across FIFO/SepBIT/MiDAS/DOGI/QUASAR. | regenerated and wired into Evaluation |
 | Mechanism ablation | `fig:component-ablation` | History-only fails on death cohorts; lifecycle hints remove exposure; DOGI payload fallback removes remaining payload GC. | regenerated and wired into Evaluation with subfloats |
 | Open-zone/config sensitivity | `fig:open-zone-robustness` | Exact cohort placement, binning, missing hints, wrong epochs, and residual migration expose the real open-zone and strict-mode cost. | compact one-column figure, not `figure*` |
+| FDP deployment pressure | `fig:fdp-handle-pressure` | FDP can carry the lifecycle signal, but scarce handles collide death cohorts, so admission/binning remains necessary. | compact one-column figure, not a physical FDP claim |
 | Prototype overhead | `fig:prototype-overhead` | Zonefs-helper throughput is scoped as accounting, while C-level placement-decision cost shows hint routing is much cheaper than DOGI-style MLP scoring. | compact one-column figure, not `figure*` |
 | Audit language | `LINE_BY_LINE_FAST_AUDIT.md` | No more premature `18/18` or "submission-grade" victory language; keep reviewer risks visible. | rewritten as checkpoint audit |
 
@@ -347,6 +354,7 @@ DOGI-specific role mapping used for the rewrite:
 | Fig. 13: group/configuration sensitivity | `fig:open-zone-robustness` shows active-zone limit, binning, bad hints, and residual cleanup cost. |
 | Fig. 14: incremental component analysis | `fig:component-ablation` uses DOGI-style staged lines: history-only, lifecycle hints, and hybrid fallback. |
 | Fig. 15/Table 5: prototype/overhead | `fig:prototype-overhead` separates actual-ZNS replay throughput from isolated C-level placement-decision cost. |
+| Interface extension not explicit in DOGI | `fig:fdp-handle-pressure` answers the ZNS-only review by showing the same lifecycle grouping signal under FDP handle scarcity. |
 
 Before claiming the graph story is done again:
 
@@ -407,6 +415,7 @@ Required before freezing the paper:
 - [x] Evaluation separates fairness, pressure, negative controls, dynamic rows, and hostile robustness.
 - [x] Same-path baselines and exact external baselines are not unit-mixed.
 - [x] Security section separates reset eligibility from sanitize/crypto-erase.
+- [x] ZNS-vs-FDP boundary is explicit: ZNS is measured, FDP is modeled, physical FDP is open.
 - [x] Overhead section separates decision overhead from zonefs helper overhead.
 - [x] Reproducibility section cites manifest, validation, and acceptance gates.
 - [x] `HowToWritePaper.md` final audit matrix is checked item by item.
@@ -439,31 +448,23 @@ This is the line the paper should hold.
 - xNVMe FDP tutorial: https://xnvme.io/tutorial/fdp/index.html
 - Samsung PM1763 official page: https://semiconductor.samsung.com/ssd/enterprise-ssd/pm1763/
 
-## 11. Bottom Review Checkpoints
+## 11. Bottom Review Traceability Matrix
 
-The pasted FAST-style review is now consolidated into reviewer-facing checkpoints. The raw review text is intentionally removed from this file so `plan.md` remains an implementation and experiment guide, not a comment dump.
+The pasted FAST-style review is now reduced to explicit checkpoints.  The raw
+review text is intentionally removed from this file so `plan.md` remains an
+implementation and experiment guide, not a comment dump.
 
-| Review Attack | Concrete Checkpoint | Paper Action | Status |
-| --- | --- | --- | --- |
-| "Why ZNS only? FDP can carry lifetime hints." | Explain QUASAR as a lifecycle-placement policy that can target native ZNS first and FDP later. | Background/Discussion map `intent`, `epoch_id`, `cohort_id`, and `security_class` to FDP handles; Evaluation now includes a trace-driven FDP handle-pressure model over 8--128 handles. | reflected + modeled |
-| "ZoneFS is not production SPDK latency." | Separate actual-ZNS replay accounting, xNVMe command-path sanity, and future SPDK poll-mode work. | Keep zonefs helper path caveat in Implementation/Evaluation/Discussion; state xNVMe is a lower-overhead bound, not full SPDK. | reflected with caveat |
-| "Zone reset is not NIST-grade physical erase." | Do not equate reset with NAND sanitization, and do not treat shared-namespace sanitize as per-zone epoch cleanup. | Cite NIST SP 800-88 Rev. 2 and NVMe sanitize; define default claim as reset eligibility and stale-exposure reduction. Strong physical erase requires dedicated namespace/media isolation, per-cohort key isolation, or future per-zone erase semantics. | reflected + tightened |
-| "Why would PQC secrets hit SSD at all?" | Scope threat model to deployments that already persist bounded PQC lifecycle state. | Background/Introduction now name KMS envelopes, key-wrap records, audit/compliance logs, crash-recovery/session-derived state, and constrained spill paths. The paper does not require every TLS session key to be synchronously persisted. | reflected |
-| "The 32-byte hint path is hand-wavy." | Give concrete delivery paths and enforcement points. | Design/Implementation include user-space request context, SPDK/xNVMe-style request metadata, xattr/ioctl file/extent metadata, io_uring request metadata, and FDP placement handles. | reflected |
-| "Untrusted tenants can abuse secret hints." | State who can issue high-priority hints and what happens to untrusted ones. | Design/Discussion use privileged policy/TLS/KMS/logging emitters, opaque cohort IDs, per-tenant quotas, admission limits, and overflow for missing provenance. | reflected |
-| "Trace replay ignores application/OS dynamics." | Do not sell trace replay as full end-to-end app proof. | Implementation/Evaluation/Discussion label Sysbench/MySQL as an execution/readiness gate and keep full YCSB/JDBC, RocksDB/MySQL block traces, and SPDK as future strengthening. | reflected with open experiment |
-| "DOGI-style may be a weakened reimplementation." | Keep same-path and exact-public baselines separate. | Evaluation and audits explain same-path style-compatible baselines are for apples-to-apples replay; exact public DOGI/MiDAS/SepBIT runs are sanity evidence, not unit-mixed WAF numbers. | reflected |
-| "Death cohort is not a brand-new storage philosophy." | Tone down novelty and position as PQC-specific cross-layer co-design. | Introduction/Discussion avoid universal placement claims; contribution is exposing PQC protocol lifetime to host-guided placement, not inventing semantic storage hints from scratch. | reflected |
+| ID | Review Attack | Required Checkpoint | Reflected In | Status | Remaining If Any |
+| --- | --- | --- | --- | --- | --- |
+| R1 | "Why ZNS only? FDP can carry lifetime hints." | Treat QUASAR as a lifecycle-placement policy, with native ZNS as the measured substrate and FDP as another carrier. | `2.Background.tex`, `4.Design.tex`, `6.Evaluation.tex`, `8.Discussion.tex`, `fig:fdp-handle-pressure` | reflected + trace-modeled | physical FDP device/emulator replay |
+| R2 | "ZoneFS is not production SPDK latency." | Separate actual-ZNS replay accounting, xNVMe command-path sanity, and future SPDK poll-mode work. | `5.Implementation.tex`, `6.Evaluation.tex`, `8.Discussion.tex`, `fig:prototype-overhead` | reflected with caveat | full SPDK or true async xNVMe replay |
+| R3 | "Zone reset is not NIST-grade physical erase." | Claim reset eligibility and exposure reduction by default; require matching erase scope for physical erasure. | `1.Introduction.tex`, `2.Background.tex`, `5.Implementation.tex`, `6.Evaluation.tex`, `7.RelatedWork.tex`, `8.Discussion.tex` | reflected + tightened | dedicated namespace/media pool, per-cohort key isolation, or future per-zone erase semantics |
+| R4 | "Why would PQC secrets hit SSD at all?" | Scope to deployments that already persist bounded PQC lifecycle state, not universal TLS session-key persistence. | `1.Introduction.tex`, `2.Background.tex`, `8.Discussion.tex` | reflected | service-specific KMS/audit/recovery trace would strengthen |
+| R5 | "The 32-byte hint path is hand-wavy." | Name concrete attachment points and enforcement policy. | `4.Design.tex` hint-delivery table, `5.Implementation.tex`, `Paper/WRITING_TRACE.md` | reflected | kernel/SPDK request-path prototype |
+| R6 | "Untrusted tenants can abuse secret hints." | Restrict high-priority hints to trusted emitters; use opaque cohorts, quotas, admission, and overflow. | `4.Design.tex`, `8.Discussion.tex`, robustness artifacts | reflected | production policy implementation |
+| R7 | "Trace replay ignores app/OS dynamics." | Do not sell replay as full end-to-end proof; keep live DB/block-trace work as a risk reducer. | `5.Implementation.tex`, `6.Evaluation.tex`, `8.Discussion.tex`, Section 5.2 above | reflected with open experiment | real YCSB/JDBC or RocksDB/MySQL block traces |
+| R8 | "DOGI-style may be a weakened reimplementation." | Keep same-path and exact-public baselines separate; audit public-DOGI parity explicitly. | `6.Evaluation.tex`, `external-readiness.md`, `dogi-public-parity-audit.md`, audit docs | reflected + audited | same app/ZenFS/SPDK path for DOGI and QUASAR |
+| R9 | "Death cohort is not a brand-new storage philosophy." | Position novelty as PQC-specific cross-layer co-design, not universal semantic-storage invention. | Abstract, Introduction, Discussion, Related Work | reflected | none for scoped claim |
 
-### New Work Items From The Review
-
-These are the remaining experiments that would move the paper from credible to much harder to reject:
-
-- [ ] **SPDK or true xNVMe async replay**: repeat representative pressure rows with a poll-mode or async kernel-bypass path and report p99 append/reset latency.
-- [ ] **Real DB block traces**: capture MySQL/Sysbench or RocksDB/YCSB block traces with PQC side writes instead of only using execution gates plus generated DOGI-shaped carriers.
-- [x] **FDP trace-driven handle model**: map QUASAR families to FDP placement handles and compare the same trace under handle-count pressure. Artifact: `artifacts/results/pqc-mixed-fdp-mapping.json`; figure: `artifacts/figures/fast-style/fig8-fdp-handle-pressure.pdf`.
-- [ ] **Physical FDP device or emulator replay**: run the same handle policy on real FDP hardware or a faithful FDP emulator. This remains open; the current result is not a physical FDP measurement.
-- [ ] **Device-diversity run**: repeat reset/append/security-capability checks on at least one additional ZNS or FDP-capable device.
-- [ ] **Dedicated-namespace/key-isolated erase benchmark**: only if the paper wants a stronger physical-erasure claim, isolate one cohort in a disposable namespace/media pool or per-cohort encryption-key domain and measure destructive erase scheduling cost. Do not use shared-namespace sanitize as per-zone cleanup.
-
-Do not claim these are completed until the corresponding artifacts exist.
+Canonical open work items are listed in Section 5.2.  Do not mark any R-row as
+production-grade complete until its corresponding artifact exists.

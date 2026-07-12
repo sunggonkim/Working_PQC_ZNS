@@ -24,7 +24,7 @@ the measured workloads and fallback modes.
 | Address ZNS-vs-FDP interface risk. | Background and Discussion frame QUASAR as lifecycle-placement policy; Evaluation now includes a trace-driven FDP handle-pressure model showing family/intent purity across 8--128 handles. | Satisfied as a deployment model; no physical FDP hardware result. |
 | Give concrete hint plumbing. | Design has a hint-delivery table covering replay/user-space, SPDK/xNVMe-style request metadata, xattr/ioctl, io_uring, and FDP placement handles. | Satisfied for design; kernel implementation remains future work. |
 | Scope stored-secret threat model. | Background clarifies QUASAR targets persisted PQC lifecycle state such as KMS envelopes, key-wrap records, audit logs, recovery records, and spill paths, not universal TLS session-key persistence. | Satisfied. |
-| Include exact public baselines. | Exact DOGI, MiDAS, and SepBIT sanity runs are included but not unit-mixed with same-path replay. | Satisfied with caveat. |
+| Include exact public baselines. | Exact DOGI, MiDAS, and SepBIT sanity runs are included but not unit-mixed with same-path replay; the public-DOGI parity audit records five direct checks and the remaining full-parity gaps. | Satisfied with explicit caveat. |
 | Include component ablation. | Evaluation explains lifecycle hints, DOGI payload fallback, admission, and residual migration. | Satisfied. |
 | Include robustness/sensitivity. | Missing hints, wrong epochs, tenant pressure, stragglers, residual strict mode, and open-zone pressure are covered. | Satisfied. |
 | Include space-amplification defense. | Component Ablation now reports an Exchange p2000 WAF/space sensitivity: QUASAR pays a small lifetime-utilization cost but keeps closed-zone fill high and stale secrets at zero. | Satisfied for scoped claim. |
@@ -32,7 +32,7 @@ the measured workloads and fallback modes.
 | Define security metric. | `stale_secret_blocks` and stale-secret block-seconds are defined; E4 exposure timeline is cited. | Satisfied. |
 | Avoid physical erase overclaim. | Paper says zone reset alone is not physical NAND erasure, cites NIST SP 800-88 Rev. 2, and now states shared-namespace sanitize is destructive device/namespace-scoped command-path evidence, not per-zone epoch cleanup. | Tightened; strong erase requires matching erase scope. |
 | Reproducibility. | `acceptance_check.py` reports 41/41 gates; current tests pass; PDFs build cleanly. | Satisfied. |
-| Final `HowToWritePaper.md` audit. | `LINE_BY_LINE_FAST_AUDIT.md` now checks the guide's pre-submission questions, DOGI figure-role translation, and the design-choice rule directly. Figure 5 uses subfloats; Figures 6--7 are compact one-column figures, with no embedded numeric labels. | Satisfied. |
+| Final `HowToWritePaper.md` audit. | `LINE_BY_LINE_FAST_AUDIT.md` now checks the guide's pre-submission questions, DOGI figure-role translation, and the design-choice rule directly. Figure 5 uses subfloats; the later sensitivity, FDP, and overhead figures are compact one-column figures with no embedded numeric labels. | Satisfied. |
 
 ## Current Format And Test Evidence
 
@@ -41,7 +41,7 @@ the measured workloads and fallback modes.
 | `make all` | Passed. |
 | `Paper/0.Main.pdf` | Single FAST/USENIX-format main PDF; 14 pages, letter. |
 | LaTeX unresolved references/citations/errors grep | Clean. |
-| `python3 -m unittest discover -s code -p 'test*.py'` | 118 tests passed in the latest run. |
+| `python3 -m unittest discover -s code -p 'test*.py'` | 121 tests passed in the latest run. |
 | `python3 code/sim/acceptance_check.py --out artifacts/results/acceptance-report.json` | 41/41 gates passed. |
 | `git diff --check` | Clean for edited paper/plan files. |
 
@@ -51,9 +51,9 @@ the measured workloads and fallback modes.
 | --- | --- | --- |
 | Figure polish | FAST reviewers read plots before prose. Motivation has a one-column semantic-gap diagnostic; Evaluation now has component ablation, open-zone/config sensitivity, FDP handle pressure, and prototype overhead figures. Numeric graph labels were removed to avoid table/figure duplication. | Checked after current rebuild. |
 | Table-heavy Evaluation | The paper still carries exact measured matrices in tables, but the main reviewer attacks now have figure paths: pressure, component attribution, open-zone sensitivity, and overhead. | Intentional auditability tradeoff. |
-| Full production SPDK path | Zonefs helper replay validates actual-ZNS append/reset behavior, but not final production p99 latency. | Fatal-risk if the submission claims production latency; requires SPDK/ZenFS or equivalent app-level path. |
+| Full production SPDK path | Zonefs helper replay validates actual-ZNS append/reset behavior, but not final production p99 latency. | Required before claiming production-grade FAST latency; requires SPDK/ZenFS or equivalent app-level path. |
 | Real YCSB/JDBC block traces | Would strengthen external validity beyond DOGI-shaped YCSB pressure generation. | Optional strengthening for the scoped claim; not represented as completed. |
-| FDP implementation | The paper now has a trace-driven FDP placement-handle model and figure, but there is no real FDP device result. | Fatal-risk if the submission positions FDP as solved; physical FDP/emulator replay remains open. |
+| FDP implementation | The paper now has a trace-driven FDP placement-handle model and figure, but there is no real FDP device result. | Required before positioning FDP as solved; physical FDP/emulator replay remains open. |
 | End-to-end app p99 | Sysbench/MySQL is an execution gate, not full QUASAR-integrated DB block tracing. | Explicitly scoped. |
 | More device diversity | One WD ZN540-class device plus emulator/exact-baseline artifacts is not a wear-leveling study. | Explicit limitation. |
 | Final prose pass | Evaluation was consolidated into five FAST-style subsections with `\textbf{}` run-in leads while preserving the evidence and claim boundaries. | Checked for current build. |
@@ -64,7 +64,7 @@ the measured workloads and fallback modes.
 | Attack | Paper Response |
 | --- | --- |
 | "This only wins on easy PQC traces." | The paper uses DOGI/FAST-shaped workload axes, pressure rows, negative controls, and workload-hardness gates; pure PQC traces are not headline WAF evidence. |
-| "DOGI is a strawman." | Same-path DOGI-style is used for apples-to-apples physical replay, and exact public DOGI runs are included separately with unit caveats. |
+| "DOGI is a strawman." | Same-path DOGI-style is used for apples-to-apples physical replay; exact public DOGI runs are included separately with unit caveats, and the public-DOGI parity audit states this is substantial direct evidence but not full end-to-end parity. |
 | "WAF gains are small." | The paper does not claim universal WAF dominance. Easy rows prove exposure reduction; pressure rows prove GC/WAF gains. |
 | "Is this cherry-picked?" | The paper includes a three-seed ratio sweep over DOGI-style families and states that 5% PQC overlays can be WAF-negative while 20% overlays show positive WAF/GC gains. |
 | "Did QUASAR buy WAF by wasting zones?" | Open-zone/config sensitivity shows exact cohort placement can exceed the device limit, binning fits the budget, and strict cleanup has explicit WAF cost. |

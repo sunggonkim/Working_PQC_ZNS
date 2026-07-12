@@ -61,7 +61,7 @@ The previous papers were used as a paragraph-role template.  The prose is origin
 | Real benchmark gate. | Initial real FIO iolog conversion is included as exposure-only sanity, and Sysbench/MySQL execution is marked as not yet a block-trace result. |
 | Oracle/bound before claim. | Epoch upper bound is explicit, scoped, and not counted as QUASAR. |
 | Component analysis. | Component ablation quantifies lifecycle hints, DOGI payload fallback, adaptive admission/binning, and residual fallback. |
-| External baseline sanity. | Exact DOGI/MiDAS/SepBIT artifacts are separated from same-path replay. |
+| External baseline sanity. | Exact DOGI/MiDAS/SepBIT artifacts are separated from same-path replay; the public-DOGI parity audit states what direct evidence exists and what remains non-parity. |
 | FDP deployment pressure. | Trace-driven FDP mapping reports family/intent purity and families per placement handle across 8--128 handles. |
 | Breakdown/overhead. | C-level decision cost and xNVMe command-path probe. |
 | Correctness/security boundary. | Sanitize capability and explicit reset-vs-erase scope, including the shared-namespace blast-radius limitation. |
